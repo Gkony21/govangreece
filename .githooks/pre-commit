@@ -1,0 +1,27 @@
+#!/bin/sh
+# Runs before every commit. Blocks secrets, client material and oversized files.
+# Enabled by `npm install` (the "prepare" script sets core.hooksPath to .githooks).
+set -e
+
+# 1. Secrets (API keys, tokens, private keys) in the staged changes.
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks is not installed (brew install gitleaks). Commit stopped." >&2
+  exit 1
+fi
+gitleaks git --pre-commit --staged --redact --no-banner
+
+# 2. Files that must never be committed, even if added with `git add -f`.
+blocked=$(git diff --cached --name-only --diff-filter=ACMR | grep -E -i '(^|/)(\.env|\.dev\.vars)|\.(pem|key|p12|pfx|psd|ai|heic|mov)$|(^|/)(photos|originals)/|\.private\.|(^|/)NOTES' || true)
+if [ -n "$blocked" ]; then
+  echo "pre-commit: these files must not be committed:" >&2
+  echo "$blocked" >&2
+  exit 1
+fi
+
+# 3. Large files: site images should be optimized WebP, well under 1 MB.
+large=$(git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -I{} sh -c 'f="{}"; [ -f "$f" ] && [ $(wc -c < "$f") -gt 1048576 ] && echo "$f"' || true)
+if [ -n "$large" ]; then
+  echo "pre-commit: files over 1 MB (optimize them first):" >&2
+  echo "$large" >&2
+  exit 1
+fi

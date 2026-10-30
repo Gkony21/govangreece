@@ -1,0 +1,17 @@
+# gitleaks config: the default rules plus the services this site uses.
+# Run by .githooks/pre-commit on every commit.
+[extend]
+useDefault = true
+
+[[rules]]
+id = "resend-api-key"
+description = "Resend API key (sends the quote form emails)"
+regex = '''\bre_[A-Za-z0-9_]{20,}\b'''
+keywords = ["re_"]
+
+# The Turnstile site key is public by design; only the secret must stay out of the repo.
+[[rules]]
+id = "turnstile-secret"
+description = "Cloudflare Turnstile secret key"
+regex = '''(?i)turnstile[_-]?secret[_-]?(?:key)?\s*[:=]\s*["']?(0x[A-Za-z0-9_-]{20,})'''
+keywords = ["turnstile"]
