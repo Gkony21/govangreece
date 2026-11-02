@@ -133,68 +133,113 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   to { opacity: 1; transform: none; }
 }
 
-/* Hero: four photos crossfading behind the text, each with a slow zoom (components/Hero.tsx).
-   24s cycle, 6s per photo. Slide i starts 1.2s early so the first one is already visible on load.
-   Each photo fades in over the one before, which stays fully visible until it is covered: the page behind never
-   shows through. The first photo sits under the last one, so it turns on unseen and the last one fades out over it. */
-.hero-slide {
-  opacity: 0;
-  animation: hero-in 24s linear infinite both;
+/* Hero (components/Hero.tsx): the text on the night sky, with photos printed like booth prints around it.
+   Phones: text from the top, one print beside the buttons, three more along the bottom edge of the screen.
+   Wide screens: text on the left, the four prints scattered on the right.
+   Placement uses `rotate` and `translate`, so the drop-in animation can use `transform` without undoing them. */
+.hero {
+  min-height: calc(100svh - var(--header-h));
+  background:
+    radial-gradient(60% 45% at 85% 20%, rgb(169 139 255 / 0.22), transparent 70%),
+    radial-gradient(70% 50% at 10% 95%, rgb(213 140 255 / 0.14), transparent 70%),
+    var(--color-night);
 }
 
-.hero-slides picture:first-child .hero-slide {
-  opacity: 1;
-  animation-name: hero-first;
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(30vw, 9rem);
+  grid-template-rows: auto auto auto minmax(15rem, 1fr);
+  grid-template-areas: "title title" "lead lead" "cta print" "prints prints";
+  gap: 1.5rem 1rem;
 }
 
-.hero-slides picture:last-child .hero-slide {
-  animation-name: hero-last;
+/* On phones the prints are placed in the grid themselves: the box around them steps aside. */
+.hero-prints {
+  display: contents;
 }
 
-@keyframes hero-in {
-  0% { opacity: 0; transform: scale(1.08); }
-  5% { opacity: 1; }
-  30% { opacity: 1; transform: scale(1); }
-  30.01%, 100% { opacity: 0; transform: scale(1); }
+.hero-print {
+  position: relative;
+  padding: 0.45rem 0.45rem 1.6rem;
+  border-radius: 2px;
+  background: #fbf8ff;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.55), 0 0 40px rgb(169 139 255 / 0.18);
+  animation: print-drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-@keyframes hero-first {
-  0% { opacity: 1; transform: scale(1.08); }
-  30% { opacity: 1; transform: scale(1); }
-  30.01%, 100% { opacity: 0; transform: scale(1); }
+@keyframes print-drop {
+  from { transform: translateY(-2.5rem) scale(1.04); opacity: 0; }
 }
 
-@keyframes hero-last {
-  0% { opacity: 0; transform: scale(1.08); }
-  5%, 25% { opacity: 1; }
-  30%, 100% { opacity: 0; transform: scale(1); }
+.hero-print-360 {
+  grid-area: print;
+  align-self: center;
+  justify-self: end;
+  width: min(34vw, 10rem);
+  margin-right: -1.75rem;
+  rotate: 9deg;
 }
 
-/* Darkens the photos so the text stays readable: a little more at the bottom of phones, where the buttons sit on
-   the photo; from the left on wide screens, where the text is. */
-.hero-slides::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(18 12 34 / 0.6) 0%, rgb(18 12 34 / 0.55) 45%, rgb(18 12 34 / 0.6) 70%, rgb(18 12 34 / 0.85) 100%);
+.hero-print-friends,
+.hero-print-couple,
+.hero-print-van {
+  grid-area: prints;
+  align-self: end;
+}
+
+.hero-print-friends {
+  justify-self: start;
+  width: min(44vw, 15rem);
+  margin: 0 0 -1rem -1.75rem;
+  rotate: -8deg;
+}
+
+.hero-print-couple {
+  z-index: 1;
+  justify-self: center;
+  width: min(40vw, 14rem);
+  margin-bottom: 6rem;
+  rotate: 4deg;
+}
+
+.hero-print-van {
+  z-index: 2;
+  justify-self: end;
+  width: min(40vw, 14rem);
+  margin: 0 -1.75rem 0.25rem 0;
+  rotate: -5deg;
 }
 
 @media (min-width: 1024px) {
-  .hero-slides::after {
-    background: linear-gradient(90deg, rgb(18 12 34 / 0.92) 0%, rgb(18 12 34 / 0.65) 55%, rgb(18 12 34 / 0.35) 100%);
+  .hero {
+    min-height: min(calc(100svh - var(--header-h)), 860px);
   }
-}
 
-/* The 5x15 print drops into place, slightly tilted, like it just came out of the booth. */
-.hero-strip {
-  transform: rotate(4deg);
-  box-shadow: 0 30px 60px rgb(0 0 0 / 0.55), 0 0 60px rgb(169 139 255 / 0.25);
-  animation: strip-drop 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
-}
+  /* The empty rows above and below the text take the spare height, so the text sits centred beside the prints. */
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas: ". prints" "title prints" "lead prints" "cta prints" ". prints";
+    gap: 1.5rem 2rem;
+  }
 
-@keyframes strip-drop {
-  from { transform: translateY(-40px) rotate(-6deg); opacity: 0; }
-  to { transform: rotate(4deg); opacity: 1; }
+  .hero-prints {
+    display: block;
+    position: relative;
+    grid-area: prints;
+    height: 40rem;
+  }
+
+  .hero-print {
+    position: absolute;
+    margin: 0;
+    padding: 0.6rem 0.6rem 2.2rem;
+  }
+
+  .hero-print-360 { top: 2%; left: 0; width: 44%; rotate: -6deg; }
+  .hero-print-couple { top: 12%; right: 0; width: 48%; rotate: 7deg; }
+  .hero-print-friends { bottom: 6%; left: 3%; z-index: 1; width: 48%; rotate: 5deg; }
+  .hero-print-van { bottom: 1%; right: 3%; width: 44%; rotate: -4deg; }
 }
 
 /* Mouse-shaped hint at the bottom of the hero that there is more below. */
@@ -245,8 +290,7 @@ html.js:not([data-reveal-ready]) [data-reveal] {
 @media (prefers-reduced-motion: reduce) {
   .neon,
   .scroll-progress,
-  .hero-slide,
-  .hero-strip,
+  .hero-print,
   .scroll-cue::after,
   .service-band-track {
     animation: none;

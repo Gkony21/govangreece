@@ -31,7 +31,6 @@ export type Dictionary = {
     lead: string;
     servicesCta: string;
     area: string;
-    stripLabel: string;
   };
   // Service names looping in the band under the hero.
   band: string[];

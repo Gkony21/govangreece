@@ -29,7 +29,6 @@ export const el = {
     lead: "Όλα από μία ομάδα, σε καλύτερη τιμή από το να τα κλείσεις χωριστά.",
     servicesCta: "Δείτε τις υπηρεσίες",
     area: "Γάμοι, βαφτίσεις, πάρτι και εταιρικά. Σπάρτη, Λακωνία και όλη η Πελοπόννησος.",
-    stripLabel: "Φωτογραφίες από τα events μας, σαν εκτύπωση του photo booth",
   },
   band: ["Mirror Booth", "360 Video", "Audio Guestbook", "Cocktail Van", "Portable Bar"],
   sections: {

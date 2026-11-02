@@ -15,55 +15,25 @@
 //            "ok"      permission given
 //   Children never appear on the site, not even in previews.
 
-const wide = [16, 9];
-const tall = [9, 16];
 const card = [4, 5];
 const square = [1, 1];
 const band = [3, 2];
+const print = [3, 4];
 
 export const media = [
-  // Hero: four crossfading backgrounds, all at night: the hero should feel like the party.
-  // The client's photos are all portrait. A phone screen is even narrower and a desktop one is landscape, so no
-  // photo looks good cropped both ways: each device gets its own picks, chosen to keep the subject in the frame.
+  // Hero: photos printed like booth prints, scattered around the text. The client's photos are all portrait, so as a
+  // full-screen background they always lost a third or more; as prints they show whole.
+  { id: "hero-van", ref: "P74", src: "IMG_2411.HEIC", kind: "photo", aspect: print, focus: [0.5, 0.5], widths: [320, 640], consent: "none",
+    alt: { el: "Το GO! Van με μωβ φώτα τη νύχτα", en: "The GO! Van in purple light at night" } },
+  { id: "hero-360", ref: "P55", src: "IMG_9642.HEIC", kind: "photo", aspect: print, focus: [0.4, 0.5], widths: [320, 640], consent: "none",
+    alt: { el: "Η πλατφόρμα 360 με μια φωτεινή καρδιά τη νύχτα", en: "The 360 platform with a neon heart at night" } },
+  // Two frames of the client's own 5x15 print of one wedding (P01), landscape like the real print. Recognizable people.
   ...[
-    {
-      id: "hero-1",
-      wide: { ref: "P74", src: "IMG_2411.HEIC", focus: [0.5, 0.55] },
-      tall: { ref: "P74", src: "IMG_2411.HEIC", focus: [0.5, 0.5] },
-      alt: { el: "Το GO! Van με μωβ φώτα τη νύχτα", en: "The GO! Van in purple light at night" },
-    },
-    {
-      id: "hero-2",
-      wide: { ref: "P21", src: "IMG_0208.HEIC", focus: [0.5, 0.74] },
-      tall: { ref: "P55", src: "IMG_9642.HEIC", focus: [0.4, 0.5] },
-      alt: { el: "Η πλατφόρμα 360 στημένη τη νύχτα", en: "The 360 platform set up at night" },
-    },
-    {
-      id: "hero-3",
-      wide: { ref: "P41", src: "IMG_9933.HEIC", focus: [0.5, 0.55] },
-      tall: { ref: "P45", src: "IMG_9861.HEIC", focus: [0.5, 0.5] },
-      alt: { el: "Ο Magic Mirror με κόκκινο χαλί και props", en: "The Magic Mirror with a red carpet and props" },
-    },
-    {
-      id: "hero-4",
-      wide: { ref: "P45", src: "IMG_9861.HEIC", focus: [0.5, 0.6] },
-      tall: { ref: "P06", src: "FBC104D0-4EE6-4096-884D-BD63F490FF06.JPG", focus: [0.5, 0.5] },
-      alt: { el: "Props, φωτεινή επιγραφή «Let's Party» και η μπάρα με μωβ φώτα", en: "Props, a \"Let's Party\" neon sign and the bar in purple light" },
-    },
-  ].flatMap(({ id, wide: w, tall: t, alt }) => [
-    { ...w, id: `${id}-wide`, kind: "photo", aspect: wide, widths: [1280, 1920, 2560], quality: 68, consent: "none", alt },
-    { ...t, id: `${id}-tall`, kind: "photo", aspect: tall, widths: [720, 1080], quality: 68, consent: "none", alt },
-  ]),
-
-  // Hero: the three frames of the 5x15 photo strip, landscape like a real booth print: guests having fun, all from
-  // the client's own print of one wedding (P01). Every frame shows recognizable people.
-  ...[
-    ["strip-couple", [0.316, 0.722, 0.37, 0.201], [0.5, 0.5], { el: "Νύφη και γαμπρός με καπέλα από τα props", en: "A bride and groom in hats from the props" }],
-    ["strip-friends", [0.01, 0.38, 0.26, 0.2], [0.5, 0.45], { el: "Φίλοι με γυαλιά και πινακίδες από τα props", en: "Friends posing with glasses and signs from the props" }],
-    ["strip-girls", [0.748, 0.288, 0.252, 0.2], [0.5, 0.45], { el: "Φίλες με μάσκες και πινακίδες από τα props", en: "Friends posing with masks and signs from the props" }],
+    ["hero-couple", [0.316, 0.722, 0.37, 0.201], [0.5, 0.5], { el: "Νύφη και γαμπρός με καπέλα από τα props", en: "A bride and groom in hats from the props" }],
+    ["hero-friends", [0.01, 0.38, 0.26, 0.2], [0.5, 0.45], { el: "Φίλοι με γυαλιά και πινακίδες από τα props", en: "Friends posing with glasses and signs from the props" }],
   ].map(([id, region, focus, alt]) => ({
     id, ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
-    region, aspect: band, focus, widths: [240, 480], consent: "pending", alt,
+    region, aspect: band, focus, widths: [320, 640], consent: "pending", alt,
   })),
 
   // Services: one photo each, plus short silent clips.

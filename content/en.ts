@@ -29,7 +29,6 @@ export const en = {
     lead: "All from one team, for less than booking each one separately.",
     servicesCta: "See the services",
     area: "Weddings, christenings, parties and corporate events. Sparta, Laconia and all of the Peloponnese.",
-    stripLabel: "Photos from our events, like a photo booth print",
   },
   band: ["Mirror Booth", "360 Video", "Audio Guestbook", "Cocktail Van", "Portable Bar"],
   sections: {
