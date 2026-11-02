@@ -287,6 +287,24 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   to { transform: translateX(-50%); }
 }
 
+/* The package bar (components/PackageBar.tsx) slides up once a service is picked. Hidden, it is also out of the tab
+   order. The page gets room at the bottom so the bar never covers the footer. */
+.package-bar {
+  visibility: hidden;
+  transform: translateY(110%);
+  transition: transform 0.25s ease, visibility 0s 0.25s;
+}
+
+.package-bar[data-on] {
+  visibility: visible;
+  transform: none;
+  transition: transform 0.25s ease;
+}
+
+body:has(.package-bar[data-on]) {
+  padding-bottom: 6rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon,
   .scroll-progress,
@@ -294,6 +312,11 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   .scroll-cue::after,
   .service-band-track {
     animation: none;
+  }
+
+  .package-bar,
+  .package-bar[data-on] {
+    transition: none;
   }
 
   html.js [data-reveal] {
