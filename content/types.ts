@@ -26,7 +26,14 @@ export type Dictionary = {
   };
   hero: {
     title: string;
+    // Shown bold, then the rest of the sentence in a lighter colour.
+    leadStrong: string;
+    lead: string;
+    servicesCta: string;
+    area: string;
   };
+  // Service names looping in the band under the hero.
+  band: string[];
   sections: Record<SectionId, { title: string }>;
   footer: {
     tagline: string;

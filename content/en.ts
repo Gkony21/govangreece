@@ -25,7 +25,12 @@ export const en = {
   },
   hero: {
     title: "Planning an event in Laconia?",
+    leadStrong: "Photo booth, 360 video, an audio guestbook and a cocktail bar in a VW van.",
+    lead: "All from one team, for less than booking each one separately.",
+    servicesCta: "See the services",
+    area: "Weddings, christenings, parties and corporate events. Sparta, Laconia and all of the Peloponnese.",
   },
+  band: ["Mirror Booth", "360 Video", "Audio Guestbook", "Cocktail Van", "Portable Bar"],
   sections: {
     services: { title: "Pick what you want at your event" },
     cocktails: { title: "A cocktail with your name on it" },

@@ -133,9 +133,166 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   to { opacity: 1; transform: none; }
 }
 
+/* Hero (components/Hero.tsx): the text on the night sky, with photos printed like booth prints around it.
+   Phones: text from the top, one print beside the buttons, three more along the bottom edge of the screen.
+   Wide screens: text on the left, the four prints scattered on the right.
+   Placement uses `rotate` and `translate`, so the drop-in animation can use `transform` without undoing them. */
+.hero {
+  min-height: calc(100svh - var(--header-h));
+  background:
+    radial-gradient(60% 45% at 85% 20%, rgb(169 139 255 / 0.22), transparent 70%),
+    radial-gradient(70% 50% at 10% 95%, rgb(213 140 255 / 0.14), transparent 70%),
+    var(--color-night);
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(30vw, 9rem);
+  grid-template-rows: auto auto auto minmax(15rem, 1fr);
+  grid-template-areas: "title title" "lead lead" "cta print" "prints prints";
+  gap: 1.5rem 1rem;
+}
+
+/* On phones the prints are placed in the grid themselves: the box around them steps aside. */
+.hero-prints {
+  display: contents;
+}
+
+.hero-print {
+  position: relative;
+  padding: 0.45rem 0.45rem 1.6rem;
+  border-radius: 2px;
+  background: #fbf8ff;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.55), 0 0 40px rgb(169 139 255 / 0.18);
+  animation: print-drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes print-drop {
+  from { transform: translateY(-2.5rem) scale(1.04); opacity: 0; }
+}
+
+.hero-print-360 {
+  grid-area: print;
+  align-self: center;
+  justify-self: end;
+  width: min(34vw, 10rem);
+  margin-right: -1.75rem;
+  rotate: 9deg;
+}
+
+.hero-print-friends,
+.hero-print-couple,
+.hero-print-van {
+  grid-area: prints;
+  align-self: end;
+}
+
+.hero-print-friends {
+  justify-self: start;
+  width: min(44vw, 15rem);
+  margin: 0 0 -1rem -1.75rem;
+  rotate: -8deg;
+}
+
+.hero-print-couple {
+  z-index: 1;
+  justify-self: center;
+  width: min(40vw, 14rem);
+  margin-bottom: 6rem;
+  rotate: 4deg;
+}
+
+.hero-print-van {
+  z-index: 2;
+  justify-self: end;
+  width: min(40vw, 14rem);
+  margin: 0 -1.75rem 0.25rem 0;
+  rotate: -5deg;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: min(calc(100svh - var(--header-h)), 860px);
+  }
+
+  /* The empty rows above and below the text take the spare height, so the text sits centred beside the prints. */
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas: ". prints" "title prints" "lead prints" "cta prints" ". prints";
+    gap: 1.5rem 2rem;
+  }
+
+  .hero-prints {
+    display: block;
+    position: relative;
+    grid-area: prints;
+    height: 40rem;
+  }
+
+  .hero-print {
+    position: absolute;
+    margin: 0;
+    padding: 0.6rem 0.6rem 2.2rem;
+  }
+
+  .hero-print-360 { top: 2%; left: 0; width: 44%; rotate: -6deg; }
+  .hero-print-couple { top: 12%; right: 0; width: 48%; rotate: 7deg; }
+  .hero-print-friends { bottom: 6%; left: 3%; z-index: 1; width: 48%; rotate: 5deg; }
+  .hero-print-van { bottom: 1%; right: 3%; width: 44%; rotate: -4deg; }
+}
+
+/* Mouse-shaped hint at the bottom of the hero that there is more below. */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1.4rem;
+  width: 22px;
+  height: 36px;
+  margin-left: -11px;
+  border: 2px solid var(--color-haze);
+  border-radius: 12px;
+}
+
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--color-amber);
+  animation: scroll-cue 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-cue {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(12px); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Service names under the hero, looping. The track holds the list twice over, so moving it by half has no seam. */
+.service-band-track {
+  animation: marquee 32s linear infinite;
+}
+
+.service-band:hover .service-band-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon,
-  .scroll-progress {
+  .scroll-progress,
+  .hero-print,
+  .scroll-cue::after,
+  .service-band-track {
     animation: none;
   }
 

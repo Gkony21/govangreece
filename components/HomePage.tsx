@@ -1,15 +1,15 @@
-import ButtonLink from "@/components/ButtonLink";
 import Clip from "@/components/Clip";
+import Hero from "@/components/Hero";
 import Photo from "@/components/Photo";
 import RevealObserver from "@/components/RevealObserver";
+import ServiceBand from "@/components/ServiceBand";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { sectionIds, type Dictionary, type Locale, type SectionId } from "@/content/types";
 import { media, type MediaId } from "@/lib/media";
 
 // Step 3 review: the processed photos and videos, shown raw in the section they belong to. Replaced as sections land.
-const previewMedia: Partial<Record<SectionId | "hero", string[]>> = {
-  hero: ["hero-", "strip-"],
+const previewMedia: Partial<Record<SectionId, string[]>> = {
   services: ["service-", "clip-"],
   why: ["break-"],
   gallery: ["gallery-"],
@@ -46,21 +46,8 @@ export default function HomePage({ dict, homeHref }: Props) {
       <SiteHeader dict={dict} homeHref={homeHref} />
 
       <main id="main">
-        <section aria-labelledby="hero-title" className="border-b border-line">
-          <div className="wrap grid min-h-[min(80vh,760px)] content-center gap-8 py-16">
-            <h1 id="hero-title" className="neon max-w-[12ch] font-display text-step-4 leading-[0.95] font-black text-balance">
-              {dict.hero.title}
-            </h1>
-            <div className="flex flex-wrap gap-3">
-              <ButtonLink href="#contact">{dict.quoteCta}</ButtonLink>
-              <ButtonLink href="#services" variant="ghost">
-                {dict.header.nav[0].label}
-              </ButtonLink>
-            </div>
-            <StepNote step={4} />
-            <MediaPreview prefixes={previewMedia.hero} locale={dict.locale} />
-          </div>
-        </section>
+        <Hero dict={dict} />
+        <ServiceBand items={dict.band} />
 
         {sectionIds.map((id) => (
           <section key={id} id={id} aria-labelledby={`${id}-title`} className="border-b border-line py-20 lg:py-24">
