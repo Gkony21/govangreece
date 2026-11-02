@@ -22,56 +22,49 @@ const square = [1, 1];
 const band = [3, 2];
 
 export const media = [
-  // Hero: crossfading backgrounds, all at night: the hero should feel like the party. Each photo has a wide crop
-  // (desktop) and a tall crop (phones).
+  // Hero: four crossfading backgrounds, all at night: the hero should feel like the party.
+  // The client's photos are all portrait. A phone screen is even narrower and a desktop one is landscape, so no
+  // photo looks good cropped both ways: each device gets its own picks, chosen to keep the subject in the frame.
   ...[
     {
-      id: "hero-party-night",
-      ref: "P49",
-      src: "IMG_2711.HEIC",
-      wideFocus: [0.5, 0.3],
-      tallFocus: [0.5, 0.5],
-      alt: { el: "Πυροτεχνήματα και φωτάκια πάνω από γάμο δίπλα σε πισίνα", en: "Fireworks and string lights over a poolside wedding" },
+      id: "hero-1",
+      wide: { ref: "P74", src: "IMG_2411.HEIC", focus: [0.5, 0.55] },
+      tall: { ref: "P74", src: "IMG_2411.HEIC", focus: [0.5, 0.5] },
+      alt: { el: "Το GO! Van με μωβ φώτα τη νύχτα", en: "The GO! Van in purple light at night" },
     },
     {
-      id: "hero-van-night",
-      ref: "P51",
-      src: "IMG_4288.HEIC",
-      wideFocus: [0.5, 0.5],
-      tallFocus: [0.3, 0.5],
-      alt: { el: "Το GO! Van με μωβ φώτα και τη μπάρα ανοιχτή", en: "The GO! Van in purple light with its bar open" },
+      id: "hero-2",
+      wide: { ref: "P21", src: "IMG_0208.HEIC", focus: [0.5, 0.74] },
+      tall: { ref: "P55", src: "IMG_9642.HEIC", focus: [0.4, 0.5] },
+      alt: { el: "Η πλατφόρμα 360 στημένη τη νύχτα", en: "The 360 platform set up at night" },
     },
     {
-      id: "hero-360-fireworks",
-      ref: "P28",
-      src: "IMG_0241.HEIC",
-      wideFocus: [0.5, 0.45],
-      tallFocus: [0.5, 0.5],
-      alt: { el: "Η πλατφόρμα 360 σε κήπο, με πυροτεχνήματα από πάνω", en: "The 360 platform in a garden under fireworks" },
+      id: "hero-3",
+      wide: { ref: "P41", src: "IMG_9933.HEIC", focus: [0.5, 0.55] },
+      tall: { ref: "P45", src: "IMG_9861.HEIC", focus: [0.5, 0.5] },
+      alt: { el: "Ο Magic Mirror με κόκκινο χαλί και props", en: "The Magic Mirror with a red carpet and props" },
     },
     {
-      id: "hero-mirror-night",
-      ref: "P41",
-      src: "IMG_9933.HEIC",
-      wideFocus: [0.5, 0.55],
-      tallFocus: [0.35, 0.5],
-      alt: { el: "Ο Magic Mirror με κόκκινο χαλί σε βραδινό event", en: "The Magic Mirror with a red carpet at a night event" },
+      id: "hero-4",
+      wide: { ref: "P45", src: "IMG_9861.HEIC", focus: [0.5, 0.6] },
+      tall: { ref: "P06", src: "FBC104D0-4EE6-4096-884D-BD63F490FF06.JPG", focus: [0.5, 0.5] },
+      alt: { el: "Props, φωτεινή επιγραφή «Let's Party» και η μπάρα με μωβ φώτα", en: "Props, a \"Let's Party\" neon sign and the bar in purple light" },
     },
-  ].flatMap(({ wideFocus, tallFocus, wideConsent = "none", ...photo }) => [
-    { ...photo, id: `${photo.id}-wide`, kind: "photo", aspect: wide, focus: wideFocus, widths: [1280, 1920, 2560], quality: 68, consent: wideConsent },
-    { ...photo, id: `${photo.id}-tall`, kind: "photo", aspect: tall, focus: tallFocus, widths: [720, 1080], quality: 68, consent: "none" },
+  ].flatMap(({ id, wide: w, tall: t, alt }) => [
+    { ...w, id: `${id}-wide`, kind: "photo", aspect: wide, widths: [1280, 1920, 2560], quality: 68, consent: "none", alt },
+    { ...t, id: `${id}-tall`, kind: "photo", aspect: tall, widths: [720, 1080], quality: 68, consent: "none", alt },
   ]),
 
-  // Hero: the three frames of the 5x15 photo strip, landscape like a real booth print. The people come from the
-  // client's own print of a wedding strip (P01).
-  { id: "strip-van", ref: "P74", src: "IMG_2411.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.42], widths: [240, 480], consent: "none",
-    alt: { el: "Το van με μωβ φώτα", en: "The van in purple light" } },
-  { id: "strip-couple", ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
-    region: [0.316, 0.722, 0.37, 0.201], aspect: band, focus: [0.5, 0.5], widths: [240, 480], consent: "pending",
-    alt: { el: "Ζευγάρι νεόνυμφων με καπέλα από τα props", en: "A bride and groom in hats from the props" } },
-  { id: "strip-friends", ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
-    region: [0.731, 0.267, 0.269, 0.222], aspect: band, focus: [0.5, 0.45], widths: [240, 480], consent: "pending",
-    alt: { el: "Φίλες με μάσκες και πινακίδες από τα props", en: "Friends posing with masks and signs from the props" } },
+  // Hero: the three frames of the 5x15 photo strip, landscape like a real booth print: guests having fun, all from
+  // the client's own print of one wedding (P01). Every frame shows recognizable people.
+  ...[
+    ["strip-couple", [0.316, 0.722, 0.37, 0.201], [0.5, 0.5], { el: "Νύφη και γαμπρός με καπέλα από τα props", en: "A bride and groom in hats from the props" }],
+    ["strip-friends", [0.01, 0.38, 0.26, 0.2], [0.5, 0.45], { el: "Φίλοι με γυαλιά και πινακίδες από τα props", en: "Friends posing with glasses and signs from the props" }],
+    ["strip-girls", [0.748, 0.288, 0.252, 0.2], [0.5, 0.45], { el: "Φίλες με μάσκες και πινακίδες από τα props", en: "Friends posing with masks and signs from the props" }],
+  ].map(([id, region, focus, alt]) => ({
+    id, ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
+    region, aspect: band, focus, widths: [240, 480], consent: "pending", alt,
+  })),
 
   // Services: one photo each, plus short silent clips.
   { id: "service-mirror", ref: "P65", src: "IMG_3139.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.6], widths: [480, 960], consent: "none",
@@ -114,7 +107,7 @@ export const media = [
     ["gallery-mirror-xmas", "P40", "CAE23400-BE20-4EA9-B1B2-BED35120FF13.JPG", [0.5, 0.55], { el: "Ο Magic Mirror δίπλα σε χριστουγεννιάτικο δέντρο", en: "The Magic Mirror next to a Christmas tree" }],
     ["gallery-360-props", "P42", "69D13F77-71F3-4C48-B8F7-9E3BF11A7A86.JPG", [0.5, 0.6], { el: "Η πλατφόρμα 360 με props τη νύχτα", en: "The 360 platform with props at night" }],
     ["gallery-van-neon", "P59", "IMG_4291.HEIC", [0.5, 0.55], { el: "Το GO! Van με κόκκινα και μπλε φώτα", en: "The GO! Van in red and blue light" }],
-    ["gallery-360-heart", "P55", "IMG_9642.HEIC", [0.5, 0.6], { el: "Η πλατφόρμα 360 με φωτεινή καρδιά", en: "The 360 platform with a neon heart" }],
+    ["gallery-props-neon", "P80", "IMG_0209.HEIC", [0.5, 0.6], { el: "Props και φωτεινή επιγραφή «Let's Party» τη νύχτα", en: "Props and a \"Let's Party\" neon sign at night" }],
     ["gallery-phone-gold", "P71", "IMG_0550.JPG", [0.5, 0.55], { el: "Το τηλέφωνο ευχών με χρυσές λεπτομέρειες", en: "The guestbook phone with gold details" }],
     ["gallery-phone-flowers", "P76", "IMG_2447.HEIC", [0.5, 0.6], { el: "Το τηλέφωνο ευχών ανάμεσα σε λουλούδια", en: "The guestbook phone among flowers" }],
     ["gallery-props", "P50", "IMG_0287.HEIC", [0.5, 0.6], { el: "Βαλίτσα με props για τις φωτογραφίες", en: "A suitcase full of photo props" }],

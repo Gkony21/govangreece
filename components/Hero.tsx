@@ -4,11 +4,12 @@ import Photo from "@/components/Photo";
 import type { Dictionary } from "@/content/types";
 import { media } from "@/lib/media";
 
-// Background photos, in order. Each has a "-wide" crop (landscape screens) and a "-tall" crop (phones, portrait).
-const slides = ["hero-party-night", "hero-van-night", "hero-360-fireworks", "hero-mirror-night"] as const;
+// Background photos, in order. Each has a "-wide" photo (landscape screens) and a "-tall" one (phones, portrait),
+// not always the same picture: see media/media.config.mjs.
+const slides = ["hero-1", "hero-2", "hero-3", "hero-4"] as const;
 
-// The three frames of the 5x15 strip, top to bottom: the van, then guests having fun.
-const stripFrames = ["strip-van", "strip-couple", "strip-friends"] as const;
+// The three frames of the 5x15 strip, top to bottom: guests having fun.
+const stripFrames = ["strip-couple", "strip-friends", "strip-girls"] as const;
 
 type Props = {
   dict: Dictionary;
