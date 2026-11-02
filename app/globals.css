@@ -134,30 +134,49 @@ html.js:not([data-reveal-ready]) [data-reveal] {
 }
 
 /* Hero: four photos crossfading behind the text, each with a slow zoom (components/Hero.tsx).
-   24s cycle, 6s per photo. Slide i starts 1.2s early so the first one is already visible on load. */
+   24s cycle, 6s per photo. Slide i starts 1.2s early so the first one is already visible on load.
+   Each photo fades in over the one before, which stays fully visible until it is covered: the page behind never
+   shows through. The first photo sits under the last one, so it turns on unseen and the last one fades out over it. */
 .hero-slide {
   opacity: 0;
-  animation: hero-fade 24s linear infinite both;
+  animation: hero-in 24s linear infinite both;
 }
 
 .hero-slides picture:first-child .hero-slide {
   opacity: 1;
+  animation-name: hero-first;
 }
 
-@keyframes hero-fade {
+.hero-slides picture:last-child .hero-slide {
+  animation-name: hero-last;
+}
+
+@keyframes hero-in {
+  0% { opacity: 0; transform: scale(1.08); }
+  5% { opacity: 1; }
+  30% { opacity: 1; transform: scale(1); }
+  30.01%, 100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes hero-first {
+  0% { opacity: 1; transform: scale(1.08); }
+  30% { opacity: 1; transform: scale(1); }
+  30.01%, 100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes hero-last {
   0% { opacity: 0; transform: scale(1.08); }
   5%, 25% { opacity: 1; }
-  30% { opacity: 0; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1); }
+  30%, 100% { opacity: 0; transform: scale(1); }
 }
 
-/* Darkens the photos so the text stays readable. On phones it also fades them into the page at the bottom;
-   on wide screens it darkens from the left, where the text is. */
+/* Darkens the photos so the text stays readable: a little more at the bottom of phones, where the buttons sit on
+   the photo; from the left on wide screens, where the text is. */
 .hero-slides::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(18 12 34 / 0.5) 0%, rgb(18 12 34 / 0.45) 40%, rgb(18 12 34 / 0.7) 75%, var(--color-night) 100%);
+  background: linear-gradient(180deg, rgb(18 12 34 / 0.6) 0%, rgb(18 12 34 / 0.55) 45%, rgb(18 12 34 / 0.6) 70%, rgb(18 12 34 / 0.85) 100%);
 }
 
 @media (min-width: 1024px) {
