@@ -10,12 +10,16 @@ Built with Next.js (App Router, static export), TypeScript and Tailwind CSS. Hos
 npm install      # also enables the git hooks in .githooks/
 npm run dev      # http://localhost:3000
 npm run build    # static site in out/
+npm run lint
+npm run typecheck
 ```
 
-## Deploys
+## Branches and deploys
 
-- Every push to a branch gets its own Cloudflare Pages preview link.
-- `main` is the live site at https://govangreece.gr.
+- `main` is the live site at https://govangreece.gr. It only takes pull requests from `dev`.
+- `dev` is the site in progress, at https://dev.govangreece.pages.dev.
+- Each change is built on its own branch and opened as a pull request into `dev`. Every branch gets its own Cloudflare Pages preview link.
+- CI (`.github/workflows/ci.yml`) runs on every pull request: lint, typecheck, build, and a gitleaks scan of the git history and of the built site.
 
 ## Content
 
