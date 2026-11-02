@@ -1,0 +1,17 @@
+# Version updates go to dev, like every other change. (Security alerts are separate and always target main.)
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: npm
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: monthly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
