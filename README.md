@@ -27,6 +27,20 @@ npm run typecheck
 - All page text lives in `content/el.ts` (Greek, at `/`) and `content/en.ts` (English, at `/en`). Both satisfy the `Dictionary` type in `content/types.ts`, so a missing translation fails the build.
 - Each language has its own root layout (`app/(el)/layout.tsx`, `app/(en)/en/layout.tsx`), so every page has the right `<html lang>`.
 
+## Photos and videos
+
+The originals never enter the repo. `media/media.config.mjs` lists every photo and video on the site: source file, crop, sizes, alt text and consent.
+
+```bash
+npm run media                # rebuild all of public/media and lib/media.ts (macOS + ffmpeg)
+npm run media -- service-    # rebuild only ids starting with "service-"
+npm run check:media          # no EXIF/XMP/GPS in public/media (also runs in CI)
+```
+
+Originals are read from `MEDIA_SOURCE` (default `../photos/drive-2026-10-31`). Components use `<Photo>` and `<Clip>`.
+
+People: children never appear. A recognizable adult is marked `consent: "pending"`, which is fine for previews, but CI blocks every pull request into `main` until it is `"ok"`.
+
 ## What never goes in this repo
 
 The pre-commit hook (`.githooks/pre-commit`) checks these on every commit:
