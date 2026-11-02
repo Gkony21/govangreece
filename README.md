@@ -23,7 +23,9 @@ npm run typecheck
 
 ## Content
 
-Business details (phone, email, social links) live in `lib/site.ts`. Only details the business already publishes belong there.
+- Business details (phone, email, social links) live in `lib/site.ts`. Only details the business already publishes belong there.
+- All page text lives in `content/el.ts` (Greek, at `/`) and `content/en.ts` (English, at `/en`). Both satisfy the `Dictionary` type in `content/types.ts`, so a missing translation fails the build.
+- Each language has its own root layout (`app/(el)/layout.tsx`, `app/(en)/en/layout.tsx`), so every page has the right `<html lang>`.
 
 ## What never goes in this repo
 
