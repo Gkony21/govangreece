@@ -5,7 +5,8 @@
 //   id       output name, used by components
 //   ref      number on the client's contact sheets (P = photo, V = video), for us
 //   src      original file name in MEDIA_SOURCE (an array joins several videos into one clip)
-//   aspect   crop ratio [w, h]; focus is the crop centre as fractions of the photo [x, y]
+//   region   optional part of the photo to start from, as fractions [x, y, w, h], e.g. one frame of a printed strip
+//   aspect   crop ratio [w, h]; focus is the crop centre as fractions of the photo (or region) [x, y]
 //   widths   output widths in px (photos)
 //   blur     areas to blur, as fractions of the photo [x, y, w, h]: number plates, other businesses' signs
 //   trim     [start, length] in seconds (videos)
@@ -21,17 +22,24 @@ const square = [1, 1];
 const band = [3, 2];
 
 export const media = [
-  // Hero: crossfading backgrounds. Each photo has a wide crop (desktop) and a tall crop (phones).
+  // Hero: crossfading backgrounds, all at night: the hero should feel like the party. Each photo has a wide crop
+  // (desktop) and a tall crop (phones).
   ...[
     {
+      id: "hero-party-night",
+      ref: "P49",
+      src: "IMG_2711.HEIC",
+      wideFocus: [0.5, 0.3],
+      tallFocus: [0.5, 0.5],
+      alt: { el: "Πυροτεχνήματα και φωτάκια πάνω από γάμο δίπλα σε πισίνα", en: "Fireworks and string lights over a poolside wedding" },
+    },
+    {
       id: "hero-van-night",
-      ref: "P10",
-      src: "IMG_2260.HEIC",
-      wideFocus: [0.5, 0.62],
-      tallFocus: [0.42, 0.5],
-      // The wide crop shows two guests at the bar.
-      wideConsent: "pending",
-      alt: { el: "Το GO! Van με μωβ φώτα σε βραδινό event", en: "The GO! Van lit in purple at a night event" },
+      ref: "P51",
+      src: "IMG_4288.HEIC",
+      wideFocus: [0.5, 0.5],
+      tallFocus: [0.3, 0.5],
+      alt: { el: "Το GO! Van με μωβ φώτα και τη μπάρα ανοιχτή", en: "The GO! Van in purple light with its bar open" },
     },
     {
       id: "hero-360-fireworks",
@@ -49,26 +57,21 @@ export const media = [
       tallFocus: [0.35, 0.5],
       alt: { el: "Ο Magic Mirror με κόκκινο χαλί σε βραδινό event", en: "The Magic Mirror with a red carpet at a night event" },
     },
-    {
-      id: "hero-van-sunset",
-      ref: "P82",
-      src: "IMG_2799.heic",
-      wideFocus: [0.5, 0.55],
-      tallFocus: [0.3, 0.5],
-      alt: { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" },
-    },
   ].flatMap(({ wideFocus, tallFocus, wideConsent = "none", ...photo }) => [
     { ...photo, id: `${photo.id}-wide`, kind: "photo", aspect: wide, focus: wideFocus, widths: [1280, 1920, 2560], quality: 68, consent: wideConsent },
     { ...photo, id: `${photo.id}-tall`, kind: "photo", aspect: tall, focus: tallFocus, widths: [720, 1080], quality: 68, consent: "none" },
   ]),
 
-  // Hero: the three frames of the 5x15 photo strip.
-  { id: "strip-van", ref: "P74", src: "IMG_2411.HEIC", kind: "photo", aspect: square, focus: [0.5, 0.5], widths: [240, 480], consent: "none",
+  // Hero: the three frames of the 5x15 photo strip, landscape like a real booth print. The people come from the
+  // client's own print of a wedding strip (P01).
+  { id: "strip-van", ref: "P74", src: "IMG_2411.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.42], widths: [240, 480], consent: "none",
     alt: { el: "Το van με μωβ φώτα", en: "The van in purple light" } },
-  { id: "strip-360", ref: "P21", src: "IMG_0208.HEIC", kind: "photo", aspect: square, focus: [0.5, 0.62], widths: [240, 480], consent: "none",
-    alt: { el: "Η πλατφόρμα 360 με μπλε φως", en: "The 360 platform glowing blue" } },
-  { id: "strip-phone", ref: "P35", src: "att.brXHUtjq7bwr0TVSAFEAq3_d_ERfvU1kVN9FJFbWOK0.JPG", kind: "photo", aspect: square, focus: [0.5, 0.58], widths: [240, 480], consent: "none",
-    alt: { el: "Το vintage τηλέφωνο ευχών", en: "The vintage guestbook phone" } },
+  { id: "strip-couple", ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
+    region: [0.316, 0.722, 0.37, 0.201], aspect: band, focus: [0.5, 0.5], widths: [240, 480], consent: "pending",
+    alt: { el: "Ζευγάρι νεόνυμφων με καπέλα από τα props", en: "A bride and groom in hats from the props" } },
+  { id: "strip-friends", ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
+    region: [0.731, 0.267, 0.269, 0.222], aspect: band, focus: [0.5, 0.45], widths: [240, 480], consent: "pending",
+    alt: { el: "Φίλες με μάσκες και πινακίδες από τα props", en: "Friends posing with masks and signs from the props" } },
 
   // Services: one photo each, plus short silent clips.
   { id: "service-mirror", ref: "P65", src: "IMG_3139.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.6], widths: [480, 960], consent: "none",
@@ -94,8 +97,8 @@ export const media = [
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
 
   // Full-width "breathers" between sections, with parallax.
-  { id: "break-fireworks", ref: "P49", src: "IMG_2711.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.35], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Πυροτεχνήματα πάνω από γάμο δίπλα σε πισίνα", en: "Fireworks over a poolside wedding" } },
+  { id: "break-van-sunset", ref: "P82", src: "IMG_2799.heic", kind: "photo", aspect: band, focus: [0.5, 0.6], widths: [960, 1600, 2400], quality: 68, consent: "none",
+    alt: { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" } },
   { id: "break-venue", ref: "P29", src: "IMG_2244.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.55], widths: [960, 1600, 2400], quality: 68, consent: "none",
     alt: { el: "Η πλατφόρμα 360 στημένη σε κτήμα γάμου το σούρουπο", en: "The 360 platform at a wedding venue at dusk" } },
   { id: "break-van-night", ref: "P83", src: "IMG_4292.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [960, 1600, 2400], quality: 68, consent: "none",
@@ -110,7 +113,7 @@ export const media = [
     ["gallery-mirror-garden", "P30", "IMG_9867.HEIC", [0.5, 0.55], { el: "Ο Magic Mirror και props σε κήπο τη νύχτα", en: "The Magic Mirror and props in a garden at night" }],
     ["gallery-mirror-xmas", "P40", "CAE23400-BE20-4EA9-B1B2-BED35120FF13.JPG", [0.5, 0.55], { el: "Ο Magic Mirror δίπλα σε χριστουγεννιάτικο δέντρο", en: "The Magic Mirror next to a Christmas tree" }],
     ["gallery-360-props", "P42", "69D13F77-71F3-4C48-B8F7-9E3BF11A7A86.JPG", [0.5, 0.6], { el: "Η πλατφόρμα 360 με props τη νύχτα", en: "The 360 platform with props at night" }],
-    ["gallery-van-purple", "P51", "IMG_4288.HEIC", [0.5, 0.55], { el: "Το GO! Van με μωβ φώτα", en: "The GO! Van in purple light" }],
+    ["gallery-van-neon", "P59", "IMG_4291.HEIC", [0.5, 0.55], { el: "Το GO! Van με κόκκινα και μπλε φώτα", en: "The GO! Van in red and blue light" }],
     ["gallery-360-heart", "P55", "IMG_9642.HEIC", [0.5, 0.6], { el: "Η πλατφόρμα 360 με φωτεινή καρδιά", en: "The 360 platform with a neon heart" }],
     ["gallery-phone-gold", "P71", "IMG_0550.JPG", [0.5, 0.55], { el: "Το τηλέφωνο ευχών με χρυσές λεπτομέρειες", en: "The guestbook phone with gold details" }],
     ["gallery-phone-flowers", "P76", "IMG_2447.HEIC", [0.5, 0.6], { el: "Το τηλέφωνο ευχών ανάμεσα σε λουλούδια", en: "The guestbook phone among flowers" }],

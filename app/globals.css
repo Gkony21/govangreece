@@ -151,12 +151,13 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   100% { opacity: 0; transform: scale(1); }
 }
 
-/* Darkens the photos so the text stays readable: from the bottom on phones, from the left on wide screens. */
+/* Darkens the photos so the text stays readable. On phones it also fades them into the page at the bottom;
+   on wide screens it darkens from the left, where the text is. */
 .hero-slides::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(18 12 34 / 0.78) 0%, rgb(18 12 34 / 0.7) 45%, rgb(18 12 34 / 0.92) 100%);
+  background: linear-gradient(180deg, rgb(18 12 34 / 0.5) 0%, rgb(18 12 34 / 0.45) 40%, rgb(18 12 34 / 0.7) 75%, var(--color-night) 100%);
 }
 
 @media (min-width: 1024px) {

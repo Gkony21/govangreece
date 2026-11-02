@@ -79,10 +79,20 @@ async function buildPhoto(entry) {
     image = await sharp(image).composite(layers).toBuffer();
   }
 
-  const box = cropBox(info.width, info.height, entry.aspect, entry.focus);
+  // A region narrows the photo first, e.g. one frame out of a printed photo strip.
+  let { width, height } = info;
+  if (entry.region) {
+    const [x, y, w, h] = entry.region;
+    const region = { left: Math.round(x * width), top: Math.round(y * height), width: Math.round(w * width), height: Math.round(h * height) };
+    image = await sharp(image).extract(region).toBuffer();
+    ({ width, height } = region);
+  }
+
+  const box = cropBox(width, height, entry.aspect, entry.focus);
   const cropped = await sharp(image).extract(box).toBuffer();
+  // Never upscale: drop widths larger than the crop, and offer the crop's own width instead.
   const widths = entry.widths.filter((w) => w <= box.width);
-  if (widths.length === 0) widths.push(box.width);
+  if (widths.length < entry.widths.length) widths.push(box.width);
 
   const files = [];
   for (const w of widths) {

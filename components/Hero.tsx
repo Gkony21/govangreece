@@ -5,10 +5,10 @@ import type { Dictionary } from "@/content/types";
 import { media } from "@/lib/media";
 
 // Background photos, in order. Each has a "-wide" crop (landscape screens) and a "-tall" crop (phones, portrait).
-const slides = ["hero-van-night", "hero-360-fireworks", "hero-mirror-night", "hero-van-sunset"] as const;
+const slides = ["hero-party-night", "hero-van-night", "hero-360-fireworks", "hero-mirror-night"] as const;
 
-// The three frames of the 5x15 strip, top to bottom.
-const stripFrames = ["strip-van", "strip-360", "strip-phone"] as const;
+// The three frames of the 5x15 strip, top to bottom: the van, then guests having fun.
+const stripFrames = ["strip-van", "strip-couple", "strip-friends"] as const;
 
 type Props = {
   dict: Dictionary;
@@ -41,10 +41,11 @@ export default function Hero({ dict }: Props) {
 
         <figure
           aria-label={hero.stripLabel}
-          className="hero-strip grid w-[min(170px,44vw)] grid-rows-[repeat(3,auto)_auto] gap-2 justify-self-center bg-[#fbf8ff] p-2.5 pb-0 lg:w-[200px]"
+          className="hero-strip grid w-[min(190px,50vw)] gap-2 justify-self-center bg-[#fbf8ff] p-2.5 pb-0 lg:w-[240px]"
         >
+          <p lang="en" className="pt-1 text-center font-display text-lg leading-none font-extrabold tracking-wide text-on-violet/80">drinks &amp; smiles</p>
           {stripFrames.map((id) => (
-            <Photo key={id} id={id} locale={dict.locale} sizes="200px" className="aspect-square w-full rounded-[2px] object-cover" />
+            <Photo key={id} id={id} locale={dict.locale} sizes="240px" className="aspect-[3/2] w-full rounded-[2px] object-cover" />
           ))}
           <figcaption className="grid place-items-center py-2">
             {/* eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized */}
@@ -60,9 +61,14 @@ export default function Hero({ dict }: Props) {
 
 // Crossfading photos behind the hero, with a slow zoom. Decorative: the text carries the meaning, so alt is empty.
 // Phones in portrait get the tall crop, everything else the wide one. Only the first photo loads with high priority.
+// On phones the photos fill only the first screen and fade into the night below, where the strip sits: stretched over
+// the whole hero they would be zoomed in and lose their sides.
 function HeroSlides() {
   return (
-    <div className="hero-slides absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div
+      className="hero-slides absolute inset-x-0 top-0 -z-10 h-[min(calc(100svh-var(--header-h)),860px)] overflow-hidden lg:inset-0 lg:h-auto"
+      aria-hidden="true"
+    >
       {slides.map((id, i) => {
         const wide = media[`${id}-wide`];
         const tall = media[`${id}-tall`];
