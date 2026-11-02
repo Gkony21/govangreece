@@ -25,7 +25,13 @@ export const el = {
   },
   hero: {
     title: "Έχεις event στη Λακωνία;",
+    leadStrong: "Photo booth, 360 video, τηλέφωνο για ευχές και cocktail bar σε VW van.",
+    lead: "Όλα από μία ομάδα, σε καλύτερη τιμή από το να τα κλείσεις χωριστά.",
+    servicesCta: "Δείτε τις υπηρεσίες",
+    area: "Γάμοι, βαφτίσεις, πάρτι και εταιρικά. Σπάρτη, Λακωνία και όλη η Πελοπόννησος.",
+    stripLabel: "Φωτογραφίες από τα events μας, σαν εκτύπωση του photo booth",
   },
+  band: ["Mirror Booth", "360 Video", "Audio Guestbook", "Cocktail Van", "Portable Bar"],
   sections: {
     services: { title: "Διάλεξε τι θέλεις στο event σου" },
     cocktails: { title: "Το κοκτέιλ με το όνομά σας" },
