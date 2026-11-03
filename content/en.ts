@@ -103,10 +103,9 @@ export const en = {
   },
   cocktails: {
     lead: "A one-of-a-kind mix that tells your story: pick from our signature cocktails and give them your own name. At weddings couples usually pick 2 or 3.",
-    nameLabel: "Type your names",
-    namePlaceholder: "e.g. Maria & Nikos",
-    nameHint: "Each name becomes a cocktail.",
-    quotes: ["“", "”"],
+    nameLabel: "Name for {cocktail}",
+    namePlaceholder: "Your name",
+    nameHint: "✎ Tap a cocktail's name and type your own.",
     signatures: [
       { name: "Cocktail #1", text: "Gin, ginger, lime, green apple, cucumber" },
       { name: "Cocktail #2", text: "Aperol, peach, grapefruit soda, basil" },

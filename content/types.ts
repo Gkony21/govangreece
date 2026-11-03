@@ -60,11 +60,10 @@ export type Dictionary = {
   };
   cocktails: {
     lead: string;
+    // Screen-reader label of each card's name field; {cocktail} becomes its menu name.
     nameLabel: string;
     namePlaceholder: string;
     nameHint: string;
-    // Quote marks around a cocktail named by the visitor: «» in Greek, “” in English.
-    quotes: [string, string];
     // Name and ingredients, in the order of the watercolours. Signatures first: the visitor names those.
     signatures: { name: string; text: string }[];
     classicsTitle: string;
