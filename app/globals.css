@@ -353,17 +353,21 @@ body:has(.package-bar[data-on]) {
   }
 }
 
-/* Computers: the photo takes 62% of the width on one side and fades into the dark towards the line. */
+/* Computers: the photo takes 62% of the width on one side and fades into the dark towards the line. The photo's
+   own colour (--glow, set per breath) spills onto the dark side, so it reads as light rather than an empty panel. */
 @media (min-width: 1024px) {
   .breath::after {
     --fade: 90deg;
+    --glow-x: 30%;
     background:
+      radial-gradient(55% 80% at var(--glow-x) 55%, rgb(var(--glow) / 0.26), rgb(var(--glow) / 0) 70%),
       linear-gradient(var(--fade), var(--color-night) 38%, rgb(18 12 34 / 0.55) 46%, rgb(18 12 34 / 0) 62%),
       linear-gradient(180deg, rgb(18 12 34 / 0.6) 0%, rgb(18 12 34 / 0) 18%, rgb(18 12 34 / 0) 80%, rgb(18 12 34 / 0.75) 100%);
   }
 
   .breath[data-side="left"]::after {
     --fade: 270deg;
+    --glow-x: 70%;
   }
 }
 

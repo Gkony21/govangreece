@@ -1,12 +1,14 @@
+import type { CSSProperties } from "react";
 import type { BreathId, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
 // The photo of each breath, and the side it takes on computers: they alternate, the line goes on the other side.
 // On phones the line sits at the bottom, or at the top where the subject is low in the photo.
+// glow: the photo's own light as "r g b", spilling softly onto the dark side on computers.
 const breaths = {
-  bar: { photo: "break-van-night", side: "right", phoneText: "bottom" },
-  memories: { photo: "break-360-fireworks", side: "left", phoneText: "top" },
-  date: { photo: "break-van-sunset", side: "right", phoneText: "bottom" },
+  bar: { photo: "break-van-night", side: "right", phoneText: "bottom", glow: "255 64 120" },
+  memories: { photo: "break-360-fireworks", side: "left", phoneText: "top", glow: "70 220 140" },
+  date: { photo: "break-van-sunset", side: "right", phoneText: "bottom", glow: "255 170 90" },
 } as const;
 
 type Props = {
@@ -21,7 +23,7 @@ type Props = {
 // Phones: the photo fills the screen width, cut tall, with the line over it.
 // Computers: the photo fills one side, near square, and fades into the dark where the line stands.
 export default function Breath({ id, text, locale }: Props) {
-  const { photo, side, phoneText } = breaths[id];
+  const { photo, side, phoneText, glow } = breaths[id];
   const square = media[photo];
   const tall = media[`${photo}-tall` as const];
   const right = side === "right";
@@ -30,6 +32,7 @@ export default function Breath({ id, text, locale }: Props) {
     <div
       data-side={side}
       data-phone-text={phoneText}
+      style={{ "--glow": glow } as CSSProperties}
       className={`breath relative isolate grid h-[clamp(20rem,62svh,38rem)] overflow-hidden ${phoneText === "top" ? "items-start" : "items-end"} border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:items-center`}
     >
       {/* Photo and line share the one grid cell, so the line can sit at the top, middle or bottom. */}
