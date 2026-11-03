@@ -1,4 +1,4 @@
-export type NeonSignKind = "logo" | "cocktail" | "heart";
+export type NeonSignKind = "logo" | "cocktail" | "heart" | "rating" | "question";
 
 // The tubes of the drawn signs, one path each.
 const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: string[] }> = {
@@ -23,10 +23,29 @@ const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: str
       "M196 50 V58 M192 54 H200",
     ],
   },
+  // "5" and a star, over the Google reviews. Drawn, not text: if the rating ever drops below 5, redraw or swap it.
+  rating: {
+    viewBox: "8 12 240 150",
+    paths: [
+      "M78 40 H34 L28 88 C40 80 52 78 60 80 C76 84 84 98 84 112 C84 132 68 148 50 148 C38 148 28 142 22 134",
+      "M164 34 L178.1 72.6 L219.2 74.1 L186.8 99.4 L198.1 138.9 L164 116 L129.9 138.9 L141.2 99.4 L108.8 74.1 L149.9 72.6 Z",
+      "M228 22 V38 M220 30 H236",
+    ],
+  },
+  // A speech bubble with a question mark, over the questions.
+  question: {
+    viewBox: "10 10 196 166",
+    paths: [
+      "M48 20 H168 A28 28 0 0 1 196 48 V108 A28 28 0 0 1 168 136 H96 L60 168 L66 136 H48 A28 28 0 0 1 20 108 V48 A28 28 0 0 1 48 20 Z",
+      "M88 60 C88 42 128 40 128 60 C128 76 108 78 108 94 V100",
+      "M108 114 V118",
+    ],
+  },
 };
 
-// A neon sign hanging on two wires on the dark side of a breath, on computers only. White-hot tubes with a halo in
-// the breath's --halo colour; it flickers on once as it comes into view (CSS in globals.css). Decorative only.
+// A neon sign hanging on two wires on the dark side of a breath or over a section's title, on computers only.
+// White-hot tubes with a halo in the --halo colour set around it; it flickers on once as it comes into view (CSS in
+// globals.css). Decorative only.
 export default function NeonSign({ kind }: { kind: NeonSignKind }) {
   return (
     <div aria-hidden="true" className="neon-sign hidden lg:block">

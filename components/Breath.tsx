@@ -103,7 +103,7 @@ export default function Breath({ id, line, locale }: Props) {
         >
           <NeonSign kind={sign} />
           <p className="max-w-[14ch] font-display text-[clamp(2.6rem,8vw,5.5rem)] leading-[0.95] font-extrabold text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.55)] lg:max-w-[15ch] lg:text-[clamp(3.5rem,min(5.2vw,9svh),5.4rem)] lg:leading-[0.93]">
-            {line.lead} <span className="breath-neon">{line.neon}</span>
+            {line.lead} <span className="neon-words">{line.neon}</span>
           </p>
           <a
             href={href}

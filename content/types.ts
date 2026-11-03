@@ -96,6 +96,35 @@ export type Dictionary = {
     prev: string;
     next: string;
   };
+  reviews: {
+    // {rating} and {count} come from lib/site.ts (google), updated by hand.
+    summary: string;
+    // Screen-reader label of a row of stars; {n} becomes the number of stars.
+    stars: string;
+    all: string;
+    // Real Google reviews only, picked by hand: first name and initial of the surname, as Google shows them.
+    // On the English page the text is our translation, and note says so.
+    items: { name: string; text: string; event: string }[];
+    note?: string;
+  };
+  about: {
+    // The neon words end the line and glow on computers.
+    lead: string;
+    neon: string;
+    text: string;
+    // Where we go, from home outwards: rings around Sparta.
+    areaTitle: string;
+    home: string;
+    areas: string[];
+    areaNote: string;
+  };
+  faq: {
+    items: { q: string; a: string }[];
+    // Under the questions: call or message us. {phone} becomes the phone number, as a link.
+    moreTitle: string;
+    moreText: string;
+    call: string;
+  };
   footer: {
     tagline: string;
     socialLabel: string;
