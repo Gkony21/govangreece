@@ -267,46 +267,82 @@ export const media = {
   },
   "break-van-sunset": {
     "kind": "photo",
-    "src": "/media/break-van-sunset-960.webp",
-    "srcSet": "/media/break-van-sunset-960.webp 960w, /media/break-van-sunset-1600.webp 1600w, /media/break-van-sunset-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
+    "src": "/media/break-van-sunset-900.webp",
+    "srcSet": "/media/break-van-sunset-900.webp 900w, /media/break-van-sunset-1400.webp 1400w, /media/break-van-sunset-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
     "alt": {
       "el": "Το GO! Van στο ηλιοβασίλεμα",
       "en": "The GO! Van at sunset"
     },
     "consent": "none"
   },
-  "break-venue": {
+  "break-van-sunset-tall": {
     "kind": "photo",
-    "src": "/media/break-venue-960.webp",
-    "srcSet": "/media/break-venue-960.webp 960w, /media/break-venue-1600.webp 1600w, /media/break-venue-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
+    "src": "/media/break-van-sunset-tall-640.webp",
+    "srcSet": "/media/break-van-sunset-tall-640.webp 640w, /media/break-van-sunset-tall-1080.webp 1080w",
+    "width": 1080,
+    "height": 1620,
     "alt": {
-      "el": "Η πλατφόρμα 360 στημένη σε κτήμα γάμου το σούρουπο",
-      "en": "The 360 platform at a wedding venue at dusk"
+      "el": "",
+      "en": ""
+    },
+    "consent": "none"
+  },
+  "break-mirror-sunset": {
+    "kind": "photo",
+    "src": "/media/break-mirror-sunset-900.webp",
+    "srcSet": "/media/break-mirror-sunset-900.webp 900w, /media/break-mirror-sunset-1400.webp 1400w, /media/break-mirror-sunset-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
+    "alt": {
+      "el": "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα",
+      "en": "The Magic Mirror on a red carpet at sunset"
+    },
+    "consent": "none"
+  },
+  "break-mirror-sunset-tall": {
+    "kind": "photo",
+    "src": "/media/break-mirror-sunset-tall-640.webp",
+    "srcSet": "/media/break-mirror-sunset-tall-640.webp 640w, /media/break-mirror-sunset-tall-1080.webp 1080w",
+    "width": 1080,
+    "height": 1620,
+    "alt": {
+      "el": "",
+      "en": ""
     },
     "consent": "none"
   },
   "break-van-night": {
     "kind": "photo",
-    "src": "/media/break-van-night-960.webp",
-    "srcSet": "/media/break-van-night-960.webp 960w, /media/break-van-night-1600.webp 1600w, /media/break-van-night-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
+    "src": "/media/break-van-night-900.webp",
+    "srcSet": "/media/break-van-night-900.webp 900w, /media/break-van-night-1400.webp 1400w, /media/break-van-night-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
     "alt": {
       "el": "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα",
       "en": "The van's bar in red and purple light at night"
     },
     "consent": "none"
   },
+  "break-van-night-tall": {
+    "kind": "photo",
+    "src": "/media/break-van-night-tall-640.webp",
+    "srcSet": "/media/break-van-night-tall-640.webp 640w, /media/break-van-night-tall-1080.webp 1080w",
+    "width": 1080,
+    "height": 1620,
+    "alt": {
+      "el": "",
+      "en": ""
+    },
+    "consent": "none"
+  },
   "gallery-360-terrace": {
     "kind": "photo",
     "src": "/media/gallery-360-terrace-400.webp",
-    "srcSet": "/media/gallery-360-terrace-400.webp 400w, /media/gallery-360-terrace-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-360-terrace-400.webp 400w, /media/gallery-360-terrace-800.webp 800w, /media/gallery-360-terrace-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Η πλατφόρμα 360 σε ταράτσα κτήματος",
       "en": "The 360 platform on a venue terrace"
@@ -316,9 +352,9 @@ export const media = {
   "gallery-360-night": {
     "kind": "photo",
     "src": "/media/gallery-360-night-400.webp",
-    "srcSet": "/media/gallery-360-night-400.webp 400w, /media/gallery-360-night-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-360-night-400.webp 400w, /media/gallery-360-night-800.webp 800w, /media/gallery-360-night-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Η πλατφόρμα 360 σε κήπο τη νύχτα",
       "en": "The 360 platform in a garden at night"
@@ -328,9 +364,9 @@ export const media = {
   "gallery-van-bar-red": {
     "kind": "photo",
     "src": "/media/gallery-van-bar-red-400.webp",
-    "srcSet": "/media/gallery-van-bar-red-400.webp 400w, /media/gallery-van-bar-red-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-van-bar-red-400.webp 400w, /media/gallery-van-bar-red-800.webp 800w, /media/gallery-van-bar-red-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Η μπάρα του van με κόκκινα φώτα",
       "en": "The van's bar in red light"
@@ -340,9 +376,9 @@ export const media = {
   "gallery-phone-stone": {
     "kind": "photo",
     "src": "/media/gallery-phone-stone-400.webp",
-    "srcSet": "/media/gallery-phone-stone-400.webp 400w, /media/gallery-phone-stone-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-phone-stone-400.webp 400w, /media/gallery-phone-stone-800.webp 800w, /media/gallery-phone-stone-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Το τηλέφωνο ευχών σε πέτρινο χώρο",
       "en": "The guestbook phone in a stone-walled room"
@@ -352,9 +388,9 @@ export const media = {
   "gallery-mirror-garden": {
     "kind": "photo",
     "src": "/media/gallery-mirror-garden-400.webp",
-    "srcSet": "/media/gallery-mirror-garden-400.webp 400w, /media/gallery-mirror-garden-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-mirror-garden-400.webp 400w, /media/gallery-mirror-garden-800.webp 800w, /media/gallery-mirror-garden-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Ο Magic Mirror και props σε κήπο τη νύχτα",
       "en": "The Magic Mirror and props in a garden at night"
@@ -364,9 +400,9 @@ export const media = {
   "gallery-mirror-xmas": {
     "kind": "photo",
     "src": "/media/gallery-mirror-xmas-400.webp",
-    "srcSet": "/media/gallery-mirror-xmas-400.webp 400w, /media/gallery-mirror-xmas-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-mirror-xmas-400.webp 400w, /media/gallery-mirror-xmas-800.webp 800w, /media/gallery-mirror-xmas-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Ο Magic Mirror δίπλα σε χριστουγεννιάτικο δέντρο",
       "en": "The Magic Mirror next to a Christmas tree"
@@ -376,9 +412,9 @@ export const media = {
   "gallery-360-props": {
     "kind": "photo",
     "src": "/media/gallery-360-props-400.webp",
-    "srcSet": "/media/gallery-360-props-400.webp 400w, /media/gallery-360-props-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-360-props-400.webp 400w, /media/gallery-360-props-800.webp 800w, /media/gallery-360-props-1170.webp 1170w",
+    "width": 1170,
+    "height": 1463,
     "alt": {
       "el": "Η πλατφόρμα 360 με props τη νύχτα",
       "en": "The 360 platform with props at night"
@@ -388,9 +424,9 @@ export const media = {
   "gallery-van-neon": {
     "kind": "photo",
     "src": "/media/gallery-van-neon-400.webp",
-    "srcSet": "/media/gallery-van-neon-400.webp 400w, /media/gallery-van-neon-800.webp 800w",
-    "width": 800,
-    "height": 999,
+    "srcSet": "/media/gallery-van-neon-400.webp 400w, /media/gallery-van-neon-800.webp 800w, /media/gallery-van-neon-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Το GO! Van με κόκκινα και μπλε φώτα",
       "en": "The GO! Van in red and blue light"
@@ -400,9 +436,9 @@ export const media = {
   "gallery-props-neon": {
     "kind": "photo",
     "src": "/media/gallery-props-neon-400.webp",
-    "srcSet": "/media/gallery-props-neon-400.webp 400w, /media/gallery-props-neon-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-props-neon-400.webp 400w, /media/gallery-props-neon-800.webp 800w, /media/gallery-props-neon-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Props και φωτεινή επιγραφή «Let's Party» τη νύχτα",
       "en": "Props and a \"Let's Party\" neon sign at night"
@@ -412,9 +448,9 @@ export const media = {
   "gallery-phone-gold": {
     "kind": "photo",
     "src": "/media/gallery-phone-gold-400.webp",
-    "srcSet": "/media/gallery-phone-gold-400.webp 400w, /media/gallery-phone-gold-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-phone-gold-400.webp 400w, /media/gallery-phone-gold-800.webp 800w, /media/gallery-phone-gold-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Το τηλέφωνο ευχών με χρυσές λεπτομέρειες",
       "en": "The guestbook phone with gold details"
@@ -424,33 +460,21 @@ export const media = {
   "gallery-phone-flowers": {
     "kind": "photo",
     "src": "/media/gallery-phone-flowers-400.webp",
-    "srcSet": "/media/gallery-phone-flowers-400.webp 400w, /media/gallery-phone-flowers-800.webp 800w",
-    "width": 800,
-    "height": 1000,
+    "srcSet": "/media/gallery-phone-flowers-400.webp 400w, /media/gallery-phone-flowers-800.webp 800w, /media/gallery-phone-flowers-1200.webp 1200w",
+    "width": 1200,
+    "height": 1500,
     "alt": {
       "el": "Το τηλέφωνο ευχών ανάμεσα σε λουλούδια",
       "en": "The guestbook phone among flowers"
     },
     "consent": "none"
   },
-  "gallery-props": {
-    "kind": "photo",
-    "src": "/media/gallery-props-400.webp",
-    "srcSet": "/media/gallery-props-400.webp 400w, /media/gallery-props-800.webp 800w",
-    "width": 800,
-    "height": 1000,
-    "alt": {
-      "el": "Βαλίτσα με props για τις φωτογραφίες",
-      "en": "A suitcase full of photo props"
-    },
-    "consent": "none"
-  },
   "gallery-van-dusk": {
     "kind": "photo",
     "src": "/media/gallery-van-dusk-400.webp",
-    "srcSet": "/media/gallery-van-dusk-400.webp 400w, /media/gallery-van-dusk-800.webp 800w",
-    "width": 800,
-    "height": 800,
+    "srcSet": "/media/gallery-van-dusk-400.webp 400w, /media/gallery-van-dusk-800.webp 800w, /media/gallery-van-dusk-1200.webp 1200w",
+    "width": 1200,
+    "height": 1200,
     "alt": {
       "el": "Το GO! Van στο σούρουπο με τα βουνά πίσω",
       "en": "The GO! Van at dusk with the mountains behind"
@@ -460,9 +484,9 @@ export const media = {
   "gallery-mirror-stone": {
     "kind": "photo",
     "src": "/media/gallery-mirror-stone-600.webp",
-    "srcSet": "/media/gallery-mirror-stone-600.webp 600w, /media/gallery-mirror-stone-1200.webp 1200w",
-    "width": 1200,
-    "height": 800,
+    "srcSet": "/media/gallery-mirror-stone-600.webp 600w, /media/gallery-mirror-stone-1200.webp 1200w, /media/gallery-mirror-stone-1800.webp 1800w",
+    "width": 1800,
+    "height": 1200,
     "alt": {
       "el": "Ο Magic Mirror μπροστά σε πέτρινο σπίτι",
       "en": "The Magic Mirror in front of a stone house"
@@ -472,9 +496,9 @@ export const media = {
   "gallery-van-crowd": {
     "kind": "photo",
     "src": "/media/gallery-van-crowd-600.webp",
-    "srcSet": "/media/gallery-van-crowd-600.webp 600w, /media/gallery-van-crowd-1200.webp 1200w",
-    "width": 1200,
-    "height": 800,
+    "srcSet": "/media/gallery-van-crowd-600.webp 600w, /media/gallery-van-crowd-1200.webp 1200w, /media/gallery-van-crowd-1800.webp 1800w",
+    "width": 1800,
+    "height": 1200,
     "alt": {
       "el": "Καλεσμένοι γύρω από το van σε γλέντι",
       "en": "Guests gathered around the van at a party"

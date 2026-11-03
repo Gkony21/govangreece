@@ -20,6 +20,7 @@ const card = [4, 5];
 const square = [1, 1];
 const band = [3, 2];
 const print = [3, 4];
+const tall = [2, 3];
 
 export const media = [
   // Hero: photos printed like booth prints, scattered around the text. The client's photos are all portrait, so as a
@@ -75,15 +76,20 @@ export const media = [
   { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "pending",
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
 
-  // Full-width "breathers" between sections, with parallax.
-  { id: "break-van-sunset", ref: "P82", src: "IMG_2799.heic", kind: "photo", aspect: band, focus: [0.5, 0.6], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" } },
-  { id: "break-venue", ref: "P29", src: "IMG_2244.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.55], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Η πλατφόρμα 360 στημένη σε κτήμα γάμου το σούρουπο", en: "The 360 platform at a wedding venue at dusk" } },
-  { id: "break-van-night", ref: "P83", src: "IMG_4292.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" } },
+  // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
+  // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
+  ...[
+    ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.6], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
+    ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Magic Mirror on a red carpet at sunset" }],
+    ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
+  ].flatMap(([id, ref, src, focus, alt]) => [
+    { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent: "none", alt },
+    // The same photo cut tall for phones, where the breath covers most of the screen.
+    { id: `${id}-tall`, ref, src, kind: "photo", aspect: tall, focus, widths: [640, 1080], quality: 68, consent: "none",
+      alt: { el: "", en: "" } }, // the computer entry's alt is used: the two are one picture
+  ]),
 
-  // Gallery.
+  // Gallery. The largest size is for the lightbox.
   ...[
     ["gallery-360-terrace", "P03", "IMG_2246.HEIC", [0.5, 0.55], { el: "Η πλατφόρμα 360 σε ταράτσα κτήματος", en: "The 360 platform on a venue terrace" }],
     ["gallery-360-night", "P12", "IMG_0211.HEIC", [0.5, 0.6], { el: "Η πλατφόρμα 360 σε κήπο τη νύχτα", en: "The 360 platform in a garden at night" }],
@@ -96,14 +102,13 @@ export const media = [
     ["gallery-props-neon", "P80", "IMG_0209.HEIC", [0.5, 0.6], { el: "Props και φωτεινή επιγραφή «Let's Party» τη νύχτα", en: "Props and a \"Let's Party\" neon sign at night" }],
     ["gallery-phone-gold", "P71", "IMG_0550.JPG", [0.5, 0.55], { el: "Το τηλέφωνο ευχών με χρυσές λεπτομέρειες", en: "The guestbook phone with gold details" }],
     ["gallery-phone-flowers", "P76", "IMG_2447.HEIC", [0.5, 0.6], { el: "Το τηλέφωνο ευχών ανάμεσα σε λουλούδια", en: "The guestbook phone among flowers" }],
-    ["gallery-props", "P50", "IMG_0287.HEIC", [0.5, 0.6], { el: "Βαλίτσα με props για τις φωτογραφίες", en: "A suitcase full of photo props" }],
-  ].map(([id, ref, src, focus, alt]) => ({ id, ref, src, kind: "photo", aspect: card, focus, widths: [400, 800], consent: "none", alt })),
+  ].map(([id, ref, src, focus, alt]) => ({ id, ref, src, kind: "photo", aspect: card, focus, widths: [400, 800, 1200], consent: "none", alt })),
 
-  { id: "gallery-van-dusk", ref: "P63", src: "IMG_2800.heic", kind: "photo", aspect: square, focus: [0.5, 0.35], widths: [400, 800], consent: "none",
+  { id: "gallery-van-dusk", ref: "P63", src: "IMG_2800.heic", kind: "photo", aspect: square, focus: [0.5, 0.35], widths: [400, 800, 1200], consent: "none",
     // Square crop from the top keeps the number plate out of the frame.
     alt: { el: "Το GO! Van στο σούρουπο με τα βουνά πίσω", en: "The GO! Van at dusk with the mountains behind" } },
-  { id: "gallery-mirror-stone", ref: "P77", src: "IMG_0556.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200], consent: "none",
+  { id: "gallery-mirror-stone", ref: "P77", src: "IMG_0556.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "none",
     alt: { el: "Ο Magic Mirror μπροστά σε πέτρινο σπίτι", en: "The Magic Mirror in front of a stone house" } },
-  { id: "gallery-van-crowd", ref: "P38", src: "IMG_3261.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200], consent: "pending",
+  { id: "gallery-van-crowd", ref: "P38", src: "IMG_3261.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "pending",
     alt: { el: "Καλεσμένοι γύρω από το van σε γλέντι", en: "Guests gathered around the van at a party" } },
 ];

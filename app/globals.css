@@ -319,12 +319,281 @@ body:has(.package-bar[data-on]) {
   padding-bottom: 6rem;
 }
 
+/* Breaths: full-width photos between sections (components/Breath.tsx). The photo is 20% taller than its frame
+   and drifts through it while the frame crosses the screen. Dark at the bottom, so the line over it reads. */
+.breath {
+  view-timeline: --breath;
+}
+
+.breath::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(18 12 34 / 0.55) 0%,
+    rgb(18 12 34 / 0) 30%,
+    rgb(18 12 34 / 0) 45%,
+    var(--color-night) 100%
+  );
+}
+
+/* Phones, line at the top: dark at the top instead, so the bottom of the photo stays clear. */
+@media (max-width: 1023px) {
+  .breath[data-phone-text="top"]::after {
+    background: linear-gradient(
+      180deg,
+      var(--color-night) 0%,
+      rgb(18 12 34 / 0.45) 35%,
+      rgb(18 12 34 / 0) 55%,
+      rgb(18 12 34 / 0) 85%,
+      rgb(18 12 34 / 0.6) 100%
+    );
+  }
+}
+
+/* Computers: the photo takes 61% of the width on one side. Towards the line it darkens and dissolves into the
+   night (a mask, so there is no edge), while its own colour (--glow, set per breath) spills across the seam and a
+   little violet lights the far side. Fine film grain over it all, so the dark side reads as a surface, not a void.
+   --toward points from the photo to the line. */
+@media (min-width: 1024px) {
+  .breath {
+    --toward: 270deg;
+    --seam: 42%;
+    --far: 14%;
+  }
+
+  .breath[data-side="left"] {
+    --toward: 90deg;
+    --seam: 58%;
+    --far: 86%;
+  }
+
+  /* no-repeat: with a fractional width the mask tile can fall a pixel short and repeat, drawing a hairline at the edge. */
+  .breath-photo {
+    mask-repeat: no-repeat;
+    mask-image: linear-gradient(
+      var(--toward),
+      #000 0 48%,
+      rgb(0 0 0 / 0.86) 60%,
+      rgb(0 0 0 / 0.55) 72%,
+      rgb(0 0 0 / 0.22) 85%,
+      transparent
+    );
+  }
+
+  .breath::after {
+    background:
+      radial-gradient(38% 62% at var(--seam) 56%, rgb(var(--glow) / 0.2), rgb(var(--glow) / 0) 70%),
+      radial-gradient(30% 45% at var(--far) 30%, rgb(169 139 255 / 0.1), transparent 70%),
+      linear-gradient(
+        var(--toward),
+        rgb(18 12 34 / 0) 23%,
+        rgb(18 12 34 / 0.35) 35%,
+        rgb(18 12 34 / 0.72) 48%,
+        rgb(18 12 34 / 0.92) 61%
+      ),
+      linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
+  }
+
+  /* Short fade (Breath.tsx): the photo slides 6% out past the screen edge and dissolves over its inner fifth or so,
+     with softer corners (the radial), so a subject at its inner edge stays lit. The dark side's shade moves with it. */
+  .breath[data-fade="short"] {
+    --core: 72%;
+  }
+
+  .breath[data-fade="short"][data-side="left"] {
+    --core: 28%;
+  }
+
+  .breath[data-fade="short"][data-side="right"] .breath-photo { right: -6%; }
+  .breath[data-fade="short"][data-side="left"] .breath-photo { left: -6%; }
+
+  .breath[data-fade="short"] .breath-photo {
+    mask-image:
+      linear-gradient(var(--toward), #000 0 70%, rgb(0 0 0 / 0.8) 82%, rgb(0 0 0 / 0.4) 92%, transparent),
+      radial-gradient(112% 62% at var(--core) 50%, #000 50%, rgb(0 0 0 / 0.55) 72%, transparent 96%);
+    mask-composite: intersect;
+  }
+
+  .breath[data-fade="short"]::after {
+    background:
+      radial-gradient(34% 60% at 50% 56%, rgb(var(--glow) / 0.2), rgb(var(--glow) / 0) 70%),
+      radial-gradient(30% 45% at var(--far) 30%, rgb(169 139 255 / 0.1), transparent 70%),
+      linear-gradient(var(--toward), rgb(18 12 34 / 0) 47%, rgb(18 12 34 / 0.35) 52%, rgb(18 12 34 / 0.8) 57%),
+      linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
+  }
+
+  .breath::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* The last words of the line, lit like the sign above them. */
+  .breath-neon {
+    color: #fff6ff;
+    text-shadow:
+      0 0 4px rgb(255 255 255 / 0.6),
+      0 0 14px rgb(var(--halo)),
+      0 0 36px rgb(var(--halo) / 0.7),
+      0 0 80px rgb(var(--halo) / 0.5);
+  }
+}
+
+/* The neon sign over a breath's line (components/NeonSign.tsx): white tubes with a halo in the breath's --halo,
+   a touch crooked, hanging from the ceiling on two wires, with its light on the wall behind. */
+.neon-sign {
+  position: relative;
+  isolation: isolate;
+  rotate: -3deg;
+}
+
+.neon-sign::before,
+.neon-sign::after {
+  content: "";
+  position: absolute;
+  bottom: 88%;
+  width: 1px;
+  height: 100vh;
+  background: linear-gradient(transparent, rgb(241 236 255 / 0.28));
+}
+
+.neon-sign::before { left: 26%; }
+.neon-sign::after { right: 26%; }
+
+.neon-sign-glow {
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgb(var(--halo) / 0.2), transparent);
+}
+
+.neon-sign > img,
+.neon-sign > svg {
+  display: block;
+  width: auto;
+  height: clamp(7rem, 26svh, 15.5rem);
+  filter:
+    drop-shadow(0 0 1.5px #fff)
+    drop-shadow(0 0 6px rgb(255 236 255 / 0.9))
+    drop-shadow(0 0 14px rgb(var(--halo)))
+    drop-shadow(0 0 34px rgb(var(--halo) / 0.75))
+    drop-shadow(0 0 70px rgb(var(--halo) / 0.5));
+}
+
+/* Sign and words flicker on once, as the line comes into view (data-in, components/RevealObserver.tsx). */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.js [data-in] .neon-sign > :not(.neon-sign-glow) {
+    animation: sign-on 1.6s steps(1, end) 0.35s both;
+  }
+
+  html.js [data-in] .breath-neon {
+    animation: power-on 1.6s steps(1, end) 0.35s both;
+  }
+}
+
+@keyframes sign-on {
+  0% { opacity: 0.3; filter: none; }
+  12% { opacity: 1; }
+  18% { opacity: 0.35; filter: none; }
+  30% { opacity: 1; }
+  36% { opacity: 0.5; filter: none; }
+  50%, 100% { opacity: 1; }
+}
+
+@supports (animation-timeline: view()) {
+  .breath-photo {
+    animation: breath-drift linear both;
+    animation-timeline: --breath;
+    animation-range: cover;
+  }
+}
+
+@keyframes breath-drift {
+  from { transform: translateY(-8%); }
+  to { transform: translateY(8%); }
+}
+
+/* Gallery lightbox (components/GalleryGrid.tsx): a full-screen native <dialog>. pinch-zoom leaves one-finger moves
+   to the swipe handlers instead of the browser. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 4.5rem 1rem 2rem;
+  border: 0;
+  background: rgb(18 12 34 / 0.94);
+  backdrop-filter: blur(10px);
+  color: var(--color-ink);
+  touch-action: pinch-zoom;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+  animation: lightbox-in 0.25s ease;
+}
+
+.lightbox::backdrop {
+  background: transparent;
+}
+
+.lightbox-photo {
+  width: auto;
+  max-width: min(100%, 72rem);
+  height: auto;
+  max-height: calc(100svh - 9rem);
+  border-radius: 6px;
+  animation: lightbox-in 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox-button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: rgb(18 12 34 / 0.7);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.lightbox-button:hover {
+  border-color: var(--color-violet);
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+}
+
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon,
   .scroll-progress,
   .hero-print,
   .scroll-cue::after,
-  .service-band-track {
+  .service-band-track,
+  .breath-photo,
+  .lightbox[open],
+  .lightbox-photo {
     animation: none;
   }
 

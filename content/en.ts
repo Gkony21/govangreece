@@ -122,6 +122,36 @@ export const en = {
     note: "All of them come alcohol-free too, in whatever quantity you need. Have something else in mind? We'll make it.",
     pick: "I want cocktails at my event",
   },
+  why: {
+    lead: "We're the only team in Laconia that does it all.",
+    stats: [
+      { value: "5", label: "services" },
+      { value: "1", label: "team" },
+      { value: "1", label: "quote" },
+    ],
+    points: [
+      { title: "One call for everything", text: "Booths, wishes and drinks: one conversation, one quote." },
+      { title: "A better price together", text: "The more you book together, the less you pay than booking each one separately." },
+      { title: "Someone at the booth", text: "A professional attendant the whole time, so you don't have to lift a finger." },
+      { title: "Everything in 1–2 days", text: "Photos, videos and messages wait for you in the cloud shortly after the event." },
+    ],
+  },
+  breaths: {
+    bar: { lead: "The bar comes", neon: "to you.", link: "See the Cocktail Van" },
+    memories: { lead: "Every guest leaves with a", neon: "memory.", link: "See the Magic Mirror" },
+    date: { lead: "Tell us the date. We'll take care of", neon: "the rest.", link: "Ask for a quote" },
+  },
+  gallery: {
+    lead: "From weddings, parties and openings. Tap a photo to see it larger.",
+    more: "See more photos",
+    instagram: "More on Instagram",
+    open: "Enlarge: {alt}",
+    dialogLabel: "Photos from our events",
+    counter: "{n} of {total}",
+    close: "Close",
+    prev: "Previous photo",
+    next: "Next photo",
+  },
   footer: {
     tagline: "drinks & smiles",
     socialLabel: "Social media",
