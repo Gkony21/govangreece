@@ -1,6 +1,7 @@
 import type { Dictionary } from "./types";
 
-// Greek text. Draft copy from design concept v3: the client's corrections replace it as they arrive.
+// Greek text. Draft copy written by us: the client's own texts replace it as they arrive.
+// The reader is addressed in the plural (σας, Ζητήστε), except the client's own slogans, like the hero title.
 export const el = {
   locale: "el",
   meta: {
@@ -26,12 +27,12 @@ export const el = {
   hero: {
     title: "Έχεις event στη Λακωνία;",
     leadStrong: "Photo booth, 360 video, τηλέφωνο για ευχές και cocktail bar σε VW van.",
-    lead: "Όλα από μία ομάδα, σε καλύτερη τιμή από το να τα κλείσεις χωριστά.",
+    lead: "Όλα από μία ομάδα, σε καλύτερη τιμή από το να τα κλείσετε χωριστά.",
     servicesCta: "Δείτε τις υπηρεσίες",
     area: "Γάμοι, βαφτίσεις, πάρτι και εταιρικά. Σπάρτη, Λακωνία και όλη η Πελοπόννησος.",
   },
   sections: {
-    services: { title: "Διάλεξε τι θέλεις στο event σου" },
+    services: { title: "Διαλέξτε τι θέλετε στο event σας" },
     cocktails: { title: "Το κοκτέιλ με το όνομά σας" },
     why: { title: "Γιατί GO! Van" },
     gallery: { title: "Από τα events μας" },
@@ -41,7 +42,7 @@ export const el = {
     contact: { title: "Πείτε μας για το event σας" },
   },
   services: {
-    lead: "Πάρε μία υπηρεσία ή συνδύασε όσες θέλεις. Όσο περισσότερες μαζί, τόσο καλύτερη η τιμή.",
+    lead: "Πάρτε μία υπηρεσία ή συνδυάστε όσες θέλετε. Όσο περισσότερες μαζί, τόσο καλύτερη η τιμή.",
     pick: "Το θέλω",
     items: [
       {
@@ -96,9 +97,9 @@ export const el = {
       },
     ],
     bag: {
-      one: "Διάλεξες: {list}. Πρόσθεσε κι άλλη για καλύτερη τιμή.",
-      many: "Το πακέτο σου: {list}. {count} υπηρεσίες, μία προσφορά.",
-      label: "Το πακέτο σου",
+      one: "Διαλέξατε: {list}. Προσθέστε κι άλλη για καλύτερη τιμή.",
+      many: "Το πακέτο σας: {list}. {count} υπηρεσίες, μία προσφορά.",
+      label: "Το πακέτο σας",
     },
   },
   footer: {
