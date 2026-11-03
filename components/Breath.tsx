@@ -9,6 +9,9 @@ import { media } from "@/lib/media";
 // glow: the photo's own light as "r g b", spilling softly onto the dark side on computers.
 // sign and halo: the neon sign over the line on computers, and the colour it (and the neon words) glow in.
 // href: where the small link under the line goes.
+// fade: how the photo dissolves into the night on computers. "short" where the subject touches the photo's inner edge
+// (the van's nose, with the logo on its door): the photo slides out a little, cutting its far side, and dissolves over
+// a short, soft edge, so the subject stays lit.
 const breaths = {
   bar: {
     photo: "break-van-night",
@@ -18,6 +21,7 @@ const breaths = {
     sign: "cocktail",
     halo: "255 110 210",
     href: "#service-van",
+    fade: "long",
   },
   memories: {
     photo: "break-mirror-sunset",
@@ -27,6 +31,7 @@ const breaths = {
     sign: "logo",
     halo: "213 140 255",
     href: "#service-mirror",
+    fade: "long",
   },
   date: {
     photo: "break-van-sunset",
@@ -36,6 +41,7 @@ const breaths = {
     sign: "heart",
     halo: "255 120 160",
     href: "#contact",
+    fade: "short",
   },
 } as const;
 
@@ -61,7 +67,7 @@ type Props = {
 // Computers: the photo fills one side, near square, and darkens into the night where the line stands, under a
 // string of fairy lights like the hero's and a neon sign. The line's last words glow like the sign.
 export default function Breath({ id, line, locale }: Props) {
-  const { photo, side, phoneText, glow, sign, halo, href } = breaths[id];
+  const { photo, side, phoneText, glow, sign, halo, href, fade } = breaths[id];
   const square = media[photo];
   const tall = media[`${photo}-tall` as const];
   const right = side === "right";
@@ -70,6 +76,7 @@ export default function Breath({ id, line, locale }: Props) {
     <div
       data-side={side}
       data-phone-text={phoneText}
+      data-fade={fade}
       style={{ "--glow": glow, "--halo": halo } as CSSProperties}
       className={`breath relative isolate grid h-[clamp(20rem,62svh,38rem)] overflow-hidden ${phoneText === "top" ? "items-start" : "items-end"} border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:min-h-[36rem] lg:items-center`}
     >

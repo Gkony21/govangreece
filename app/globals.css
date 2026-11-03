@@ -370,7 +370,9 @@ body:has(.package-bar[data-on]) {
     --far: 86%;
   }
 
+  /* no-repeat: with a fractional width the mask tile can fall a pixel short and repeat, drawing a hairline at the edge. */
   .breath-photo {
+    mask-repeat: no-repeat;
     mask-image: linear-gradient(
       var(--toward),
       #000 0 48%,
@@ -392,6 +394,34 @@ body:has(.package-bar[data-on]) {
         rgb(18 12 34 / 0.72) 48%,
         rgb(18 12 34 / 0.92) 61%
       ),
+      linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
+  }
+
+  /* Short fade (Breath.tsx): the photo slides 6% out past the screen edge and dissolves over its inner fifth or so,
+     with softer corners (the radial), so a subject at its inner edge stays lit. The dark side's shade moves with it. */
+  .breath[data-fade="short"] {
+    --core: 72%;
+  }
+
+  .breath[data-fade="short"][data-side="left"] {
+    --core: 28%;
+  }
+
+  .breath[data-fade="short"][data-side="right"] .breath-photo { right: -6%; }
+  .breath[data-fade="short"][data-side="left"] .breath-photo { left: -6%; }
+
+  .breath[data-fade="short"] .breath-photo {
+    mask-image:
+      linear-gradient(var(--toward), #000 0 70%, rgb(0 0 0 / 0.8) 82%, rgb(0 0 0 / 0.4) 92%, transparent),
+      radial-gradient(112% 62% at var(--core) 50%, #000 50%, rgb(0 0 0 / 0.55) 72%, transparent 96%);
+    mask-composite: intersect;
+  }
+
+  .breath[data-fade="short"]::after {
+    background:
+      radial-gradient(34% 60% at 50% 56%, rgb(var(--glow) / 0.2), rgb(var(--glow) / 0) 70%),
+      radial-gradient(30% 45% at var(--far) 30%, rgb(169 139 255 / 0.1), transparent 70%),
+      linear-gradient(var(--toward), rgb(18 12 34 / 0) 47%, rgb(18 12 34 / 0.35) 52%, rgb(18 12 34 / 0.8) 57%),
       linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
   }
 
