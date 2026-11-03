@@ -41,6 +41,7 @@ export default function Services({ dict }: Props) {
             return (
               <li
                 key={service.id}
+                id={`service-${service.id}`}
                 data-reveal={i % 2 ? "right" : "left"}
                 className="grid gap-6 border-b border-line py-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.1fr)_minmax(0,1.1fr)] lg:gap-10 lg:py-14"
               >

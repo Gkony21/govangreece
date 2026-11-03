@@ -137,9 +137,9 @@ export const en = {
     ],
   },
   breaths: {
-    bar: "The bar comes to you.",
-    memories: "Every guest leaves with a memory.",
-    date: "Tell us the date. We'll take care of the rest.",
+    bar: { lead: "The bar comes", neon: "to you.", link: "See the Cocktail Van" },
+    memories: { lead: "Every guest leaves with a", neon: "memory.", link: "See the Magic Mirror" },
+    date: { lead: "Tell us the date. We'll take care of", neon: "the rest.", link: "Ask for a quote" },
   },
   gallery: {
     lead: "From weddings, parties and openings. Tap a photo to see it larger.",

@@ -54,7 +54,7 @@ export default function HomePage({ dict, homeHref }: Props) {
           const breath = breathBefore[id];
           return (
             <Fragment key={id}>
-              {breath && <Breath id={breath} text={dict.breaths[breath]} locale={dict.locale} />}
+              {breath && <Breath id={breath} line={dict.breaths[breath]} locale={dict.locale} />}
               {id === "services" ? (
                 <Services dict={dict} />
               ) : id === "cocktails" ? (

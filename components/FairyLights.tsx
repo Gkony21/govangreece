@@ -2,10 +2,12 @@
 
 import { useEffect, useRef } from "react";
 
-type Bulb = { x: number; y: number; r: number; phase: number; speed: number };
+type Point = { x: number; y: number };
+type Bulb = Point & { r: number; phase: number; speed: number };
 
-// A string of lights: its height at the ends, how far it sags in the middle, and the bulb radius, in px.
-type Strand = { y: number; sag: number; r: number };
+// A string of lights: its height at the start (and at the end, y1, if different), how far it sags in the middle and
+// the bulb radius, in px. from and to: the part of the box's width it spans, 0 to 1; past 0 or 1 it runs off the edge.
+type Strand = { y: number; y1?: number; sag: number; r: number; from?: number; to?: number };
 
 // The hero's two strings.
 const heroStrands: Strand[] = [
@@ -17,16 +19,19 @@ type Props = {
   strands?: Strand[];
   // About one bulb every this many px along each string.
   spacing?: number;
+  // Draw the wire between the bulbs.
+  wire?: boolean;
   // Position and size of the canvas.
   className?: string;
 };
 
-// Strings of warm fairy lights hanging across the top of their box, like the event photos on the flyers. They twinkle
-// only while on screen. Decorative only: hidden from screen readers, and still (no twinkling) with
-// prefers-reduced-motion.
+// Strings of warm fairy lights hanging across the top of their box, like the event photos on the flyers. Only whole
+// bulbs show: where a string runs off the edge of the box, the bulbs it would cut are left out. They twinkle only
+// while on screen. Decorative only: hidden from screen readers, and still (no twinkling) with prefers-reduced-motion.
 export default function FairyLights({
   strands = heroStrands,
   spacing = 55,
+  wire = false,
   className = "absolute inset-x-0 top-0 h-48 w-full",
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -38,6 +43,7 @@ export default function FairyLights({
 
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let bulbs: Bulb[] = [];
+    let wires: Point[][] = [];
     let w = 0;
     let h = 0;
     let frame = 0;
@@ -51,24 +57,37 @@ export default function FairyLights({
       canvas!.height = h * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      const along = (s: Strand, t: number): Point => {
+        const from = s.from ?? 0;
+        const to = s.to ?? 1;
+        return {
+          x: (from + (to - from) * t) * w,
+          y: s.y + ((s.y1 ?? s.y) - s.y) * t + Math.sin(Math.PI * t) * s.sag,
+        };
+      };
+
+      wires = wire ? strands.map((s) => Array.from({ length: 49 }, (_, i) => along(s, i / 48))) : [];
       bulbs = strands.flatMap((s) => {
-        const n = Math.max(6, Math.round(w / spacing));
-        return Array.from({ length: n + 1 }, (_, i) => {
-          const t = i / n;
-          return {
-            x: t * w,
-            y: s.y + Math.sin(Math.PI * t) * s.sag,
-            r: s.r,
-            phase: Math.random() * Math.PI * 2,
-            speed: 0.6 + Math.random() * 1.2,
-          };
-        });
+        const n = Math.max(6, Math.round((w * ((s.to ?? 1) - (s.from ?? 0))) / spacing));
+        return Array.from({ length: n + 1 }, (_, i) => ({
+          ...along(s, i / n),
+          r: s.r,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.6 + Math.random() * 1.2,
+        })).filter((b) => b.x >= b.r * 3 && b.x <= w - b.r * 3 && b.y >= b.r * 3);
       });
       if (still) draw(0);
     }
 
     function draw(time: number) {
       ctx!.clearRect(0, 0, w, h);
+      ctx!.strokeStyle = "rgba(241,236,255,0.16)";
+      ctx!.lineWidth = 1;
+      for (const points of wires) {
+        ctx!.beginPath();
+        points.forEach((p, i) => (i ? ctx!.lineTo(p.x, p.y) : ctx!.moveTo(p.x, p.y)));
+        ctx!.stroke();
+      }
       for (const b of bulbs) {
         const glow = still ? 0.85 : 0.55 + 0.45 * Math.sin((time / 1000) * b.speed + b.phase);
         const g = ctx!.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 7);
@@ -102,7 +121,7 @@ export default function FairyLights({
       observer.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [strands, spacing]);
+  }, [strands, spacing, wire]);
 
   return (
     <canvas

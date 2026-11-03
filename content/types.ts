@@ -80,8 +80,9 @@ export type Dictionary = {
     stats: { value: string; label: string }[];
     points: { title: string; text: string }[];
   };
-  // Lines over the full-width photos between sections.
-  breaths: Record<BreathId, string>;
+  // Lines over the full-width photos between sections. The neon words end the line and glow on computers;
+  // link: a small link under the line, on computers.
+  breaths: Record<BreathId, { lead: string; neon: string; link: string }>;
   gallery: {
     lead: string;
     // Phones show the first photos only; this button shows the rest.
