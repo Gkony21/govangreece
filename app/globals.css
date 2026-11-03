@@ -319,12 +319,112 @@ body:has(.package-bar[data-on]) {
   padding-bottom: 6rem;
 }
 
+/* Breaths: full-width photos between sections (components/Breath.tsx). The photo is 20% taller than its frame
+   and drifts through it while the frame crosses the screen. Dark at the bottom, so the line over it reads. */
+.breath {
+  view-timeline: --breath;
+}
+
+.breath::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(18 12 34 / 0.55) 0%,
+    rgb(18 12 34 / 0) 30%,
+    rgb(18 12 34 / 0) 45%,
+    var(--color-night) 100%
+  );
+}
+
+@supports (animation-timeline: view()) {
+  .breath-photo {
+    animation: breath-drift linear both;
+    animation-timeline: --breath;
+    animation-range: cover;
+  }
+}
+
+@keyframes breath-drift {
+  from { transform: translateY(-8%); }
+  to { transform: translateY(8%); }
+}
+
+/* Gallery lightbox (components/GalleryGrid.tsx): a full-screen native <dialog>. pinch-zoom leaves one-finger moves
+   to the swipe handlers instead of the browser. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 4.5rem 1rem 2rem;
+  border: 0;
+  background: rgb(18 12 34 / 0.94);
+  backdrop-filter: blur(10px);
+  color: var(--color-ink);
+  touch-action: pinch-zoom;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+  animation: lightbox-in 0.25s ease;
+}
+
+.lightbox::backdrop {
+  background: transparent;
+}
+
+.lightbox-photo {
+  width: auto;
+  max-width: min(100%, 72rem);
+  height: auto;
+  max-height: calc(100svh - 9rem);
+  border-radius: 6px;
+  animation: lightbox-in 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox-button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: rgb(18 12 34 / 0.7);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.lightbox-button:hover {
+  border-color: var(--color-violet);
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+}
+
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon,
   .scroll-progress,
   .hero-print,
   .scroll-cue::after,
-  .service-band-track {
+  .service-band-track,
+  .breath-photo,
+  .lightbox[open],
+  .lightbox-photo {
     animation: none;
   }
 

@@ -7,6 +7,9 @@ export type Locale = "el" | "en";
 export const sectionIds = ["services", "cocktails", "why", "gallery", "reviews", "about", "faq", "contact"] as const;
 export type SectionId = (typeof sectionIds)[number];
 
+// The full-width photos between sections ("breaths"), each with a line of text.
+export type BreathId = "bar" | "memories" | "date";
+
 // The five services, in menu order. Also the values of the quote form's checkboxes.
 export const serviceIds = ["mirror", "360", "guestbook", "van", "bar"] as const;
 export type ServiceId = (typeof serviceIds)[number];
@@ -70,6 +73,27 @@ export type Dictionary = {
     classics: { name: string; text: string }[];
     note: string;
     pick: string;
+  };
+  why: {
+    lead: string;
+    // Big numbers beside the points: 5 services, 1 team, 1 quote.
+    stats: { value: string; label: string }[];
+    points: { title: string; text: string }[];
+  };
+  // Lines over the full-width photos between sections.
+  breaths: Record<BreathId, string>;
+  gallery: {
+    lead: string;
+    // Phones show the first photos only; this button shows the rest.
+    more: string;
+    instagram: string;
+    // Lightbox: {alt} is the photo's description; {n} and {total} its place in the gallery.
+    open: string;
+    dialogLabel: string;
+    counter: string;
+    close: string;
+    prev: string;
+    next: string;
   };
   footer: {
     tagline: string;
