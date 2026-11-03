@@ -58,6 +58,20 @@ export type Dictionary = {
     // The bar at the bottom of the screen once something is picked. {list} becomes the picked names, {count} how many.
     bag: { one: string; many: string; label: string };
   };
+  cocktails: {
+    lead: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    nameHint: string;
+    // Quote marks around a cocktail named by the visitor: «» in Greek, “” in English.
+    quotes: [string, string];
+    // Name and ingredients, in the order of the watercolours. Signatures first: the visitor names those.
+    signatures: { name: string; text: string }[];
+    classicsTitle: string;
+    classics: { name: string; text: string }[];
+    note: string;
+    pick: string;
+  };
   footer: {
     tagline: string;
     socialLabel: string;

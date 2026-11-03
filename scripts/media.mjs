@@ -27,8 +27,9 @@ function run(cmd, args) {
   return execFileSync(cmd, args, { stdio: ["ignore", "pipe", "pipe"] });
 }
 
-function sourcePath(name) {
-  const file = path.join(source, name);
+// Most originals are the client's photos in MEDIA_SOURCE; an entry with `dir` reads from elsewhere instead.
+function sourcePath(name, dir) {
+  const file = path.join(dir ? path.resolve(root, dir) : source, name);
   if (!existsSync(file)) throw new Error(`Original not found: ${file}`);
   return file;
 }
@@ -60,7 +61,7 @@ function cropBox(width, height, [aw, ah], [fx, fy]) {
 
 async function buildPhoto(entry) {
   // Rotate per the camera's orientation flag first, so crops and blur boxes refer to the photo as seen.
-  const { data, info } = await sharp(decodable(sourcePath(entry.src))).rotate().toBuffer({ resolveWithObject: true });
+  const { data, info } = await sharp(decodable(sourcePath(entry.src, entry.dir))).rotate().toBuffer({ resolveWithObject: true });
   let image = data;
 
   if (entry.blur?.length) {

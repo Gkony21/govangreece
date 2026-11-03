@@ -102,6 +102,28 @@ export const el = {
       label: "Το πακέτο σας",
     },
   },
+  cocktails: {
+    lead: "Ένα μοναδικό μείγμα που αφηγείται τη δική σας ιστορία: διαλέξτε από τα signature κοκτέιλ μας και δώστε τους το δικό σας όνομα. Στους γάμους συνήθως επιλέγονται 2 με 3.",
+    nameLabel: "Γράψτε τα ονόματά σας",
+    namePlaceholder: "π.χ. Μαρία & Νίκος",
+    nameHint: "Κάθε όνομα γίνεται ένα κοκτέιλ.",
+    quotes: ["«", "»"],
+    signatures: [
+      { name: "Cocktail #1", text: "Τζιν, τζίντζερ, lime, πράσινο μήλο, αγγούρι" },
+      { name: "Cocktail #2", text: "Aperol, ροδάκινο, σόδα γκρέιπφρουτ, βασιλικός" },
+      { name: "Cocktail #3", text: "Βότκα, ράσμπερι, τσιχλόφουσκα, lime" },
+      { name: "Cocktail #4", text: "Ρούμι, passion fruit ή μάνγκο, καραμέλα, lime, δυόσμος" },
+    ],
+    classicsTitle: "Ή τα κλασικά",
+    classics: [
+      { name: "Margarita", text: "Τεκίλα, lime, triple sec, αλάτι στο ποτήρι" },
+      { name: "Paloma", text: "Τεκίλα, lime, σόδα γκρέιπφρουτ, αλάτι στο ποτήρι" },
+      { name: "Mai Tai", text: "Ρούμι, lime, σιρόπι πικραμύγδαλο, triple sec, bitters" },
+      { name: "Mojito", text: "Ρούμι, lime, μαύρη ζάχαρη, δυόσμος, σόδα" },
+    ],
+    note: "Όλα γίνονται και χωρίς αλκοόλ, σε όση ποσότητα θέλετε. Αν έχετε κάτι άλλο στο μυαλό σας, το φτιάχνουμε.",
+    pick: "Θέλω κοκτέιλ στο event",
+  },
   footer: {
     tagline: "drinks & smiles",
     socialLabel: "Social media",

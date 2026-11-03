@@ -287,6 +287,20 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   to { transform: translateX(-50%); }
 }
 
+/* Signature cocktails as menu cards on paper (components/CocktailNamer.tsx), each slightly tilted by an inline
+   `rotate`. Hovering straightens and lifts one, like picking it up. */
+.cocktail-card {
+  padding: 0.7rem 0.7rem 1.1rem;
+  background: #fbf8ff;
+  box-shadow: 0 24px 50px rgb(0 0 0 / 0.45);
+  transition: rotate 0.3s ease, translate 0.3s ease;
+}
+
+.cocktail-card:hover {
+  rotate: 0deg !important;
+  translate: 0 -6px;
+}
+
 /* The package bar (components/PackageBar.tsx) slides up once a service is picked. Hidden, it is also out of the tab
    order. The page gets room at the bottom so the bar never covers the footer. */
 .package-bar {
@@ -315,7 +329,8 @@ body:has(.package-bar[data-on]) {
   }
 
   .package-bar,
-  .package-bar[data-on] {
+  .package-bar[data-on],
+  .cocktail-card {
     transition: none;
   }
 
