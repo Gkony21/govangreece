@@ -49,6 +49,102 @@ export const media = {
     },
     "consent": "pending"
   },
+  "cocktail-signature-1": {
+    "kind": "photo",
+    "src": "/media/cocktail-signature-1-400.webp",
+    "srcSet": "/media/cocktail-signature-1-400.webp 400w, /media/cocktail-signature-1-800.webp 800w",
+    "width": 800,
+    "height": 1000,
+    "alt": {
+      "el": "Ακουαρέλα: ψηλό ποτήρι με αγγούρι, πράσινο μήλο και lime",
+      "en": "Watercolour: a tall glass with cucumber, green apple and lime"
+    },
+    "consent": "none"
+  },
+  "cocktail-signature-2": {
+    "kind": "photo",
+    "src": "/media/cocktail-signature-2-400.webp",
+    "srcSet": "/media/cocktail-signature-2-400.webp 400w, /media/cocktail-signature-2-800.webp 800w",
+    "width": 800,
+    "height": 1000,
+    "alt": {
+      "el": "Ακουαρέλα: κολονάτο ποτήρι με ροδάκινο και βασιλικό",
+      "en": "Watercolour: a stemmed glass with peach and basil"
+    },
+    "consent": "none"
+  },
+  "cocktail-signature-3": {
+    "kind": "photo",
+    "src": "/media/cocktail-signature-3-400.webp",
+    "srcSet": "/media/cocktail-signature-3-400.webp 400w, /media/cocktail-signature-3-800.webp 800w",
+    "width": 800,
+    "height": 1000,
+    "alt": {
+      "el": "Ακουαρέλα: κολονάτο ποτήρι με ράσμπερι και lime",
+      "en": "Watercolour: a stemmed glass with raspberry and lime"
+    },
+    "consent": "none"
+  },
+  "cocktail-signature-4": {
+    "kind": "photo",
+    "src": "/media/cocktail-signature-4-400.webp",
+    "srcSet": "/media/cocktail-signature-4-400.webp 400w, /media/cocktail-signature-4-800.webp 800w",
+    "width": 800,
+    "height": 1000,
+    "alt": {
+      "el": "Ακουαρέλα: κοντό ποτήρι με passion fruit και δυόσμο",
+      "en": "Watercolour: a short glass with passion fruit and mint"
+    },
+    "consent": "none"
+  },
+  "cocktail-margarita": {
+    "kind": "photo",
+    "src": "/media/cocktail-margarita-160.webp",
+    "srcSet": "/media/cocktail-margarita-160.webp 160w, /media/cocktail-margarita-320.webp 320w",
+    "width": 320,
+    "height": 400,
+    "alt": {
+      "el": "Ακουαρέλα: Margarita",
+      "en": "Watercolour: a Margarita"
+    },
+    "consent": "none"
+  },
+  "cocktail-paloma": {
+    "kind": "photo",
+    "src": "/media/cocktail-paloma-160.webp",
+    "srcSet": "/media/cocktail-paloma-160.webp 160w, /media/cocktail-paloma-320.webp 320w",
+    "width": 320,
+    "height": 400,
+    "alt": {
+      "el": "Ακουαρέλα: Paloma",
+      "en": "Watercolour: a Paloma"
+    },
+    "consent": "none"
+  },
+  "cocktail-mai-tai": {
+    "kind": "photo",
+    "src": "/media/cocktail-mai-tai-160.webp",
+    "srcSet": "/media/cocktail-mai-tai-160.webp 160w, /media/cocktail-mai-tai-320.webp 320w",
+    "width": 320,
+    "height": 400,
+    "alt": {
+      "el": "Ακουαρέλα: Mai Tai",
+      "en": "Watercolour: a Mai Tai"
+    },
+    "consent": "none"
+  },
+  "cocktail-mojito": {
+    "kind": "photo",
+    "src": "/media/cocktail-mojito-160.webp",
+    "srcSet": "/media/cocktail-mojito-160.webp 160w, /media/cocktail-mojito-320.webp 320w",
+    "width": 320,
+    "height": 400,
+    "alt": {
+      "el": "Ακουαρέλα: Mojito",
+      "en": "Watercolour: a Mojito"
+    },
+    "consent": "none"
+  },
   "service-mirror": {
     "kind": "photo",
     "src": "/media/service-mirror-480.webp",

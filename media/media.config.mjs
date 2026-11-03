@@ -5,6 +5,7 @@
 //   id       output name, used by components
 //   ref      number on the client's contact sheets (P = photo, V = video), for us
 //   src      original file name in MEDIA_SOURCE (an array joins several videos into one clip)
+//   dir      optional folder to read src from instead, relative to the repo (our own crops, not the client's photos)
 //   region   optional part of the photo to start from, as fractions [x, y, w, h], e.g. one frame of a printed strip
 //   aspect   crop ratio [w, h]; focus is the crop centre as fractions of the photo (or region) [x, y]
 //   widths   output widths in px (photos)
@@ -34,6 +35,21 @@ export const media = [
   ].map(([id, region, focus, alt]) => ({
     id, ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
     region, aspect: band, focus, widths: [320, 640], consent: "pending", alt,
+  })),
+
+  // Cocktails: the watercolours from the client's 2026 cocktail menu, cut out of the menu's PSD at full resolution.
+  ...[
+    ["cocktail-signature-1", "signature-1", { el: "Ακουαρέλα: ψηλό ποτήρι με αγγούρι, πράσινο μήλο και lime", en: "Watercolour: a tall glass with cucumber, green apple and lime" }],
+    ["cocktail-signature-2", "signature-2", { el: "Ακουαρέλα: κολονάτο ποτήρι με ροδάκινο και βασιλικό", en: "Watercolour: a stemmed glass with peach and basil" }],
+    ["cocktail-signature-3", "signature-3", { el: "Ακουαρέλα: κολονάτο ποτήρι με ράσμπερι και lime", en: "Watercolour: a stemmed glass with raspberry and lime" }],
+    ["cocktail-signature-4", "signature-4", { el: "Ακουαρέλα: κοντό ποτήρι με passion fruit και δυόσμο", en: "Watercolour: a short glass with passion fruit and mint" }],
+    ["cocktail-margarita", "margarita", { el: "Ακουαρέλα: Margarita", en: "Watercolour: a Margarita" }],
+    ["cocktail-paloma", "paloma", { el: "Ακουαρέλα: Paloma", en: "Watercolour: a Paloma" }],
+    ["cocktail-mai-tai", "mai-tai", { el: "Ακουαρέλα: Mai Tai", en: "Watercolour: a Mai Tai" }],
+    ["cocktail-mojito", "mojito", { el: "Ακουαρέλα: Mojito", en: "Watercolour: a Mojito" }],
+  ].map(([id, file, alt]) => ({
+    id, ref: "menu", dir: "../design/assets/hd", src: `${file}.webp`, kind: "photo",
+    aspect: card, focus: [0.5, 0.5], widths: id.includes("signature") ? [400, 800] : [160, 320], quality: 80, consent: "none", alt,
   })),
 
   // Services: one photo each, plus short silent clips.

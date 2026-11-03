@@ -58,6 +58,19 @@ export type Dictionary = {
     // The bar at the bottom of the screen once something is picked. {list} becomes the picked names, {count} how many.
     bag: { one: string; many: string; label: string };
   };
+  cocktails: {
+    lead: string;
+    // Screen-reader label of each card's name field; {cocktail} becomes its menu name.
+    nameLabel: string;
+    namePlaceholder: string;
+    nameHint: string;
+    // Name and ingredients, in the order of the watercolours. Signatures first: the visitor names those.
+    signatures: { name: string; text: string }[];
+    classicsTitle: string;
+    classics: { name: string; text: string }[];
+    note: string;
+    pick: string;
+  };
   footer: {
     tagline: string;
     socialLabel: string;

@@ -101,6 +101,27 @@ export const en = {
       label: "Your package",
     },
   },
+  cocktails: {
+    lead: "A one-of-a-kind mix that tells your story: pick from our signature cocktails and give them your own name. At weddings couples usually pick 2 or 3.",
+    nameLabel: "Name for {cocktail}",
+    namePlaceholder: "Your name",
+    nameHint: "✎ Tap a cocktail's name and type your own.",
+    signatures: [
+      { name: "Cocktail #1", text: "Gin, ginger, lime, green apple, cucumber" },
+      { name: "Cocktail #2", text: "Aperol, peach, grapefruit soda, basil" },
+      { name: "Cocktail #3", text: "Vodka, raspberry, bubblegum, lime" },
+      { name: "Cocktail #4", text: "Rum, passion fruit or mango, caramel, lime, mint" },
+    ],
+    classicsTitle: "Or the classics",
+    classics: [
+      { name: "Margarita", text: "Tequila, lime, triple sec, salt rim" },
+      { name: "Paloma", text: "Tequila, lime, grapefruit soda, salt rim" },
+      { name: "Mai Tai", text: "Rum, lime, orgeat, triple sec, bitters" },
+      { name: "Mojito", text: "Rum, lime, brown sugar, mint, soda" },
+    ],
+    note: "All of them come alcohol-free too, in whatever quantity you need. Have something else in mind? We'll make it.",
+    pick: "I want cocktails at my event",
+  },
   footer: {
     tagline: "drinks & smiles",
     socialLabel: "Social media",

@@ -1,4 +1,5 @@
 import Clip from "@/components/Clip";
+import Cocktails from "@/components/Cocktails";
 import Hero from "@/components/Hero";
 import PackageBar from "@/components/PackageBar";
 import Photo from "@/components/Photo";
@@ -12,14 +13,12 @@ import { media, type MediaId } from "@/lib/media";
 
 // Step 3 review: the processed photos and videos, shown raw in the section they belong to. Replaced as sections land.
 const previewMedia: Partial<Record<SectionId, string[]>> = {
-  cocktails: ["clip-cocktails"],
   why: ["break-"],
   gallery: ["gallery-"],
 };
 
 // Which build step fills each section. Temporary: the labels disappear as the real sections land.
 const comingInStep: Partial<Record<SectionId, number>> = {
-  cocktails: 6,
   why: 7,
   gallery: 7,
   reviews: 8,
@@ -53,6 +52,8 @@ export default function HomePage({ dict, homeHref }: Props) {
         {sectionIds.map((id) =>
           id === "services" ? (
             <Services key={id} dict={dict} />
+          ) : id === "cocktails" ? (
+            <Cocktails key={id} dict={dict} />
           ) : (
             <section key={id} id={id} aria-labelledby={`${id}-title`} className="border-b border-line py-20 lg:py-24">
               <div className="wrap grid gap-4">
