@@ -289,22 +289,22 @@ export const media = {
     },
     "consent": "none"
   },
-  "break-360-fireworks": {
+  "break-mirror-sunset": {
     "kind": "photo",
-    "src": "/media/break-360-fireworks-900.webp",
-    "srcSet": "/media/break-360-fireworks-900.webp 900w, /media/break-360-fireworks-1400.webp 1400w, /media/break-360-fireworks-1800.webp 1800w",
+    "src": "/media/break-mirror-sunset-900.webp",
+    "srcSet": "/media/break-mirror-sunset-900.webp 900w, /media/break-mirror-sunset-1400.webp 1400w, /media/break-mirror-sunset-1800.webp 1800w",
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Η πλατφόρμα 360 με πράσινα φώτα και πυροτεχνήματα τη νύχτα",
-      "en": "The 360 platform glowing green under fireworks at night"
+      "el": "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα",
+      "en": "The Magic Mirror on a red carpet at sunset"
     },
     "consent": "none"
   },
-  "break-360-fireworks-tall": {
+  "break-mirror-sunset-tall": {
     "kind": "photo",
-    "src": "/media/break-360-fireworks-tall-640.webp",
-    "srcSet": "/media/break-360-fireworks-tall-640.webp 640w, /media/break-360-fireworks-tall-1080.webp 1080w",
+    "src": "/media/break-mirror-sunset-tall-640.webp",
+    "srcSet": "/media/break-mirror-sunset-tall-640.webp 640w, /media/break-mirror-sunset-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {

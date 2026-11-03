@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import FairyLights from "@/components/FairyLights";
 import type { BreathId, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
@@ -7,9 +8,12 @@ import { media } from "@/lib/media";
 // glow: the photo's own light as "r g b", spilling softly onto the dark side on computers.
 const breaths = {
   bar: { photo: "break-van-night", side: "right", phoneText: "bottom", glow: "255 64 120" },
-  memories: { photo: "break-360-fireworks", side: "left", phoneText: "top", glow: "70 220 140" },
+  memories: { photo: "break-mirror-sunset", side: "left", phoneText: "top", glow: "255 150 120" },
   date: { photo: "break-van-sunset", side: "right", phoneText: "bottom", glow: "255 170 90" },
 } as const;
+
+// One string of lights over the dark side on computers, sparser than the hero's two.
+const strand = [{ y: 10, sag: 70, r: 2.8 }];
 
 type Props = {
   id: BreathId;
@@ -21,7 +25,8 @@ type Props = {
 // through it as the page scrolls (parallax): CSS in globals.css, components/ParallaxFallback.tsx where the browser
 // has no scroll timelines.
 // Phones: the photo fills the screen width, cut tall, with the line over it.
-// Computers: the photo fills one side, near square, and fades into the dark where the line stands.
+// Computers: the photo fills one side, near square, and fades into the dark where the line stands, under a string
+// of fairy lights like the hero's.
 export default function Breath({ id, text, locale }: Props) {
   const { photo, side, phoneText, glow } = breaths[id];
   const square = media[photo];
@@ -50,6 +55,7 @@ export default function Breath({ id, text, locale }: Props) {
           className={`breath-photo absolute inset-x-0 -top-[10%] -z-10 h-[120%] w-full object-cover lg:w-[62%] ${right ? "lg:left-auto" : "lg:right-auto"}`}
         />
       </picture>
+      <FairyLights strands={strand} spacing={58} className={`absolute top-0 hidden h-56 w-[44%] lg:block ${right ? "left-0" : "right-0"}`} />
       <div className={`wrap [grid-area:1/1] lg:grid lg:py-0 ${phoneText === "top" ? "pt-10" : "pb-10"}`}>
         <p
           data-reveal={right ? "left" : "right"}

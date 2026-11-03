@@ -80,7 +80,7 @@ export const media = [
   // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
     ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.6], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
-    ["break-360-fireworks", "P28", "IMG_0241.HEIC", [0.5, 0.52], { el: "Η πλατφόρμα 360 με πράσινα φώτα και πυροτεχνήματα τη νύχτα", en: "The 360 platform glowing green under fireworks at night" }],
+    ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Magic Mirror on a red carpet at sunset" }],
     ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
   ].flatMap(([id, ref, src, focus, alt]) => [
     { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent: "none", alt },
