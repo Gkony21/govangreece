@@ -339,6 +339,34 @@ body:has(.package-bar[data-on]) {
   );
 }
 
+/* Phones, line at the top: dark at the top instead, so the bottom of the photo stays clear. */
+@media (max-width: 1023px) {
+  .breath[data-phone-text="top"]::after {
+    background: linear-gradient(
+      180deg,
+      var(--color-night) 0%,
+      rgb(18 12 34 / 0.45) 35%,
+      rgb(18 12 34 / 0) 55%,
+      rgb(18 12 34 / 0) 85%,
+      rgb(18 12 34 / 0.6) 100%
+    );
+  }
+}
+
+/* Computers: the photo takes 62% of the width on one side and fades into the dark towards the line. */
+@media (min-width: 1024px) {
+  .breath::after {
+    --fade: 90deg;
+    background:
+      linear-gradient(var(--fade), var(--color-night) 38%, rgb(18 12 34 / 0.55) 46%, rgb(18 12 34 / 0) 62%),
+      linear-gradient(180deg, rgb(18 12 34 / 0.6) 0%, rgb(18 12 34 / 0) 18%, rgb(18 12 34 / 0) 80%, rgb(18 12 34 / 0.75) 100%);
+  }
+
+  .breath[data-side="left"]::after {
+    --fade: 270deg;
+  }
+}
+
 @supports (animation-timeline: view()) {
   .breath-photo {
     animation: breath-drift linear both;

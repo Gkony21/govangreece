@@ -1,10 +1,12 @@
 import type { BreathId, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
-const photos = {
-  bar: "break-van-night",
-  memories: "break-venue",
-  date: "break-van-sunset",
+// The photo of each breath, and the side it takes on computers: they alternate, the line goes on the other side.
+// On phones the line sits at the bottom, or at the top where the subject is low in the photo.
+const breaths = {
+  bar: { photo: "break-van-night", side: "right", phoneText: "bottom" },
+  memories: { photo: "break-360-fireworks", side: "left", phoneText: "top" },
+  date: { photo: "break-van-sunset", side: "right", phoneText: "bottom" },
 } as const;
 
 type Props = {
@@ -13,33 +15,42 @@ type Props = {
   locale: Locale;
 };
 
-// A "breath" between sections: a full-width photo with one line over it. The photo is taller than its frame and
-// drifts through it as the page scrolls (parallax): CSS in globals.css, components/ParallaxFallback.tsx where the
-// browser has no scroll timelines. Phones get a tall crop of the same photo.
+// A "breath" between sections: a big photo with one line over it. The photo is taller than its frame and drifts
+// through it as the page scrolls (parallax): CSS in globals.css, components/ParallaxFallback.tsx where the browser
+// has no scroll timelines.
+// Phones: the photo fills the screen width, cut tall, with the line over it.
+// Computers: the photo fills one side, near square, and fades into the dark where the line stands.
 export default function Breath({ id, text, locale }: Props) {
-  const wide = media[photos[id]];
-  const tall = media[`${photos[id]}-tall` as const];
+  const { photo, side, phoneText } = breaths[id];
+  const square = media[photo];
+  const tall = media[`${photo}-tall` as const];
+  const right = side === "right";
 
   return (
-    <div className="breath relative isolate grid h-[clamp(20rem,62svh,38rem)] items-end overflow-hidden border-b border-line">
-      <picture>
+    <div
+      data-side={side}
+      data-phone-text={phoneText}
+      className={`breath relative isolate grid h-[clamp(20rem,62svh,38rem)] overflow-hidden ${phoneText === "top" ? "items-start" : "items-end"} border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:items-center`}
+    >
+      {/* Photo and line share the one grid cell, so the line can sit at the top, middle or bottom. */}
+      <picture className="[grid-area:1/1]">
         <source media="(max-width: 767px)" srcSet={tall.srcSet} sizes="100vw" width={tall.width} height={tall.height} />
         <img
-          src={wide.src}
-          srcSet={wide.srcSet}
-          sizes="100vw"
-          width={wide.width}
-          height={wide.height}
-          alt={wide.alt[locale]}
+          src={square.src}
+          srcSet={square.srcSet}
+          sizes="(min-width: 1024px) 62vw, 100vw"
+          width={square.width}
+          height={square.height}
+          alt={square.alt[locale]}
           loading="lazy"
           decoding="async"
-          className="breath-photo absolute inset-x-0 -top-[10%] -z-10 h-[120%] w-full object-cover"
+          className={`breath-photo absolute inset-x-0 -top-[10%] -z-10 h-[120%] w-full object-cover lg:w-[62%] ${right ? "lg:left-auto" : "lg:right-auto"}`}
         />
       </picture>
-      <div className="wrap pb-10 lg:pb-14">
+      <div className={`wrap [grid-area:1/1] lg:grid lg:py-0 ${phoneText === "top" ? "pt-10" : "pb-10"}`}>
         <p
-          data-reveal="left"
-          className="max-w-[14ch] font-display text-[clamp(2.6rem,8vw,6rem)] leading-[0.95] font-extrabold text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.55)]"
+          data-reveal={right ? "left" : "right"}
+          className={`max-w-[14ch] font-display text-[clamp(2.6rem,8vw,5.5rem)] leading-[0.95] font-extrabold text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.55)] lg:max-w-[36%] lg:text-[clamp(3.5rem,5vw,5rem)] ${right ? "" : "lg:justify-self-end lg:text-right"}`}
         >
           {text}
         </p>

@@ -76,20 +76,18 @@ export const media = [
   { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "pending",
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
 
-  // Full-width "breathers" between sections, with parallax.
-  { id: "break-van-sunset", ref: "P82", src: "IMG_2799.heic", kind: "photo", aspect: band, focus: [0.5, 0.6], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" } },
-  { id: "break-venue", ref: "P29", src: "IMG_2244.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.55], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Η πλατφόρμα 360 στημένη σε κτήμα γάμου το σούρουπο", en: "The 360 platform at a wedding venue at dusk" } },
-  { id: "break-van-night", ref: "P83", src: "IMG_4292.HEIC", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [960, 1600, 2400], quality: 68, consent: "none",
-    alt: { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" } },
-  // The same three, cut tall for phones: a landscape crop on a tall phone screen would lose most of its sides.
+  // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
+  // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
-    ["break-van-sunset-tall", "P82", "IMG_2799.heic", [0.5, 0.6]],
-    ["break-venue-tall", "P29", "IMG_2244.HEIC", [0.42, 0.5]],
-    ["break-van-night-tall", "P83", "IMG_4292.HEIC", [0.6, 0.5]],
-  ].map(([id, ref, src, focus]) => ({ id, ref, src, kind: "photo", aspect: tall, focus, widths: [640, 1080], quality: 68, consent: "none",
-    alt: { el: "", en: "" } })), // the wide entry's alt is used: the two are one picture
+    ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.6], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
+    ["break-360-fireworks", "P28", "IMG_0241.HEIC", [0.5, 0.52], { el: "Η πλατφόρμα 360 με πράσινα φώτα και πυροτεχνήματα τη νύχτα", en: "The 360 platform glowing green under fireworks at night" }],
+    ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
+  ].flatMap(([id, ref, src, focus, alt]) => [
+    { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent: "none", alt },
+    // The same photo cut tall for phones, where the breath covers most of the screen.
+    { id: `${id}-tall`, ref, src, kind: "photo", aspect: tall, focus, widths: [640, 1080], quality: 68, consent: "none",
+      alt: { el: "", en: "" } }, // the computer entry's alt is used: the two are one picture
+  ]),
 
   // Gallery. The largest size is for the lightbox.
   ...[

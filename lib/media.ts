@@ -267,37 +267,13 @@ export const media = {
   },
   "break-van-sunset": {
     "kind": "photo",
-    "src": "/media/break-van-sunset-960.webp",
-    "srcSet": "/media/break-van-sunset-960.webp 960w, /media/break-van-sunset-1600.webp 1600w, /media/break-van-sunset-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
+    "src": "/media/break-van-sunset-900.webp",
+    "srcSet": "/media/break-van-sunset-900.webp 900w, /media/break-van-sunset-1400.webp 1400w, /media/break-van-sunset-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
     "alt": {
       "el": "Το GO! Van στο ηλιοβασίλεμα",
       "en": "The GO! Van at sunset"
-    },
-    "consent": "none"
-  },
-  "break-venue": {
-    "kind": "photo",
-    "src": "/media/break-venue-960.webp",
-    "srcSet": "/media/break-venue-960.webp 960w, /media/break-venue-1600.webp 1600w, /media/break-venue-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
-    "alt": {
-      "el": "Η πλατφόρμα 360 στημένη σε κτήμα γάμου το σούρουπο",
-      "en": "The 360 platform at a wedding venue at dusk"
-    },
-    "consent": "none"
-  },
-  "break-van-night": {
-    "kind": "photo",
-    "src": "/media/break-van-night-960.webp",
-    "srcSet": "/media/break-van-night-960.webp 960w, /media/break-van-night-1600.webp 1600w, /media/break-van-night-2400.webp 2400w",
-    "width": 2400,
-    "height": 1600,
-    "alt": {
-      "el": "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα",
-      "en": "The van's bar in red and purple light at night"
     },
     "consent": "none"
   },
@@ -313,15 +289,39 @@ export const media = {
     },
     "consent": "none"
   },
-  "break-venue-tall": {
+  "break-360-fireworks": {
     "kind": "photo",
-    "src": "/media/break-venue-tall-640.webp",
-    "srcSet": "/media/break-venue-tall-640.webp 640w, /media/break-venue-tall-1080.webp 1080w",
+    "src": "/media/break-360-fireworks-900.webp",
+    "srcSet": "/media/break-360-fireworks-900.webp 900w, /media/break-360-fireworks-1400.webp 1400w, /media/break-360-fireworks-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
+    "alt": {
+      "el": "Η πλατφόρμα 360 με πράσινα φώτα και πυροτεχνήματα τη νύχτα",
+      "en": "The 360 platform glowing green under fireworks at night"
+    },
+    "consent": "none"
+  },
+  "break-360-fireworks-tall": {
+    "kind": "photo",
+    "src": "/media/break-360-fireworks-tall-640.webp",
+    "srcSet": "/media/break-360-fireworks-tall-640.webp 640w, /media/break-360-fireworks-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {
       "el": "",
       "en": ""
+    },
+    "consent": "none"
+  },
+  "break-van-night": {
+    "kind": "photo",
+    "src": "/media/break-van-night-900.webp",
+    "srcSet": "/media/break-van-night-900.webp 900w, /media/break-van-night-1400.webp 1400w, /media/break-van-night-1800.webp 1800w",
+    "width": 1800,
+    "height": 1800,
+    "alt": {
+      "el": "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα",
+      "en": "The van's bar in red and purple light at night"
     },
     "consent": "none"
   },
