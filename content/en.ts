@@ -152,6 +152,90 @@ export const en = {
     prev: "Previous photo",
     next: "Next photo",
   },
+  reviews: {
+    summary: "{rating} out of 5 · {count} reviews on Google",
+    stars: "{n} out of 5 stars",
+    all: "See all reviews on Google",
+    items: [
+      { name: "Georgia K.", text: "Amazing professionals!!! Flawless service... thank you so much!!!" },
+      { name: "Nikos E.", text: "Excellent in every way, great at what they do, polite and helpful. Well done!!" },
+      { name: "Ageliki G.", text: "Everything was flawless!!! Thank you so much for everything!!" },
+      { name: "Katerina K.", text: "Great service!" },
+    ],
+    note: "Greek reviews translated by us.",
+  },
+  about: {
+    lead: "We're from Sparta, and we bring your event",
+    neon: "drinks & smiles.",
+    text: "Mostly weddings and christenings, but also shop openings, corporate events and parties. We arrive early, set up, and make sure everyone has a great time until we pack up.",
+    areaTitle: "Where we go",
+    home: "Sparta",
+    areas: ["All of Laconia", "Kalamata, Tripoli, the Peloponnese", "Athens and further"],
+    areaNote: "Outside the Peloponnese, by arrangement.",
+  },
+  faq: {
+    groupsLabel: "Question topics",
+    groups: [
+      {
+        title: "Services",
+        items: [
+          {
+            q: "Can we book just one service?",
+            a: "Of course. And when you book two or more together, the price is always better than booking them separately.",
+          },
+          {
+            q: "How long does it last?",
+            a: "The Magic Mirror and the 360 come in a 4-hour package and can stay longer if you like. The guestbook phone, the bar and the van stay for the whole event.",
+          },
+          {
+            q: "Do you make alcohol-free cocktails?",
+            a: "Yes. Any cocktail you like, with or without alcohol, in whatever quantity you need.",
+          },
+          {
+            q: "Can it have our names or our logo?",
+            a: "Yes. The Magic Mirror print design and the 360 videos are made with your names, logo, colours and music. And the signature cocktails take the names you choose.",
+          },
+        ],
+      },
+      {
+        title: "The venue",
+        items: [
+          {
+            q: "What does the venue need?",
+            a: "A power socket near where we set up, for everything except the guestbook phone. If the event is outdoors and it rains, we need an indoor or covered space.",
+          },
+          {
+            q: "How early do you arrive?",
+            a: "At least an hour before the guests, so everything is set up and ready.",
+          },
+          {
+            q: "Can the van go indoors?",
+            a: "Most indoor venues don't allow it. That's where the Portable Bar fits in, with the same VW front. How much space each one needs we'll tell you on the phone, depending on your venue.",
+          },
+        ],
+      },
+      {
+        title: "Booking & delivery",
+        items: [
+          {
+            q: "When do we get the photos and videos?",
+            a: "Guests get them on the spot, by QR code. You get everything together, guestbook messages included, 1–2 days after the event.",
+          },
+          {
+            q: "Do you travel outside Laconia?",
+            a: "Yes. We cover Kalamata, Tripoli and the rest of the Peloponnese, and further by arrangement.",
+          },
+          {
+            q: "How early should we book?",
+            a: "We suggest at least six months ahead. If your event is sooner, ask us: we may still be free. The date is secured with a small deposit.",
+          },
+        ],
+      },
+    ],
+    moreTitle: "Didn't find your answer?",
+    moreText: "Call us on {phone}, or message us on Viber or WhatsApp.",
+    call: "Call",
+  },
   footer: {
     tagline: "drinks & smiles",
     socialLabel: "Social media",

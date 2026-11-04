@@ -15,6 +15,12 @@ export const site = {
     instagram: "https://www.instagram.com/govan.official/",
     tiktok: "https://www.tiktok.com/@govangreece",
   },
+  // The Google Business Profile: rating and number of reviews, updated by hand when they change.
+  google: {
+    rating: 5,
+    count: 10,
+    url: "https://www.google.com/maps/place/?q=place_id:ChIJNwC17o2gp0YRExafiWn9kLk",
+  },
 } as const;
 
 export const links = {

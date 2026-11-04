@@ -320,7 +320,7 @@ body:has(.package-bar[data-on]) {
 }
 
 /* Breaths: full-width photos between sections (components/Breath.tsx). The photo is 20% taller than its frame
-   and drifts through it while the frame crosses the screen. Dark at the bottom, so the line over it reads. */
+   and drifts through it while the frame crosses the screen. */
 .breath {
   view-timeline: --breath;
 }
@@ -330,26 +330,111 @@ body:has(.package-bar[data-on]) {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgb(18 12 34 / 0.55) 0%,
-    rgb(18 12 34 / 0) 30%,
-    rgb(18 12 34 / 0) 45%,
-    var(--color-night) 100%
-  );
+  pointer-events: none;
 }
 
-/* Phones, line at the top: dark at the top instead, so the bottom of the photo stays clear. */
+/* Phones: mostly the computer layout, stacked. The photo fills the top of the breath and dissolves into the night,
+   where the sign and the line stand; its own colour (--glow) lights the seam. --photo-h is the photo's height, --text-at
+   how far into it the line's block starts, --lift how much of its top is cut (Breath.tsx).
+   Where the line is at the top, it stands over the photo instead: the photo fills the breath under a band of night
+   that darkens its sky, like dusk falling, and the line reads over that. */
 @media (max-width: 1023px) {
+  .breath {
+    --photo-h: min(115vw, 32rem);
+    --text-at: 0.7;
+  }
+
+  .breath[data-phone-sign="wall"] {
+    --text-at: 0.93;
+  }
+
+  .breath-frame {
+    top: calc(var(--lift) * -1);
+    bottom: auto;
+    height: var(--photo-h);
+    mask-image: linear-gradient(180deg, #000 0 42%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.28) 80%, transparent);
+  }
+
+  .breath-text {
+    padding-block: calc(var(--photo-h) * var(--text-at) - var(--lift)) 2.75rem;
+  }
+
+  .breath::after {
+    background:
+      radial-gradient(70% calc(var(--photo-h) * 0.22) at 50% calc(var(--photo-h) * 0.77 - var(--lift)), rgb(var(--glow) / 0.2), transparent 70%),
+      linear-gradient(180deg, rgb(18 12 34 / 0.45), transparent calc(var(--photo-h) * 0.18));
+  }
+
+  .breath[data-phone-text="top"] {
+    min-height: min(140vw, 40rem);
+    align-content: start;
+  }
+
+  .breath[data-phone-text="top"] .breath-frame {
+    inset: 3.5rem 0 0;
+    height: auto;
+    mask-image: linear-gradient(180deg, transparent, #000 5rem);
+  }
+
+  .breath[data-phone-text="top"] .breath-text {
+    padding-block: 2.25rem 0;
+  }
+
   .breath[data-phone-text="top"]::after {
-    background: linear-gradient(
-      180deg,
-      var(--color-night) 0%,
-      rgb(18 12 34 / 0.45) 35%,
-      rgb(18 12 34 / 0) 55%,
-      rgb(18 12 34 / 0) 85%,
-      rgb(18 12 34 / 0.6) 100%
-    );
+    background:
+      linear-gradient(180deg, rgb(18 12 34 / 0.9), rgb(18 12 34 / 0.7) 20%, rgb(18 12 34 / 0.3) 42%, transparent 58%),
+      linear-gradient(0deg, rgb(18 12 34 / 0.45), transparent 16%);
+  }
+
+  /* The wires fade out over the photo instead of reaching its top. */
+  .breath .neon-sign::before,
+  .breath .neon-sign::after {
+    height: 14rem;
+  }
+
+  /* Sign beside the line, on the right: the line keeps the left column, the link runs under both. */
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.75rem;
+  }
+
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) .neon-sign {
+    grid-area: 1 / 2;
+  }
+
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > p {
+    grid-area: 1 / 1;
+  }
+
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > a {
+    grid-column: 1 / -1;
+  }
+
+  /* In the corner it hangs from the top of the breath, its wires all the way up, a little smaller to leave the line
+     its width. */
+  .breath[data-phone-sign="corner"] .neon-sign {
+    margin-top: 0.5rem;
+    rotate: 4deg;
+  }
+
+  .breath[data-phone-sign="corner"] .neon-sign::before,
+  .breath[data-phone-sign="corner"] .neon-sign::after {
+    height: 100vh;
+  }
+
+  .breath[data-phone-sign="corner"] .neon-sign > img {
+    height: 5.5rem;
+  }
+
+  /* On the wall it needs no wires, which would cross the photo's subject. */
+  .breath[data-phone-sign="wall"] .neon-sign {
+    align-self: center;
+    rotate: 6deg;
+  }
+
+  .breath[data-phone-sign="wall"] .neon-sign::before,
+  .breath[data-phone-sign="wall"] .neon-sign::after {
+    display: none;
   }
 }
 
@@ -435,20 +520,22 @@ body:has(.package-bar[data-on]) {
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-
-  /* The last words of the line, lit like the sign above them. */
-  .breath-neon {
-    color: #fff6ff;
-    text-shadow:
-      0 0 4px rgb(255 255 255 / 0.6),
-      0 0 14px rgb(var(--halo)),
-      0 0 36px rgb(var(--halo) / 0.7),
-      0 0 80px rgb(var(--halo) / 0.5);
-  }
 }
 
-/* The neon sign over a breath's line (components/NeonSign.tsx): white tubes with a halo in the breath's --halo,
-   a touch crooked, hanging from the ceiling on two wires, with its light on the wall behind. */
+/* The last words of a line (breaths, about), lit like the neon signs, in the --halo set around them. */
+.neon-words {
+  color: #fff6ff;
+  text-shadow:
+    0 0 4px rgb(255 255 255 / 0.6),
+    0 0 14px rgb(var(--halo)),
+    0 0 36px rgb(var(--halo) / 0.7),
+    0 0 80px rgb(var(--halo) / 0.5);
+}
+
+/* The neon sign over a breath's line or a section's title (components/NeonSign.tsx): white tubes with a halo in the
+   --halo set around it, a touch crooked, hanging from the ceiling on two wires, with its light on the wall behind.
+   Sections that hang one clip their overflow, so the wires end at the section's top. Small on phones, with a tighter
+   glow; on computers big. */
 .neon-sign {
   position: relative;
   isolation: isolate;
@@ -479,22 +566,66 @@ body:has(.package-bar[data-on]) {
 .neon-sign > svg {
   display: block;
   width: auto;
-  height: clamp(7rem, 26svh, 15.5rem);
+  height: 5.25rem;
   filter:
-    drop-shadow(0 0 1.5px #fff)
-    drop-shadow(0 0 6px rgb(255 236 255 / 0.9))
-    drop-shadow(0 0 14px rgb(var(--halo)))
-    drop-shadow(0 0 34px rgb(var(--halo) / 0.75))
-    drop-shadow(0 0 70px rgb(var(--halo) / 0.5));
+    drop-shadow(0 0 1px #fff)
+    drop-shadow(0 0 4px rgb(255 236 255 / 0.9))
+    drop-shadow(0 0 9px rgb(var(--halo)))
+    drop-shadow(0 0 22px rgb(var(--halo) / 0.7))
+    drop-shadow(0 0 44px rgb(var(--halo) / 0.45));
 }
 
-/* Sign and words flicker on once, as the line comes into view (data-in, components/RevealObserver.tsx). */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+/* The logo has room around it, the drawn signs don't. */
+.neon-sign > img {
+  height: 6.5rem;
+}
+
+/* Phones: in a section, the sign hangs beside the title, smaller. */
+@media (max-width: 1023px) {
+  .section-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .section-head > * {
+    grid-column: 1 / -1;
+  }
+
+  .section-head > h2 {
+    grid-area: 1 / 1;
+    align-self: end;
+  }
+
+  .section-head > .neon-sign {
+    grid-area: 1 / 2;
+    margin-top: -1rem;
+    rotate: 3deg;
+  }
+
+  .section-head > .neon-sign > svg {
+    height: 3.4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .neon-sign > img,
+  .neon-sign > svg {
+    height: clamp(7rem, 26svh, 15.5rem);
+    filter:
+      drop-shadow(0 0 1.5px #fff)
+      drop-shadow(0 0 6px rgb(255 236 255 / 0.9))
+      drop-shadow(0 0 14px rgb(var(--halo)))
+      drop-shadow(0 0 34px rgb(var(--halo) / 0.75))
+      drop-shadow(0 0 70px rgb(var(--halo) / 0.5));
+  }
+}
+
+/* Sign and words flicker on once, as they come into view (data-in, components/RevealObserver.tsx). */
+@media (prefers-reduced-motion: no-preference) {
   html.js [data-in] .neon-sign > :not(.neon-sign-glow) {
     animation: sign-on 1.6s steps(1, end) 0.35s both;
   }
 
-  html.js [data-in] .breath-neon {
+  html.js [data-in] .neon-words {
     animation: power-on 1.6s steps(1, end) 0.35s both;
   }
 }
@@ -519,6 +650,166 @@ body:has(.package-bar[data-on]) {
 @keyframes breath-drift {
   from { transform: translateY(-8%); }
   to { transform: translateY(8%); }
+}
+
+/* Where we go (components/About.tsx): rings around Sparta, brightest near home. The outer one is dashed: further
+   away is by arrangement. A slow amber pulse runs out from home. */
+.area-rings {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  place-items: center;
+  width: min(100%, 30rem);
+  aspect-ratio: 1;
+}
+
+.area-rings > li,
+.area-rings::before {
+  grid-area: 1 / 1;
+}
+
+.area-rings::before {
+  content: "";
+  width: 98%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, transparent 86%, rgb(255 195 92 / 0.35) 98%, transparent);
+  opacity: 0;
+  animation: area-pulse 5s cubic-bezier(0.2, 0.6, 0.3, 1) 1s infinite;
+}
+
+@keyframes area-pulse {
+  from { scale: 0.04; opacity: 1; }
+  to { scale: 1; opacity: 0; }
+}
+
+.area-ring {
+  --ring: 213 140 255;
+  position: relative;
+  width: var(--size);
+  aspect-ratio: 1;
+  border: 1.5px solid rgb(var(--ring) / var(--alpha, 1));
+  border-radius: 50%;
+  box-shadow:
+    0 0 var(--glow, 0) rgb(var(--ring) / 0.45),
+    inset 0 0 var(--glow, 0) rgb(var(--ring) / 0.3);
+}
+
+.area-ring[data-ring="1"] { --size: 38%; --glow: 16px; }
+.area-ring[data-ring="2"] { --size: 68%; --glow: 8px; --ring: 169 139 255; --alpha: 0.8; }
+.area-ring[data-ring="3"] { --size: 98%; --ring: 169 159 201; --alpha: 0.5; border-style: dashed; }
+
+/* Each ring's name sits on its top edge, cutting the line. */
+.area-ring > span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -50%;
+  padding: 0.15rem 0.75rem;
+  background: var(--color-night-2);
+  font-size: var(--text-step--1);
+  white-space: nowrap;
+}
+
+.area-ring[data-ring="3"] > span {
+  color: var(--color-haze);
+}
+
+/* Home: an amber light at the centre, its name under it. */
+.area-home {
+  position: relative;
+  z-index: 1;
+  width: 0.8rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-amber);
+  box-shadow: 0 0 0 5px rgb(255 195 92 / 0.18), 0 0 22px var(--color-amber);
+}
+
+.area-home > span {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  translate: -50% 0;
+  font-family: var(--font-display);
+  font-size: var(--text-step-1);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* FAQ (components/Faq.tsx): the + turns into a × as a question opens, and the answer slides open where the browser
+   can animate <details>. Elsewhere it just opens. */
+.faq-plus::before,
+.faq-plus::after {
+  content: "";
+  grid-area: 1 / 1;
+  width: 0.9rem;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.faq-plus::after {
+  rotate: 90deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+
+  .faq-item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+      content-visibility 0.45s allow-discrete;
+  }
+
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
+}
+
+/* Computers: one topic at a time. The picked pill (a radio button) glows like the signs and only its questions show,
+   fading in. A rule per topic, for up to four. */
+.faq-pick:has(:checked) {
+  border-color: rgb(var(--halo) / 0.7);
+  color: #fff6ff;
+  text-shadow: 0 0 10px rgb(var(--halo) / 0.8);
+  box-shadow:
+    0 0 18px rgb(var(--halo) / 0.35),
+    inset 0 0 14px rgb(var(--halo) / 0.15);
+}
+
+.faq-pick:has(:focus-visible) {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+@media (min-width: 1024px) {
+  #faq:has([name="faq-group"]:checked) .faq-group {
+    display: none;
+  }
+
+  #faq:has([name="faq-group"][value="0"]:checked) .faq-group[data-group="0"],
+  #faq:has([name="faq-group"][value="1"]:checked) .faq-group[data-group="1"],
+  #faq:has([name="faq-group"][value="2"]:checked) .faq-group[data-group="2"],
+  #faq:has([name="faq-group"][value="3"]:checked) .faq-group[data-group="3"] {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .faq-group {
+    animation: faq-in 0.4s ease-out;
+  }
+}
+
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
 }
 
 /* Gallery lightbox (components/GalleryGrid.tsx): a full-screen native <dialog>. pinch-zoom leaves one-finger moves
@@ -592,6 +883,7 @@ html:has(.lightbox[open]) {
   .scroll-cue::after,
   .service-band-track,
   .breath-photo,
+  .area-rings::before,
   .lightbox[open],
   .lightbox-photo {
     animation: none;

@@ -1,11 +1,14 @@
 import { Fragment } from "react";
+import About from "@/components/About";
 import Breath from "@/components/Breath";
 import Cocktails from "@/components/Cocktails";
+import Faq from "@/components/Faq";
 import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
 import PackageBar from "@/components/PackageBar";
 import ParallaxFallback from "@/components/ParallaxFallback";
 import RevealObserver from "@/components/RevealObserver";
+import Reviews from "@/components/Reviews";
 import ServiceBand from "@/components/ServiceBand";
 import Services from "@/components/Services";
 import SiteFooter from "@/components/SiteFooter";
@@ -22,9 +25,6 @@ const breathBefore: Partial<Record<SectionId, BreathId>> = {
 
 // Which build step fills each section. Temporary: the labels disappear as the real sections land.
 const comingInStep: Partial<Record<SectionId, number>> = {
-  reviews: 8,
-  about: 8,
-  faq: 8,
   contact: 9,
 };
 
@@ -63,6 +63,12 @@ export default function HomePage({ dict, homeHref }: Props) {
                 <Why dict={dict} />
               ) : id === "gallery" ? (
                 <Gallery dict={dict} />
+              ) : id === "reviews" ? (
+                <Reviews dict={dict} />
+              ) : id === "about" ? (
+                <About dict={dict} />
+              ) : id === "faq" ? (
+                <Faq dict={dict} />
               ) : (
                 <section id={id} aria-labelledby={`${id}-title`} className="border-b border-line py-20 lg:py-24">
                   <div className="wrap grid gap-4">
