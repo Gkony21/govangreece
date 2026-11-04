@@ -120,7 +120,10 @@ export type Dictionary = {
     areaNote: string;
   };
   faq: {
-    items: { q: string; a: string }[];
+    // The questions by topic. Computers show one topic at a time, picked beside them (groupsLabel names that choice for
+    // screen readers); phones list them all.
+    groupsLabel: string;
+    groups: { title: string; items: { q: string; a: string }[] }[];
     // Under the questions: call or message us. {phone} becomes the phone number, as a link.
     moreTitle: string;
     moreText: string;

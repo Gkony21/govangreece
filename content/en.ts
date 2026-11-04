@@ -174,46 +174,62 @@ export const en = {
     areaNote: "Outside the Peloponnese, by arrangement.",
   },
   faq: {
-    items: [
+    groupsLabel: "Question topics",
+    groups: [
       {
-        q: "Can we book just one service?",
-        a: "Of course. And when you book two or more together, the price is always better than booking them separately.",
+        title: "Services",
+        items: [
+          {
+            q: "Can we book just one service?",
+            a: "Of course. And when you book two or more together, the price is always better than booking them separately.",
+          },
+          {
+            q: "How long does it last?",
+            a: "The Magic Mirror and the 360 come in a 4-hour package and can stay longer if you like. The guestbook phone, the bar and the van stay for the whole event.",
+          },
+          {
+            q: "Do you make alcohol-free cocktails?",
+            a: "Yes. Any cocktail you like, with or without alcohol, in whatever quantity you need.",
+          },
+          {
+            q: "Can it have our names or our logo?",
+            a: "Yes. The Magic Mirror print design and the 360 videos are made with your names, logo, colours and music. And the signature cocktails take the names you choose.",
+          },
+        ],
       },
       {
-        q: "How long does it last?",
-        a: "The Magic Mirror and the 360 come in a 4-hour package and can stay longer if you like. The guestbook phone, the bar and the van stay for the whole event.",
+        title: "The venue",
+        items: [
+          {
+            q: "What does the venue need?",
+            a: "A power socket near where we set up, for everything except the guestbook phone. If the event is outdoors and it rains, we need an indoor or covered space.",
+          },
+          {
+            q: "How early do you arrive?",
+            a: "At least an hour before the guests, so everything is set up and ready.",
+          },
+          {
+            q: "Can the van go indoors?",
+            a: "Most indoor venues don't allow it. That's where the Portable Bar fits in, with the same VW front. How much space each one needs we'll tell you on the phone, depending on your venue.",
+          },
+        ],
       },
       {
-        q: "What does the venue need?",
-        a: "A power socket near where we set up, for everything except the guestbook phone. If the event is outdoors and it rains, we need an indoor or covered space.",
-      },
-      {
-        q: "How early do you arrive?",
-        a: "At least an hour before the guests, so everything is set up and ready.",
-      },
-      {
-        q: "Can the van go indoors?",
-        a: "Most indoor venues don't allow it. That's where the Portable Bar fits in, with the same VW front. How much space each one needs we'll tell you on the phone, depending on your venue.",
-      },
-      {
-        q: "Do you make alcohol-free cocktails?",
-        a: "Yes. Any cocktail you like, with or without alcohol, in whatever quantity you need.",
-      },
-      {
-        q: "Can it have our names or our logo?",
-        a: "Yes. The Magic Mirror print design and the 360 videos are made with your names, logo, colours and music. And the signature cocktails take the names you choose.",
-      },
-      {
-        q: "When do we get the photos and videos?",
-        a: "Guests get them on the spot, by QR code. You get everything together, guestbook messages included, 1–2 days after the event.",
-      },
-      {
-        q: "Do you travel outside Laconia?",
-        a: "Yes. We cover Kalamata, Tripoli and the rest of the Peloponnese, and further by arrangement.",
-      },
-      {
-        q: "How early should we book?",
-        a: "We suggest at least six months ahead. If your event is sooner, ask us: we may still be free. The date is secured with a small deposit.",
+        title: "Booking & delivery",
+        items: [
+          {
+            q: "When do we get the photos and videos?",
+            a: "Guests get them on the spot, by QR code. You get everything together, guestbook messages included, 1–2 days after the event.",
+          },
+          {
+            q: "Do you travel outside Laconia?",
+            a: "Yes. We cover Kalamata, Tripoli and the rest of the Peloponnese, and further by arrangement.",
+          },
+          {
+            q: "How early should we book?",
+            a: "We suggest at least six months ahead. If your event is sooner, ask us: we may still be free. The date is secured with a small deposit.",
+          },
+        ],
       },
     ],
     moreTitle: "Didn't find your answer?",

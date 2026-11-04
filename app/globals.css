@@ -770,6 +770,48 @@ body:has(.package-bar[data-on]) {
   }
 }
 
+/* Computers: one topic at a time. The picked pill (a radio button) glows like the signs and only its questions show,
+   fading in. A rule per topic, for up to four. */
+.faq-pick:has(:checked) {
+  border-color: rgb(var(--halo) / 0.7);
+  color: #fff6ff;
+  text-shadow: 0 0 10px rgb(var(--halo) / 0.8);
+  box-shadow:
+    0 0 18px rgb(var(--halo) / 0.35),
+    inset 0 0 14px rgb(var(--halo) / 0.15);
+}
+
+.faq-pick:has(:focus-visible) {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+@media (min-width: 1024px) {
+  #faq:has([name="faq-group"]:checked) .faq-group {
+    display: none;
+  }
+
+  #faq:has([name="faq-group"][value="0"]:checked) .faq-group[data-group="0"],
+  #faq:has([name="faq-group"][value="1"]:checked) .faq-group[data-group="1"],
+  #faq:has([name="faq-group"][value="2"]:checked) .faq-group[data-group="2"],
+  #faq:has([name="faq-group"][value="3"]:checked) .faq-group[data-group="3"] {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .faq-group {
+    animation: faq-in 0.4s ease-out;
+  }
+}
+
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+}
+
 /* Gallery lightbox (components/GalleryGrid.tsx): a full-screen native <dialog>. pinch-zoom leaves one-finger moves
    to the swipe handlers instead of the browser. */
 .lightbox {
