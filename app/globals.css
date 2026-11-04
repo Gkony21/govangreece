@@ -333,49 +333,57 @@ body:has(.package-bar[data-on]) {
   pointer-events: none;
 }
 
-/* Phones: the computer layout, stacked. The photo fills the top of the breath (the bottom, when the line is at the
-   top) and dissolves into the night, where the sign and the line stand; its own colour (--glow) lights the seam.
-   --photo-h is the photo's height, --text-at how far into it the line's block starts. */
+/* Phones: mostly the computer layout, stacked. The photo fills the top of the breath and dissolves into the night,
+   where the sign and the line stand; its own colour (--glow) lights the seam. --photo-h is the photo's height, --text-at
+   how far into it the line's block starts, --lift how much of its top is cut (Breath.tsx).
+   Where the line is at the top, it stands over the photo instead: the photo fills the breath under a band of night
+   that darkens its sky, like dusk falling, and the line reads over that. */
 @media (max-width: 1023px) {
   .breath {
     --photo-h: min(115vw, 32rem);
     --text-at: 0.7;
   }
 
-  .breath[data-phone-sign="beside"] {
+  .breath[data-phone-sign="wall"] {
     --text-at: 0.93;
   }
 
   .breath-frame {
+    top: calc(var(--lift) * -1);
     bottom: auto;
     height: var(--photo-h);
     mask-image: linear-gradient(180deg, #000 0 42%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.28) 80%, transparent);
   }
 
-  .breath[data-phone-text="top"] .breath-frame {
-    top: auto;
-    bottom: 0;
-    mask-image: linear-gradient(0deg, #000 0 42%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.28) 80%, transparent);
-  }
-
   .breath-text {
-    padding-block: calc(var(--photo-h) * var(--text-at)) 2.75rem;
-  }
-
-  .breath[data-phone-text="top"] .breath-text {
-    padding-block: 2.75rem calc(var(--photo-h) * 0.77);
+    padding-block: calc(var(--photo-h) * var(--text-at) - var(--lift)) 2.75rem;
   }
 
   .breath::after {
     background:
-      radial-gradient(70% calc(var(--photo-h) * 0.22) at 50% calc(var(--photo-h) * 0.77), rgb(var(--glow) / 0.2), transparent 70%),
+      radial-gradient(70% calc(var(--photo-h) * 0.22) at 50% calc(var(--photo-h) * 0.77 - var(--lift)), rgb(var(--glow) / 0.2), transparent 70%),
       linear-gradient(180deg, rgb(18 12 34 / 0.45), transparent calc(var(--photo-h) * 0.18));
+  }
+
+  .breath[data-phone-text="top"] {
+    min-height: min(140vw, 40rem);
+    align-content: start;
+  }
+
+  .breath[data-phone-text="top"] .breath-frame {
+    inset: 3.5rem 0 0;
+    height: auto;
+    mask-image: linear-gradient(180deg, transparent, #000 5rem);
+  }
+
+  .breath[data-phone-text="top"] .breath-text {
+    padding-block: 2.25rem 0;
   }
 
   .breath[data-phone-text="top"]::after {
     background:
-      radial-gradient(70% calc(var(--photo-h) * 0.22) at 50% calc(100% - var(--photo-h) * 0.77), rgb(var(--glow) / 0.2), transparent 70%),
-      linear-gradient(0deg, rgb(18 12 34 / 0.55), transparent calc(var(--photo-h) * 0.18));
+      linear-gradient(180deg, rgb(18 12 34 / 0.9), rgb(18 12 34 / 0.7) 20%, rgb(18 12 34 / 0.3) 42%, transparent 58%),
+      linear-gradient(0deg, rgb(18 12 34 / 0.45), transparent 16%);
   }
 
   /* The wires fade out over the photo instead of reaching its top. */
@@ -385,27 +393,48 @@ body:has(.package-bar[data-on]) {
   }
 
   /* Sign beside the line, on the right: the line keeps the left column, the link runs under both. */
-  .breath[data-phone-sign="beside"] [data-reveal] {
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] {
     grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.75rem;
   }
 
-  .breath[data-phone-sign="beside"] .neon-sign {
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) .neon-sign {
     grid-area: 1 / 2;
-    margin-top: 0.4rem;
-    rotate: 4deg;
   }
 
-  .breath[data-phone-sign="beside"] [data-reveal] > p {
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > p {
     grid-area: 1 / 1;
   }
 
-  .breath[data-phone-sign="beside"] [data-reveal] > a {
+  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > a {
     grid-column: 1 / -1;
   }
 
-  .breath[data-phone-sign="beside"] .neon-sign::before,
-  .breath[data-phone-sign="beside"] .neon-sign::after {
-    height: 9rem;
+  /* In the corner it hangs from the top of the breath, its wires all the way up, a little smaller to leave the line
+     its width. */
+  .breath[data-phone-sign="corner"] .neon-sign {
+    margin-top: 0.5rem;
+    rotate: 4deg;
+  }
+
+  .breath[data-phone-sign="corner"] .neon-sign::before,
+  .breath[data-phone-sign="corner"] .neon-sign::after {
+    height: 100vh;
+  }
+
+  .breath[data-phone-sign="corner"] .neon-sign > img {
+    height: 5.5rem;
+  }
+
+  /* On the wall it needs no wires, which would cross the photo's subject. */
+  .breath[data-phone-sign="wall"] .neon-sign {
+    align-self: center;
+    rotate: 6deg;
+  }
+
+  .breath[data-phone-sign="wall"] .neon-sign::before,
+  .breath[data-phone-sign="wall"] .neon-sign::after {
+    display: none;
   }
 }
 

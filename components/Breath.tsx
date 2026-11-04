@@ -5,15 +5,17 @@ import type { BreathId, Dictionary, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
 // The photo of each breath, and the side it takes on computers: they alternate, the line goes on the other side.
-// On phones the line sits at the bottom, or at the top where the subject is low in the photo.
+// On phones the line sits under the photo, or over it at the top, where the subject is low in the photo.
 // glow: the photo's own light as "r g b", spilling softly onto the dark side on computers.
 // sign and halo: the neon sign over the line on computers, and the colour it (and the neon words) glow in.
 // href: where the small link under the line goes.
 // fade: how the photo dissolves into the night on computers. "short" where the subject touches the photo's inner edge
 // (the van's nose, with the logo on its door): the photo slides out a little, cutting its far side, and dissolves over
 // a short, soft edge, so the subject stays lit.
-// phoneSign: where the sign hangs on phones, "above" the line or "beside" it, on the right. Beside where the subject
-// fills the bottom of the photo (the van, logo and all), so the sign and the line sit below it, in the night.
+// phoneSign: where the sign goes on phones. "above" the line, on wires that fade out over the photo. In the top right
+// "corner", beside a line over the photo, hanging from the top of the breath. Or beside the line on the "wall", with no
+// wires, where the subject fills the bottom of the photo (the van, logo and all) and wires would cross it.
+// phoneLift: how much of the photo's top (sky) is cut on phones, so the line comes up closer under a low subject.
 const breaths = {
   bar: {
     photo: "break-van-night",
@@ -25,6 +27,7 @@ const breaths = {
     href: "#service-van",
     fade: "long",
     phoneSign: "above",
+    phoneLift: "0rem",
   },
   memories: {
     photo: "break-mirror-sunset",
@@ -35,7 +38,8 @@ const breaths = {
     halo: "213 140 255",
     href: "#service-mirror",
     fade: "long",
-    phoneSign: "above",
+    phoneSign: "corner",
+    phoneLift: "0rem",
   },
   date: {
     photo: "break-van-sunset",
@@ -46,7 +50,8 @@ const breaths = {
     halo: "255 120 160",
     href: "#contact",
     fade: "short",
-    phoneSign: "beside",
+    phoneSign: "wall",
+    phoneLift: "3.5rem",
   },
 } as const;
 
@@ -70,11 +75,12 @@ type Props = {
 // has no scroll timelines.
 // Both: the photo dissolves into the night where the line stands, under a neon sign, and the line's last words glow
 // like the sign. A small link under the line.
-// Phones: the photo fills the width at the top (at the bottom, when the line is at the top), the line below it.
+// Phones: the photo fills the width at the top, the line below it. Or, when the line is at the top, the photo fills the
+// breath and the line stands over its sky.
 // Computers: the photo fills one side, near square, the line on the other, under a string of fairy lights like the
 // hero's and a bigger sign.
 export default function Breath({ id, line, locale }: Props) {
-  const { photo, side, phoneText, glow, sign, halo, href, fade, phoneSign } = breaths[id];
+  const { photo, side, phoneText, glow, sign, halo, href, fade, phoneSign, phoneLift } = breaths[id];
   const square = media[photo];
   const tall = media[`${photo}-tall` as const];
   const right = side === "right";
@@ -85,10 +91,10 @@ export default function Breath({ id, line, locale }: Props) {
       data-phone-text={phoneText}
       data-fade={fade}
       data-phone-sign={phoneSign}
-      style={{ "--glow": glow, "--halo": halo } as CSSProperties}
+      style={{ "--glow": glow, "--halo": halo, "--lift": phoneLift } as CSSProperties}
       className="breath relative isolate grid overflow-hidden border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:min-h-[36rem] lg:items-center"
     >
-      {/* The frame of the photo: the whole breath on computers, its top or bottom on phones (globals.css). */}
+      {/* The frame of the photo: the whole breath on computers, its top (or all of it) on phones (globals.css). */}
       <picture className="breath-frame absolute inset-0 -z-10 overflow-hidden">
         <source media="(max-width: 767px)" srcSet={tall.srcSet} sizes="100vw" width={tall.width} height={tall.height} />
         <img
