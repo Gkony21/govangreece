@@ -23,7 +23,7 @@ export default function About({ dict }: Props) {
             {dict.sections.about.title}
           </h2>
           <p data-reveal className="font-display text-[clamp(2.6rem,5vw,4.6rem)] leading-[0.95] font-extrabold text-balance">
-            {about.lead} <span className="neon-words text-neon">{about.neon}</span>
+            {about.lead} <span className="neon-words">{about.neon}</span>
           </p>
           <p data-reveal className="max-w-[38rem] text-step-1 text-haze">
             {about.text}

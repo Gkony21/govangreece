@@ -156,8 +156,13 @@ export const en = {
     summary: "{rating} out of 5 · {count} reviews on Google",
     stars: "{n} out of 5 stars",
     all: "See all reviews on Google",
-    items: [],
-    note: "Reviews translated from Greek.",
+    items: [
+      { name: "Georgia K.", text: "Amazing professionals!!! Flawless service... thank you so much!!!" },
+      { name: "Nikos E.", text: "Excellent in every way, great at what they do, polite and helpful. Well done!!" },
+      { name: "Ageliki G.", text: "Everything was flawless!!! Thank you so much for everything!!" },
+      { name: "Katerina K.", text: "Great service!" },
+    ],
+    note: "Greek reviews translated by us.",
   },
   about: {
     lead: "We're from Sparta, and we bring your event",

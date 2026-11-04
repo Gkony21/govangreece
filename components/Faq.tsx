@@ -10,7 +10,8 @@ type Props = {
 
 // Frequently asked questions, as native <details>: they open without JavaScript, and smoothly where the browser can
 // animate them (CSS in globals.css). Under them, a way to just call us.
-// Computers: the title under a neon "?" on the left, with the call buttons below it; the questions on the right.
+// Phones: a small neon "?" beside the title.
+// Computers: the title under a bigger neon "?" on the left, with the call buttons below it; the questions on the right.
 export default function Faq({ dict }: Props) {
   const { faq } = dict;
   const [before, after = ""] = faq.moreText.split("{phone}");
@@ -23,7 +24,7 @@ export default function Faq({ dict }: Props) {
       className="overflow-clip border-b border-line py-20 lg:py-28"
     >
       <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-12">
-        <div data-reveal className="grid content-start justify-items-start gap-6 lg:col-start-1 lg:row-start-1">
+        <div data-reveal className="section-head grid content-start justify-items-start gap-6 lg:col-start-1 lg:row-start-1">
           <NeonSign kind="question" />
           <h2 id="faq-title" className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
             {dict.sections.faq.title}

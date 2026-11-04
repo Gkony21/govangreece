@@ -160,7 +160,12 @@ export const el = {
     summary: "{rating} στα 5 · {count} κριτικές στη Google",
     stars: "{n} στα 5 αστέρια",
     all: "Δείτε όλες τις κριτικές στη Google",
-    items: [],
+    items: [
+      { name: "Georgia K.", text: "Φοβεροί επαγγελματίες!!! Άψογη εξυπηρέτηση...ευχαριστούμε πολύ!!!" },
+      { name: "Nikos E.", text: "Εξαιρετικοι σε ολα αριστοι στη δουλεια τους ευγενικοι και εξυπηρετικοί. Πολλα μπραβο!!" },
+      { name: "Ageliki G.", text: "Όλα άψογα!!! Ευχαριστώ πολύ για όλα!!" },
+      { name: "Katerina K.", text: "Great service!", lang: "en" },
+    ],
   },
   about: {
     lead: "Είμαστε από τη Σπάρτη και φέρνουμε στο event σας",

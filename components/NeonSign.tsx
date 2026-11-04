@@ -43,12 +43,12 @@ const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: str
   },
 };
 
-// A neon sign hanging on two wires on the dark side of a breath or over a section's title, on computers only.
-// White-hot tubes with a halo in the --halo colour set around it; it flickers on once as it comes into view (CSS in
-// globals.css). Decorative only.
+// A neon sign hanging on two wires over a breath's line or a section's title: big on computers, small on phones
+// (beside the title, in sections). White-hot tubes with a halo in the --halo colour set around it; it flickers on once
+// as it comes into view (CSS in globals.css). Decorative only.
 export default function NeonSign({ kind }: { kind: NeonSignKind }) {
   return (
-    <div aria-hidden="true" className="neon-sign hidden lg:block">
+    <div aria-hidden="true" className="neon-sign">
       <span className="neon-sign-glow" />
       {kind === "logo" ? (
         // eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized

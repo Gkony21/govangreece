@@ -102,9 +102,10 @@ export type Dictionary = {
     // Screen-reader label of a row of stars; {n} becomes the number of stars.
     stars: string;
     all: string;
-    // Real Google reviews only, picked by hand: first name and initial of the surname, as Google shows them.
-    // On the English page the text is our translation, and note says so.
-    items: { name: string; text: string; event: string }[];
+    // Real Google reviews only, picked by hand, word for word: first name and initial of the surname, in the letters
+    // Google shows them. On the English page the Greek ones are our translation, and note says so. lang: a review
+    // written in the other language.
+    items: { name: string; text: string; lang?: Locale }[];
     note?: string;
   };
   about: {
