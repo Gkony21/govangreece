@@ -16,9 +16,9 @@ declare global {
 
 // Cloudflare's test key, which always passes. Used on this computer, where the real key does not work.
 const testKey = "1x00000000000000000000AA";
-// The widget's site key, public by design (the secret lives on Cloudflare only). The test key until the real widget
-// exists: until then the form only sends locally.
-const siteKey = testKey;
+// The widget's site key, public by design (the secret lives on Cloudflare only). It works on govangreece.gr and
+// every *.govangreece.pages.dev preview.
+const siteKey = "0x4AAAAAAFztYOKddLrEZ5nv";
 
 // How long a send waits for the token before giving up, a box to tick included.
 const patience = 60_000;
