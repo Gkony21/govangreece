@@ -17,6 +17,8 @@ type Props = {
 export default function Clip({ id, locale, className }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const clip = media[id];
+  // next dev runs no Functions, so there the clips come straight from public/media (functions/video/[name].ts).
+  const src = process.env.NODE_ENV === "development" ? clip.src.replace("/video/", "/media/") : clip.src;
 
   useEffect(() => {
     const video = ref.current;
@@ -36,7 +38,7 @@ export default function Clip({ id, locale, className }: Props) {
   return (
     <video
       ref={ref}
-      src={clip.src}
+      src={src}
       poster={clip.poster}
       width={clip.width}
       height={clip.height}
