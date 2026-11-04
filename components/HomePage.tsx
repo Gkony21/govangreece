@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import About from "@/components/About";
 import Breath from "@/components/Breath";
 import Cocktails from "@/components/Cocktails";
+import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
 import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
@@ -21,11 +22,6 @@ const breathBefore: Partial<Record<SectionId, BreathId>> = {
   why: "bar",
   reviews: "memories",
   contact: "date",
-};
-
-// Which build step fills each section. Temporary: the labels disappear as the real sections land.
-const comingInStep: Partial<Record<SectionId, number>> = {
-  contact: 9,
 };
 
 type Props = {
@@ -70,14 +66,7 @@ export default function HomePage({ dict, homeHref }: Props) {
               ) : id === "faq" ? (
                 <Faq dict={dict} />
               ) : (
-                <section id={id} aria-labelledby={`${id}-title`} className="border-b border-line py-20 lg:py-24">
-                  <div className="wrap grid gap-4">
-                    <h2 id={`${id}-title`} data-reveal className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-                      {dict.sections[id].title}
-                    </h2>
-                    <StepNote step={comingInStep[id]} />
-                  </div>
-                </section>
+                <Contact dict={dict} />
               )}
             </Fragment>
           );
@@ -89,14 +78,5 @@ export default function HomePage({ dict, homeHref }: Props) {
       <RevealObserver />
       <ParallaxFallback />
     </>
-  );
-}
-
-function StepNote({ step }: { step?: number }) {
-  if (!step) return null;
-  return (
-    <p lang="el" className="justify-self-start rounded-full border border-amber/40 px-3 py-1 text-sm text-amber">
-      Έρχεται στο Βήμα {step}
-    </p>
   );
 }

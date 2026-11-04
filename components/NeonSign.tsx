@@ -1,4 +1,4 @@
-export type NeonSignKind = "logo" | "cocktail" | "heart" | "rating" | "question";
+export type NeonSignKind = "logo" | "cocktail" | "heart" | "rating" | "question" | "phone";
 
 // The tubes of the drawn signs, one path each.
 const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: string[] }> = {
@@ -39,6 +39,19 @@ const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: str
       "M48 20 H168 A28 28 0 0 1 196 48 V108 A28 28 0 0 1 168 136 H96 L60 168 L66 136 H48 A28 28 0 0 1 20 108 V48 A28 28 0 0 1 48 20 Z",
       "M88 60 C88 42 128 40 128 60 C128 76 108 78 108 94 V100",
       "M108 114 V118",
+    ],
+  },
+  // An old rotary phone, the receiver on top and the finger holes round the dial, with a sparkle, over the form.
+  phone: {
+    viewBox: "14 10 196 162",
+    paths: [
+      "M56 52 C80 38 120 38 144 52 C156 46 174 50 176 62 C178 72 170 78 160 76 L138 66 C114 54 86 54 62 66 L40 76 C30 78 22 72 24 62 C26 50 44 46 56 52 Z",
+      "M44 164 L64 96 C66 89 72 86 80 86 H120 C128 86 134 89 136 96 L156 164 Z",
+      "M124 130 A24 24 0 1 1 76 130 A24 24 0 1 1 124 130",
+      "M104 130 A4 4 0 1 1 96 130 A4 4 0 1 1 104 130",
+      "M107.5 117 v0.5 M98.2 115.1 v0.5 M89.6 119.2 v0.5 M85.2 127.7 v0.5 M86.8 137 v0.5 M93.7 143.6 v0.5 M103.1 144.7 v0.5 M111.3 139.8 v0.5",
+      "M190 18 V42 M178 30 H202",
+      "M200 58 V66 M196 62 H204",
     ],
   },
 };

@@ -11,6 +11,7 @@
   --color-amber: #ffc35c;
   --color-line: rgb(169 139 255 / 0.22);
   --color-on-violet: #160d2b;
+  --color-error: #ff8aa5;
 
   --font-display: var(--font-sofia), "Arial Narrow", sans-serif;
   --font-sans: var(--font-didact), "Century Gothic", system-ui, sans-serif;
@@ -49,10 +50,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-amber);
-  outline-offset: 3px;
-  border-radius: 4px;
+/* In the base layer, so a component's own rounding and focus style (pills, form fields) win over it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* Page width with a 16px gutter that respects the iPhone notch. */

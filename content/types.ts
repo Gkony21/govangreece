@@ -14,6 +14,10 @@ export type BreathId = "bar" | "memories" | "date";
 export const serviceIds = ["mirror", "360", "guestbook", "van", "bar"] as const;
 export type ServiceId = (typeof serviceIds)[number];
 
+// The kinds of event the quote form offers. Also the values its email will carry (step 10).
+export const eventTypes = ["wedding", "christening", "venue", "corporate", "party", "other"] as const;
+export type EventType = (typeof eventTypes)[number];
+
 type Service = {
   id: ServiceId;
   name: string;
@@ -128,6 +132,51 @@ export type Dictionary = {
     moreTitle: string;
     moreText: string;
     call: string;
+  };
+  contact: {
+    lead: string;
+    // Beside the form: call or message us instead.
+    directTitle: string;
+    directPhone: string;
+    call: string;
+    form: {
+      // Screen-reader name of the form.
+      label: string;
+      requiredNote: string;
+      name: string;
+      phone: string;
+      email: string;
+      date: string;
+      noDate: string;
+      event: string;
+      eventTypes: Record<EventType, string>;
+      place: string;
+      placePlaceholder: string;
+      guests: string;
+      guestsPlaceholder: string;
+      services: string;
+      servicesHint: string;
+      // Ticks every service at once.
+      all: string;
+      message: string;
+      submit: string;
+      // {link} becomes the link to the privacy policy (privacyLink, at privacyHref).
+      privacy: string;
+      privacyLink: string;
+      privacyHref: string;
+      errors: {
+        name: string;
+        phone: string;
+        phoneInvalid: string;
+        email: string;
+        date: string;
+        datePast: string;
+        // Next to the button, after a try with mistakes; {count} becomes how many fields need fixing.
+        summaryOne: string;
+        summaryMany: string;
+      };
+      sent: { title: string; text: string };
+    };
   };
   footer: {
     tagline: string;
