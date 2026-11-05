@@ -155,7 +155,8 @@ function buildVideo(entry) {
   return sharp(frame)
     .webp({ quality: POSTER_QUALITY, effort: 6 })
     .toFile(path.join(outDir, poster))
-    .then(() => ({ kind: "video", src: `/media/${name}`, poster: `/media/${poster}`, width, height }));
+    // Played from /video/, which answers in byte ranges, as Safari on iPhone needs (functions/video/[name].ts).
+    .then(() => ({ kind: "video", src: `/video/${name}`, poster: `/media/${poster}`, width, height }));
 }
 
 // The JSON object inside lib/media.ts from the last run.

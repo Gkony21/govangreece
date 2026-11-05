@@ -207,7 +207,7 @@ export const media = {
   },
   "clip-van": {
     "kind": "video",
-    "src": "/media/clip-van.mp4",
+    "src": "/video/clip-van.mp4",
     "poster": "/media/clip-van-poster.webp",
     "width": 540,
     "height": 960,
@@ -219,7 +219,7 @@ export const media = {
   },
   "clip-mirror": {
     "kind": "video",
-    "src": "/media/clip-mirror.mp4",
+    "src": "/video/clip-mirror.mp4",
     "poster": "/media/clip-mirror-poster.webp",
     "width": 540,
     "height": 960,
@@ -231,7 +231,7 @@ export const media = {
   },
   "clip-360": {
     "kind": "video",
-    "src": "/media/clip-360.mp4",
+    "src": "/video/clip-360.mp4",
     "poster": "/media/clip-360-poster.webp",
     "width": 540,
     "height": 960,
@@ -243,7 +243,7 @@ export const media = {
   },
   "clip-cocktails": {
     "kind": "video",
-    "src": "/media/clip-cocktails.mp4",
+    "src": "/video/clip-cocktails.mp4",
     "poster": "/media/clip-cocktails-poster.webp",
     "width": 540,
     "height": 960,
@@ -255,7 +255,7 @@ export const media = {
   },
   "clip-guestbook": {
     "kind": "video",
-    "src": "/media/clip-guestbook.mp4",
+    "src": "/video/clip-guestbook.mp4",
     "poster": "/media/clip-guestbook-poster.webp",
     "width": 540,
     "height": 960,
