@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState, type ComponentProps, type FormEvent } from "react";
 import { eventTypes, serviceIds, type Dictionary } from "@/content/types";
 import { setPicked, togglePick, usePicked } from "@/lib/package";
+import { checkQuote, isoDay, quoteLimits, readQuote, type QuoteErrors, type QuoteResult } from "@/lib/quote";
+import { links, site } from "@/lib/site";
+import { humanCheck, type HumanCheck } from "@/lib/turnstile";
 
 type Props = {
   dict: Dictionary;
@@ -23,73 +26,131 @@ const label = "font-display text-xl leading-none font-extrabold tracking-wide";
 const chip =
   "group relative inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-line px-4 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide transition-colors hover:border-violet has-checked:border-violet has-checked:bg-violet has-checked:text-on-violet has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-amber";
 
-// Today as YYYY-MM-DD in the visitor's time zone, the format of <input type="date">.
-function today() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+// What is wrong, in words. The checks are lib/quote.ts, the same the server runs, against the visitor's today.
+function check(data: FormData, messages: Form["errors"]): Errors {
+  const found = checkQuote(readQuote(data), isoDay(new Date()));
+  return wordsFor(found, messages);
 }
 
-// Only what is needed to call back: a name, a phone that looks like one, and a date (or "not set yet"). An email is
-// optional, but has to look like one when given. The server checks it all again (step 10).
-function validate(data: FormData, errors: Form["errors"]): Errors {
-  const found: Errors = {};
-  const phone = String(data.get("phone")).trim();
-  const digits = phone.replace(/\D/g, "").length;
-  const email = String(data.get("email")).trim();
-  const date = data.get("date");
-
-  if (!String(data.get("name")).trim()) found.name = errors.name;
-  if (!phone) found.phone = errors.phone;
-  else if (digits < 10 || digits > 15 || /[^\d\s+().-]/.test(phone)) found.phone = errors.phoneInvalid;
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) found.email = errors.email;
-  // A disabled field is left out of the form data: no date when "not set yet" is ticked.
-  if (!data.has("noDate")) {
-    if (!date) found.date = errors.date;
-    else if (String(date) < today()) found.date = errors.datePast;
+function wordsFor(found: QuoteErrors, messages: Form["errors"]): Errors {
+  const errors: Errors = {};
+  for (const field of fields) {
+    const code = found[field];
+    if (code) errors[field] = messages[code];
   }
-  return found;
+  return errors;
+}
+
+// Asks Turnstile for its token, then sends. Anything that goes wrong on the way is "failed": the visitor sees the
+// phone number and can try again.
+async function send(data: FormData, human: HumanCheck): Promise<QuoteResult> {
+  try {
+    data.set("cf-turnstile-response", await human.token());
+    const response = await fetch("/api/quote", { method: "POST", body: data, headers: { Accept: "application/json" } });
+    return await response.json();
+  } catch {
+    return { ok: false, error: "failed" };
+  }
 }
 
 // The quote request. Light on purpose: the deal is closed on the phone, so only name, phone and date are needed.
 // Mistakes show after the first try, under each field, and clear as they are fixed; the first one gets the focus.
 // The services are the package built with "I want it", both ways.
-// Step 9: it does not send yet. A valid request shows the thank-you, with a note saying so.
+// It sends to /api/quote (functions/api/quote.ts), which emails the client. Turnstile loads as the form comes near.
 export default function QuoteForm({ dict }: Props) {
   const form = dict.contact.form;
   const picked = usePicked();
   const [errors, setErrors] = useState<Errors>({});
   const [tried, setTried] = useState(false);
   const [noDate, setNoDate] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "failed">("idle");
+  const [asked, setAsked] = useState(false);
   const [sent, setSent] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const date = useRef<HTMLInputElement>(null);
+  const humanBox = useRef<HTMLDivElement>(null);
+  const human = useRef<HumanCheck>(undefined);
   const thanks = useRef<HTMLHeadingElement>(null);
+
+  // Turnstile, started once, when the form is near or someone sends it.
+  function startHuman() {
+    if (!human.current && humanBox.current) human.current = humanCheck(humanBox.current, dict.locale, () => setAsked(true));
+    return human.current;
+  }
 
   // The date picker starts at today. Set here, as the page is built ahead of time.
   useEffect(() => {
-    if (date.current) date.current.min = today();
+    if (date.current) date.current.min = isoDay(new Date());
   }, []);
+
+  useEffect(() => {
+    if (sent) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          startHuman();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+    if (formRef.current) observer.observe(formRef.current);
+    return () => {
+      observer.disconnect();
+      human.current?.remove();
+      human.current = undefined;
+    };
+    // startHuman only reads refs, a state setter and the page's language, which never change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sent]);
 
   useEffect(() => {
     if (sent) thanks.current?.focus();
   }, [sent]);
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  // Focuses the first wrong field; true when there was one.
+  function showFirst(found: Errors) {
+    const first = fields.find((field) => found[field]);
+    if (first) document.getElementById(`quote-${first}`)?.focus();
+    return first !== undefined;
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const found = validate(new FormData(event.currentTarget), form.errors);
+    if (status === "sending") return;
+    const data = new FormData(event.currentTarget);
+    const found = check(data, form.errors);
     setErrors(found);
     setTried(true);
-    const first = fields.find((field) => found[field]);
-    if (first) {
-      document.getElementById(`quote-${first}`)?.focus();
+    if (showFirst(found)) {
+      setStatus("idle");
       return;
     }
-    // Sent: the package is done with, so the bar at the bottom goes too.
-    setSent(true);
-    setPicked([]);
+
+    const turnstile = startHuman();
+    if (!turnstile) return;
+    setStatus("sending");
+    const result = await send(data, turnstile);
+    if (result.ok) {
+      // Sent: the package is done with, so the bar at the bottom goes too.
+      setSent(true);
+      setPicked([]);
+      return;
+    }
+    // A token works once: the next try needs a new one.
+    turnstile.reset();
+    if (result.error === "invalid") {
+      const fromServer = wordsFor(result.errors, form.errors);
+      setErrors(fromServer);
+      setStatus("idle");
+      showFirst(fromServer);
+      return;
+    }
+    setStatus("failed");
   }
 
   function recheck(event: FormEvent<HTMLFormElement>) {
-    if (tried) setErrors(validate(new FormData(event.currentTarget), form.errors));
+    if (tried) setErrors(check(new FormData(event.currentTarget), form.errors));
   }
 
   if (sent) {
@@ -99,9 +160,6 @@ export default function QuoteForm({ dict }: Props) {
           <span className="neon-words">{form.sent.title}</span>
         </h3>
         <p className="text-step-1 text-haze">{form.sent.text}</p>
-        <p lang="el" className="rounded-full border border-amber/40 px-3 py-1 text-sm text-amber">
-          Δοκιμή: η φόρμα δεν στέλνει ακόμα. Η αποστολή έρχεται στο Βήμα 10.
-        </p>
       </div>
     );
   }
@@ -110,10 +168,14 @@ export default function QuoteForm({ dict }: Props) {
   const summary = count === 1 ? form.errors.summaryOne : form.errors.summaryMany.replace("{count}", String(count));
   const all = serviceIds.every((id) => picked.includes(id));
   const [beforeLink, afterLink = ""] = form.privacy.split("{link}");
+  const [beforePhone, afterPhone = ""] = form.failed.split("{phone}");
+  const sending = status === "sending";
 
   return (
     <form
+      ref={formRef}
       data-reveal
+      action="/api/quote"
       method="post"
       noValidate
       aria-label={form.label}
@@ -122,10 +184,38 @@ export default function QuoteForm({ dict }: Props) {
       className="grid content-start gap-7 rounded-3xl border border-line bg-night-2 p-5 sm:p-8 lg:grid-cols-2 lg:gap-x-6 lg:p-10"
     >
       <p className="text-step--1 text-haze lg:col-span-2">{form.requiredNote}</p>
+      <input type="hidden" name="locale" value={dict.locale} />
 
-      <TextField id="quote-name" name="name" label={form.name} error={errors.name} required autoComplete="name" autoCapitalize="words" />
-      <TextField id="quote-phone" name="phone" label={form.phone} error={errors.phone} required type="tel" autoComplete="tel" />
-      <TextField id="quote-email" name="email" label={form.email} error={errors.email} type="email" autoComplete="email" spellCheck={false} />
+      <TextField
+        id="quote-name"
+        name="name"
+        label={form.name}
+        error={errors.name}
+        required
+        autoComplete="name"
+        autoCapitalize="words"
+        maxLength={quoteLimits.name}
+      />
+      <TextField
+        id="quote-phone"
+        name="phone"
+        label={form.phone}
+        error={errors.phone}
+        required
+        type="tel"
+        autoComplete="tel"
+        maxLength={quoteLimits.phone}
+      />
+      <TextField
+        id="quote-email"
+        name="email"
+        label={form.email}
+        error={errors.email}
+        type="email"
+        autoComplete="email"
+        spellCheck={false}
+        maxLength={quoteLimits.email}
+      />
 
       <div className="grid content-start gap-2.5">
         <label htmlFor="quote-date" className={label}>
@@ -168,8 +258,22 @@ export default function QuoteForm({ dict }: Props) {
         </div>
       </fieldset>
 
-      <TextField id="quote-place" name="place" label={form.place} placeholder={form.placePlaceholder} autoComplete="off" maxLength={120} />
-      <TextField id="quote-guests" name="guests" label={form.guests} placeholder={form.guestsPlaceholder} inputMode="numeric" maxLength={12} />
+      <TextField
+        id="quote-place"
+        name="place"
+        label={form.place}
+        placeholder={form.placePlaceholder}
+        autoComplete="off"
+        maxLength={quoteLimits.place}
+      />
+      <TextField
+        id="quote-guests"
+        name="guests"
+        label={form.guests}
+        placeholder={form.guestsPlaceholder}
+        inputMode="numeric"
+        maxLength={quoteLimits.guests}
+      />
 
       <fieldset aria-describedby="quote-services-hint" className="lg:col-span-2">
         <legend className={`${label} float-left mb-2 w-full`}>{form.services}</legend>
@@ -203,19 +307,34 @@ export default function QuoteForm({ dict }: Props) {
         <label htmlFor="quote-message" className={label}>
           {form.message}
         </label>
-        <textarea id="quote-message" name="message" rows={4} maxLength={2000} className={`${input} resize-y`} />
+        <textarea id="quote-message" name="message" rows={4} maxLength={quoteLimits.message} className={`${input} resize-y`} />
       </div>
 
-      <div className="grid gap-4 lg:col-span-2">
-        <p aria-live="polite" className="text-error empty:hidden">
-          {tried && count > 0 ? summary : ""}
+      {/* No gap here: Turnstile's box takes no room until Cloudflare asks for a tick. */}
+      <div className="grid lg:col-span-2">
+        <div ref={humanBox} className={asked ? "mb-4" : undefined} />
+        <p aria-live="polite" className="mb-4 text-error empty:hidden">
+          {status === "failed" ? (
+            <>
+              {beforePhone}
+              <a href={links.call} className="whitespace-nowrap text-ink underline decoration-error underline-offset-4">
+                {site.phone.display}
+              </a>
+              {afterPhone}
+            </>
+          ) : tried && count > 0 ? (
+            summary
+          ) : (
+            ""
+          )}
         </p>
         <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-6">
           <button
             type="submit"
-            className="justify-self-start rounded-full bg-violet px-7 py-4 font-display text-xl leading-none font-extrabold tracking-wide text-on-violet transition-shadow hover:shadow-[0_0_28px_2px_rgb(213_140_255/0.55)]"
+            aria-disabled={sending || undefined}
+            className="justify-self-start rounded-full bg-violet px-7 py-4 font-display text-xl leading-none font-extrabold tracking-wide text-on-violet transition-shadow hover:shadow-[0_0_28px_2px_rgb(213_140_255/0.55)] aria-disabled:cursor-wait aria-disabled:opacity-70 aria-disabled:hover:shadow-none"
           >
-            {form.submit}
+            {sending ? form.sending : form.submit}
           </button>
           <p className="text-step--1 text-haze">
             {beforeLink}

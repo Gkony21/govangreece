@@ -267,6 +267,7 @@ export const en = {
       all: "All of them",
       message: "Anything else we should know?",
       submit: "Send the request",
+      sending: "Sending…",
       privacy: "We use your details only to reply to you. {link}",
       privacyLink: "Privacy policy",
       privacyHref: "/en/privacy",
@@ -280,6 +281,7 @@ export const en = {
         summaryOne: "One field needs fixing.",
         summaryMany: "{count} fields need fixing.",
       },
+      failed: "We could not send your request. Please try again in a moment, or call us on {phone}.",
       sent: {
         title: "Thank you!",
         text: "We've got your request. We'll call you soon to talk it through.",

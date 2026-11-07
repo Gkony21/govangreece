@@ -14,7 +14,7 @@ export type BreathId = "bar" | "memories" | "date";
 export const serviceIds = ["mirror", "360", "guestbook", "van", "bar"] as const;
 export type ServiceId = (typeof serviceIds)[number];
 
-// The kinds of event the quote form offers. Also the values its email will carry (step 10).
+// The kinds of event the quote form offers. Also the values the form sends.
 export const eventTypes = ["wedding", "christening", "venue", "corporate", "party", "other"] as const;
 export type EventType = (typeof eventTypes)[number];
 
@@ -160,6 +160,8 @@ export type Dictionary = {
       all: string;
       message: string;
       submit: string;
+      // The button while the request is on its way.
+      sending: string;
       // {link} becomes the link to the privacy policy (privacyLink, at privacyHref).
       privacy: string;
       privacyLink: string;
@@ -175,6 +177,8 @@ export type Dictionary = {
         summaryOne: string;
         summaryMany: string;
       };
+      // Next to the button, when the request could not be sent; {phone} becomes the phone number, as a link.
+      failed: string;
       sent: { title: string; text: string };
     };
   };
