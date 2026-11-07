@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import About from "@/components/About";
 import Breath from "@/components/Breath";
+import BusinessJsonLd from "@/components/BusinessJsonLd";
 import Cocktails from "@/components/Cocktails";
 import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
@@ -33,6 +34,7 @@ type Props = {
 export default function HomePage({ dict, homeHref }: Props) {
   return (
     <>
+      <BusinessJsonLd dict={dict} path={homeHref} />
       <a
         href="#main"
         className="sr-only z-50 rounded-full bg-amber px-4 py-2 text-night focus:not-sr-only focus:fixed focus:top-3 focus:left-3"

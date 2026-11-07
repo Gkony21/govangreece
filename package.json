@@ -10,6 +10,7 @@
     "prepare": "git config core.hooksPath .githooks || true",
     "typecheck": "next typegen && tsc --noEmit",
     "media": "node scripts/media.mjs",
+    "og": "node scripts/og.mjs",
     "check:media": "node scripts/check-media.mjs"
   },
   "dependencies": {

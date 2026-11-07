@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import type { Dictionary } from "@/content/types";
 import { site } from "@/lib/site";
 
+// The picture shown when a link to the site is shared (Viber, WhatsApp, Facebook...): public/og.jpg, 1200x630,
+// the logo, three booth prints and the party around them, the same for both languages (npm run og, scripts/og.mjs).
+export const shareImage = { url: "/og.jpg", width: 1200, height: 630, alt: "GO! Van, drinks & smiles" };
+
 // Shared <head> data for both languages. `path` is this language's home page.
 export function pageMetadata(dict: Dictionary, path: string): Metadata {
   return {
@@ -19,7 +23,9 @@ export function pageMetadata(dict: Dictionary, path: string): Metadata {
       siteName: site.name,
       title: dict.meta.title,
       description: dict.meta.description,
+      images: [shareImage],
     },
+    twitter: { card: "summary_large_image", images: [shareImage.url] },
   };
 }
 
@@ -33,7 +39,15 @@ export function privacyMetadata(dict: Dictionary, text: { title: string; intro: 
       canonical: path,
       languages: { el: "/privacy", en: "/en/privacy", "x-default": "/privacy" },
     },
-    openGraph: { type: "website", locale: dict.meta.ogLocale, url: path, siteName: site.name, title, description: text.intro },
+    openGraph: {
+      type: "website",
+      locale: dict.meta.ogLocale,
+      url: path,
+      siteName: site.name,
+      title,
+      description: text.intro,
+      images: [shareImage],
+    },
   };
 }
 
