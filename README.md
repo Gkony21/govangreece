@@ -58,6 +58,12 @@ npm run media -- service-    # rebuild only ids starting with "service-"
 npm run check:media          # no EXIF/XMP/GPS in public/media (also runs in CI)
 ```
 
+The picture shown when a link is shared (`public/og.jpg`) is made the same way, from the originals:
+
+```bash
+npm run og                   # rebuild public/og.jpg (scripts/og.mjs)
+```
+
 Originals are read from `MEDIA_SOURCE` (default `../photos/drive-2026-10-31`). Components use `<Photo>` and `<Clip>`.
 
 People: children never appear. A recognizable adult is marked `consent: "pending"`, which is fine for previews, but CI blocks every pull request into `main` until it is `"ok"`.
