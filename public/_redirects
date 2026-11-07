@@ -1,0 +1,5 @@
+# Redirects for Cloudflare Pages (https://developers.cloudflare.com/pages/configuration/redirects/).
+#
+# /qr: the address in the QR code printed for the van and the cards. 302, not 301, so the QR can be pointed
+# somewhere else later without browsers having remembered the old target.
+/qr / 302
