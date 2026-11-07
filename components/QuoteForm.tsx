@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ComponentProps, type FormEvent } from
 import { eventTypes, serviceIds, type Dictionary } from "@/content/types";
 import { setPicked, togglePick, usePicked } from "@/lib/package";
 import { checkQuote, isoDay, quoteLimits, readQuote, type QuoteErrors, type QuoteResult } from "@/lib/quote";
-import { links, site } from "@/lib/site";
+import { links, phoneFor } from "@/lib/site";
 import { humanCheck, type HumanCheck } from "@/lib/turnstile";
 
 type Props = {
@@ -318,7 +318,7 @@ export default function QuoteForm({ dict }: Props) {
             <>
               {beforePhone}
               <a href={links.call} className="whitespace-nowrap text-ink underline decoration-error underline-offset-4">
-                {site.phone.display}
+                {phoneFor(dict.locale)}
               </a>
               {afterPhone}
             </>

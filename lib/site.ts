@@ -29,3 +29,8 @@ export const links = {
   whatsapp: `https://wa.me/${site.phone.e164.slice(1)}`,
   email: `mailto:${site.email}`,
 } as const;
+
+// The phone number as each language's visitors need it: Greeks dial it as is, everyone else needs the +30.
+export function phoneFor(locale: string) {
+  return locale === "el" ? site.phone.display : site.phone.international;
+}

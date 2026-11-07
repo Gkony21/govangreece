@@ -1,17 +1,20 @@
 "use client";
 
 import { useRef } from "react";
+import LanguageLink from "@/components/LanguageLink";
 import type { Dictionary } from "@/content/types";
 
 type Props = {
   header: Dictionary["header"];
   // Put before the #section links: "" on the home page, the home page's address on other pages.
   sectionBase?: string;
+  // The same page in the other language, when it is not the home page.
+  switchHref?: string;
 };
 
 // Phone menu built on the native popover: opens and closes without JavaScript, closes on Esc or a tap outside.
 // The one script here closes it after a link is followed.
-export default function MobileMenu({ header, sectionBase = "" }: Props) {
+export default function MobileMenu({ header, sectionBase = "", switchHref }: Props) {
   const panel = useRef<HTMLDivElement>(null);
   const { switchLanguage } = header;
 
@@ -45,15 +48,11 @@ export default function MobileMenu({ header, sectionBase = "" }: Props) {
               {item.label}
             </a>
           ))}
-          <a
-            href={switchLanguage.href}
-            hrefLang={switchLanguage.hrefLang}
-            lang={switchLanguage.hrefLang}
-            aria-label={switchLanguage.ariaLabel}
+          <LanguageLink
+            link={switchLanguage}
+            href={switchHref}
             className="mt-2 justify-self-start rounded-full border border-line px-4 py-2 text-haze no-underline"
-          >
-            {switchLanguage.label}
-          </a>
+          />
         </nav>
       </div>
     </>

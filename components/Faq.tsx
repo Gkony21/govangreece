@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import NeonSign from "@/components/NeonSign";
 import type { Dictionary } from "@/content/types";
-import { links, site } from "@/lib/site";
+import { links, phoneFor } from "@/lib/site";
 
 type Props = {
   dict: Dictionary;
@@ -75,7 +75,7 @@ export default function Faq({ dict }: Props) {
             <p className="text-haze">
               {before}
               <a href={links.call} className="whitespace-nowrap text-ink no-underline hover:text-neon">
-                {site.phone.display}
+                {phoneFor(dict.locale)}
               </a>
               {after}
             </p>

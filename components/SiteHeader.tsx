@@ -1,4 +1,5 @@
 import ButtonLink from "@/components/ButtonLink";
+import LanguageLink from "@/components/LanguageLink";
 import MobileMenu from "@/components/MobileMenu";
 import type { Dictionary } from "@/content/types";
 
@@ -7,10 +8,12 @@ type Props = {
   homeHref: string;
   // Put before the #section links: "" on the home page, the home page's address on other pages.
   sectionBase?: string;
+  // The same page in the other language, when it is not the home page.
+  switchHref?: string;
 };
 
 // Sticky header: logo, section links and language switch on desktop, a menu button on phones. The quote button stays on both.
-export default function SiteHeader({ dict, homeHref, sectionBase = "" }: Props) {
+export default function SiteHeader({ dict, homeHref, sectionBase = "", switchHref }: Props) {
   const { header } = dict;
   const { switchLanguage } = header;
 
@@ -30,21 +33,17 @@ export default function SiteHeader({ dict, homeHref, sectionBase = "" }: Props) 
           ))}
         </nav>
 
-        <a
-          href={switchLanguage.href}
-          hrefLang={switchLanguage.hrefLang}
-          lang={switchLanguage.hrefLang}
-          aria-label={switchLanguage.ariaLabel}
+        <LanguageLink
+          link={switchLanguage}
+          href={switchHref}
           className="hidden rounded-full border border-line px-3 py-1 text-sm text-haze no-underline hover:text-ink lg:inline-block"
-        >
-          {switchLanguage.label}
-        </a>
+        />
 
         <ButtonLink href={`${sectionBase}#contact`} size="sm" className="ml-auto lg:ml-0">
           {dict.quoteCta}
         </ButtonLink>
 
-        <MobileMenu header={header} sectionBase={sectionBase} />
+        <MobileMenu header={header} sectionBase={sectionBase} switchHref={switchHref} />
       </div>
     </header>
   );
