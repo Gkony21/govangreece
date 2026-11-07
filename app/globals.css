@@ -88,6 +88,41 @@ body {
   50%, 100% { opacity: 1; }
 }
 
+/* The 404 page (app/global-not-found.tsx): a neon "404" whose zero has gone out, a dead grey tube that sparks back
+   for a moment every few seconds. Still with reduced motion. */
+.sign-404 {
+  color: #fbf5ff;
+  text-shadow:
+    0 0 6px rgb(255 255 255 / 0.55),
+    0 0 20px var(--color-neon),
+    0 0 48px rgb(213 140 255 / 0.65),
+    0 0 100px rgb(169 139 255 / 0.45);
+  animation: power-on 1.6s steps(1, end) 0.3s both;
+}
+
+.sign-404-out {
+  color: rgb(251 245 255 / 0.14);
+  text-shadow: none;
+  -webkit-text-stroke: 1px rgb(251 245 255 / 0.22);
+  animation: spark 5s steps(1, end) 2.2s infinite;
+}
+
+@keyframes spark {
+  0%, 88%, 100% { color: rgb(251 245 255 / 0.14); text-shadow: none; }
+  90%, 94% {
+    color: #fbf5ff;
+    text-shadow: 0 0 6px rgb(255 255 255 / 0.55), 0 0 20px var(--color-neon), 0 0 48px rgb(213 140 255 / 0.65);
+  }
+  92% { color: rgb(251 245 255 / 0.3); text-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sign-404,
+  .sign-404-out {
+    animation: none;
+  }
+}
+
 /* Scroll progress: a neon line across the top of the page. Browsers without scroll timelines just don't show it. */
 .scroll-progress {
   position: fixed;

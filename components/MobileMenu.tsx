@@ -5,11 +5,13 @@ import type { Dictionary } from "@/content/types";
 
 type Props = {
   header: Dictionary["header"];
+  // Put before the #section links: "" on the home page, the home page's address on other pages.
+  sectionBase?: string;
 };
 
 // Phone menu built on the native popover: opens and closes without JavaScript, closes on Esc or a tap outside.
 // The one script here closes it after a link is followed.
-export default function MobileMenu({ header }: Props) {
+export default function MobileMenu({ header, sectionBase = "" }: Props) {
   const panel = useRef<HTMLDivElement>(null);
   const { switchLanguage } = header;
 
@@ -39,7 +41,7 @@ export default function MobileMenu({ header }: Props) {
       >
         <nav aria-label={header.navLabel} className="wrap grid gap-1 py-4">
           {header.nav.map((item) => (
-            <a key={item.id} href={`#${item.id}`} className="py-3 font-display text-3xl font-extrabold no-underline">
+            <a key={item.id} href={`${sectionBase}#${item.id}`} className="py-3 font-display text-3xl font-extrabold no-underline">
               {item.label}
             </a>
           ))}
