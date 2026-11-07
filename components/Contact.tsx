@@ -3,7 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import NeonSign from "@/components/NeonSign";
 import QuoteForm from "@/components/QuoteForm";
 import type { Dictionary } from "@/content/types";
-import { links, site } from "@/lib/site";
+import { links, phoneFor, site } from "@/lib/site";
 
 type Props = {
   dict: Dictionary;
@@ -42,7 +42,7 @@ export default function Contact({ dict }: Props) {
                 href={links.call}
                 className="font-display text-[2.4rem] leading-none font-extrabold tracking-wide text-ink no-underline hover:text-neon"
               >
-                {site.phone.display}
+                {phoneFor(dict.locale)}
               </a>
             </p>
             <div className="flex flex-wrap gap-3">

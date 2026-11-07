@@ -1,5 +1,5 @@
 import type { Dictionary } from "@/content/types";
-import { links, site } from "@/lib/site";
+import { links, phoneFor, site } from "@/lib/site";
 
 type Props = {
   dict: Dictionary;
@@ -24,7 +24,7 @@ export default function SiteFooter({ dict }: Props) {
           {site.email}
         </a>
         <a href={links.call} className="no-underline hover:text-ink">
-          {site.phone.display}
+          {phoneFor(dict.locale)}
         </a>
         <a href={dict.contact.form.privacyHref} className="no-underline hover:text-ink">
           {dict.contact.form.privacyLink}

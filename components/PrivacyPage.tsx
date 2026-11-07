@@ -3,41 +3,45 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import type { PrivacyText } from "@/content/privacy-el";
 import type { Dictionary } from "@/content/types";
-import { links, site } from "@/lib/site";
+import { links, phoneFor, site } from "@/lib/site";
 
 type Props = {
   dict: Dictionary;
   text: PrivacyText;
   homeHref: string;
+  // The same page in the other language, for the language switch.
+  otherLanguageHref: string;
 };
 
 const linkClass = "text-ink underline decoration-violet underline-offset-4 hover:text-neon";
 
-// {email}, {phone} and {dpa} in the text, as links.
-const placeholders: Record<string, ReactNode> = {
-  "{email}": (
-    <a href={links.email} className={linkClass}>
-      {site.email}
-    </a>
-  ),
-  "{phone}": (
-    <a href={links.call} className={`${linkClass} whitespace-nowrap`}>
-      {site.phone.display}
-    </a>
-  ),
-  "{dpa}": (
-    <a href="https://www.dpa.gr" rel="noopener" className={linkClass}>
-      www.dpa.gr
-    </a>
-  ),
-};
-
-function withLinks(line: string) {
-  return line.split(/(\{email\}|\{phone\}|\{dpa\})/).map((part, i) => <Fragment key={i}>{placeholders[part] ?? part}</Fragment>);
+// {email}, {phone} and {dpa} in the text, as links. The phone with +30 outside Greek.
+function placeholders(locale: string): Record<string, ReactNode> {
+  return {
+    "{email}": (
+      <a href={links.email} className={linkClass}>
+        {site.email}
+      </a>
+    ),
+    "{phone}": (
+      <a href={links.call} className={`${linkClass} whitespace-nowrap`}>
+        {phoneFor(locale)}
+      </a>
+    ),
+    "{dpa}": (
+      <a href="https://www.dpa.gr" rel="noopener" className={linkClass}>
+        www.dpa.gr
+      </a>
+    ),
+  };
 }
 
 // The privacy policy: the site's header and footer around one narrow column of text, easy to read on a phone.
-export default function PrivacyPage({ dict, text, homeHref }: Props) {
+export default function PrivacyPage({ dict, text, homeHref, otherLanguageHref }: Props) {
+  const tokens = placeholders(dict.locale);
+  const withLinks = (line: string) =>
+    line.split(/(\{email\}|\{phone\}|\{dpa\})/).map((part, i) => <Fragment key={i}>{tokens[part] ?? part}</Fragment>);
+
   return (
     <>
       <a
@@ -46,7 +50,7 @@ export default function PrivacyPage({ dict, text, homeHref }: Props) {
       >
         {dict.skipToContent}
       </a>
-      <SiteHeader dict={dict} homeHref={homeHref} sectionBase={homeHref} />
+      <SiteHeader dict={dict} homeHref={homeHref} sectionBase={homeHref} switchHref={otherLanguageHref} />
 
       <main id="main" className="wrap max-w-[46rem] py-14 lg:py-20">
         <h1 className="neon font-display text-step-3 leading-none font-black">{text.title}</h1>
