@@ -26,6 +26,9 @@ export default function SiteFooter({ dict }: Props) {
         <a href={links.call} className="no-underline hover:text-ink">
           {site.phone.display}
         </a>
+        <a href={dict.contact.form.privacyHref} className="no-underline hover:text-ink">
+          {dict.contact.form.privacyLink}
+        </a>
         <span className="lg:ml-auto">
           © {new Date().getFullYear()} {site.name}
         </span>
