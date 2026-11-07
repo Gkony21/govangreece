@@ -64,17 +64,19 @@ export async function onRequest({ request, env }: Context): Promise<Response> {
     return reply(request, 200, { ok: true }, quote);
   }
 
-  if (!env.RESEND_API_KEY || !env.QUOTE_TO) {
+  const resendKey = env.RESEND_API_KEY?.trim();
+  const to = env.QUOTE_TO?.trim();
+  if (!resendKey || !to) {
     console.error("quote: RESEND_API_KEY or QUOTE_TO is not set");
     return reply(request, 500, { ok: false, error: "failed" }, quote);
   }
 
   const sent = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+    headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: "GO! Van site <forma@govangreece.gr>",
-      to: [env.QUOTE_TO],
+      to: [to],
       reply_to: quote.email || undefined,
       subject: email.subject,
       html: email.html,
@@ -93,19 +95,28 @@ export async function onRequest({ request, env }: Context): Promise<Response> {
 // Asks Turnstile whether the token the widget gave the form is real, fresh, and from this site.
 async function human(token: FormDataEntryValue | null, request: Request, env: Env) {
   if (typeof token !== "string" || !token || token.length > 2048) return false;
-  if (!env.TURNSTILE_SECRET_KEY) {
+  // Trimmed: a pasted secret easily brings a space or a line break along, and Turnstile then calls it invalid.
+  const secret = env.TURNSTILE_SECRET_KEY?.trim();
+  if (!secret) {
     console.error("quote: TURNSTILE_SECRET_KEY is not set");
     return false;
   }
   const check = new FormData();
-  check.append("secret", env.TURNSTILE_SECRET_KEY);
+  check.append("secret", secret);
   check.append("response", token);
   const ip = request.headers.get("CF-Connecting-IP");
   if (ip) check.append("remoteip", ip);
   try {
     const answer = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: check });
     const result: { success?: boolean; "error-codes"?: string[] } = await answer.json();
-    if (!result.success) console.warn(`quote: Turnstile said no (${result["error-codes"]?.join(", ") || "no reason"})`);
+    if (!result.success) {
+      const codes = result["error-codes"] ?? [];
+      // For a rejected secret, its shape only (never the secret): enough to tell a site key or a cut paste apart.
+      const shape = codes.includes("invalid-input-secret")
+        ? `; the secret has ${secret.length} characters, starts with "${secret.slice(0, 4)}", ${secret === env.TURNSTILE_SECRET_KEY ? "no" : "had"} spaces around it`
+        : "";
+      console.warn(`quote: Turnstile said no (${codes.join(", ") || "no reason"})${shape}`);
+    }
     return result.success === true;
   } catch (error) {
     console.error("quote: Turnstile could not be reached", error);
