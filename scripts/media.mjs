@@ -118,7 +118,7 @@ async function buildPhoto(entry) {
 function buildVideo(entry) {
   const name = `${entry.id}.mp4`;
   const out = path.join(outDir, name);
-  const sources = [entry.src].flat().map(sourcePath);
+  const sources = [entry.src].flat().map((src) => sourcePath(src, entry.dir));
   const scale = `scale=${VIDEO_WIDTH}:-2,setsar=1,fps=30`;
 
   const input = [];

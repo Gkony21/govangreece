@@ -217,6 +217,18 @@ export const media = {
     },
     "consent": "none"
   },
+  "clip-bar": {
+    "kind": "video",
+    "src": "/video/clip-bar.mp4",
+    "poster": "/media/clip-bar-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": {
+      "el": "Η πρόσοψη VW της φορητής μπάρας με αναμμένα φώτα",
+      "en": "The VW front of the portable bar with its lights on"
+    },
+    "consent": "none"
+  },
   "clip-guestbook": {
     "kind": "video",
     "src": "/video/clip-guestbook.mp4",

@@ -12,7 +12,7 @@ const serviceMedia: Record<ServiceId, { photo: PhotoId; clip?: ClipId }> = {
   "360": { photo: "service-360", clip: "clip-360" },
   guestbook: { photo: "service-guestbook", clip: "clip-guestbook" },
   van: { photo: "service-van", clip: "clip-van" },
-  bar: { photo: "service-bar" },
+  bar: { photo: "service-bar", clip: "clip-bar" },
 };
 
 type Props = {
