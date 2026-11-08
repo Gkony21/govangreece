@@ -63,7 +63,7 @@ export const media = [
   { id: "clip-cocktails", ref: "V13+V20", src: ["IMG_1676.MOV", "d8c1b430392c4c8d81a2fc86a0dd9128.MOV"], kind: "video", consent: "none",
     alt: { el: "Κοκτέιλ σερβίρονται στη μπάρα", en: "Cocktails being poured at the bar" } },
   // Temporary, until the client has a video of the portable bar: a slow camera move we made from the photo (P69), locally.
-  { id: "clip-bar", ref: "P69", src: "clip-bar-orbit.mp4", dir: "../design/assets", kind: "video", trim: [0, 6], consent: "none",
+  { id: "clip-bar", ref: "P69", src: "clip-bar-orbit.mp4", dir: "../design/assets", kind: "video", trim: [0, 8], consent: "none",
     alt: { el: "Η πρόσοψη VW της φορητής μπάρας με αναμμένα φώτα", en: "The VW front of the portable bar with its lights on" } },
   { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "pending",
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
