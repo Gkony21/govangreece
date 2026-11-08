@@ -61,6 +61,8 @@ export type Dictionary = {
   services: {
     lead: string;
     pick: string;
+    // The tap on phones that opens what a service includes.
+    more: string;
     items: Service[];
     // The bar at the bottom of the screen once something is picked. one and many are read out by screen readers, with
     // {list} the picked names and {count} how many; oneShort and manyShort are the line shown under the bulbs.
