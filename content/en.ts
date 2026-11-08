@@ -42,7 +42,7 @@ export const en = {
     contact: { title: "Tell us about your event" },
   },
   services: {
-    lead: "Book one service or combine as many as you like. The more you book together, the better the price.",
+    lead: "Book one service or combine as many as you like.",
     pick: "I want it",
     more: "What's included",
     items: [
@@ -258,7 +258,7 @@ export const en = {
       guests: "Roughly how many guests?",
       guestsPlaceholder: "e.g. 200",
       services: "What are you interested in?",
-      servicesHint: "Tick as many as you like. The more you book together, the better the price.",
+      servicesHint: "Tick as many as you like.",
       all: "All of them",
       message: "Anything else we should know?",
       submit: "Send the request",
