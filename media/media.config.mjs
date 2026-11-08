@@ -68,7 +68,7 @@ export const media = [
   // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
   // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
-    ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.6], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
+    ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.49], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
     ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Mirror Photo Booth on a red carpet at sunset" }],
     ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
   ].flatMap(([id, ref, src, focus, alt]) => [
