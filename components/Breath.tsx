@@ -16,6 +16,7 @@ import { media } from "@/lib/media";
 // "corner", beside a line over the photo, hanging from the top of the breath. Or beside the line on the "wall", with no
 // wires, where the subject fills the bottom of the photo (the van, logo and all) and wires would cross it.
 // phoneLift: how much of the photo's top (sky) is cut on phones, so the line comes up closer under a low subject.
+// cut: where the photo ends in a neon cut instead of dissolving, the design of that cut (seams below, CSS in globals.css).
 const breaths = {
   bar: {
     photo: "break-van-night",
@@ -26,8 +27,9 @@ const breaths = {
     halo: "255 110 210",
     href: "#service-van",
     fade: "long",
-    phoneSign: "above",
+    phoneSign: "wall",
     phoneLift: "0rem",
+    cut: "shard",
   },
   memories: {
     photo: "break-mirror-sunset",
@@ -40,6 +42,7 @@ const breaths = {
     fade: "long",
     phoneSign: "corner",
     phoneLift: "0rem",
+    cut: null,
   },
   date: {
     photo: "break-van-sunset",
@@ -52,6 +55,7 @@ const breaths = {
     fade: "short",
     phoneSign: "wall",
     phoneLift: "3.5rem",
+    cut: null,
   },
 } as const;
 
@@ -64,6 +68,27 @@ const strands = {
   right: [{ y: 6, y1: -30, sag: 44, r: 2.8, from: -0.03, to: 0.6 }],
 };
 
+// The neon lines of each cut, as x1 y1 x2 y2 in % of the breath (computers) or of the photo (phones). They trace the
+// edges of the clip-paths in globals.css. "shard": the cut breaks a sliver off the photo, the main edge in the breath's
+// colour, the sliver's two edges in violet.
+const seams = {
+  shard: {
+    phone: [
+      { line: [-2, 77.8, 102, 88.2], tone: "main" },
+      { line: [-2, 81.8, 102, 92.2], tone: "violet" },
+      { line: [-2, 88.8, 102, 99.2], tone: "violet" },
+    ],
+    computer: [
+      { line: [55, 0, 42, 100], tone: "main" },
+      { line: [51.5, 0, 38.5, 100], tone: "violet" },
+      { line: [47, 0, 34, 100], tone: "violet" },
+    ],
+  },
+} as const;
+
+// With a cut, the lights' box ends at the cut, so the string stops there: only whole bulbs, as always.
+const cutStrands = [{ y: 6, y1: 10, sag: 44, r: 2.8, from: -0.05, to: 1 }];
+
 type Props = {
   id: BreathId;
   line: Dictionary["breaths"][BreathId];
@@ -73,14 +98,14 @@ type Props = {
 // A "breath" between sections: a big photo with one line over it. The photo is taller than its frame and drifts
 // through it as the page scrolls (parallax): CSS in globals.css, components/ParallaxFallback.tsx where the browser
 // has no scroll timelines.
-// Both: the photo dissolves into the night where the line stands, under a neon sign, and the line's last words glow
-// like the sign. A small link under the line.
+// Both: the photo dissolves into the night where the line stands, or ends in a neon cut like the hero's, with a neon
+// sign and the line's last words glowing like the sign. A small link under the line.
 // Phones: the photo fills the width at the top, the line below it. Or, when the line is at the top, the photo fills the
 // breath and the line stands over its sky.
 // Computers: the photo fills one side, near square, the line on the other, under a string of fairy lights like the
 // hero's and a bigger sign.
 export default function Breath({ id, line, locale }: Props) {
-  const { photo, side, phoneText, glow, sign, halo, href, fade, phoneSign, phoneLift } = breaths[id];
+  const { photo, side, phoneText, glow, sign, halo, href, fade, phoneSign, phoneLift, cut } = breaths[id];
   const square = media[photo];
   const tall = media[`${photo}-tall` as const];
   const right = side === "right";
@@ -91,6 +116,7 @@ export default function Breath({ id, line, locale }: Props) {
       data-phone-text={phoneText}
       data-fade={fade}
       data-phone-sign={phoneSign}
+      data-cut={cut ?? undefined}
       style={{ "--glow": glow, "--halo": halo, "--lift": phoneLift } as CSSProperties}
       className="breath relative isolate grid overflow-hidden border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:min-h-[36rem] lg:items-center"
     >
@@ -100,7 +126,7 @@ export default function Breath({ id, line, locale }: Props) {
         <img
           src={square.src}
           srcSet={square.srcSet}
-          sizes="(min-width: 1024px) 61vw, 100vw"
+          sizes={`(min-width: 1024px) ${cut ? 76 : 61}vw, 100vw`}
           width={square.width}
           height={square.height}
           alt={square.alt[locale]}
@@ -109,7 +135,21 @@ export default function Breath({ id, line, locale }: Props) {
           className={`breath-photo absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover lg:w-[61%] ${right ? "lg:left-auto" : "lg:right-auto"}`}
         />
       </picture>
-      <FairyLights strands={strands[side]} spacing={58} wire className="absolute inset-x-0 top-0 hidden h-56 w-full lg:block" />
+      {cut && (
+        <svg className="breath-seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {(["phone", "computer"] as const).flatMap((device) =>
+            seams[cut][device].map(({ line: [x1, y1, x2, y2], tone }) => (
+              <line key={`${device}-${x1}`} x1={x1} y1={y1} x2={x2} y2={y2} data-device={device} data-tone={tone} />
+            )),
+          )}
+        </svg>
+      )}
+      <FairyLights
+        strands={cut ? cutStrands : strands[side]}
+        spacing={58}
+        wire
+        className={`absolute inset-x-0 top-0 hidden h-56 w-full lg:block ${cut ? "breath-lights" : ""}`}
+      />
       <div className="breath-text wrap lg:grid lg:py-0">
         <div
           data-reveal={right ? "left" : "right"}
