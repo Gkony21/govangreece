@@ -362,6 +362,22 @@ html:not(.js) .service-more {
     linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
 }
 
+/* A review as a paper note: the same paper as the receipt in Why GO! Van, with a warm glow, each at its own slant. */
+.review-note {
+  background: #f6efe2;
+  color: #1a1326;
+  box-shadow: 0 0 34px rgb(255 195 92 / 0.3);
+  rotate: -1.6deg;
+}
+
+li:nth-child(even) > .review-note {
+  rotate: 1.3deg;
+}
+
+li:nth-child(3) > .review-note {
+  rotate: -0.9deg;
+}
+
 .hero-link {
   display: inline-flex;
   align-items: center;

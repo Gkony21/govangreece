@@ -4,22 +4,16 @@ import type { Dictionary } from "@/content/types";
 import { media } from "@/lib/media";
 import { site } from "@/lib/site";
 
-// In grid order. Four columns from tablets up, four rows: the wide (landscape) photos take two columns each.
+// In grid order. One big scene across the top, then four columns from tablets up: the wide photo takes two of them.
 const photos = [
-  { id: "gallery-van-neon" },
-  { id: "gallery-360-terrace" },
-  { id: "gallery-mirror-stone", wide: true },
-  { id: "gallery-phone-gold" },
-  { id: "gallery-van-crowd", wide: true },
-  { id: "gallery-mirror-garden" },
-  { id: "gallery-360-night" },
-  { id: "gallery-van-bar-red" },
-  { id: "gallery-phone-flowers" },
-  { id: "gallery-van-dusk" },
-  { id: "gallery-mirror-xmas" },
-  { id: "gallery-props-neon" },
-  { id: "gallery-phone-stone" },
-  { id: "gallery-360-props" },
+  { id: "gallery-van-crowd", feature: true },
+  { id: "gallery-moment-laugh" },
+  { id: "gallery-moment-green" },
+  { id: "gallery-moment-pour" },
+  { id: "gallery-moment-portable" },
+  { id: "gallery-moment-wedding", wide: true },
+  { id: "gallery-moment-van-far" },
+  { id: "gallery-moment-call" },
 ] as const;
 
 type Props = {
@@ -46,15 +40,17 @@ export default function Gallery({ dict }: Props) {
           labels={gallery}
           items={photos.map(({ id, ...photo }) => {
             const wide = "wide" in photo;
+            const feature = "feature" in photo;
             const { src, srcSet, width, height, alt } = media[id];
             return {
               wide,
+              feature,
               full: { src, srcSet, width, height, alt: alt[dict.locale] },
               thumb: (
                 <Photo
                   id={id}
                   locale={dict.locale}
-                  sizes={wide ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
+                  sizes={feature ? "(min-width: 1240px) 1200px, 100vw" : wide ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
                   className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                 />
               ),

@@ -37,7 +37,7 @@ const breaths = {
     phoneLift: "0rem",
   },
   date: {
-    photo: "break-van-sunset",
+    photo: "break-van-lit",
     side: "right",
     glow: "255 170 90",
     sign: "heart",
@@ -45,7 +45,7 @@ const breaths = {
     href: "#contact",
     cut: "slab",
     photoWidth: 66,
-    focus: "50% 100%",
+    focus: "50% 50%",
     phoneLift: "6rem",
   },
 } as const;

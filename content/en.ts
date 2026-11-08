@@ -138,7 +138,6 @@ export const en = {
   },
   gallery: {
     lead: "From weddings, parties and openings. Tap a photo to see it larger.",
-    more: "See more photos",
     instagram: "More on Instagram",
     open: "Enlarge: {alt}",
     dialogLabel: "Photos from our events",
@@ -152,10 +151,9 @@ export const en = {
     stars: "{n} out of 5 stars",
     all: "See all reviews on Google",
     items: [
-      { name: "Georgia K.", text: "Amazing professionals!!! Flawless service... thank you so much!!!" },
       { name: "Nikos E.", text: "Excellent in every way, great at what they do, polite and helpful. Well done!!" },
+      { name: "Georgia K.", text: "Amazing professionals!!! Flawless service... thank you so much!!!" },
       { name: "Ageliki G.", text: "Everything was flawless!!! Thank you so much for everything!!" },
-      { name: "Katerina K.", text: "Great service!" },
     ],
     note: "Greek reviews translated by us.",
   },

@@ -94,8 +94,6 @@ export type Dictionary = {
   breaths: Record<BreathId, { lead: string; neon: string; link: string }>;
   gallery: {
     lead: string;
-    // Phones show the first photos only; this button shows the rest.
-    more: string;
     instagram: string;
     // Lightbox: {alt} is the photo's description; {n} and {total} its place in the gallery.
     open: string;
