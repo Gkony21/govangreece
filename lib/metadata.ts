@@ -56,4 +56,7 @@ export const viewport: Viewport = {
 };
 
 // Runs before first paint: lets CSS hide [data-reveal] elements only when JavaScript is available.
-export const jsFlagScript = "document.documentElement.classList.add('js')";
+export const jsFlagScript =
+  "var d=document.documentElement;d.classList.add('js');try{var n=performance.getEntriesByType('navigation')[0];" +
+  // The hero's lights come on only for someone arriving from elsewhere: not on a reload, "back", or a link within the site.
+  "if(n&&n.type==='navigate'&&document.referrer.indexOf(location.origin)!==0)d.classList.add('hero-intro')}catch(e){}";
