@@ -4,7 +4,7 @@ import type { Dictionary } from "./types";
 export const en = {
   locale: "en",
   meta: {
-    title: "GO! Van | 360 Video Booth, Mirror Booth & Cocktail Van in Laconia, Greece",
+    title: "GO! Van | 360 Video Booth, Mirror Photo Booth & Cocktail Van Bar in Laconia, Greece",
     description:
       "360 Video Booth, Mirror Photo Booth, Audio Guestbook and a Cocktail Van Bar for weddings, christenings and events in Laconia, Greece.",
     ogLocale: "en_US",
@@ -47,7 +47,6 @@ export const en = {
       {
         id: "mirror",
         name: "Mirror Photo Booth",
-        short: "Mirror Booth",
         alias: "GO! Magic Mirror",
         text: "A mirror with a touch screen. Guests take their photos, get the print right away and download the photo with a QR code.",
         facts: ["4-hour base package", "Unlimited 5x15 prints", "Props", "Your own print design", "Attendant"],
@@ -56,7 +55,6 @@ export const en = {
       {
         id: "360",
         name: "360 Video Booth",
-        short: "360 Video",
         alias: "GO! 360",
         text: "The camera circles around you and makes a slow-motion video set to the song you picked, ready to share.",
         options: [
@@ -68,7 +66,6 @@ export const en = {
       {
         id: "guestbook",
         name: "Audio Guestbook",
-        short: "Audio Guestbook",
         alias: "GO! Guestbook",
         text: "A vintage phone. Guests pick it up, hear your greeting and leave their wishes in their own voice.",
         facts: ["For the whole event", "No power needed", "Unlimited recordings", "Your own greeting"],
@@ -77,7 +74,6 @@ export const en = {
       {
         id: "van",
         name: "Cocktail Van Bar",
-        short: "Cocktail Van",
         alias: "GO! Van bar",
         text: "The VW van turns into a bar at your event, for the whole night.",
         options: [
@@ -89,7 +85,6 @@ export const en = {
       {
         id: "bar",
         name: "Portable Bar",
-        short: "Portable Bar",
         alias: "The bar without the van",
         text: "The bar with the VW front, for venues where the van can't go.",
         facts: ["For the whole event", "With or without a bartender", "We can bring the drinks too"],
@@ -137,8 +132,8 @@ export const en = {
     ],
   },
   breaths: {
-    bar: { lead: "The bar comes", neon: "to you.", link: "See the Cocktail Van" },
-    memories: { lead: "Every guest leaves with a", neon: "memory.", link: "See the Magic Mirror" },
+    bar: { lead: "The bar comes", neon: "to you.", link: "See the Cocktail Van Bar" },
+    memories: { lead: "Every guest leaves with a", neon: "memory.", link: "See the Mirror Photo Booth" },
     date: { lead: "Tell us the date. We'll take care of", neon: "the rest.", link: "Ask for a quote" },
   },
   gallery: {
@@ -185,7 +180,7 @@ export const en = {
           },
           {
             q: "How long does it last?",
-            a: "The Magic Mirror and the 360 come in a 4-hour package and can stay longer if you like. The guestbook phone, the bar and the van stay for the whole event.",
+            a: "The Mirror Photo Booth and the 360 Video Booth come in a 4-hour package and can stay longer if you like. The guestbook phone, the bar and the van stay for the whole event.",
           },
           {
             q: "Do you make alcohol-free cocktails?",
@@ -193,7 +188,7 @@ export const en = {
           },
           {
             q: "Can it have our names or our logo?",
-            a: "Yes. The Magic Mirror print design and the 360 videos are made with your names, logo, colours and music. And the signature cocktails take the names you choose.",
+            a: "Yes. The Mirror Photo Booth print design and the 360 Video Booth videos are made with your names, logo, colours and music. And the signature cocktails take the names you choose.",
           },
         ],
       },

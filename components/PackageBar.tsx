@@ -25,7 +25,7 @@ export default function PackageBar({ services, quoteCta }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  const list = services.items.filter((s) => picked.includes(s.id)).map((s) => s.short).join(", ");
+  const list = services.items.filter((s) => picked.includes(s.id)).map((s) => s.name).join(", ");
   const template = picked.length === 1 ? services.bag.one : services.bag.many;
   const [before, after = ""] = template.replace("{count}", String(picked.length)).split("{list}");
   const text = picked.length ? before + list + after : "";

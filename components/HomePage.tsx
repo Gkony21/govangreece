@@ -46,7 +46,7 @@ export default function HomePage({ dict, homeHref }: Props) {
 
       <main id="main">
         <Hero dict={dict} />
-        <ServiceBand items={dict.services.items.map((s) => s.short)} />
+        <ServiceBand items={dict.services.items.map((s) => s.name)} />
 
         {sectionIds.map((id) => {
           const breath = breathBefore[id];
