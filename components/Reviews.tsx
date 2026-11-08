@@ -85,9 +85,6 @@ function GoogleLink({ label, className }: { label: string; className: string }) 
       className={`items-center gap-2.5 font-display text-[1.3rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon ${className}`}
     >
       {label}
-      <span aria-hidden="true" className="grid size-9 place-items-center rounded-full border border-line text-base">
-        →
-      </span>
     </a>
   );
 }

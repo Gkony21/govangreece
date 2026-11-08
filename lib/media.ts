@@ -152,8 +152,8 @@ export const media = {
     "width": 960,
     "height": 1200,
     "alt": {
-      "el": "Ο Magic Mirror στημένος σε κήπο το σούρουπο",
-      "en": "The Magic Mirror set up in a garden at dusk"
+      "el": "Το Mirror Photo Booth στημένο σε κήπο το σούρουπο",
+      "en": "The Mirror Photo Booth set up in a garden at dusk"
     },
     "consent": "none"
   },
@@ -224,8 +224,8 @@ export const media = {
     "width": 540,
     "height": 960,
     "alt": {
-      "el": "Ο Magic Mirror σε λειτουργία",
-      "en": "The Magic Mirror in action"
+      "el": "Το Mirror Photo Booth σε λειτουργία",
+      "en": "The Mirror Photo Booth in action"
     },
     "consent": "pending"
   },
@@ -296,8 +296,8 @@ export const media = {
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα",
-      "en": "The Magic Mirror on a red carpet at sunset"
+      "el": "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα",
+      "en": "The Mirror Photo Booth on a red carpet at sunset"
     },
     "consent": "none"
   },
@@ -392,8 +392,8 @@ export const media = {
     "width": 1200,
     "height": 1500,
     "alt": {
-      "el": "Ο Magic Mirror και props σε κήπο τη νύχτα",
-      "en": "The Magic Mirror and props in a garden at night"
+      "el": "Το Mirror Photo Booth και props σε κήπο τη νύχτα",
+      "en": "The Mirror Photo Booth and props in a garden at night"
     },
     "consent": "none"
   },
@@ -404,8 +404,8 @@ export const media = {
     "width": 1200,
     "height": 1500,
     "alt": {
-      "el": "Ο Magic Mirror δίπλα σε χριστουγεννιάτικο δέντρο",
-      "en": "The Magic Mirror next to a Christmas tree"
+      "el": "Το Mirror Photo Booth δίπλα σε χριστουγεννιάτικο δέντρο",
+      "en": "The Mirror Photo Booth next to a Christmas tree"
     },
     "consent": "none"
   },
@@ -488,8 +488,8 @@ export const media = {
     "width": 1800,
     "height": 1200,
     "alt": {
-      "el": "Ο Magic Mirror μπροστά σε πέτρινο σπίτι",
-      "en": "The Magic Mirror in front of a stone house"
+      "el": "Το Mirror Photo Booth μπροστά σε πέτρινο σπίτι",
+      "en": "The Mirror Photo Booth in front of a stone house"
     },
     "consent": "none"
   },

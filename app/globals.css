@@ -404,6 +404,12 @@ body:has(.package-bar[data-on]) {
       linear-gradient(180deg, rgb(18 12 34 / 0.45), transparent calc(var(--photo-h) * 0.18));
   }
 
+  /* Gold neon, so the link reads over any photo. */
+  .breath-link {
+    color: #ffd08a;
+    text-shadow: 0 0 12px rgb(255 195 92 / 0.75), 0 1px 10px rgb(0 0 0 / 0.8);
+  }
+
   .breath[data-phone-text="top"] {
     min-height: min(140vw, 40rem);
     align-content: start;
@@ -421,7 +427,7 @@ body:has(.package-bar[data-on]) {
 
   .breath[data-phone-text="top"]::after {
     background:
-      linear-gradient(180deg, rgb(18 12 34 / 0.9), rgb(18 12 34 / 0.7) 20%, rgb(18 12 34 / 0.3) 42%, transparent 58%),
+      linear-gradient(180deg, rgb(18 12 34 / 0.94), rgb(18 12 34 / 0.82) 22%, rgb(18 12 34 / 0.55) 42%, transparent 64%),
       linear-gradient(0deg, rgb(18 12 34 / 0.45), transparent 16%);
   }
 

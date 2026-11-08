@@ -66,7 +66,7 @@ export default function Gallery({ dict }: Props) {
           href={site.social.instagram}
           className="mt-8 inline-flex items-center gap-2 font-display text-xl font-extrabold tracking-wide text-violet hover:text-neon"
         >
-          {gallery.instagram} <span aria-hidden="true">→</span>
+          {gallery.instagram}
         </a>
       </div>
     </section>

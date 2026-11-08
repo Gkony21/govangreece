@@ -121,12 +121,9 @@ export default function Breath({ id, line, locale }: Props) {
           </p>
           <a
             href={href}
-            className="inline-flex items-center gap-2.5 font-display text-[1.2rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon lg:text-[1.3rem]"
+            className="breath-link inline-flex min-h-11 items-center font-display text-[1.2rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon lg:text-[1.3rem]"
           >
             {line.link}
-            <span aria-hidden="true" className="grid size-8 place-items-center rounded-full border border-line text-sm lg:size-9 lg:text-base">
-              →
-            </span>
           </a>
         </div>
       </div>

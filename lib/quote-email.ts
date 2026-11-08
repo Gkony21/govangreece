@@ -24,7 +24,7 @@ export function internationalPhone(phone: string) {
 export function quoteEmail(quote: Quote) {
   const day = quote.date ? new Date(`${quote.date}T00:00:00Z`) : undefined;
   const event = quote.event ? el.contact.form.eventTypes[quote.event] : "";
-  const services = quote.services.map((id) => el.services.items.find((s) => s.id === id)?.short).join(", ");
+  const services = quote.services.map((id) => el.services.items.find((s) => s.id === id)?.name).join(", ");
   const phone = internationalPhone(quote.phone);
 
   const rows: [string, string][] = [

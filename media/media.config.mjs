@@ -55,7 +55,7 @@ export const media = [
 
   // Services: one photo each, plus short silent clips.
   { id: "service-mirror", ref: "P65", src: "IMG_3139.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.6], widths: [480, 960], consent: "none",
-    alt: { el: "Ο Magic Mirror στημένος σε κήπο το σούρουπο", en: "The Magic Mirror set up in a garden at dusk" } },
+    alt: { el: "Το Mirror Photo Booth στημένο σε κήπο το σούρουπο", en: "The Mirror Photo Booth set up in a garden at dusk" } },
   { id: "service-360", ref: "P15", src: "IMG_3353.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.62], widths: [480, 960], consent: "none",
     alt: { el: "Η πλατφόρμα 360 σε γκαζόν δίπλα σε λίμνη", en: "The 360 platform on a lawn by a pond" } },
   { id: "service-guestbook", ref: "P46", src: "11F982D2-C9BC-425D-93E3-A8D47D3BD867.JPG", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [480, 960], consent: "none",
@@ -68,7 +68,7 @@ export const media = [
   { id: "clip-van", ref: "V05", src: "IMG_1635.MOV", kind: "video", trim: [5, 6], consent: "none", // starts after the number plate leaves the frame
     alt: { el: "Το van με τη μπάρα ανοιχτή, από κοντά", en: "A close look at the van with its bar open" } },
   { id: "clip-mirror", ref: "V06", src: "4f523286234648adb452931bd46dccf5.MOV", kind: "video", trim: [0, 4.3], consent: "pending", // a guest photo on the mirror's screen
-    alt: { el: "Ο Magic Mirror σε λειτουργία", en: "The Magic Mirror in action" } },
+    alt: { el: "Το Mirror Photo Booth σε λειτουργία", en: "The Mirror Photo Booth in action" } },
   { id: "clip-360", ref: "V11", src: "IMG_4436.MP4", kind: "video", trim: [0, 6], consent: "none",
     alt: { el: "Η πλατφόρμα 360 στημένη με θέα", en: "The 360 platform set up with a view" } },
   { id: "clip-cocktails", ref: "V13+V20", src: ["IMG_1676.MOV", "d8c1b430392c4c8d81a2fc86a0dd9128.MOV"], kind: "video", consent: "none",
@@ -80,7 +80,7 @@ export const media = [
   // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
     ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.6], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
-    ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Ο Magic Mirror με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Magic Mirror on a red carpet at sunset" }],
+    ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Mirror Photo Booth on a red carpet at sunset" }],
     ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
   ].flatMap(([id, ref, src, focus, alt]) => [
     { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent: "none", alt },
@@ -95,8 +95,8 @@ export const media = [
     ["gallery-360-night", "P12", "IMG_0211.HEIC", [0.5, 0.6], { el: "Η πλατφόρμα 360 σε κήπο τη νύχτα", en: "The 360 platform in a garden at night" }],
     ["gallery-van-bar-red", "P22", "CD217B30-3E2B-44AE-BF05-BFFFC7C48A19.JPG", [0.5, 0.5], { el: "Η μπάρα του van με κόκκινα φώτα", en: "The van's bar in red light" }],
     ["gallery-phone-stone", "P26", "IMG_9700.HEIC", [0.5, 0.5], { el: "Το τηλέφωνο ευχών σε πέτρινο χώρο", en: "The guestbook phone in a stone-walled room" }],
-    ["gallery-mirror-garden", "P30", "IMG_9867.HEIC", [0.5, 0.55], { el: "Ο Magic Mirror και props σε κήπο τη νύχτα", en: "The Magic Mirror and props in a garden at night" }],
-    ["gallery-mirror-xmas", "P40", "CAE23400-BE20-4EA9-B1B2-BED35120FF13.JPG", [0.5, 0.55], { el: "Ο Magic Mirror δίπλα σε χριστουγεννιάτικο δέντρο", en: "The Magic Mirror next to a Christmas tree" }],
+    ["gallery-mirror-garden", "P30", "IMG_9867.HEIC", [0.5, 0.55], { el: "Το Mirror Photo Booth και props σε κήπο τη νύχτα", en: "The Mirror Photo Booth and props in a garden at night" }],
+    ["gallery-mirror-xmas", "P40", "CAE23400-BE20-4EA9-B1B2-BED35120FF13.JPG", [0.5, 0.55], { el: "Το Mirror Photo Booth δίπλα σε χριστουγεννιάτικο δέντρο", en: "The Mirror Photo Booth next to a Christmas tree" }],
     ["gallery-360-props", "P42", "69D13F77-71F3-4C48-B8F7-9E3BF11A7A86.JPG", [0.5, 0.6], { el: "Η πλατφόρμα 360 με props τη νύχτα", en: "The 360 platform with props at night" }],
     ["gallery-van-neon", "P59", "IMG_4291.HEIC", [0.5, 0.55], { el: "Το GO! Van με κόκκινα και μπλε φώτα", en: "The GO! Van in red and blue light" }],
     ["gallery-props-neon", "P80", "IMG_0209.HEIC", [0.5, 0.6], { el: "Props και φωτεινή επιγραφή «Let's Party» τη νύχτα", en: "Props and a \"Let's Party\" neon sign at night" }],
@@ -108,7 +108,7 @@ export const media = [
     // Square crop from the top keeps the number plate out of the frame.
     alt: { el: "Το GO! Van στο σούρουπο με τα βουνά πίσω", en: "The GO! Van at dusk with the mountains behind" } },
   { id: "gallery-mirror-stone", ref: "P77", src: "IMG_0556.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "none",
-    alt: { el: "Ο Magic Mirror μπροστά σε πέτρινο σπίτι", en: "The Magic Mirror in front of a stone house" } },
+    alt: { el: "Το Mirror Photo Booth μπροστά σε πέτρινο σπίτι", en: "The Mirror Photo Booth in front of a stone house" } },
   { id: "gallery-van-crowd", ref: "P38", src: "IMG_3261.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "pending",
     alt: { el: "Καλεσμένοι γύρω από το van σε γλέντι", en: "Guests gathered around the van at a party" } },
 ];

@@ -5,7 +5,7 @@ import type { Dictionary } from "./types";
 export const el = {
   locale: "el",
   meta: {
-    title: "GO! Van | 360 Video Booth, Mirror Booth & Cocktail Van στη Λακωνία",
+    title: "GO! Van | 360 Video Booth, Mirror Photo Booth & Cocktail Van Bar στη Λακωνία",
     description:
       "360 Video Booth, Mirror Photo Booth, Audio Guestbook και Cocktail Van Bar για γάμους, βαφτίσεις και events στη Λακωνία.",
     ogLocale: "el_GR",
@@ -48,7 +48,6 @@ export const el = {
       {
         id: "mirror",
         name: "Mirror Photo Booth",
-        short: "Mirror Booth",
         alias: "GO! Magic Mirror",
         text: "Ένας καθρέφτης με οθόνη αφής. Οι καλεσμένοι φωτογραφίζονται, παίρνουν αμέσως την εκτύπωση και κατεβάζουν τη φωτογραφία με QR.",
         facts: ["Βασικό πακέτο 4 ωρών", "Απεριόριστες εκτυπώσεις 5x15", "Props", "Δικό σας σχέδιο εκτύπωσης", "Χειριστής"],
@@ -57,7 +56,6 @@ export const el = {
       {
         id: "360",
         name: "360 Video Booth",
-        short: "360 Video",
         alias: "GO! 360",
         text: "Η κάμερα γυρίζει γύρω σας και βγαίνει slow-motion βίντεο με το τραγούδι που διαλέξατε, έτοιμο να το στείλετε.",
         options: [
@@ -69,7 +67,6 @@ export const el = {
       {
         id: "guestbook",
         name: "Audio Guestbook",
-        short: "Audio Guestbook",
         alias: "GO! Guestbook",
         text: "Ένα vintage τηλέφωνο. Οι καλεσμένοι το σηκώνουν, ακούνε το μήνυμά σας και αφήνουν τις ευχές τους με τη φωνή τους.",
         facts: ["Για όλο το event", "Δεν θέλει ρεύμα", "Απεριόριστες ηχογραφήσεις", "Δικό σας μήνυμα υποδοχής"],
@@ -78,7 +75,6 @@ export const el = {
       {
         id: "van",
         name: "Cocktail Van Bar",
-        short: "Cocktail Van",
         alias: "GO! Van bar",
         text: "Το VW van γίνεται μπαρ μέσα στο event σας, για όλη τη βραδιά.",
         options: [
@@ -90,7 +86,6 @@ export const el = {
       {
         id: "bar",
         name: "Portable Bar",
-        short: "Portable Bar",
         alias: "Μπάρα χωρίς το van",
         text: "Η μπάρα με την πρόσοψη του VW, για χώρους όπου δεν μπαίνει το van.",
         facts: ["Για όλο το event", "Με ή χωρίς barman", "Φέρνουμε και ποτά, αν θέλετε"],
@@ -141,8 +136,8 @@ export const el = {
     ],
   },
   breaths: {
-    bar: { lead: "Το μπαρ έρχεται", neon: "σε εσάς.", link: "Δείτε το Cocktail Van" },
-    memories: { lead: "Κάθε καλεσμένος φεύγει με μια", neon: "ανάμνηση.", link: "Δείτε το Magic Mirror" },
+    bar: { lead: "Το μπαρ έρχεται", neon: "σε εσάς.", link: "Δείτε το Cocktail Van Bar" },
+    memories: { lead: "Κάθε καλεσμένος φεύγει με μια", neon: "ανάμνηση.", link: "Δείτε το Mirror Photo Booth" },
     date: { lead: "Πείτε μας την ημερομηνία. Τα υπόλοιπα", neon: "τα αναλαμβάνουμε.", link: "Ζητήστε προσφορά" },
   },
   gallery: {
@@ -188,7 +183,7 @@ export const el = {
           },
           {
             q: "Πόσες ώρες κρατάει;",
-            a: "Το Magic Mirror και το 360 έχουν βασικό πακέτο 4 ωρών και μένουν περισσότερο αν το θέλετε. Το τηλέφωνο ευχών, η μπάρα και το van μένουν για όλο το event.",
+            a: "Το Mirror Photo Booth και το 360 Video Booth έχουν βασικό πακέτο 4 ωρών και μένουν περισσότερο αν το θέλετε. Το τηλέφωνο ευχών, η μπάρα και το van μένουν για όλο το event.",
           },
           {
             q: "Κάνετε κοκτέιλ χωρίς αλκοόλ;",
@@ -196,7 +191,7 @@ export const el = {
           },
           {
             q: "Γίνεται με τα ονόματά μας ή το logo μας;",
-            a: "Ναι. Το σχέδιο της εκτύπωσης στο Magic Mirror και τα βίντεο του 360 γίνονται με τα ονόματα, το logo, τα χρώματα και τη μουσική σας. Και τα signature κοκτέιλ παίρνουν το όνομα που θα διαλέξετε.",
+            a: "Ναι. Το σχέδιο της εκτύπωσης στο Mirror Photo Booth και τα βίντεο του 360 Video Booth γίνονται με τα ονόματα, το logo, τα χρώματα και τη μουσική σας. Και τα signature κοκτέιλ παίρνουν το όνομα που θα διαλέξετε.",
           },
         ],
       },

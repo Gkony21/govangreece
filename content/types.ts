@@ -22,7 +22,6 @@ type Service = {
   id: ServiceId;
   name: string;
   // Short name, for the band under the hero and the package bar.
-  short: string;
   // The client's own product name, shown small under the name.
   alias: string;
   text: string;

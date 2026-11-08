@@ -292,7 +292,7 @@ export default function QuoteForm({ dict }: Props) {
                 className="sr-only"
               />
               <Tick />
-              {service.short}
+              {service.name}
             </label>
           ))}
           <label className={`${chip} border-dashed`}>
