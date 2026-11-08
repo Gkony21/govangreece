@@ -145,7 +145,6 @@ export type Dictionary = {
     form: {
       // Screen-reader name of the form.
       label: string;
-      requiredNote: string;
       name: string;
       phone: string;
       email: string;
@@ -158,10 +157,15 @@ export type Dictionary = {
       guests: string;
       guestsPlaceholder: string;
       services: string;
-      servicesHint: string;
       // Ticks every service at once.
       all: string;
+      // Opens email, place, guests and message.
+      more: string;
       message: string;
+      // Above the button, once a cocktail has a name; {names} becomes the names.
+      cocktails: string;
+      // Heading of the names at the top of the message we receive.
+      cocktailNames: string;
       submit: string;
       // The button while the request is on its way.
       sending: string;
