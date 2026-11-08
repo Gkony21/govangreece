@@ -1,22 +1,35 @@
 "use client";
 
 import { useRef } from "react";
+import ButtonLink from "@/components/ButtonLink";
 import LanguageLink from "@/components/LanguageLink";
+import PhoneIcon from "@/components/PhoneIcon";
 import type { Dictionary } from "@/content/types";
+import { links, phoneFor } from "@/lib/site";
 
 type Props = {
-  header: Dictionary["header"];
+  dict: Dictionary;
+  homeHref: string;
   // Put before the #section links: "" on the home page, the home page's address on other pages.
   sectionBase?: string;
   // The same page in the other language, when it is not the home page.
   switchHref?: string;
 };
 
-// Phone menu built on the native popover: opens and closes without JavaScript, closes on Esc or a tap outside.
-// The one script here closes it after a link is followed.
-export default function MobileMenu({ header, sectionBase = "", switchHref }: Props) {
+// The string of lights across the top of the menu: where each bulb sits, in % across and px down.
+const BULBS = 11;
+const bulbs = Array.from({ length: BULBS + 1 }, (_, i) => ({
+  x: ((i / BULBS) * 96 + 2).toFixed(2),
+  y: (8 + Math.sin((Math.PI * i) / BULBS) * 14).toFixed(1),
+}));
+const wire = `M-3 8 ${bulbs.map((b) => `L${b.x} ${b.y}`).join(" ")} L103 8`;
+
+// Full-screen phone menu built on the native popover: opens and closes without JavaScript, closes on Esc. A neon line
+// comes down the screen and meets the panel with the phone numbers rising from below; then the lights and the links
+// switch on one by one (CSS in app/globals.css, .menu). The one script here closes it after a link is followed.
+export default function MobileMenu({ dict, homeHref, sectionBase = "", switchHref }: Props) {
   const panel = useRef<HTMLDivElement>(null);
-  const { switchLanguage } = header;
+  const { header, contact } = dict;
 
   function closeOnLink(event: React.MouseEvent) {
     if ((event.target as HTMLElement).closest("a")) panel.current?.hidePopover();
@@ -35,25 +48,69 @@ export default function MobileMenu({ header, sectionBase = "", switchHref }: Pro
         </svg>
       </button>
 
-      <div
-        id="mobile-menu"
-        ref={panel}
-        popover="auto"
-        onClick={closeOnLink}
-        className="inset-x-0 top-(--header-h) bottom-auto m-0 w-full border-b border-line bg-night-2 p-0 text-ink backdrop:bg-night/60"
-      >
-        <nav aria-label={header.navLabel} className="wrap grid gap-1 py-4">
+      <div id="mobile-menu" ref={panel} popover="auto" onClick={closeOnLink} className="menu">
+        <div className="menu-sheet menu-sheet-top" />
+        <div className="menu-sheet menu-sheet-bottom" />
+        <svg className="menu-seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="-2" y1="102" x2="102" y2="-2" />
+        </svg>
+
+        <div className="menu-bar wrap">
+          <a href={homeHref} aria-label={header.homeLabel} className="shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized */}
+            <img src="/logo-112.webp" alt="" width={56} height={56} className="size-14" />
+          </a>
+          <button
+            type="button"
+            popoverTarget="mobile-menu"
+            popoverTargetAction="hide"
+            aria-label={header.closeLabel}
+            className="menu-close ml-auto grid size-11 place-items-center rounded-full border border-line text-ink"
+          >
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M4.5 4.5l11 11M15.5 4.5l-11 11" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="menu-lights" aria-hidden="true">
+          <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+            <path d={wire} />
+          </svg>
+          {bulbs.map((b, i) => (
+            <i key={b.x} style={{ left: `${b.x}%`, top: `${b.y}px`, animationDelay: `${(0.35 + i * 0.045).toFixed(2)}s` }} />
+          ))}
+        </div>
+
+        <nav aria-label={header.navLabel} className="menu-links">
           {header.nav.map((item) => (
-            <a key={item.id} href={`${sectionBase}#${item.id}`} className="py-3 font-display text-3xl font-extrabold no-underline">
+            <a key={item.id} href={`${sectionBase}#${item.id}`}>
               {item.label}
             </a>
           ))}
-          <LanguageLink
-            link={switchLanguage}
-            href={switchHref}
-            className="mt-2 justify-self-start rounded-full border border-line px-4 py-2 text-haze no-underline"
-          />
         </nav>
+
+        <div className="menu-contact">
+          <p className="flex items-center justify-between gap-3 text-sm text-haze">
+            {contact.directPhone}
+            <LanguageLink link={header.switchLanguage} href={switchHref} className="grid h-11 min-w-12 place-items-center rounded-full border border-line px-3 text-haze no-underline" />
+          </p>
+          <a href={links.call} className="menu-number">
+            {phoneFor(dict.locale)}
+          </a>
+          <div className="flex gap-2">
+            <ButtonLink href={links.call} variant="neon" size="sm" className="min-h-12 flex-1 px-2">
+              <PhoneIcon size={18} />
+              {contact.call}
+            </ButtonLink>
+            <ButtonLink href={links.viber} variant="ghost" size="sm" className="min-h-12 flex-1 px-2">
+              Viber
+            </ButtonLink>
+            <ButtonLink href={links.whatsapp} variant="ghost" size="sm" rel="noopener" className="min-h-12 flex-1 px-2">
+              WhatsApp
+            </ButtonLink>
+          </div>
+        </div>
       </div>
     </>
   );

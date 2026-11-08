@@ -22,6 +22,7 @@ export const el = {
       { id: "faq", label: "Ερωτήσεις" },
     ],
     menuLabel: "Μενού",
+    closeLabel: "Κλείσιμο μενού",
     switchLanguage: { label: "EN", href: "/en", ariaLabel: "English version", hrefLang: "en" },
   },
   hero: {
@@ -94,6 +95,8 @@ export const el = {
     bag: {
       one: "Διαλέξατε: {list}. Προσθέστε κι άλλη για καλύτερη τιμή.",
       many: "Το πακέτο σας: {list}. {count} υπηρεσίες, μία προσφορά.",
+      oneShort: "Με 2+ καλύτερη τιμή",
+      manyShort: "{count} υπηρεσίες, μία προσφορά",
       label: "Το πακέτο σας",
     },
   },

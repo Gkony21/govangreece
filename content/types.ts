@@ -45,6 +45,7 @@ export type Dictionary = {
     navLabel: string;
     nav: { id: SectionId; label: string }[];
     menuLabel: string;
+    closeLabel: string;
     // Link to the same page in the other language.
     switchLanguage: { label: string; href: string; ariaLabel: string; hrefLang: Locale };
   };
@@ -61,8 +62,9 @@ export type Dictionary = {
     lead: string;
     pick: string;
     items: Service[];
-    // The bar at the bottom of the screen once something is picked. {list} becomes the picked names, {count} how many.
-    bag: { one: string; many: string; label: string };
+    // The bar at the bottom of the screen once something is picked. one and many are read out by screen readers, with
+    // {list} the picked names and {count} how many; oneShort and manyShort are the line shown under the bulbs.
+    bag: { one: string; many: string; oneShort: string; manyShort: string; label: string };
   };
   cocktails: {
     lead: string;
