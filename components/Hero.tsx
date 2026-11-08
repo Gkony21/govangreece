@@ -47,7 +47,7 @@ export default function Hero({ dict }: Props) {
               <Photo
                 id={print.id}
                 locale={dict.locale}
-                sizes="(min-width: 1024px) 260px, 45vw"
+                sizes="(min-width: 1024px) 260px, 40vw"
                 priority={"priority" in print}
                 className={`${print.shape} w-full rounded-[1px] object-cover`}
               />

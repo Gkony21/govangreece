@@ -9,7 +9,8 @@ type Props = {
   // Rendered width, for the browser to pick a file from srcSet, e.g. "(min-width: 1024px) 33vw, 100vw".
   sizes: string;
   className?: string;
-  // Above the fold: load right away instead of lazily.
+  // Above the fold: load right away instead of lazily. Not "high" priority: the hero's largest element is its text,
+  // which waits for the fonts, so the photos should not crowd them out.
   priority?: boolean;
 };
 
@@ -26,7 +27,6 @@ export default function Photo({ id, locale, sizes, className, priority = false }
       height={photo.height}
       alt={photo.alt[locale]}
       loading={priority ? "eager" : "lazy"}
-      fetchPriority={priority ? "high" : undefined}
       decoding="async"
       className={className}
     />

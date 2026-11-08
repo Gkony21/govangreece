@@ -121,6 +121,8 @@ export default function GalleryGrid({ items, labels }: Props) {
             width={current.width}
             height={current.height}
             alt={current.alt}
+            // Lazy: the lightbox is closed when the page loads, so nothing is fetched until a photo is opened.
+            loading="lazy"
             className="lightbox-photo"
           />
           <figcaption className="text-center text-step--1 text-haze">
