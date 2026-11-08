@@ -433,7 +433,7 @@ html.js:not([data-reveal-ready]) [data-reveal] {
     animation: hero-seam-draw 0.45s 0.85s cubic-bezier(0.5, 0, 0.2, 1) both;
   }
 
-  .hero-intro .hero-seam-computer {
+  .hero-intro .hero-seam line.hero-seam-computer {
     transform-origin: 54% 0%;
   }
 
