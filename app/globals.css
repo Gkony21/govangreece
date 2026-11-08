@@ -1030,6 +1030,105 @@ html:has(.menu:popover-open) {
   }
 }
 
+/* A breath that ends in a neon cut, like the hero, instead of dissolving (Breath.tsx). The frame is clipped, not the
+   photo, so the cut stays put while the photo drifts through it. The clip-paths are one polygon: the bridges along the
+   edges between the photo and its sliver have no area. */
+.breath-seam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: var(--photo-h);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.breath-seam line {
+  stroke: #fff3fb;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px rgb(var(--halo) / 0.75)) drop-shadow(0 0 14px rgb(var(--halo))) drop-shadow(0 0 30px rgb(var(--halo)));
+}
+
+.breath-seam line[data-tone="violet"] {
+  stroke: #f6eaff;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 4px #e9d5ff) drop-shadow(0 0 14px #a98bff) drop-shadow(0 0 30px #a98bff);
+}
+
+.breath-seam line[data-device="computer"] {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .breath[data-cut] .breath-frame {
+    mask-image: none;
+  }
+
+  .breath[data-cut="shard"] .breath-frame {
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 78%, 0 0, 0 82%, 100% 92%, 100% 99%, 0 89%, 0 0);
+  }
+
+  .breath[data-cut] .breath-text {
+    padding-block: calc(var(--photo-h) + 1.1rem) 2.75rem;
+  }
+
+  .breath[data-cut]::after {
+    background: radial-gradient(80% 9rem at 50% calc(var(--photo-h) + 2rem), rgb(var(--glow) / 0.18), transparent 72%);
+  }
+}
+
+/* Computers. The photo is wider than in the other breaths, so its lit part falls under the sliver. --cut-shift moves the
+   cut right on wide screens, where the centred line reaches further across. */
+@media (min-width: 1024px) {
+  .breath[data-cut] {
+    --cut-shift: min(max(0px, (100vw - 1300px) * 0.2533), 245px);
+  }
+
+  .breath[data-cut] .breath-photo {
+    width: 76%;
+    mask-image: none;
+    object-position: 50% 55%;
+  }
+
+  .breath[data-cut="shard"] .breath-frame {
+    --main-top: calc(55% + var(--cut-shift));
+    --main-bottom: calc(42% + var(--cut-shift));
+    --sliver-top: calc(51.5% + var(--cut-shift));
+    --sliver-bottom: calc(38.5% + var(--cut-shift));
+    --sliver-far-top: calc(47% + var(--cut-shift));
+    --sliver-far-bottom: calc(34% + var(--cut-shift));
+    clip-path: polygon(
+      var(--main-top) 0, 100% 0, 100% 100%, var(--main-bottom) 100%, var(--main-top) 0,
+      var(--sliver-top) 0, var(--sliver-bottom) 100%, var(--sliver-far-bottom) 100%, var(--sliver-far-top) 0, var(--main-top) 0
+    );
+  }
+
+  .breath-seam {
+    height: 100%;
+    translate: var(--cut-shift) 0;
+  }
+
+  .breath-seam line[data-device="phone"] {
+    display: none;
+  }
+
+  .breath-seam line[data-device="computer"] {
+    display: inline;
+  }
+
+  .breath[data-cut="shard"] .breath-lights {
+    width: calc(46.9% + var(--cut-shift));
+  }
+
+  .breath[data-cut]::after {
+    background:
+      radial-gradient(30% 75% at 40% 55%, rgb(var(--glow) / 0.17), transparent 70%),
+      radial-gradient(30% 45% at 14% 30%, rgb(169 139 255 / 0.1), transparent 70%);
+  }
+}
+
 /* The last words of a line (breaths, about), lit like the neon signs, in the --halo set around them. */
 .neon-words {
   color: #fff6ff;
