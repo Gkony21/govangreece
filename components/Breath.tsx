@@ -45,7 +45,7 @@ const breaths = {
     href: "#contact",
     cut: "slab",
     photoWidth: 66,
-    focus: "50% 60%",
+    focus: "50% 100%",
     phoneLift: "6rem",
   },
 } as const;
@@ -66,8 +66,8 @@ const seams = {
     { line: [60, 0, 47, 100], tone: "violet" },
   ],
   slab: [
-    { line: [77, 0, 64, 100], tone: "main" },
-    { line: [74, 0, 61, 100], tone: "violet" },
+    { line: [63, 0, 50, 100], tone: "main" },
+    { line: [60, 0, 47, 100], tone: "violet" },
     { line: [49, 0, 36, 100], tone: "violet" },
   ],
 } as const;
