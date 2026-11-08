@@ -24,11 +24,11 @@ export const en = {
     switchLanguage: { label: "ΕΛ", href: "/", ariaLabel: "Ελληνική έκδοση", hrefLang: "el" },
   },
   hero: {
-    title: "Planning an event in Laconia?",
+    title: "Planning an event\nin Laconia?",
     leadStrong: "Photo booth, 360 video, an audio guestbook and a cocktail bar in a VW van.",
-    lead: "All from one team, for less than booking each one separately.",
+    lead: "All from one team.",
     servicesCta: "See the services",
-    area: "Weddings, christenings, parties and corporate events. Sparta, Laconia and all of the Peloponnese.",
+    servicesCtaShort: "The services",
   },
   sections: {
     services: { title: "Pick what you want at your event" },

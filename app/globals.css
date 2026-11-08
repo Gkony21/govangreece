@@ -172,144 +172,232 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   to { opacity: 1; transform: none; }
 }
 
-/* Hero (components/Hero.tsx): the text on the night sky, with photos printed like booth prints around it.
-   Phones: text from the top, one print beside the buttons, three more along the bottom edge of the screen.
-   Wide screens: text on the left, the four prints scattered on the right.
-   Placement uses `rotate` and `translate`, so the drop-in animation can use `transform` without undoing them. */
+/* Hero (components/Hero.tsx): the van at night behind a slanted neon line, with the text on the dark side of it.
+   Phones: the photo on top, cut along a gentle rising line; the title leans with the line, the lead half as much, and
+   the buttons are straight. Computers: the photo on the right, cut along a steep diagonal. */
 .hero {
+  --hero-lean: 5.665deg;
   min-height: calc(100svh - var(--header-h));
-  background:
-    radial-gradient(60% 45% at 85% 20%, rgb(169 139 255 / 0.22), transparent 70%),
-    radial-gradient(70% 50% at 10% 95%, rgb(213 140 255 / 0.14), transparent 70%),
-    var(--color-night);
+  background: #0e0820;
 }
 
-.hero-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) min(30vw, 9rem);
-  grid-template-rows: auto auto auto minmax(15rem, 1fr);
-  grid-template-areas: "title title" "lead lead" "cta print" "prints prints";
-  gap: 1.5rem 1rem;
-}
-
-/* On phones the prints are placed in the grid themselves: the box around them steps aside. */
-.hero-prints {
-  display: contents;
-}
-
-.hero-print {
+.hero-media {
   position: relative;
-  padding: 0.45rem 0.45rem 1.6rem;
-  border-radius: 2px;
-  background: #fbf8ff;
-  box-shadow: 0 18px 40px rgb(0 0 0 / 0.55), 0 0 40px rgb(169 139 255 / 0.18);
-  animation: print-drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  flex: none;
+  height: min(99.2vw, 62svh);
+  margin-bottom: -0.75rem;
 }
 
-@keyframes print-drop {
-  from { transform: translateY(-2.5rem) scale(1.04); opacity: 0; }
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 74.7%;
+  clip-path: polygon(0 0, 100% 0, 100% 87.2%, 0 96.8%);
 }
 
-.hero-print-360 {
-  grid-area: print;
-  align-self: center;
-  justify-self: end;
-  width: min(34vw, 10rem);
-  margin-right: -1.75rem;
-  rotate: 9deg;
+.hero-seam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.hero-print-friends,
-.hero-print-couple,
-.hero-print-van {
-  grid-area: prints;
-  align-self: end;
+.hero-seam line {
+  stroke: #fbf3ff;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px #e9d5ff) drop-shadow(0 0 14px #a98bff) drop-shadow(0 0 30px #a98bff);
 }
 
-.hero-print-friends {
-  justify-self: start;
-  width: min(44vw, 15rem);
-  margin: 0 0 -1rem -1.75rem;
-  rotate: -8deg;
+.hero-seam-computer {
+  display: none;
 }
 
-.hero-print-couple {
-  z-index: 1;
-  justify-self: center;
-  width: min(40vw, 14rem);
-  margin-bottom: 6rem;
-  rotate: 4deg;
+/* Two clinking glasses hanging from the string of lights. */
+.hero-toast {
+  --halo: 255 190 90;
+  position: absolute;
+  top: 17.2%;
+  left: 4.6%;
 }
 
-.hero-print-van {
+.hero-toast::before {
+  content: "";
+  position: absolute;
+  bottom: 92%;
+  left: calc(50% + 2px);
+  width: 1px;
+  height: 4.8vw;
+  background: rgb(241 236 255 / 0.32);
+}
+
+.hero-toast .neon-sign {
+  rotate: 5deg;
+}
+
+.hero-toast .neon-sign::before,
+.hero-toast .neon-sign::after,
+.hero-signs .neon-sign::before,
+.hero-signs .neon-sign::after {
+  display: none;
+}
+
+.hero-toast .neon-sign > svg {
+  height: min(14.93vw, 5.5rem);
+  stroke-width: 6;
+}
+
+.hero-text {
+  position: relative;
   z-index: 2;
-  justify-self: end;
-  width: min(40vw, 14rem);
-  margin: 0 -1.75rem 0.25rem 0;
-  rotate: -5deg;
+  margin-top: auto;
+  padding: 0 max(1rem, env(safe-area-inset-right, 0px)) 1.25rem max(1rem, env(safe-area-inset-left, 0px));
+}
+
+.hero-title {
+  margin-top: 0.75rem;
+  font-size: min(15.1vw, 5.5rem);
+  line-height: 0.95;
+  white-space: pre-line;
+  transform: skewY(calc(var(--hero-lean) * -1));
+  transform-origin: 0 100%;
+}
+
+:lang(en) .hero-title {
+  font-size: min(13vw, 5rem);
+}
+
+.hero-lead {
+  margin: 0.7rem 0 1rem;
+  color: #fff;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  transform: skewY(calc(var(--hero-lean) * -0.5));
+  transform-origin: 0 100%;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.1rem;
+}
+
+.btn-neon {
+  border: 2px solid #f6eaff;
+  background: rgb(14 8 32 / 0.55);
+  color: #fff;
+  box-shadow: 0 0 5px #fff, 0 0 14px #c9a8ff, 0 0 34px #a98bff, inset 0 0 14px rgb(169 139 255 / 0.6);
+  text-shadow: 0 0 10px #d9c2ff;
+}
+
+.btn-neon:hover {
+  background: rgb(70 42 130 / 0.6);
+  box-shadow: 0 0 7px #fff, 0 0 20px #d9c2ff, 0 0 48px #a98bff, inset 0 0 20px rgb(169 139 255 / 0.8);
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.hero-link > span {
+  padding-bottom: 3px;
+  border-bottom: 2px solid #d9c2ff;
+  box-shadow: 0 7px 10px -6px #a98bff;
+  text-shadow: 0 0 8px #c9a8ff;
+}
+
+.hero-signs {
+  display: none;
 }
 
 @media (min-width: 1024px) {
   .hero {
     min-height: min(calc(100svh - var(--header-h)), 860px);
+    background:
+      radial-gradient(60% 45% at 85% 20%, rgb(169 139 255 / 0.22), transparent 70%),
+      radial-gradient(70% 50% at 10% 95%, rgb(213 140 255 / 0.14), transparent 70%),
+      var(--color-night);
   }
 
-  /* The empty rows above and below the text take the spare height, so the text sits centred beside the prints. */
-  .hero-layout {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    grid-template-rows: 1fr auto auto auto 1fr;
-    grid-template-areas: ". prints" "title prints" "lead prints" "cta prints" ". prints";
-    gap: 1.5rem 2rem;
-  }
-
-  .hero-prints {
-    display: block;
-    position: relative;
-    grid-area: prints;
-    height: 40rem;
-  }
-
-  .hero-print {
+  .hero-media {
     position: absolute;
+    inset: 0;
+    height: auto;
     margin: 0;
-    padding: 0.6rem 0.6rem 2.2rem;
+    background: radial-gradient(38% 80% at 46% 55%, rgb(150 100 255 / 0.3), transparent 70%);
   }
 
-  .hero-print-360 { top: 2%; left: 0; width: 44%; rotate: -6deg; }
-  .hero-print-couple { top: 12%; right: 0; width: 48%; rotate: 7deg; }
-  .hero-print-friends { bottom: 6%; left: 3%; z-index: 1; width: 48%; rotate: 5deg; }
-  .hero-print-van { bottom: 1%; right: 3%; width: 44%; rotate: -4deg; }
-}
+  .hero-photo {
+    left: auto;
+    width: 58%;
+    object-position: 50% 72%;
+    clip-path: polygon(20.7% 0, 100% 0, 100% 100%, 0 100%);
+  }
 
-/* Mouse-shaped hint at the bottom of the hero that there is more below. */
-.scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 1.4rem;
-  width: 22px;
-  height: 36px;
-  margin-left: -11px;
-  border: 2px solid var(--color-haze);
-  border-radius: 12px;
-}
+  .hero-seam-phone,
+  .hero-toast {
+    display: none;
+  }
 
-.scroll-cue::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 6px;
-  width: 4px;
-  height: 8px;
-  margin-left: -2px;
-  border-radius: 2px;
-  background: var(--color-amber);
-  animation: scroll-cue 1.6s ease-in-out infinite;
-}
+  .hero-seam-computer {
+    display: block;
+  }
 
-@keyframes scroll-cue {
-  0% { transform: translateY(0); opacity: 1; }
-  70% { transform: translateY(12px); opacity: 0; }
-  100% { opacity: 0; }
+  .hero-text {
+    margin: 0;
+    padding: clamp(5.5rem, 15svh, 8.5rem) 0 3rem max(8.4vw, calc((100vw - 1180px) / 2 + 1rem));
+  }
+
+  .hero-title {
+    margin: 0;
+    font-size: min(6.78vw, 7rem);
+    transform: none;
+  }
+
+  :lang(en) .hero-title {
+    font-size: min(5.4vw, 5.6rem);
+  }
+
+  .hero-lead {
+    max-width: 34ch;
+    margin: 1.5rem 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    transform: none;
+  }
+
+  .hero-cta {
+    gap: 1.6rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .hero-signs {
+    --s: min(4.2rem, 4.6vw);
+    display: flex;
+    align-items: flex-end;
+    gap: min(1.5rem, 1.6vw);
+  }
+
+  .hero-signs .neon-sign > svg {
+    height: var(--s);
+  }
+
+  .hero-signs .neon-sign > img {
+    height: calc(var(--s) * 1.25);
+  }
 }
 
 /* Service names under the hero, looping. The track holds the list twice over, so moving it by half has no seam. */
@@ -918,8 +1006,6 @@ html:has(.lightbox[open]) {
 @media (prefers-reduced-motion: reduce) {
   .neon,
   .scroll-progress,
-  .hero-print,
-  .scroll-cue::after,
   .service-band-track,
   .breath-photo,
   .area-rings::before,

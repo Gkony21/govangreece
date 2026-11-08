@@ -55,7 +55,7 @@ export type Dictionary = {
     leadStrong: string;
     lead: string;
     servicesCta: string;
-    area: string;
+    servicesCtaShort: string;
   };
   sections: Record<SectionId, { title: string }>;
   services: {

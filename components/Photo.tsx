@@ -9,13 +9,14 @@ type Props = {
   // Rendered width, for the browser to pick a file from srcSet, e.g. "(min-width: 1024px) 33vw, 100vw".
   sizes: string;
   className?: string;
-  // Above the fold: load right away instead of lazily. Not "high" priority: the hero's largest element is its text,
-  // which waits for the fonts, so the photos should not crowd them out.
+  // Above the fold: load right away instead of lazily.
   priority?: boolean;
+  // The largest thing on the first screen: fetch it ahead of everything else.
+  high?: boolean;
 };
 
 // A photo from lib/media.ts in the right size for the screen. Width and height are set so the page doesn't jump.
-export default function Photo({ id, locale, sizes, className, priority = false }: Props) {
+export default function Photo({ id, locale, sizes, className, priority = false, high = false }: Props) {
   const photo = media[id];
   return (
     // eslint-disable-next-line @next/next/no-img-element -- static export: the files are already resized by scripts/media.mjs
@@ -27,6 +28,7 @@ export default function Photo({ id, locale, sizes, className, priority = false }
       height={photo.height}
       alt={photo.alt[locale]}
       loading={priority ? "eager" : "lazy"}
+      fetchPriority={high ? "high" : undefined}
       decoding="async"
       className={className}
     />
