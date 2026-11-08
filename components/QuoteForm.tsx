@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentProps, type FormEvent } from "react";
+import { flushSync } from "react-dom";
 import { eventTypes, serviceIds, type Dictionary } from "@/content/types";
+import { useCocktailNames } from "@/lib/cocktail-names";
 import { setPicked, togglePick, usePicked } from "@/lib/package";
 import { checkQuote, isoDay, quoteLimits, readQuote, type QuoteErrors, type QuoteResult } from "@/lib/quote";
 import { links, phoneFor } from "@/lib/site";
@@ -14,17 +16,19 @@ type Props = {
 type Form = Dictionary["contact"]["form"];
 
 // The fields that can be wrong, in the order they appear: the first wrong one gets the focus.
-const fields = ["name", "phone", "email", "date"] as const;
+const fields = ["name", "phone", "date", "email"] as const;
 type Errors = Partial<Record<(typeof fields)[number], string>>;
 
 const input =
-  "w-full min-h-13 rounded-xl border border-line bg-night px-4 py-3 text-ink transition-[border-color,box-shadow] placeholder:text-haze/60 hover:border-violet/60 focus-visible:border-violet focus-visible:shadow-[0_0_0_4px_rgb(169_139_255/0.2)] focus-visible:outline-none aria-[invalid=true]:border-error disabled:opacity-40";
+  "w-full min-h-12 rounded-xl border border-line bg-night px-3 py-2 text-ink sm:px-4 transition-[border-color,box-shadow] placeholder:text-haze/60 hover:border-violet/60 focus-visible:border-violet focus-visible:shadow-[0_0_0_4px_rgb(169_139_255/0.2)] focus-visible:outline-none aria-[invalid=true]:border-error disabled:opacity-40";
 
-const label = "font-display text-xl leading-none font-extrabold tracking-wide";
+const label = "font-display text-[1.15rem] leading-none font-extrabold tracking-wide";
+
+const legend = "font-display text-xl leading-none font-extrabold tracking-wide";
 
 // A choice drawn as a pill, its radio or checkbox hidden inside (relative, so focusing it never scrolls the page).
 const chip =
-  "group relative inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-line px-4 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide transition-colors hover:border-violet has-checked:border-violet has-checked:bg-violet has-checked:text-on-violet has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-amber";
+  "group relative inline-flex cursor-pointer items-center gap-1.5 min-h-10 rounded-full border border-line px-3.5 py-1.5 font-display text-[1.05rem] leading-none font-extrabold tracking-wide transition-colors hover:border-violet has-checked:border-violet has-checked:bg-violet has-checked:text-on-violet has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-amber";
 
 // What is wrong, in words. The checks are lib/quote.ts, the same the server runs, against the visitor's today.
 function check(data: FormData, messages: Form["errors"]): Errors {
@@ -53,13 +57,16 @@ async function send(data: FormData, human: HumanCheck): Promise<QuoteResult> {
   }
 }
 
-// The quote request. Light on purpose: the deal is closed on the phone, so only name, phone and date are needed.
+// The quote request. Light on purpose: the deal is closed on the phone, so only name, phone and date are needed, and
+// everything beyond the basics waits behind "Add details" (open without JavaScript, .quote-details in app/globals.css).
 // Mistakes show after the first try, under each field, and clear as they are fixed; the first one gets the focus.
-// The services are the package built with "I want it", both ways.
+// The services are the package built with "I want it", both ways. Names given to the cocktails go into the message.
 // It sends to /api/quote (functions/api/quote.ts), which emails the client. Turnstile loads as the form comes near.
 export default function QuoteForm({ dict }: Props) {
   const form = dict.contact.form;
   const picked = usePicked();
+  const cocktailNames = useCocktailNames();
+  const [details, setDetails] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [tried, setTried] = useState(false);
   const [noDate, setNoDate] = useState(false);
@@ -110,10 +117,18 @@ export default function QuoteForm({ dict }: Props) {
 
   // Focuses the first wrong field; true when there was one.
   function showFirst(found: Errors) {
+    // A wrong email can be behind "Add details": open them first, so it can take the focus.
+    if (found.email) flushSync(() => setDetails(true));
     const first = fields.find((field) => found[field]);
     if (first) document.getElementById(`quote-${first}`)?.focus();
     return first !== undefined;
   }
+
+  // The cocktails the visitor has named, in menu order.
+  const named = dict.cocktails.signatures.flatMap((signature) => {
+    const name = cocktailNames[signature.name]?.trim();
+    return name ? [{ cocktail: signature.name, name }] : [];
+  });
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -125,6 +140,12 @@ export default function QuoteForm({ dict }: Props) {
     if (showFirst(found)) {
       setStatus("idle");
       return;
+    }
+
+    // At the top of the message, as the server cuts anything past its limit from the end.
+    if (named.length > 0) {
+      const lines = named.map(({ cocktail, name }) => `${cocktail}: ${name}`).join("\n");
+      data.set("message", `${form.cocktailNames}:\n${lines}\n\n${data.get("message")}`.trim());
     }
 
     const turnstile = startHuman();
@@ -181,9 +202,8 @@ export default function QuoteForm({ dict }: Props) {
       aria-label={form.label}
       onSubmit={submit}
       onChange={recheck}
-      className="grid content-start gap-7 rounded-3xl border border-line bg-night-2 p-5 sm:p-8 lg:grid-cols-2 lg:gap-x-6 lg:p-10"
+      className="grid grid-cols-1 content-start gap-x-3 gap-y-4 rounded-3xl border border-line bg-night-2 p-5 min-[22.5rem]:grid-cols-2 sm:p-8 lg:gap-x-5 lg:gap-y-5 lg:p-9"
     >
-      <p className="text-step--1 text-haze lg:col-span-2">{form.requiredNote}</p>
       <input type="hidden" name="locale" value={dict.locale} />
 
       <TextField
@@ -206,18 +226,8 @@ export default function QuoteForm({ dict }: Props) {
         autoComplete="tel"
         maxLength={quoteLimits.phone}
       />
-      <TextField
-        id="quote-email"
-        name="email"
-        label={form.email}
-        error={errors.email}
-        type="email"
-        autoComplete="email"
-        spellCheck={false}
-        maxLength={quoteLimits.email}
-      />
 
-      <div className="grid content-start gap-2.5">
+      <div className="col-span-full grid content-start gap-2">
         <label htmlFor="quote-date" className={label}>
           {form.date}
           <Required />
@@ -246,9 +256,9 @@ export default function QuoteForm({ dict }: Props) {
         <FieldError id="quote-date-error" message={errors.date} />
       </div>
 
-      <fieldset className="lg:col-span-2">
-        <legend className={`${label} float-left mb-3.5 w-full`}>{form.event}</legend>
-        <div className="clear-left flex flex-wrap gap-2.5">
+      <fieldset className="col-span-full">
+        <legend className={`${legend} float-left mb-2.5 w-full`}>{form.event}</legend>
+        <div className="clear-left flex flex-wrap gap-2">
           {eventTypes.map((type) => (
             <label key={type} className={chip}>
               <input type="radio" name="event" value={type} className="sr-only" />
@@ -258,29 +268,9 @@ export default function QuoteForm({ dict }: Props) {
         </div>
       </fieldset>
 
-      <TextField
-        id="quote-place"
-        name="place"
-        label={form.place}
-        placeholder={form.placePlaceholder}
-        autoComplete="off"
-        maxLength={quoteLimits.place}
-      />
-      <TextField
-        id="quote-guests"
-        name="guests"
-        label={form.guests}
-        placeholder={form.guestsPlaceholder}
-        inputMode="numeric"
-        maxLength={quoteLimits.guests}
-      />
-
-      <fieldset aria-describedby="quote-services-hint" className="lg:col-span-2">
-        <legend className={`${label} float-left mb-2 w-full`}>{form.services}</legend>
-        <p id="quote-services-hint" className="clear-left mb-3.5 text-step--1 text-haze">
-          {form.servicesHint}
-        </p>
-        <div className="flex flex-wrap gap-2.5">
+      <fieldset className="col-span-full">
+        <legend className={`${legend} float-left mb-2.5 w-full`}>{form.services}</legend>
+        <div className="clear-left flex flex-wrap gap-2">
           {dict.services.items.map((service) => (
             <label key={service.id} className={chip}>
               <input
@@ -303,15 +293,58 @@ export default function QuoteForm({ dict }: Props) {
         </div>
       </fieldset>
 
-      <div className="grid content-start gap-2.5 lg:col-span-2">
-        <label htmlFor="quote-message" className={label}>
-          {form.message}
-        </label>
-        <textarea id="quote-message" name="message" rows={4} maxLength={quoteLimits.message} className={`${input} resize-y`} />
+      <button type="button" className="quote-more col-span-full" aria-expanded={details} aria-controls="quote-details" onClick={() => setDetails(!details)}>
+        <span aria-hidden="true" className="service-more-mark">
+          +
+        </span>
+        {form.more}
+      </button>
+
+      <div id="quote-details" className="quote-details col-span-full grid gap-x-5 gap-y-4 sm:grid-cols-2" data-open={details || undefined}>
+        <div className="sm:col-span-2">
+          <TextField
+            id="quote-email"
+            name="email"
+            label={form.email}
+            error={errors.email}
+            type="email"
+            autoComplete="email"
+            spellCheck={false}
+            maxLength={quoteLimits.email}
+          />
+        </div>
+        <TextField
+          id="quote-place"
+          name="place"
+          label={form.place}
+          placeholder={form.placePlaceholder}
+          autoComplete="off"
+          maxLength={quoteLimits.place}
+        />
+        <TextField
+          id="quote-guests"
+          name="guests"
+          label={form.guests}
+          placeholder={form.guestsPlaceholder}
+          inputMode="numeric"
+          maxLength={quoteLimits.guests}
+        />
+        <div className="grid content-start gap-2 sm:col-span-2">
+          <label htmlFor="quote-message" className={label}>
+            {form.message}
+          </label>
+          <textarea id="quote-message" name="message" rows={3} maxLength={quoteLimits.message} className={`${input} resize-y`} />
+        </div>
       </div>
 
+      {named.length > 0 && (
+        <p className="col-span-full text-[0.98rem] leading-snug text-[#ffd08a] [text-shadow:0_0_12px_rgb(255_195_92/0.6)]">
+          {form.cocktails.replace("{names}", named.map((cocktail) => cocktail.name).join(" & "))}
+        </p>
+      )}
+
       {/* No gap here: Turnstile's box takes no room until Cloudflare asks for a tick. */}
-      <div className="grid lg:col-span-2">
+      <div className="col-span-full grid">
         <div ref={humanBox} className={asked ? "mb-4" : undefined} />
         <p aria-live="polite" className="mb-4 text-error empty:hidden">
           {status === "failed" ? (
@@ -332,7 +365,7 @@ export default function QuoteForm({ dict }: Props) {
           <button
             type="submit"
             aria-disabled={sending || undefined}
-            className="justify-self-start rounded-full bg-violet px-7 py-4 font-display text-xl leading-none font-extrabold tracking-wide text-on-violet transition-shadow hover:shadow-[0_0_28px_2px_rgb(213_140_255/0.55)] aria-disabled:cursor-wait aria-disabled:opacity-70 aria-disabled:hover:shadow-none"
+            className="btn-neon justify-self-start rounded-full px-7 py-4 font-display text-xl leading-none font-extrabold tracking-wide transition-[background-color,box-shadow] aria-disabled:cursor-wait aria-disabled:opacity-70"
           >
             {sending ? form.sending : form.submit}
           </button>
@@ -383,7 +416,7 @@ type TextFieldProps = ComponentProps<"input"> & {
 
 function TextField({ id, label: text, error, required, ...props }: TextFieldProps) {
   return (
-    <div className="grid content-start gap-2.5">
+    <div className="grid content-start gap-2">
       <label htmlFor={id} className={label}>
         {text}
         {required && <Required />}

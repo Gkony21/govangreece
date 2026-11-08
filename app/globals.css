@@ -308,8 +308,10 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   text-shadow: none;
 }
 
-/* What a service includes: one tap away on phones, always on show on computers. Stays open if JavaScript never runs. */
-.service-more {
+/* What a service includes: one tap away on phones, always on show on computers. Stays open if JavaScript never runs.
+   The quote form's "Add details" is the same button, on every screen. */
+.service-more,
+.quote-more {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -329,11 +331,17 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   transition: rotate 0.2s;
 }
 
-.service-more[aria-expanded="true"] .service-more-mark {
+.service-more[aria-expanded="true"] .service-more-mark,
+.quote-more[aria-expanded="true"] .service-more-mark {
   rotate: 45deg;
 }
 
-html:not(.js) .service-more {
+html:not(.js) .service-more,
+html:not(.js) .quote-more {
+  display: none;
+}
+
+html.js .quote-details:not([data-open]) {
   display: none;
 }
 
