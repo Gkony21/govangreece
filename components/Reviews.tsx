@@ -7,10 +7,10 @@ type Props = {
   dict: Dictionary;
 };
 
-// A few real Google reviews, picked by hand, with the rating and a link to all of them on Google. They are short, so
-// they read like quotes, in the display font. The quote mark sits in the corner on phones, above the text on computers.
-// Phones: a small neon "5 ★" beside the title, the reviews one under the other.
-// Computers: the title and rating on the left, under a bigger neon "5 ★", the reviews in two columns on the right (the
+// A few real Google reviews, picked by hand, with the rating and a link to all of them on Google. Each one is a paper
+// note, a touch crooked (.review-note in globals.css): a change of texture in a page of neon.
+// Phones: a small neon "5 ★" beside the title, the notes one under the other.
+// Computers: the title and rating on the left, under a bigger neon "5 ★", the notes on the right, in two columns (the
 // first across both, when there is an odd number).
 export default function Reviews({ dict }: Props) {
   const { reviews } = dict;
@@ -32,29 +32,23 @@ export default function Reviews({ dict }: Props) {
             {dict.sections.reviews.title}
           </h2>
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-haze">
-            <Stars label={stars} />
+            <Stars label={stars} className="text-amber [text-shadow:0_0_10px_rgb(255_195_92/0.6)]" />
             {summary}
           </p>
           <GoogleLink label={reviews.all} className="hidden lg:inline-flex" />
         </div>
 
         <div className="grid content-start gap-6">
-          <ul data-reveal className="grid gap-3 lg:grid-cols-2 lg:gap-6">
+          <ul data-reveal className="grid gap-5.5 lg:grid-cols-2 lg:gap-7">
             {reviews.items.map((review) => (
               <li key={review.name} className="lg:[&:first-child:nth-last-child(odd)]:col-span-2">
-                <figure className="relative grid h-full content-start gap-3 overflow-hidden rounded-2xl border border-line bg-night-2 p-5 pr-14 lg:gap-5 lg:p-8">
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-7 right-4 font-display text-[4.5rem] leading-[0.5] text-amber [text-shadow:0_0_18px_rgb(255_195_92/0.5)] lg:static lg:pt-4 lg:text-[5.5rem]"
-                  >
-                    “
-                  </span>
-                  <blockquote lang={review.lang} className="font-display text-[1.45rem] leading-[1.12] font-extrabold lg:text-[1.85rem]">
+                <figure className="review-note grid h-full content-between gap-3.5 px-5.5 pt-6 pb-5">
+                  <blockquote lang={review.lang} className="font-display text-[1.65rem] leading-[1.1] font-extrabold">
                     {review.text}
                   </blockquote>
-                  <figcaption className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-step--1 text-haze">
-                    <Stars label={stars} />
+                  <figcaption className="flex items-center justify-between gap-3 text-[0.95rem] text-[#5b5167]">
                     {review.name}
+                    <Stars label={stars} className="text-[#c98a14]" />
                   </figcaption>
                 </figure>
               </li>
@@ -68,9 +62,9 @@ export default function Reviews({ dict }: Props) {
   );
 }
 
-function Stars({ label }: { label: string }) {
+function Stars({ label, className }: { label: string; className: string }) {
   return (
-    <span role="img" aria-label={label} className="tracking-[0.15em] text-amber [text-shadow:0_0_10px_rgb(255_195_92/0.6)]">
+    <span role="img" aria-label={label} className={`tracking-[0.15em] ${className}`}>
       ★★★★★
     </span>
   );

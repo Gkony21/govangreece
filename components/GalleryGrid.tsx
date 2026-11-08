@@ -6,6 +6,8 @@ import type { Dictionary } from "@/content/types";
 type Item = {
   // Landscape photo: two columns wide.
   wide: boolean;
+  // The big scene across the whole grid.
+  feature: boolean;
   // The thumbnail, rendered on the server.
   thumb: ReactNode;
   // The large version for the lightbox.
@@ -17,7 +19,7 @@ type Props = {
   labels: Dictionary["gallery"];
 };
 
-// Phones show this many photos until "See more": the full gallery is a long scroll on a narrow screen.
+// Phones show this many photos in the grid, to keep the page short. The lightbox still goes through all of them.
 const phoneFirst = 6;
 
 // The smallest finger movement, in px, that counts as a swipe.
@@ -29,7 +31,6 @@ const swipe = 50;
 export default function GalleryGrid({ items, labels }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
-  const [showAll, setShowAll] = useState(false);
   const start = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
 
@@ -71,7 +72,9 @@ export default function GalleryGrid({ items, labels }: Props) {
             key={item.full.src}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 0.07}s` }}
-            className={`relative overflow-hidden rounded-md bg-night-2 ${item.wide ? "col-span-2 aspect-[8/5] md:aspect-auto" : "aspect-[4/5]"} ${!showAll && i >= phoneFirst ? "max-md:hidden" : ""}`}
+            className={`relative overflow-hidden rounded-md bg-night-2 ${
+              item.feature ? "col-span-full aspect-[4/3] md:aspect-[21/9]" : item.wide ? "col-span-2 aspect-[8/5] md:aspect-auto" : "aspect-[4/5]"
+            } ${i >= phoneFirst ? "max-md:hidden" : ""}`}
           >
             <button
               type="button"
@@ -84,16 +87,6 @@ export default function GalleryGrid({ items, labels }: Props) {
           </li>
         ))}
       </ul>
-
-      {!showAll && (
-        <button
-          type="button"
-          onClick={() => setShowAll(true)}
-          className="mt-5 w-full rounded-full border border-line px-5 py-3 font-display text-lg leading-none font-extrabold tracking-wide hover:border-violet md:hidden"
-        >
-          {labels.more} <span className="text-haze">(+{items.length - phoneFirst})</span>
-        </button>
-      )}
 
       <dialog
         ref={dialog}

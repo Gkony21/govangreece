@@ -71,36 +71,29 @@ export const media = [
   // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
   // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
-    ["break-van-sunset", "P82", "IMG_2799.heic", [0.5, 0.49], { el: "Το GO! Van στο ηλιοβασίλεμα", en: "The GO! Van at sunset" }],
+    ["break-van-lit", "P74", "IMG_2411(1).HEIC", [0.5, 0.55], { el: "Το GO! Van αναμμένο με μωβ φώτα τη νύχτα", en: "The GO! Van lit up in purple at night" }, "pending"],
     ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Mirror Photo Booth on a red carpet at sunset" }],
     ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
-  ].flatMap(([id, ref, src, focus, alt]) => [
-    { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent: "none", alt },
+  ].flatMap(([id, ref, src, focus, alt, consent = "none"]) => [
+    { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent, alt },
     // The same photo cut tall for phones, where the breath covers most of the screen.
-    { id: `${id}-tall`, ref, src, kind: "photo", aspect: tall, focus, widths: [640, 1080], quality: 68, consent: "none",
+    { id: `${id}-tall`, ref, src, kind: "photo", aspect: tall, focus, widths: [640, 1080], quality: 68, consent,
       alt: { el: "", en: "" } }, // the computer entry's alt is used: the two are one picture
   ]),
 
-  // Gallery. The largest size is for the lightbox.
+  // Gallery: moments with people first (the site sells the night, not the equipment). The largest size is for the lightbox.
+  // The "frame-*" sources are single frames from the client's videos, kept in design/assets.
   ...[
-    ["gallery-360-terrace", "P03", "IMG_2246.HEIC", [0.5, 0.55], { el: "Η πλατφόρμα 360 σε ταράτσα κτήματος", en: "The 360 platform on a venue terrace" }],
-    ["gallery-360-night", "P12", "IMG_0211.HEIC", [0.5, 0.6], { el: "Η πλατφόρμα 360 σε κήπο τη νύχτα", en: "The 360 platform in a garden at night" }],
-    ["gallery-van-bar-red", "P22", "CD217B30-3E2B-44AE-BF05-BFFFC7C48A19.JPG", [0.5, 0.5], { el: "Η μπάρα του van με κόκκινα φώτα", en: "The van's bar in red light" }],
-    ["gallery-phone-stone", "P26", "IMG_9700.HEIC", [0.5, 0.5], { el: "Το τηλέφωνο ευχών σε πέτρινο χώρο", en: "The guestbook phone in a stone-walled room" }],
-    ["gallery-mirror-garden", "P30", "IMG_9867.HEIC", [0.5, 0.55], { el: "Το Mirror Photo Booth και props σε κήπο τη νύχτα", en: "The Mirror Photo Booth and props in a garden at night" }],
-    ["gallery-mirror-xmas", "P40", "CAE23400-BE20-4EA9-B1B2-BED35120FF13.JPG", [0.5, 0.55], { el: "Το Mirror Photo Booth δίπλα σε χριστουγεννιάτικο δέντρο", en: "The Mirror Photo Booth next to a Christmas tree" }],
-    ["gallery-360-props", "P42", "69D13F77-71F3-4C48-B8F7-9E3BF11A7A86.JPG", [0.5, 0.6], { el: "Η πλατφόρμα 360 με props τη νύχτα", en: "The 360 platform with props at night" }],
-    ["gallery-van-neon", "P59", "IMG_4291.HEIC", [0.5, 0.55], { el: "Το GO! Van με κόκκινα και μπλε φώτα", en: "The GO! Van in red and blue light" }],
-    ["gallery-props-neon", "P80", "IMG_0209.HEIC", [0.5, 0.6], { el: "Props και φωτεινή επιγραφή «Let's Party» τη νύχτα", en: "Props and a \"Let's Party\" neon sign at night" }],
-    ["gallery-phone-gold", "P71", "IMG_0550.JPG", [0.5, 0.55], { el: "Το τηλέφωνο ευχών με χρυσές λεπτομέρειες", en: "The guestbook phone with gold details" }],
-    ["gallery-phone-flowers", "P76", "IMG_2447.HEIC", [0.5, 0.6], { el: "Το τηλέφωνο ευχών ανάμεσα σε λουλούδια", en: "The guestbook phone among flowers" }],
-  ].map(([id, ref, src, focus, alt]) => ({ id, ref, src, kind: "photo", aspect: card, focus, widths: [400, 800, 1200], consent: "none", alt })),
+    ["gallery-moment-laugh", "V08", "frame-laugh.jpg", "../design/assets", [0.5, 0.39], "pending", { el: "Καλεσμένοι γελάνε με τα money guns δίπλα στον καθρέφτη", en: "Guests laughing with the money guns beside the mirror booth" }],
+    ["gallery-moment-green", "P84", "IMG_3493.HEIC", undefined, [0.5, 0.52], "pending", { el: "Ο barman σερβίρει καλεσμένο στο van με πράσινα φώτα", en: "The barman serving a guest at the van in green light" }],
+    ["gallery-moment-pour", "V24", "frame-pour.jpg", "../design/assets", [0.5, 0.43], "pending", { el: "Ο barman φτιάχνει κοκτέιλ κάτω από μωβ φως", en: "The barman mixing a cocktail under purple light" }],
+    ["gallery-moment-portable", "P31", "IMG_2081.HEIC", undefined, [0.5, 0.51], "pending", { el: "Το Portable Bar με τον barman και neon επιγραφή", en: "The Portable Bar with the barman and a neon sign" }],
+    ["gallery-moment-van-far", "P70", "IMG_2253.HEIC", undefined, [0.55, 0.5], "pending", { el: "Το van αναμμένο ανάμεσα στα τραπέζια τη νύχτα", en: "The van lit up among the tables at night" }, [[0.79, 0.7, 0.18, 0.07]], [0, 0.3, 1, 0.7]],
+    ["gallery-moment-call", "V12", "frame-call.jpg", "../design/assets", [0.5, 0.41], "pending", { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" }],
+  ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
 
-  { id: "gallery-van-dusk", ref: "P63", src: "IMG_2800.heic", kind: "photo", aspect: square, focus: [0.5, 0.35], widths: [400, 800, 1200], consent: "none",
-    // Square crop from the top keeps the number plate out of the frame.
-    alt: { el: "Το GO! Van στο σούρουπο με τα βουνά πίσω", en: "The GO! Van at dusk with the mountains behind" } },
-  { id: "gallery-mirror-stone", ref: "P77", src: "IMG_0556.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "none",
-    alt: { el: "Το Mirror Photo Booth μπροστά σε πέτρινο σπίτι", en: "The Mirror Photo Booth in front of a stone house" } },
+  { id: "gallery-moment-wedding", ref: "V32", src: "frame-wedding.jpg", dir: "../design/assets", kind: "photo", aspect: band, focus: [0.5, 0.7], widths: [600, 1080], consent: "none",
+    alt: { el: "Γάμος κάτω από τα φωτάκια το σούρουπο", en: "A wedding under string lights at dusk" } },
   { id: "gallery-van-crowd", ref: "P38", src: "IMG_3261.JPG", kind: "photo", aspect: band, focus: [0.5, 0.5], widths: [600, 1200, 1800], consent: "pending",
     alt: { el: "Καλεσμένοι γύρω από το van σε γλέντι", en: "Guests gathered around the van at a party" } },
 ];
