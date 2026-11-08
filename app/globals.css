@@ -400,6 +400,103 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   }
 }
 
+/* Opening of the hero: the site starts dark and the lights come on, for someone arriving from elsewhere (the "hero-intro"
+   class, set by jsFlagScript in lib/metadata.ts). The string of bulbs spreads from where it is tied, the van lights up
+   with a flicker, the neon line draws itself, and the title and the rest switch on. Everything else rests in its final
+   state, so without the class or with reduced motion the hero is simply there. */
+@property --hero-reach {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-intro .hero-photo {
+    animation: hero-van-on 0.8s 0.5s linear both;
+  }
+
+  .hero-intro .hero-media canvas {
+    -webkit-mask-image: radial-gradient(circle at 45.5% 15%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
+    mask-image: radial-gradient(circle at 45.5% 15%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
+    animation: hero-reach-phone 0.75s 0.12s steps(9, end) both;
+  }
+
+  .hero-intro .hero > canvas {
+    -webkit-mask-image: radial-gradient(circle at 53.4% 30%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
+    mask-image: radial-gradient(circle at 53.4% 30%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
+    animation: hero-reach-computer 0.75s 0.12s steps(14, end) both;
+  }
+
+  .hero-intro .hero-seam line {
+    transform-box: view-box;
+    transform-origin: 0% 97%;
+    animation: hero-seam-draw 0.45s 0.85s cubic-bezier(0.5, 0, 0.2, 1) both;
+  }
+
+  .hero-intro .hero-seam line.hero-seam-computer {
+    transform-origin: 54% 0%;
+  }
+
+  .hero-intro .hero-toast {
+    animation: hero-sign-on 0.8s 0.95s steps(1, end) both;
+  }
+
+  .hero-intro #hero-title {
+    animation: power-on 1.6s steps(1, end) 1.05s both;
+  }
+
+  .hero-intro .hero-lead {
+    animation: hero-rise 0.5s 1.35s ease both;
+  }
+
+  .hero-intro .hero-cta {
+    animation: hero-rise 0.5s 1.5s ease both;
+  }
+
+  .hero-intro .hero-signs > div {
+    animation: hero-sign-on 0.8s steps(1, end) both;
+  }
+
+  .hero-intro .hero-signs > div:nth-child(1) { animation-delay: 1.6s; }
+  .hero-intro .hero-signs > div:nth-child(2) { animation-delay: 1.72s; }
+  .hero-intro .hero-signs > div:nth-child(3) { animation-delay: 1.84s; }
+  .hero-intro .hero-signs > div:nth-child(4) { animation-delay: 1.96s; }
+}
+
+@keyframes hero-van-on {
+  0% { filter: brightness(0.06) saturate(0.3); }
+  18% { filter: brightness(0.62) saturate(0.8); }
+  26% { filter: brightness(0.16) saturate(0.4); }
+  44% { filter: brightness(0.92) saturate(1); }
+  52% { filter: brightness(0.5) saturate(0.8); }
+  100% { filter: none; }
+}
+
+@keyframes hero-reach-phone {
+  to { --hero-reach: 330px; }
+}
+
+@keyframes hero-reach-computer {
+  to { --hero-reach: 900px; }
+}
+
+@keyframes hero-seam-draw {
+  from { transform: scale(0); }
+}
+
+@keyframes hero-sign-on {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  18% { opacity: 0.2; }
+  30% { opacity: 1; }
+  36% { opacity: 0.4; }
+  50%, 100% { opacity: 1; }
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
 /* Service names under the hero, looping. The track holds the list twice over, so moving it by half has no seam. */
 .service-band-track {
   animation: marquee 32s linear infinite;
