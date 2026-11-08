@@ -835,207 +835,12 @@ html:has(.menu:popover-open) {
   pointer-events: none;
 }
 
-/* Phones: mostly the computer layout, stacked. The photo fills the top of the breath and dissolves into the night,
-   where the sign and the line stand; its own colour (--glow) lights the seam. --photo-h is the photo's height, --text-at
-   how far into it the line's block starts, --lift how much of its top is cut (Breath.tsx).
-   Where the line is at the top, it stands over the photo instead: the photo fills the breath under a band of night
-   that darkens its sky, like dusk falling, and the line reads over that. */
-@media (max-width: 1023px) {
-  .breath {
-    --photo-h: min(115vw, 32rem);
-    --text-at: 0.7;
-  }
-
-  .breath[data-phone-sign="wall"] {
-    --text-at: 0.93;
-  }
-
-  .breath-frame {
-    top: calc(var(--lift) * -1);
-    bottom: auto;
-    height: var(--photo-h);
-    mask-image: linear-gradient(180deg, #000 0 42%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.28) 80%, transparent);
-  }
-
-  .breath-text {
-    padding-block: calc(var(--photo-h) * var(--text-at) - var(--lift)) 2.75rem;
-  }
-
-  .breath::after {
-    background:
-      radial-gradient(70% calc(var(--photo-h) * 0.22) at 50% calc(var(--photo-h) * 0.77 - var(--lift)), rgb(var(--glow) / 0.2), transparent 70%),
-      linear-gradient(180deg, rgb(18 12 34 / 0.45), transparent calc(var(--photo-h) * 0.18));
-  }
-
-  /* Gold neon, so the link reads over any photo. */
-  .breath-link {
-    color: #ffd08a;
-    text-shadow: 0 0 12px rgb(255 195 92 / 0.75), 0 1px 10px rgb(0 0 0 / 0.8);
-  }
-
-  .breath[data-phone-text="top"] {
-    min-height: min(140vw, 40rem);
-    align-content: start;
-  }
-
-  .breath[data-phone-text="top"] .breath-frame {
-    inset: 3.5rem 0 0;
-    height: auto;
-    mask-image: linear-gradient(180deg, transparent, #000 5rem);
-  }
-
-  .breath[data-phone-text="top"] .breath-text {
-    padding-block: 2.25rem 0;
-  }
-
-  .breath[data-phone-text="top"]::after {
-    background:
-      linear-gradient(180deg, rgb(18 12 34 / 0.94), rgb(18 12 34 / 0.82) 22%, rgb(18 12 34 / 0.55) 42%, transparent 64%),
-      linear-gradient(0deg, rgb(18 12 34 / 0.45), transparent 16%);
-  }
-
-  /* The wires fade out over the photo instead of reaching its top. */
-  .breath .neon-sign::before,
-  .breath .neon-sign::after {
-    height: 14rem;
-  }
-
-  /* Sign beside the line, on the right: the line keeps the left column, the link runs under both. */
-  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] {
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 0.75rem;
-  }
-
-  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) .neon-sign {
-    grid-area: 1 / 2;
-  }
-
-  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > p {
-    grid-area: 1 / 1;
-  }
-
-  .breath:is([data-phone-sign="corner"], [data-phone-sign="wall"]) [data-reveal] > a {
-    grid-column: 1 / -1;
-  }
-
-  /* In the corner it hangs from the top of the breath, its wires all the way up, a little smaller to leave the line
-     its width. */
-  .breath[data-phone-sign="corner"] .neon-sign {
-    margin-top: 0.5rem;
-    rotate: 4deg;
-  }
-
-  .breath[data-phone-sign="corner"] .neon-sign::before,
-  .breath[data-phone-sign="corner"] .neon-sign::after {
-    height: 100vh;
-  }
-
-  .breath[data-phone-sign="corner"] .neon-sign > img {
-    height: 5.5rem;
-  }
-
-  /* On the wall it needs no wires, which would cross the photo's subject. */
-  .breath[data-phone-sign="wall"] .neon-sign {
-    align-self: center;
-    rotate: 6deg;
-  }
-
-  .breath[data-phone-sign="wall"] .neon-sign::before,
-  .breath[data-phone-sign="wall"] .neon-sign::after {
-    display: none;
-  }
-}
-
-/* Computers: the photo takes 61% of the width on one side. Towards the line it darkens and dissolves into the
-   night (a mask, so there is no edge), while its own colour (--glow, set per breath) spills across the seam and a
-   little violet lights the far side. Fine film grain over it all, so the dark side reads as a surface, not a void.
-   --toward points from the photo to the line. */
-@media (min-width: 1024px) {
-  .breath {
-    --toward: 270deg;
-    --seam: 42%;
-    --far: 14%;
-  }
-
-  .breath[data-side="left"] {
-    --toward: 90deg;
-    --seam: 58%;
-    --far: 86%;
-  }
-
-  /* no-repeat: with a fractional width the mask tile can fall a pixel short and repeat, drawing a hairline at the edge. */
-  .breath-photo {
-    mask-repeat: no-repeat;
-    mask-image: linear-gradient(
-      var(--toward),
-      #000 0 48%,
-      rgb(0 0 0 / 0.86) 60%,
-      rgb(0 0 0 / 0.55) 72%,
-      rgb(0 0 0 / 0.22) 85%,
-      transparent
-    );
-  }
-
-  .breath::after {
-    background:
-      radial-gradient(38% 62% at var(--seam) 56%, rgb(var(--glow) / 0.2), rgb(var(--glow) / 0) 70%),
-      radial-gradient(30% 45% at var(--far) 30%, rgb(169 139 255 / 0.1), transparent 70%),
-      linear-gradient(
-        var(--toward),
-        rgb(18 12 34 / 0) 23%,
-        rgb(18 12 34 / 0.35) 35%,
-        rgb(18 12 34 / 0.72) 48%,
-        rgb(18 12 34 / 0.92) 61%
-      ),
-      linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
-  }
-
-  /* Short fade (Breath.tsx): the photo slides 6% out past the screen edge and dissolves over its inner fifth or so,
-     with softer corners (the radial), so a subject at its inner edge stays lit. The dark side's shade moves with it. */
-  .breath[data-fade="short"] {
-    --core: 72%;
-  }
-
-  .breath[data-fade="short"][data-side="left"] {
-    --core: 28%;
-  }
-
-  .breath[data-fade="short"][data-side="right"] .breath-photo { right: -6%; }
-  .breath[data-fade="short"][data-side="left"] .breath-photo { left: -6%; }
-
-  .breath[data-fade="short"] .breath-photo {
-    mask-image:
-      linear-gradient(var(--toward), #000 0 70%, rgb(0 0 0 / 0.8) 82%, rgb(0 0 0 / 0.4) 92%, transparent),
-      radial-gradient(112% 62% at var(--core) 50%, #000 50%, rgb(0 0 0 / 0.55) 72%, transparent 96%);
-    mask-composite: intersect;
-  }
-
-  .breath[data-fade="short"]::after {
-    background:
-      radial-gradient(34% 60% at 50% 56%, rgb(var(--glow) / 0.2), rgb(var(--glow) / 0) 70%),
-      radial-gradient(30% 45% at var(--far) 30%, rgb(169 139 255 / 0.1), transparent 70%),
-      linear-gradient(var(--toward), rgb(18 12 34 / 0) 47%, rgb(18 12 34 / 0.35) 52%, rgb(18 12 34 / 0.8) 57%),
-      linear-gradient(180deg, rgb(18 12 34 / 0.55) 0%, rgb(18 12 34 / 0) 16%, rgb(18 12 34 / 0) 82%, rgb(18 12 34 / 0.7) 100%);
-  }
-
-  .breath::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.09;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-}
-
-/* A breath that ends in a neon cut, like the hero, instead of dissolving (Breath.tsx). The frame is clipped, not the
-   photo, so the cut stays put while the photo drifts through it. The clip-paths are one polygon: the bridges along the
-   edges between the photo and its sliver have no area. */
+/* The photo ends in a neon cut, like the hero (Breath.tsx). The frame is clipped, not the photo, so the cut stays put
+   while the photo drifts through it. The clip-paths are one polygon: the bridges along the edges between the photo and
+   its broken piece have no area. --photo-h is the photo's height on phones, --lift how much of its top is cut. */
 .breath-seam {
   position: absolute;
-  top: 0;
+  top: calc(var(--lift) * -1);
   left: 0;
   z-index: 1;
   width: 100%;
@@ -1061,51 +866,137 @@ html:has(.menu:popover-open) {
   display: none;
 }
 
+/* Phones and tablets: the photo at the top, the line below it, the sign beside the line. */
 @media (max-width: 1023px) {
-  .breath[data-cut] .breath-frame {
-    mask-image: none;
+  .breath {
+    --photo-h: min(115vw, 32rem);
   }
 
-  .breath[data-cut="shard"] .breath-frame {
+  /* A taller frame, so the cut falls under the van's wheels. */
+  .breath[data-cut="slab"] {
+    --photo-h: min(128vw, 36rem);
+  }
+
+  .breath-frame {
+    top: calc(var(--lift) * -1);
+    bottom: auto;
+    height: var(--photo-h);
     clip-path: polygon(0 0, 100% 0, 100% 88%, 0 78%, 0 0, 0 82%, 100% 92%, 100% 99%, 0 89%, 0 0);
   }
 
-  .breath[data-cut] .breath-text {
-    padding-block: calc(var(--photo-h) + 1.1rem) 2.75rem;
+  /* With the photo on the left on computers, the cut leans the other way here too. */
+  .breath[data-side="left"] .breath-frame {
+    clip-path: polygon(100% 0, 0 0, 0 88%, 100% 78%, 100% 0, 100% 82%, 0 92%, 0 99%, 100% 89%, 100% 0);
   }
 
-  .breath[data-cut]::after {
-    background: radial-gradient(80% 9rem at 50% calc(var(--photo-h) + 2rem), rgb(var(--glow) / 0.18), transparent 72%);
+  .breath[data-side="left"] .breath-seam {
+    scale: -1 1;
+  }
+
+  .breath-text {
+    padding-block: calc(var(--photo-h) - var(--lift) + 1.1rem) 2.75rem;
+  }
+
+  .breath::after {
+    background: radial-gradient(80% 9rem at 50% calc(var(--photo-h) - var(--lift) + 2rem), rgb(var(--glow) / 0.18), transparent 72%);
+  }
+
+  /* Gold neon, so the link stands out from the violet of the night. */
+  .breath-link {
+    color: #ffd08a;
+    text-shadow: 0 0 12px rgb(255 195 92 / 0.75), 0 1px 10px rgb(0 0 0 / 0.8);
+  }
+
+  .breath [data-reveal] {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.75rem;
+  }
+
+  .breath [data-reveal] > p {
+    grid-area: 1 / 1;
+  }
+
+  .breath [data-reveal] > a {
+    grid-column: 1 / -1;
+  }
+
+  .breath .neon-sign {
+    grid-area: 1 / 2;
+    align-self: center;
+    rotate: 6deg;
+  }
+
+  .breath .neon-sign::before,
+  .breath .neon-sign::after {
+    display: none;
   }
 }
 
-/* Computers. The photo is wider than in the other breaths, so its lit part falls under the sliver. --cut-shift moves the
-   cut right on wide screens, where the centred line reaches further across. */
+/* Computers: the photo on one side, the line on the other. --cut-shift moves the cut on wide screens, where the centred
+   line reaches further across. Fine film grain over it all, so the dark side reads as a surface, not a void. */
 @media (min-width: 1024px) {
-  .breath[data-cut] {
+  .breath {
     --cut-shift: min(max(0px, (100vw - 1300px) * 0.2533), 245px);
   }
 
-  .breath[data-cut] .breath-photo {
-    width: 76%;
-    mask-image: none;
-    object-position: 50% 55%;
+  .breath[data-side="left"] {
+    --cut-shift: max(min(0px, (100vw - 1440px) * -0.24), -160px);
   }
 
-  .breath[data-cut="shard"] .breath-frame {
+  .breath-photo {
+    width: var(--photo-w);
+    object-position: var(--focus);
+  }
+
+  /* The photo follows the cut on wide screens, so the logo stays inside the broken piece. */
+  .breath[data-cut="slab"] .breath-photo {
+    right: calc(-2% - var(--cut-shift));
+  }
+
+  .breath-frame {
     --main-top: calc(55% + var(--cut-shift));
     --main-bottom: calc(42% + var(--cut-shift));
-    --sliver-top: calc(51.5% + var(--cut-shift));
-    --sliver-bottom: calc(38.5% + var(--cut-shift));
-    --sliver-far-top: calc(47% + var(--cut-shift));
-    --sliver-far-bottom: calc(34% + var(--cut-shift));
+    --piece-top: calc(51.5% + var(--cut-shift));
+    --piece-bottom: calc(38.5% + var(--cut-shift));
+    --piece-far-top: calc(47% + var(--cut-shift));
+    --piece-far-bottom: calc(34% + var(--cut-shift));
+    --photo-edge: 100%;
     clip-path: polygon(
-      var(--main-top) 0, 100% 0, 100% 100%, var(--main-bottom) 100%, var(--main-top) 0,
-      var(--sliver-top) 0, var(--sliver-bottom) 100%, var(--sliver-far-bottom) 100%, var(--sliver-far-top) 0, var(--main-top) 0
+      var(--main-top) 0, var(--photo-edge) 0, var(--photo-edge) 100%, var(--main-bottom) 100%, var(--main-top) 0,
+      var(--piece-top) 0, var(--piece-bottom) 100%, var(--piece-far-bottom) 100%, var(--piece-far-top) 0, var(--main-top) 0
     );
   }
 
+  .breath[data-cut="slab"] .breath-frame {
+    --main-top: calc(77% + var(--cut-shift));
+    --main-bottom: calc(64% + var(--cut-shift));
+    --piece-top: calc(74% + var(--cut-shift));
+    --piece-bottom: calc(61% + var(--cut-shift));
+    --piece-far-top: calc(49% + var(--cut-shift));
+    --piece-far-bottom: calc(36% + var(--cut-shift));
+  }
+
+  .breath[data-cut="sliver-left"] .breath-frame {
+    --main-top: calc(52% + var(--cut-shift));
+    --main-bottom: calc(39% + var(--cut-shift));
+    --piece-top: calc(55.5% + var(--cut-shift));
+    --piece-bottom: calc(42.5% + var(--cut-shift));
+    --piece-far-top: calc(60% + var(--cut-shift));
+    --piece-far-bottom: calc(47% + var(--cut-shift));
+    --photo-edge: 0%;
+  }
+
+  /* The photo on the left: the line against the right, the sign at its far end, clear of the cut. */
+  .breath[data-side="left"] [data-reveal] {
+    width: fit-content;
+  }
+
+  .breath[data-side="left"] .neon-sign {
+    justify-self: end;
+  }
+
   .breath-seam {
+    top: 0;
     height: 100%;
     translate: var(--cut-shift) 0;
   }
@@ -1118,15 +1009,45 @@ html:has(.menu:popover-open) {
     display: inline;
   }
 
-  .breath[data-cut="shard"] .breath-lights {
+  /* The lights' box ends at the cut. */
+  .breath-lights {
+    left: 0;
     width: calc(46.9% + var(--cut-shift));
   }
 
-  .breath[data-cut]::after {
+  .breath[data-cut="slab"] .breath-lights {
+    width: calc(48.9% + var(--cut-shift));
+  }
+
+  .breath[data-cut="sliver-left"] .breath-lights {
+    right: 0;
+    left: auto;
+    width: calc(39.9% - var(--cut-shift));
+  }
+
+  .breath::after {
     background:
       radial-gradient(30% 75% at 40% 55%, rgb(var(--glow) / 0.17), transparent 70%),
       radial-gradient(30% 45% at 14% 30%, rgb(169 139 255 / 0.1), transparent 70%);
   }
+
+  .breath[data-side="left"]::after {
+    background:
+      radial-gradient(30% 75% at 56% 55%, rgb(var(--glow) / 0.17), transparent 70%),
+      radial-gradient(30% 45% at 86% 30%, rgb(169 139 255 / 0.1), transparent 70%);
+  }
+
+  .breath::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
 }
 
 /* The last words of a line (breaths, about), lit like the neon signs, in the --halo set around them. */
