@@ -24,7 +24,7 @@ export default function SiteHeader({ dict, homeHref, sectionBase = "", switchHre
       <div className="wrap flex h-(--header-h) items-center gap-3">
         <a href={homeHref} aria-label={header.homeLabel} className="shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized */}
-          <img src="/logo-112.webp" alt="" width={56} height={56} className="size-14" />
+          <img src="/logo-136.webp" alt="" width={68} height={68} className="size-17" />
         </a>
 
         <nav aria-label={header.navLabel} className="ml-auto hidden gap-7 text-haze lg:flex">

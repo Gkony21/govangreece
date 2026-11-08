@@ -8,7 +8,7 @@ type Bulb = Point & { r: number; phase: number; speed: number };
 // A string of lights: its height at the start (and at the end, y1, if different), how far it sags in the middle and
 // the bulb radius, in px. from and to: the part of the box's width it spans, 0 to 1; past 0 or 1 it runs off the edge.
 // bulbs: how many, instead of one every `spacing` px. vary: bulbs of uneven size. wave: [cycles, height in px] of a
-// slack ripple along the string.
+// slack ripple along the string. skipEnd: how many of the last bulbs on show to leave out, so the bare wire ends the string.
 type Strand = {
   y: number;
   y1?: number;
@@ -19,6 +19,7 @@ type Strand = {
   bulbs?: number;
   vary?: boolean;
   wave?: [number, number];
+  skipEnd?: number;
 };
 
 // The same uneven sizes on every load and resize.
@@ -99,7 +100,7 @@ export default function FairyLights({
           r: s.vary ? s.r * uneven(i + strand * 9) : s.r,
           phase: Math.random() * Math.PI * 2,
           speed: 0.6 + Math.random() * 1.2,
-        })).filter((b) => b.x >= b.r * 3 && b.x <= w - b.r * 3 && b.y >= b.r * 3);
+        })).filter((b) => b.x >= b.r * 3 && b.x <= w - b.r * 3 && b.y >= b.r * 3).slice(0, s.skipEnd ? -s.skipEnd : undefined);
       });
       if (still) draw(0);
     }

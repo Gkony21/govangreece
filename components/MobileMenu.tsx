@@ -58,7 +58,7 @@ export default function MobileMenu({ dict, homeHref, sectionBase = "", switchHre
         <div className="menu-bar wrap">
           <a href={homeHref} aria-label={header.homeLabel} className="shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized */}
-            <img src="/logo-112.webp" alt="" width={56} height={56} className="size-14" />
+            <img src="/logo-136.webp" alt="" width={68} height={68} className="size-17" />
           </a>
           <button
             type="button"

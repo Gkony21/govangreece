@@ -168,7 +168,7 @@ export const en = {
     text: "Mostly weddings and christenings, but also shop openings, corporate events and parties. We arrive early, set up, and make sure everyone has a great time until we pack up.",
     areaTitle: "Where we go",
     home: "Sparta",
-    areas: ["All of Laconia", "Kalamata, Tripoli, the Peloponnese", "Athens and further"],
+    areas: ["All of Laconia", "The Peloponnese", "Athens and further"],
     areaNote: "Outside the Peloponnese, by arrangement.",
   },
   faq: {
