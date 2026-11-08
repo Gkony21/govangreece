@@ -82,9 +82,11 @@ export type Dictionary = {
     pick: string;
   };
   why: {
+    // The big claim; neon: its last words, lit.
     lead: string;
-    // Big numbers beside the points: 5 services, 1 team, 1 quote.
-    stats: { value: string; label: string }[];
+    neon: string;
+    // The last line of the receipt, in place of an amount.
+    total: string;
     points: { title: string; text: string }[];
   };
   // Lines over the full-width photos between sections. The neon words end the line and glow on computers;

@@ -122,15 +122,11 @@ export const en = {
     pick: "I want cocktails at my event",
   },
   why: {
-    lead: "We're the only team in Laconia that does it all.",
-    stats: [
-      { value: "5", label: "services" },
-      { value: "1", label: "team" },
-      { value: "1", label: "quote" },
-    ],
+    lead: "We're the only team in Laconia that does",
+    neon: "it all.",
+    total: "1 team, 1 quote, a better price",
     points: [
       { title: "One call for everything", text: "Booths, wishes and drinks: one conversation, one quote." },
-      { title: "A better price together", text: "The more you book together, the less you pay than booking each one separately." },
       { title: "Someone at the booth", text: "A professional attendant the whole time, so you don't have to lift a finger." },
       { title: "Everything in 1–2 days", text: "Photos, videos and messages wait for you in the cloud shortly after the event." },
     ],

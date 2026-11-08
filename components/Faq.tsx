@@ -10,10 +10,10 @@ type Props = {
 
 // Frequently asked questions, as native <details>: they open without JavaScript, and smoothly where the browser can
 // animate them (CSS in globals.css). Under them, a way to just call us.
-// Phones: a small neon "?" beside the title, then every question, one topic after the other.
-// Computers: the title under a bigger neon "?" on the left, and under it the topics, as pills; the questions of the
-// picked topic on the right, the call buttons below them. The pills are radio buttons and globals.css shows the picked
-// topic with :has(), so it takes no JavaScript (without :has(), every topic shows).
+// One topic at a time, picked from pills. The pills are radio buttons and globals.css shows the picked topic with :has(),
+// so it takes no JavaScript (without :has(), every topic shows).
+// Phones: a small neon "?" beside the title, the pills, then the questions.
+// Computers: the title under a bigger neon "?" and the pills on the left, the questions and the call buttons on the right.
 export default function Faq({ dict }: Props) {
   const { faq } = dict;
   const [before, after = ""] = faq.moreText.split("{phone}");
@@ -33,12 +33,12 @@ export default function Faq({ dict }: Props) {
           </h2>
         </div>
 
-        <fieldset data-reveal className="hidden content-start gap-3 lg:col-start-1 lg:row-start-2 lg:grid lg:max-w-[24rem]">
+        <fieldset data-reveal className="flex flex-wrap content-start gap-2 lg:col-start-1 lg:row-start-2 lg:grid lg:max-w-[24rem] lg:gap-3">
           <legend className="sr-only">{faq.groupsLabel}</legend>
           {faq.groups.map((group, i) => (
             <label
               key={group.title}
-              className="faq-pick relative flex cursor-pointer items-center justify-between gap-4 rounded-full border border-line px-6 py-3.5 font-display text-[1.45rem] leading-none font-extrabold text-haze transition-[color,border-color,box-shadow] duration-300 hover:text-ink"
+              className="faq-pick relative flex min-h-11 cursor-pointer items-center justify-between gap-2 rounded-full border border-line px-4 py-2 font-display text-[1.2rem] leading-none font-extrabold text-haze transition-[color,border-color,box-shadow] duration-300 hover:text-ink lg:gap-4 lg:px-6 lg:py-3.5 lg:text-[1.45rem]"
             >
               <input type="radio" name="faq-group" value={i} defaultChecked={i === 0} className="sr-only" />
               {group.title}
