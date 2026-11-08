@@ -349,6 +349,19 @@ html:not(.js) .service-more {
   }
 }
 
+/* The receipt in Why GO! Van: paper in the night, a touch crooked, with a torn zigzag bottom edge. */
+.why-receipt {
+  --tooth: 10px;
+  width: min(100%, 24rem);
+  padding: 1.6rem 1.5rem 2.2rem;
+  background: #f6efe2;
+  color: #1a1326;
+  rotate: -2deg;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--tooth)) 51% repeat-x,
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
+}
+
 .hero-link {
   display: inline-flex;
   align-items: center;
@@ -1238,6 +1251,21 @@ html:has(.menu:popover-open) {
   aspect-ratio: 1;
 }
 
+/* Phones and tablets: smaller, so one sentence of information doesn't take a whole screen. */
+@media (max-width: 63.999rem) {
+  .area-rings {
+    width: min(100%, 16.25rem);
+  }
+
+  .area-rings .area-ring > span {
+    font-size: 0.82rem;
+  }
+
+  .area-rings .area-home > span {
+    font-size: 0.95rem;
+  }
+}
+
 .area-rings > li,
 .area-rings::before {
   grid-area: 1 / 1;
@@ -1362,20 +1390,18 @@ html:has(.menu:popover-open) {
   outline-offset: 3px;
 }
 
-@media (min-width: 1024px) {
-  #faq:has([name="faq-group"]:checked) .faq-group {
-    display: none;
-  }
-
-  #faq:has([name="faq-group"][value="0"]:checked) .faq-group[data-group="0"],
-  #faq:has([name="faq-group"][value="1"]:checked) .faq-group[data-group="1"],
-  #faq:has([name="faq-group"][value="2"]:checked) .faq-group[data-group="2"],
-  #faq:has([name="faq-group"][value="3"]:checked) .faq-group[data-group="3"] {
-    display: block;
-  }
+#faq:has([name="faq-group"]:checked) .faq-group {
+  display: none;
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+#faq:has([name="faq-group"][value="0"]:checked) .faq-group[data-group="0"],
+#faq:has([name="faq-group"][value="1"]:checked) .faq-group[data-group="1"],
+#faq:has([name="faq-group"][value="2"]:checked) .faq-group[data-group="2"],
+#faq:has([name="faq-group"][value="3"]:checked) .faq-group[data-group="3"] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
   .faq-group {
     animation: faq-in 0.4s ease-out;
   }
