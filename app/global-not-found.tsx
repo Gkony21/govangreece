@@ -24,7 +24,7 @@ export default function GlobalNotFound() {
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- a full load, as everywhere on this static site */}
             <a href="/" aria-label={`${site.name}, αρχική σελίδα`}>
               {/* eslint-disable-next-line @next/next/no-img-element -- static export, the image is already optimized */}
-              <img src="/logo-112.webp" alt="" width={72} height={72} className="size-18" />
+              <img src="/logo-136.webp" alt="" width={72} height={72} className="size-18" />
             </a>
             <p aria-hidden="true" className="sign-404 font-display text-[clamp(7rem,32vw,14rem)] leading-[0.85] font-black">
               4<span className="sign-404-out">0</span>4

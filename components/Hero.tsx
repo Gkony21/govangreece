@@ -12,11 +12,11 @@ type Props = {
 // Phones: two strings tied on the corner of the van's raised hatch, slack, running off each side of the photo.
 const phoneStrands = [
   { from: 0.455, to: -0.05, y: 57, y1: 9, sag: 26, r: 3, bulbs: 6, vary: true },
-  { from: 0.455, to: 1.05, y: 57, y1: 19, sag: 40, r: 3, bulbs: 7, vary: true, wave: [1, 4] as [number, number] },
+  { from: 0.455, to: 1.05, y: 57, y1: 19, sag: 40, r: 3, bulbs: 7, vary: true, wave: [1, 4] as [number, number], skipEnd: 1 },
 ];
 
 // Computers: one string across the dark side, tied to the neon line.
-const computerStrands = [{ from: -0.02, to: 0.534, y: 25, y1: 41, sag: 22, r: 3 }];
+const computerStrands = [{ from: -0.02, to: 0.534, y: 25, y1: 41, sag: 22, r: 3, skipEnd: 1 }];
 
 // The row of little signs under the buttons, on computers.
 const signs: { kind: NeonSignKind; halo: string }[] = [
