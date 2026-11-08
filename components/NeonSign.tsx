@@ -1,4 +1,4 @@
-export type NeonSignKind = "logo" | "cocktail" | "heart" | "rating" | "question" | "phone";
+export type NeonSignKind = "logo" | "cocktail" | "heart" | "rating" | "question" | "phone" | "toast";
 
 // The tubes of the drawn signs, one path each.
 const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: string[] }> = {
@@ -21,6 +21,22 @@ const tubes: Record<Exclude<NeonSignKind, "logo">, { viewBox: string; paths: str
       "M100 172 C54 140 22 110 22 76 C22 50 42 30 66 30 C82 30 94 40 100 54 C106 40 118 30 134 30 C158 30 178 50 178 76 C178 110 146 140 100 172 Z",
       "M184 10 V34 M172 22 H196",
       "M196 50 V58 M192 54 H200",
+    ],
+  },
+  // Two champagne flutes clinking, with a sparkle over them.
+  toast: {
+    viewBox: "0 0 200 210",
+    paths: [
+      "M44.7 38.7 L87.3 49.3 L66.5 108 Q57.3 128.4 45.2 127.4 Q34 122.6 35.5 100.3 Z",
+      "M40.3 68.5 L77.2 77.7",
+      "M45.2 127.4 L30.7 185.7",
+      "M8.4 184.2 Q32.1 179.8 51.1 194.9",
+      "M112.7 49.3 L155.3 38.7 L164.5 100.3 Q166 122.6 154.8 127.4 Q142.7 128.4 133.5 108 Z",
+      "M122.8 77.7 L159.7 68.5",
+      "M154.8 127.4 L169.3 185.7",
+      "M148.9 194.9 Q167.9 179.8 191.6 184.2",
+      "M100 4 V26 M89 15 H111",
+      "M72 16 L78 28 M128 16 L122 28",
     ],
   },
   // "5" and a star, over the Google reviews. Drawn, not text: if the rating ever drops below 5, redraw or swap it.

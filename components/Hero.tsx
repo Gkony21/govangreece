@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import FairyLights from "@/components/FairyLights";
+import NeonSign, { type NeonSignKind } from "@/components/NeonSign";
 import Photo from "@/components/Photo";
 import type { Dictionary } from "@/content/types";
 
@@ -7,61 +9,68 @@ type Props = {
   dict: Dictionary;
 };
 
-// Photos printed like booth prints, scattered around the text (positions in app/globals.css, .hero-print-*).
-// The client's photos are all portrait: as prints they show whole, where a full-screen background cropped them.
-const prints = [
-  { id: "hero-360", shape: "aspect-[3/4]", priority: true },
-  { id: "hero-couple", shape: "aspect-[3/2]", caption: true },
-  { id: "hero-friends", shape: "aspect-[3/2]" },
-  { id: "hero-van", shape: "aspect-[3/4]", priority: true },
-] as const;
+// Phones: two strings tied on the corner of the van's raised hatch, slack, running off each side of the photo.
+const phoneStrands = [
+  { from: 0.455, to: -0.05, y: 57, y1: 9, sag: 26, r: 3, bulbs: 6, vary: true },
+  { from: 0.455, to: 1.05, y: 57, y1: 19, sag: 40, r: 3, bulbs: 7, vary: true, wave: [1, 4] as [number, number] },
+];
+
+// Computers: one string across the dark side, tied to the neon line.
+const computerStrands = [{ from: -0.02, to: 0.534, y: 25, y1: 41, sag: 22, r: 3 }];
+
+// The row of little signs under the buttons, on computers.
+const signs: { kind: NeonSignKind; halo: string }[] = [
+  { kind: "cocktail", halo: "255 110 210" },
+  { kind: "heart", halo: "255 120 160" },
+  { kind: "logo", halo: "213 140 255" },
+  { kind: "rating", halo: "255 190 90" },
+];
 
 export default function Hero({ dict }: Props) {
   const { hero } = dict;
 
   return (
     <section aria-labelledby="hero-title" className="hero relative isolate flex flex-col overflow-hidden border-b border-line">
-      <FairyLights />
-
-      <div className="hero-layout wrap relative flex-1 pt-8 lg:py-12">
-        <h1 id="hero-title" className="neon [grid-area:title] max-w-[12ch] font-display text-step-4 leading-[0.92] font-black text-balance">
-          {hero.title}
-        </h1>
-        <p className="[grid-area:lead] max-w-[34ch] text-step-1 text-haze">
-          <strong className="font-normal text-ink">{hero.leadStrong}</strong> {hero.lead}
-        </p>
-
-        <div className="[grid-area:cta] grid content-start gap-6">
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href="#contact">{dict.quoteCta}</ButtonLink>
-            <ButtonLink href="#services" variant="ghost" className="bg-night/40 backdrop-blur-sm">
-              {hero.servicesCta}
-            </ButtonLink>
-          </div>
-          <p className="text-step--1 text-haze">{hero.area}</p>
-        </div>
-
-        <div className="hero-prints">
-          {prints.map((print, i) => (
-            <figure key={print.id} className={`hero-print hero-print-${print.id.slice(5)}`} style={{ animationDelay: `${0.3 + i * 0.15}s` }}>
-              <Photo
-                id={print.id}
-                locale={dict.locale}
-                sizes="(min-width: 1024px) 260px, 40vw"
-                priority={"priority" in print}
-                className={`${print.shape} w-full rounded-[1px] object-cover`}
-              />
-              {"caption" in print && (
-                <figcaption lang="en" className="absolute inset-x-0 bottom-1.5 text-center font-display text-xs font-extrabold tracking-wide text-on-violet/70 lg:bottom-2.5 lg:text-sm">
-                  drinks &amp; smiles
-                </figcaption>
-              )}
-            </figure>
-          ))}
+      <div className="hero-media">
+        <Photo id="hero-van" locale={dict.locale} sizes="(min-width: 1024px) 58vw, 100vw" priority high className="hero-photo" />
+        <svg className="hero-seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line className="hero-seam-phone" x1="-2" y1="97" x2="102" y2="87" />
+          <line className="hero-seam-computer" x1="54" y1="0" x2="42" y2="100" />
+        </svg>
+        <FairyLights strands={phoneStrands} wire wireOpacity={0.32} designWidth={375} className="absolute inset-0 h-full w-full lg:hidden" />
+        <div className="hero-toast">
+          <NeonSign kind="toast" />
         </div>
       </div>
 
-      <span className="scroll-cue hidden lg:block" aria-hidden="true" />
+      <FairyLights strands={computerStrands} spacing={47} wire wireOpacity={0.32} className="absolute inset-x-0 top-0 z-[1] hidden h-32 w-full lg:block" />
+
+      <div className="hero-text">
+        <h1 id="hero-title" className="hero-title neon font-display font-black">
+          {hero.title}
+        </h1>
+        <p className="hero-lead">
+          {hero.leadStrong} <span className="text-haze">{hero.lead}</span>
+        </p>
+
+        <div className="hero-cta">
+          <ButtonLink href="#contact" variant="neon">
+            {dict.quoteCta}
+          </ButtonLink>
+          <a href="#services" className="hero-link">
+            <span className="xl:hidden">{hero.servicesCtaShort}</span>
+            <span className="hidden xl:inline">{hero.servicesCta}</span>
+          </a>
+        </div>
+
+        <div className="hero-signs">
+          {signs.map(({ kind, halo }) => (
+            <div key={kind} style={{ "--halo": halo } as CSSProperties}>
+              <NeonSign kind={kind} />
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

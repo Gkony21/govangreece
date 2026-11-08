@@ -7,7 +7,25 @@ type Bulb = Point & { r: number; phase: number; speed: number };
 
 // A string of lights: its height at the start (and at the end, y1, if different), how far it sags in the middle and
 // the bulb radius, in px. from and to: the part of the box's width it spans, 0 to 1; past 0 or 1 it runs off the edge.
-type Strand = { y: number; y1?: number; sag: number; r: number; from?: number; to?: number };
+// bulbs: how many, instead of one every `spacing` px. vary: bulbs of uneven size. wave: [cycles, height in px] of a
+// slack ripple along the string.
+type Strand = {
+  y: number;
+  y1?: number;
+  sag: number;
+  r: number;
+  from?: number;
+  to?: number;
+  bulbs?: number;
+  vary?: boolean;
+  wave?: [number, number];
+};
+
+// The same uneven sizes on every load and resize.
+const uneven = (i: number) => {
+  const v = Math.sin(i * 127.1 + 11.7) * 43758.5453;
+  return 0.7 + 0.8 * (v - Math.floor(v));
+};
 
 // The hero's two strings.
 const heroStrands: Strand[] = [
@@ -21,6 +39,9 @@ type Props = {
   spacing?: number;
   // Draw the wire between the bulbs.
   wire?: boolean;
+  wireOpacity?: number;
+  // The strands' heights are for a box this wide, in px, and scale with the real one. Without it they stay as they are.
+  designWidth?: number;
   // Position and size of the canvas.
   className?: string;
 };
@@ -32,6 +53,8 @@ export default function FairyLights({
   strands = heroStrands,
   spacing = 55,
   wire = false,
+  wireOpacity = 0.16,
+  designWidth,
   className = "absolute inset-x-0 top-0 h-48 w-full",
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -57,21 +80,23 @@ export default function FairyLights({
       canvas!.height = h * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      const scale = designWidth ? w / designWidth : 1;
       const along = (s: Strand, t: number): Point => {
         const from = s.from ?? 0;
         const to = s.to ?? 1;
+        const [cycles, ripple] = s.wave ?? [0, 0];
         return {
           x: (from + (to - from) * t) * w,
-          y: s.y + ((s.y1 ?? s.y) - s.y) * t + Math.sin(Math.PI * t) * s.sag,
+          y: scale * (s.y + ((s.y1 ?? s.y) - s.y) * t + Math.sin(Math.PI * t) * s.sag + Math.sin(t * Math.PI * 2 * cycles) * ripple),
         };
       };
 
       wires = wire ? strands.map((s) => Array.from({ length: 49 }, (_, i) => along(s, i / 48))) : [];
-      bulbs = strands.flatMap((s) => {
-        const n = Math.max(6, Math.round((w * ((s.to ?? 1) - (s.from ?? 0))) / spacing));
+      bulbs = strands.flatMap((s, strand) => {
+        const n = s.bulbs ?? Math.max(6, Math.round((w * Math.abs((s.to ?? 1) - (s.from ?? 0))) / spacing));
         return Array.from({ length: n + 1 }, (_, i) => ({
           ...along(s, i / n),
-          r: s.r,
+          r: s.vary ? s.r * uneven(i + strand * 9) : s.r,
           phase: Math.random() * Math.PI * 2,
           speed: 0.6 + Math.random() * 1.2,
         })).filter((b) => b.x >= b.r * 3 && b.x <= w - b.r * 3 && b.y >= b.r * 3);
@@ -81,7 +106,7 @@ export default function FairyLights({
 
     function draw(time: number) {
       ctx!.clearRect(0, 0, w, h);
-      ctx!.strokeStyle = "rgba(241,236,255,0.16)";
+      ctx!.strokeStyle = `rgba(241,236,255,${wireOpacity})`;
       ctx!.lineWidth = 1;
       for (const points of wires) {
         ctx!.beginPath();
@@ -121,7 +146,7 @@ export default function FairyLights({
       observer.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [strands, spacing, wire]);
+  }, [strands, spacing, wire, wireOpacity, designWidth]);
 
   return (
     <canvas

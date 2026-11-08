@@ -3,49 +3,13 @@
 export const media = {
   "hero-van": {
     "kind": "photo",
-    "src": "/media/hero-van-320.webp",
-    "srcSet": "/media/hero-van-320.webp 320w, /media/hero-van-640.webp 640w",
-    "width": 640,
-    "height": 853,
+    "src": "/media/hero-van-480.webp",
+    "srcSet": "/media/hero-van-480.webp 480w, /media/hero-van-828.webp 828w, /media/hero-van-1200.webp 1200w, /media/hero-van-1600.webp 1600w",
+    "width": 1600,
+    "height": 2133,
     "alt": {
-      "el": "Το GO! Van με μωβ φώτα τη νύχτα",
-      "en": "The GO! Van in purple light at night"
-    },
-    "consent": "none"
-  },
-  "hero-360": {
-    "kind": "photo",
-    "src": "/media/hero-360-320.webp",
-    "srcSet": "/media/hero-360-320.webp 320w, /media/hero-360-640.webp 640w",
-    "width": 640,
-    "height": 853,
-    "alt": {
-      "el": "Η πλατφόρμα 360 με μια φωτεινή καρδιά τη νύχτα",
-      "en": "The 360 platform with a neon heart at night"
-    },
-    "consent": "none"
-  },
-  "hero-couple": {
-    "kind": "photo",
-    "src": "/media/hero-couple-320.webp",
-    "srcSet": "/media/hero-couple-320.webp 320w, /media/hero-couple-400.webp 400w",
-    "width": 400,
-    "height": 267,
-    "alt": {
-      "el": "Νύφη και γαμπρός με καπέλα από τα props",
-      "en": "A bride and groom in hats from the props"
-    },
-    "consent": "pending"
-  },
-  "hero-friends": {
-    "kind": "photo",
-    "src": "/media/hero-friends-281.webp",
-    "srcSet": "/media/hero-friends-281.webp 281w",
-    "width": 281,
-    "height": 187,
-    "alt": {
-      "el": "Φίλοι με γυαλιά και πινακίδες από τα props",
-      "en": "Friends posing with glasses and signs from the props"
+      "el": "Το GO! Van ανοιχτό τη νύχτα με μωβ φώτα και καλεσμένοι στη μπάρα του",
+      "en": "The GO! Van open at night in purple light, with guests at its bar"
     },
     "consent": "pending"
   },

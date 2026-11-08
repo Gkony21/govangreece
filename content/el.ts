@@ -25,11 +25,11 @@ export const el = {
     switchLanguage: { label: "EN", href: "/en", ariaLabel: "English version", hrefLang: "en" },
   },
   hero: {
-    title: "Έχεις event στη Λακωνία;",
-    leadStrong: "Photo booth, 360 video, τηλέφωνο για ευχές και cocktail bar σε VW van.",
-    lead: "Όλα από μία ομάδα, σε καλύτερη τιμή από το να τα κλείσετε χωριστά.",
+    title: "Έχεις event\nστη Λακωνία;",
+    leadStrong: "Photo booth, 360 video, τηλέφωνο ευχών και cocktail bar σε VW van.",
+    lead: "Όλα από μία ομάδα.",
     servicesCta: "Δείτε τις υπηρεσίες",
-    area: "Γάμοι, βαφτίσεις, πάρτι και εταιρικά. Σπάρτη, Λακωνία και όλη η Πελοπόννησος.",
+    servicesCtaShort: "Οι υπηρεσίες",
   },
   sections: {
     services: { title: "Διαλέξτε τι θέλετε στο event σας" },

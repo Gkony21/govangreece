@@ -23,20 +23,9 @@ const print = [3, 4];
 const tall = [2, 3];
 
 export const media = [
-  // Hero: photos printed like booth prints, scattered around the text. The client's photos are all portrait, so as a
-  // full-screen background they always lost a third or more; as prints they show whole.
-  { id: "hero-van", ref: "P74", src: "IMG_2411.HEIC", kind: "photo", aspect: print, focus: [0.5, 0.5], widths: [320, 640], consent: "none",
-    alt: { el: "Το GO! Van με μωβ φώτα τη νύχτα", en: "The GO! Van in purple light at night" } },
-  { id: "hero-360", ref: "P55", src: "IMG_9642.HEIC", kind: "photo", aspect: print, focus: [0.4, 0.5], widths: [320, 640], consent: "none",
-    alt: { el: "Η πλατφόρμα 360 με μια φωτεινή καρδιά τη νύχτα", en: "The 360 platform with a neon heart at night" } },
-  // Two frames of the client's own 5x15 print of one wedding (P01), landscape like the real print. Recognizable people.
-  ...[
-    ["hero-couple", [0.316, 0.722, 0.37, 0.201], [0.5, 0.5], { el: "Νύφη και γαμπρός με καπέλα από τα props", en: "A bride and groom in hats from the props" }],
-    ["hero-friends", [0.01, 0.38, 0.26, 0.2], [0.5, 0.45], { el: "Φίλοι με γυαλιά και πινακίδες από τα props", en: "Friends posing with glasses and signs from the props" }],
-  ].map(([id, region, focus, alt]) => ({
-    id, ref: "P01", src: "att.tUQ0oIDTb6SQKmDbcXStPjgOO44DNr42bWWrkqTr3IU.JPG", kind: "photo",
-    region, aspect: band, focus, widths: [320, 640], consent: "pending", alt,
-  })),
+  // Hero: the van at night with guests at its bar, whole, so each screen can crop it its own way. Recognizable people.
+  { id: "hero-van", ref: "P10", src: "IMG_2260.HEIC", kind: "photo", aspect: print, focus: [0.5, 0.5], widths: [480, 828, 1200, 1600], consent: "pending",
+    alt: { el: "Το GO! Van ανοιχτό τη νύχτα με μωβ φώτα και καλεσμένοι στη μπάρα του", en: "The GO! Van open at night in purple light, with guests at its bar" } },
 
   // Cocktails: the watercolours from the client's 2026 cocktail menu, cut out of the menu's PSD at full resolution.
   ...[
