@@ -21,6 +21,7 @@ export const en = {
       { id: "faq", label: "FAQ" },
     ],
     menuLabel: "Menu",
+    closeLabel: "Close menu",
     switchLanguage: { label: "ΕΛ", href: "/", ariaLabel: "Ελληνική έκδοση", hrefLang: "el" },
   },
   hero: {
@@ -93,6 +94,8 @@ export const en = {
     bag: {
       one: "You picked: {list}. Add another for a better price.",
       many: "Your package: {list}. {count} services, one quote.",
+      oneShort: "Better price with 2+",
+      manyShort: "{count} services, one quote",
       label: "Your package",
     },
   },

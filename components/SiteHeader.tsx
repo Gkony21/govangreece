@@ -1,7 +1,9 @@
 import ButtonLink from "@/components/ButtonLink";
 import LanguageLink from "@/components/LanguageLink";
 import MobileMenu from "@/components/MobileMenu";
+import PhoneIcon from "@/components/PhoneIcon";
 import type { Dictionary } from "@/content/types";
+import { links, phoneFor } from "@/lib/site";
 
 type Props = {
   dict: Dictionary;
@@ -39,11 +41,19 @@ export default function SiteHeader({ dict, homeHref, sectionBase = "", switchHre
           className="hidden rounded-full border border-line px-3 py-1 text-sm text-haze no-underline hover:text-ink lg:inline-block"
         />
 
+        {/* Computers: the phone as an icon, its number showing under it on hover or keyboard focus. */}
+        <a href={links.call} aria-label={`${dict.contact.call} ${phoneFor(dict.locale)}`} className="header-call btn-neon relative hidden size-11 shrink-0 place-items-center rounded-full lg:grid">
+          <PhoneIcon />
+          <span aria-hidden="true" className="header-call-number">
+            {phoneFor(dict.locale)}
+          </span>
+        </a>
+
         <ButtonLink href={`${sectionBase}#contact`} size="sm" className="ml-auto lg:ml-0">
           {dict.quoteCta}
         </ButtonLink>
 
-        <MobileMenu header={header} sectionBase={sectionBase} switchHref={switchHref} />
+        <MobileMenu dict={dict} homeHref={homeHref} sectionBase={sectionBase} switchHref={switchHref} />
       </div>
     </header>
   );

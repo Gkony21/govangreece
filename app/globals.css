@@ -443,7 +443,285 @@ html.js:not([data-reveal-ready]) [data-reveal] {
 }
 
 body:has(.package-bar[data-on]) {
-  padding-bottom: 6rem;
+  padding-bottom: 5rem;
+}
+
+.package-bulbs {
+  display: flex;
+  gap: 9px;
+}
+
+.package-bulbs i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgb(241 236 255 / 0.14);
+  box-shadow: inset 0 0 0 1px rgb(241 236 255 / 0.2);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.package-bulbs i[data-on] {
+  background: #fff0d2;
+  box-shadow: 0 0 5px #ffd68c, 0 0 14px #ffc35c, 0 0 26px rgb(255 195 92 / 0.7);
+}
+
+/* The phone in the computer header: its number shows under the icon, without moving anything around it. */
+.header-call-number {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 50%;
+  translate: 50% -0.25rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid #d9c2ff;
+  border-radius: 999px;
+  background: var(--color-night-2);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, translate 0.15s;
+}
+
+.header-call:is(:hover, :focus-visible) .header-call-number {
+  translate: 50% 0;
+  opacity: 1;
+}
+
+.header-call {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* The full-screen phone menu (components/MobileMenu.tsx): a neon line comes down, a panel rises to meet it, then the
+   lights and the links switch on. Everything rests in its final state, so without animation it is simply there. */
+html:has(.menu:popover-open) {
+  overflow: hidden;
+}
+
+.menu {
+  --menu-panel: calc(12.5rem + env(safe-area-inset-bottom, 0px));
+  --menu-rise: 40px;
+  --menu-ease: cubic-bezier(0.65, 0, 0.25, 1);
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  opacity: 0;
+  transition: opacity 0.2s, overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+}
+
+.menu:popover-open {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+.menu-sheet {
+  position: absolute;
+  inset: 0;
+}
+
+.menu-sheet-top {
+  background:
+    radial-gradient(70% 40% at 80% 18%, rgb(169 139 255 / 0.25), transparent 70%),
+    radial-gradient(70% 40% at 8% 60%, rgb(213 140 255 / 0.16), transparent 70%),
+    var(--color-night);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--menu-panel) - var(--menu-rise)), 0 calc(100% - var(--menu-panel)));
+  animation: menu-down 0.55s var(--menu-ease) both;
+}
+
+@keyframes menu-down {
+  from { clip-path: polygon(0 0, 100% 0, 100% calc(0% - var(--menu-rise)), 0 0); }
+}
+
+.menu-sheet-bottom {
+  background: radial-gradient(80% 45% at 90% 95%, rgb(169 139 255 / 0.4), transparent 70%), #22163f;
+  clip-path: polygon(0 calc(100% - var(--menu-panel)), 100% calc(100% - var(--menu-panel) - var(--menu-rise)), 100% 100%, 0 100%);
+  animation: menu-up 0.55s var(--menu-ease) both;
+}
+
+@keyframes menu-up {
+  from { clip-path: polygon(0 calc(100% + var(--menu-rise)), 100% 100%, 100% 100%, 0 calc(100% + var(--menu-rise))); }
+}
+
+.menu-seam {
+  position: absolute;
+  bottom: var(--menu-panel);
+  left: 0;
+  width: 100%;
+  height: var(--menu-rise);
+  overflow: visible;
+  pointer-events: none;
+  animation: menu-seam 0.55s var(--menu-ease) both;
+}
+
+.menu-seam line {
+  stroke: #fbf3ff;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px #e9d5ff) drop-shadow(0 0 14px #a98bff) drop-shadow(0 0 30px #a98bff);
+}
+
+@keyframes menu-seam {
+  from { translate: 0 calc(var(--menu-panel) - 100dvh); }
+}
+
+.menu-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: var(--header-h);
+}
+
+.menu-close svg {
+  animation: menu-x 0.35s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+
+@keyframes menu-x {
+  from { rotate: -90deg; scale: 0.4; }
+}
+
+.menu-lights {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  height: 2.5rem;
+}
+
+.menu-lights svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.menu-lights path {
+  fill: none;
+  stroke: rgb(241 236 255 / 0.32);
+  vector-effect: non-scaling-stroke;
+}
+
+.menu-lights i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px;
+  border-radius: 50%;
+  background: #fff0d2;
+  box-shadow: 0 0 6px #ffd68c, 0 0 16px #ffc35c, 0 0 30px rgb(255 195 92 / 0.7);
+  animation: menu-bulb 0.5s steps(1, end) both;
+}
+
+@keyframes menu-bulb {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  45% { opacity: 0.25; }
+  60%, 100% { opacity: 1; }
+}
+
+.menu-links {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 1;
+  align-content: center;
+  justify-items: start;
+  padding: 1.25rem max(1rem, env(safe-area-inset-right, 0px)) var(--menu-rise) max(1.125rem, env(safe-area-inset-left, 0px));
+}
+
+.menu-links a {
+  color: #fbf5ff;
+  font-family: var(--font-display);
+  font-size: max(2.4rem, min(18.6vw, calc((100svh - 23.5rem) / 4.4)));
+  font-weight: 900;
+  line-height: 1.09;
+  text-decoration: none;
+  text-shadow: 0 0 3px rgb(255 255 255 / 0.5), 0 0 14px #c9a8ff, 0 0 34px rgb(213 140 255 / 0.6);
+  transform: skewY(-6deg);
+  transform-origin: 0 100%;
+  animation: menu-link 0.85s steps(1, end) both;
+}
+
+.menu-links a:nth-child(1) { animation-delay: 0.5s; }
+.menu-links a:nth-child(2) { animation-delay: 0.64s; }
+.menu-links a:nth-child(3) { animation-delay: 0.78s; }
+.menu-links a:nth-child(4) { animation-delay: 0.92s; }
+
+@keyframes menu-link {
+  0% { opacity: 0; text-shadow: none; }
+  12% { opacity: 1; }
+  18% { opacity: 0.3; text-shadow: none; }
+  30% { opacity: 1; }
+  36% { opacity: 0.5; text-shadow: none; }
+  50%, 100% { opacity: 1; }
+}
+
+.menu-contact {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: var(--menu-panel);
+  padding: 0 max(1rem, env(safe-area-inset-right, 0px)) calc(1.25rem + env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
+  animation: menu-contact 0.45s 0.62s ease both;
+}
+
+@keyframes menu-contact {
+  from { opacity: 0; transform: translateY(1rem); }
+}
+
+.menu-number {
+  margin-bottom: 0.65rem;
+  color: #fbf5ff;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  text-shadow: 0 0 6px rgb(255 255 255 / 0.5), 0 0 18px var(--color-neon);
+}
+
+/* Phones on their side: no room for the slanted layout, so it becomes a plain page that scrolls. */
+@media (max-height: 480px) {
+  .menu {
+    overflow-y: auto;
+    background: var(--color-night);
+  }
+
+  .menu-sheet,
+  .menu-seam,
+  .menu-lights {
+    display: none;
+  }
+
+  .menu-links {
+    padding-block: 0 1.5rem;
+  }
+
+  .menu-links a {
+    font-size: 2.6rem;
+    transform: none;
+  }
+
+  .menu-contact {
+    height: auto;
+  }
 }
 
 /* Breaths: full-width photos between sections (components/Breath.tsx). The photo is 20% taller than its frame
@@ -1020,6 +1298,18 @@ html:has(.lightbox[open]) {
     animation: none;
   }
 
+  .menu-sheet,
+  .menu-seam,
+  .menu-close svg,
+  .menu-lights i,
+  .menu-links a,
+  .menu-contact {
+    animation: none;
+  }
+
+  .menu,
+  .header-call-number,
+  .package-bulbs i,
   .package-bar,
   .package-bar[data-on],
   .cocktail-card {

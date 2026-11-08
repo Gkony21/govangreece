@@ -10,7 +10,7 @@ type Props = {
   quoteCta: string;
 };
 
-// Slides up from the bottom of the screen once a service is picked: what is in the package, and the way to the form.
+// Slides up from the bottom of the screen once a service is picked: a bulb lit for each one, and the way to the form.
 // It steps aside while the form is on screen, where the checkboxes show the same package and the bar would cover the
 // button. A separate status line tells screen readers about each change, since the bar itself is hidden while empty.
 export default function PackageBar({ services, quoteCta }: Props) {
@@ -27,8 +27,10 @@ export default function PackageBar({ services, quoteCta }: Props) {
 
   const list = services.items.filter((s) => picked.includes(s.id)).map((s) => s.name).join(", ");
   const template = picked.length === 1 ? services.bag.one : services.bag.many;
-  const [before, after = ""] = template.replace("{count}", String(picked.length)).split("{list}");
-  const text = picked.length ? before + list + after : "";
+  const text = picked.length ? template.replace("{count}", String(picked.length)).replace("{list}", list) : "";
+  const short = (picked.length === 1 ? services.bag.oneShort : services.bag.manyShort).replace("{count}", String(picked.length));
+  // One bulb for each service picked, and one more still dark, waiting, until all of them are on.
+  const lights = Math.min(picked.length + 1, services.items.length);
 
   return (
     <>
@@ -36,12 +38,15 @@ export default function PackageBar({ services, quoteCta }: Props) {
         {text}
       </p>
       <aside aria-label={services.bag.label} data-on={(picked.length > 0 && !atForm) || undefined} className="package-bar fixed inset-x-0 bottom-0 z-30 border-t border-violet bg-night-2/95 pb-[env(safe-area-inset-bottom,0px)] backdrop-blur-md">
-        <div className="wrap flex items-center gap-4 py-3">
-          <p aria-hidden="true" className="min-w-0 flex-1 text-step--1 text-haze">
-            {before}
-            <b className="font-normal text-ink">{list}</b>
-            {after}
-          </p>
+        <div className="wrap flex items-center gap-4 py-2.5">
+          <div aria-hidden="true" className="grid min-w-0 flex-1 gap-1.5">
+            <span className="package-bulbs">
+              {Array.from({ length: lights }, (_, i) => (
+                <i key={i} data-on={i < picked.length || undefined} />
+              ))}
+            </span>
+            <p className="truncate text-sm text-haze">{short}</p>
+          </div>
           <ButtonLink href="#contact" size="sm" className="shrink-0">
             {quoteCta}
           </ButtonLink>
