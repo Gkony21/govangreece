@@ -44,6 +44,7 @@ export const en = {
   services: {
     lead: "Book one service or combine as many as you like. The more you book together, the better the price.",
     pick: "I want it",
+    more: "What's included",
     items: [
       {
         id: "mirror",
