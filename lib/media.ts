@@ -349,29 +349,29 @@ export const media = {
     },
     "consent": "pending"
   },
-  "gallery-moment-pour": {
+  "gallery-moment-cheers": {
     "kind": "photo",
-    "src": "/media/gallery-moment-pour-400.webp",
-    "srcSet": "/media/gallery-moment-pour-400.webp 400w, /media/gallery-moment-pour-800.webp 800w, /media/gallery-moment-pour-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
+    "src": "/media/gallery-moment-cheers-400.webp",
+    "srcSet": "/media/gallery-moment-cheers-400.webp 400w, /media/gallery-moment-cheers-800.webp 800w, /media/gallery-moment-cheers-1024.webp 1024w",
+    "width": 1024,
+    "height": 1280,
     "alt": {
-      "el": "Ο barman φτιάχνει κοκτέιλ κάτω από μωβ φως",
-      "en": "The barman mixing a cocktail under purple light"
+      "el": "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van",
+      "en": "A smiling guest raising a glass beside the van"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "gallery-moment-portable": {
+  "gallery-360-night": {
     "kind": "photo",
-    "src": "/media/gallery-moment-portable-400.webp",
-    "srcSet": "/media/gallery-moment-portable-400.webp 400w, /media/gallery-moment-portable-800.webp 800w, /media/gallery-moment-portable-1080.webp 1080w",
+    "src": "/media/gallery-360-night-400.webp",
+    "srcSet": "/media/gallery-360-night-400.webp 400w, /media/gallery-360-night-800.webp 800w, /media/gallery-360-night-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Το Portable Bar με τον barman και neon επιγραφή",
-      "en": "The Portable Bar with the barman and a neon sign"
+      "el": "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή",
+      "en": "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign"
     },
-    "consent": "pending"
+    "consent": "none"
   },
   "gallery-moment-van-far": {
     "kind": "photo",
@@ -385,17 +385,17 @@ export const media = {
     },
     "consent": "pending"
   },
-  "gallery-moment-call": {
+  "gallery-phone-mirror": {
     "kind": "photo",
-    "src": "/media/gallery-moment-call-400.webp",
-    "srcSet": "/media/gallery-moment-call-400.webp 400w, /media/gallery-moment-call-800.webp 800w, /media/gallery-moment-call-1080.webp 1080w",
+    "src": "/media/gallery-phone-mirror-400.webp",
+    "srcSet": "/media/gallery-phone-mirror-400.webp 400w, /media/gallery-phone-mirror-800.webp 800w, /media/gallery-phone-mirror-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Καλεσμένη αφήνει ευχή στο τηλέφωνο",
-      "en": "A guest leaving a message on the guestbook phone"
+      "el": "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο",
+      "en": "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley"
     },
-    "consent": "pending"
+    "consent": "none"
   },
   "gallery-moment-wedding": {
     "kind": "photo",
@@ -419,7 +419,7 @@ export const media = {
       "el": "Καλεσμένοι γύρω από το van σε γλέντι",
       "en": "Guests gathered around the van at a party"
     },
-    "consent": "pending"
+    "consent": "none"
   }
 } as const;
 

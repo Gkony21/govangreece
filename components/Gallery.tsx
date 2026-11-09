@@ -11,11 +11,11 @@ const photos = [
   { id: "gallery-van-crowd", feature: true },
   { id: "gallery-moment-laugh" },
   { id: "gallery-moment-green" },
-  { id: "gallery-moment-pour" },
-  { id: "gallery-moment-portable" },
+  { id: "gallery-moment-cheers" },
+  { id: "gallery-360-night" },
   { id: "gallery-moment-wedding", wide: true },
   { id: "gallery-moment-van-far" },
-  { id: "gallery-moment-call" },
+  { id: "gallery-phone-mirror" },
 ] as const;
 
 type Props = {
