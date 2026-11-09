@@ -50,6 +50,8 @@ export type Dictionary = {
     switchLanguage: { label: string; href: string; ariaLabel: string; hrefLang: Locale };
   };
   hero: {
+    // The small sentence over the big title.
+    titleLead: string;
     title: string;
     // Shown bold, then the rest of the sentence in a lighter colour.
     leadStrong: string;

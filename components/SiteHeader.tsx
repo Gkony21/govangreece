@@ -49,7 +49,7 @@ export default function SiteHeader({ dict, homeHref, sectionBase = "", switchHre
           </span>
         </a>
 
-        <ButtonLink href={`${sectionBase}#contact`} variant="neon" size="sm" className="ml-auto lg:ml-0">
+        <ButtonLink href={`${sectionBase}#contact`} variant="neon" size="sm" className="ml-auto whitespace-nowrap max-[359px]:px-3 lg:ml-0">
           {dict.quoteCta}
         </ButtonLink>
 
