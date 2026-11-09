@@ -62,17 +62,16 @@ export const media = [
     alt: { el: "Η πλατφόρμα 360 στημένη με θέα", en: "The 360 platform set up with a view" } },
   { id: "clip-cocktails", ref: "V13+V20", src: ["IMG_1676.MOV", "d8c1b430392c4c8d81a2fc86a0dd9128.MOV"], kind: "video", consent: "none",
     alt: { el: "Κοκτέιλ σερβίρονται στη μπάρα", en: "Cocktails being poured at the bar" } },
-  // Temporary, until the client has a video of the portable bar: a slow camera move we made from the photo (P69), locally.
-  { id: "clip-bar", ref: "P69", src: "clip-bar-orbit.mp4", dir: "../design/assets", kind: "video", trim: [0, 8], consent: "none",
-    alt: { el: "Η πρόσοψη VW της φορητής μπάρας με αναμμένα φώτα", en: "The VW front of the portable bar with its lights on" } },
+  { id: "clip-bar", ref: "V25", src: "IMG_2083.mov", kind: "video", trim: [0, 4.8], consent: "pending",
+    alt: { el: "Η φορητή μπάρα με την πρόσοψη VW και barman πίσω της", en: "The portable bar with its VW front and a barman behind it" } },
   { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "pending",
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
 
   // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
   // near square: the client's photos are mostly portrait, so a wide strip cut away most of them.
   ...[
-    ["break-van-lit", "P74", "IMG_2411(1).HEIC", [0.5, 0.55], { el: "Το GO! Van αναμμένο με μωβ φώτα τη νύχτα", en: "The GO! Van lit up in purple at night" }, "pending"],
-    ["break-mirror-sunset", "P65", "IMG_3139(1).HEIC", [0.55, 0.55], { el: "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα", en: "The Mirror Photo Booth on a red carpet at sunset" }],
+    ["break-drinks-red", "P22", "CD217B30-3E2B-44AE-BF05-BFFFC7C48A19(1).JPG", [0.5, 0.72], { el: "Η μπάρα του van με κόκκινα ποτά και κόκκινα φώτα, στην οθόνη πέφτουν ροδοπέταλα", en: "The van's bar with red drinks and red lights, rose petals falling on its screen" }],
+    ["break-mirror-stone", "P77", "IMG_0556.JPG", [0.42, 0.55], { el: "Το Mirror Photo Booth με κόκκινο χαλί και χρυσά κολωνάκια μπροστά σε πέτρινο τοίχο, δίπλα το τραπέζι με τα props", en: "The Mirror Photo Booth with a red carpet and gold posts by a stone wall, the props table beside it" }],
     ["break-van-night", "P83", "IMG_4292.HEIC", [0.6, 0.5], { el: "Η μπάρα του van με κόκκινα και μωβ φώτα τη νύχτα", en: "The van's bar in red and purple light at night" }],
   ].flatMap(([id, ref, src, focus, alt, consent = "none"]) => [
     { id, ref, src, kind: "photo", aspect: square, focus, widths: [900, 1400, 1800], quality: 68, consent, alt },

@@ -224,10 +224,10 @@ export const media = {
     "width": 540,
     "height": 960,
     "alt": {
-      "el": "Η πρόσοψη VW της φορητής μπάρας με αναμμένα φώτα",
-      "en": "The VW front of the portable bar with its lights on"
+      "el": "Η φορητή μπάρα με την πρόσοψη VW και barman πίσω της",
+      "en": "The portable bar with its VW front and a barman behind it"
     },
-    "consent": "none"
+    "consent": "pending"
   },
   "clip-guestbook": {
     "kind": "video",
@@ -241,46 +241,46 @@ export const media = {
     },
     "consent": "pending"
   },
-  "break-van-lit": {
+  "break-drinks-red": {
     "kind": "photo",
-    "src": "/media/break-van-lit-900.webp",
-    "srcSet": "/media/break-van-lit-900.webp 900w, /media/break-van-lit-1400.webp 1400w, /media/break-van-lit-1800.webp 1800w",
+    "src": "/media/break-drinks-red-900.webp",
+    "srcSet": "/media/break-drinks-red-900.webp 900w, /media/break-drinks-red-1400.webp 1400w, /media/break-drinks-red-1800.webp 1800w",
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Το GO! Van αναμμένο με μωβ φώτα τη νύχτα",
-      "en": "The GO! Van lit up in purple at night"
+      "el": "Η μπάρα του van με κόκκινα ποτά και κόκκινα φώτα, στην οθόνη πέφτουν ροδοπέταλα",
+      "en": "The van's bar with red drinks and red lights, rose petals falling on its screen"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "break-van-lit-tall": {
+  "break-drinks-red-tall": {
     "kind": "photo",
-    "src": "/media/break-van-lit-tall-640.webp",
-    "srcSet": "/media/break-van-lit-tall-640.webp 640w, /media/break-van-lit-tall-1080.webp 1080w",
+    "src": "/media/break-drinks-red-tall-640.webp",
+    "srcSet": "/media/break-drinks-red-tall-640.webp 640w, /media/break-drinks-red-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {
       "el": "",
       "en": ""
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "break-mirror-sunset": {
+  "break-mirror-stone": {
     "kind": "photo",
-    "src": "/media/break-mirror-sunset-900.webp",
-    "srcSet": "/media/break-mirror-sunset-900.webp 900w, /media/break-mirror-sunset-1400.webp 1400w, /media/break-mirror-sunset-1800.webp 1800w",
+    "src": "/media/break-mirror-stone-900.webp",
+    "srcSet": "/media/break-mirror-stone-900.webp 900w, /media/break-mirror-stone-1400.webp 1400w, /media/break-mirror-stone-1800.webp 1800w",
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα",
-      "en": "The Mirror Photo Booth on a red carpet at sunset"
+      "el": "Το Mirror Photo Booth με κόκκινο χαλί και χρυσά κολωνάκια μπροστά σε πέτρινο τοίχο, δίπλα το τραπέζι με τα props",
+      "en": "The Mirror Photo Booth with a red carpet and gold posts by a stone wall, the props table beside it"
     },
     "consent": "none"
   },
-  "break-mirror-sunset-tall": {
+  "break-mirror-stone-tall": {
     "kind": "photo",
-    "src": "/media/break-mirror-sunset-tall-640.webp",
-    "srcSet": "/media/break-mirror-sunset-tall-640.webp 640w, /media/break-mirror-sunset-tall-1080.webp 1080w",
+    "src": "/media/break-mirror-stone-tall-640.webp",
+    "srcSet": "/media/break-mirror-stone-tall-640.webp 640w, /media/break-mirror-stone-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {
