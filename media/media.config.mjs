@@ -47,6 +47,9 @@ export const media = [
     alt: { el: "Το Mirror Photo Booth στημένο σε κήπο το σούρουπο", en: "The Mirror Photo Booth set up in a garden at dusk" } },
   { id: "service-360", ref: "P15", src: "IMG_3353.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.62], widths: [480, 960], consent: "none",
     alt: { el: "Η πλατφόρμα 360 σε γκαζόν δίπλα σε λίμνη", en: "The 360 platform on a lawn by a pond" } },
+  // Two guests far in the background are blurred.
+  { id: "service-360-overhead", ref: "P27", src: "IMG_2785.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.42], widths: [480, 960], blur: [[0.325, 0.44, 0.07, 0.085]], consent: "none",
+    alt: { el: "Το Overhead 360: μαύρη αψίδα με το logo του GO! Van και κάμερα που γυρίζει από πάνω", en: "The Overhead 360: a black arch with the GO! Van logo and a camera that circles from above" } },
   { id: "service-guestbook", ref: "P46", src: "11F982D2-C9BC-425D-93E3-A8D47D3BD867.JPG", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [480, 960], consent: "none",
     alt: { el: "Το λευκό vintage τηλέφωνο ευχών", en: "The white vintage audio guestbook phone" } },
   { id: "service-van", ref: "P66", src: "IMG_3388.HEIC", kind: "photo", aspect: card, focus: [0.5, 0.6], widths: [480, 960], consent: "none",

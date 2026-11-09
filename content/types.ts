@@ -26,7 +26,7 @@ type Service = {
   alias: string;
   text: string;
   // Two ways to book it, side by side (360 classic or overhead, van full or semi service).
-  options?: { title: string; text: string }[];
+  options?: { title: string; text: string; tag?: string }[];
   facts: string[];
   gift?: string;
 };

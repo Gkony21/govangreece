@@ -61,8 +61,8 @@ export const en = {
         alias: "GO! 360",
         text: "The camera circles around you and makes a slow-motion video set to the song you picked, ready to share.",
         options: [
-          { title: "Classic", text: "You step onto the platform. Up to 4 people." },
-          { title: "Overhead", text: "The camera circles above you. 10 or more people at once." },
+          { title: "Classic", text: "You step onto the platform. Up to 4 people.", tag: "up to 4 people" },
+          { title: "Overhead", text: "The camera circles above you. 10 or more people at once.", tag: "10+ people" },
         ],
         facts: ["4-hour base package", "Unlimited videos", "Your names, logo and music", "Attendant"],
       },

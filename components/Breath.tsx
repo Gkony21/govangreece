@@ -12,8 +12,8 @@ import { media } from "@/lib/media";
 // photoWidth, focus: the photo's width on computers, in %, and what part of it stays in frame. focusPhone: the same on phones.
 const breaths = {
   bar: { photo: "break-van-night", side: "right", glow: "255 64 120", sign: "cocktail", halo: "255 110 210", href: "#service-van", shift: 0, photoWidth: 76, focus: "50% 55%" },
-  memories: { photo: "break-mirror-stone", side: "left", glow: "255 150 120", sign: "logo", halo: "213 140 255", href: "#service-mirror", shift: -3, photoWidth: 62, focus: "50% 55%" },
-  date: { photo: "break-drinks-red", side: "right", glow: "255 70 90", sign: "heart", halo: "255 120 160", href: "#contact", shift: 0, photoWidth: 66, focus: "50% 50%", focusPhone: "50% 100%" },
+  memories: { photo: "break-mirror-stone", side: "left", glow: "255 150 120", sign: "logo", halo: "213 140 255", href: "#service-mirror", shift: 3, photoWidth: 62, focus: "50% 55%" },
+  date: { photo: "break-drinks-red", side: "right", glow: "255 70 90", sign: "heart", halo: "255 120 160", href: "#contact", shift: -3, photoWidth: 70, focus: "50% 50%", focusPhone: "50% 100%" },
 } as const;
 
 type Point = readonly [number, number];
@@ -23,8 +23,9 @@ type Point = readonly [number, number];
 const computerTube: Point[] = [[53, -1], [47.5, 10], [44.5, 22], [44.5, 40], [44.5, 60], [46, 72], [43, 84], [41.5, 90], [39.5, 96], [37, 101]];
 const phoneTube: Point[] = [[-1, 92], [18, 97], [38, 97], [58, 91], [72, 87], [88, 88], [101, 93]];
 
-// Where the tube passes the sign on computers, before shift.
+// Where the tube passes the sign on computers, before shift, and the part of its height (in %) where it stops for the sign.
 const signX = 44.6;
+const signGap = [31, 63] as const;
 
 function tubePath(points: Point[]) {
   const [[x0, y0], ...rest] = points;
@@ -44,6 +45,15 @@ function tubeSteps(points: Point[]) {
     }
   }
   return steps;
+}
+
+// The tube on computers, in two lengths: it stops above the sign and starts again below it.
+function computerTubeLengths(shift: number) {
+  const steps = tubeSteps(computerTube).map(([x, y]) => `${Math.round((x + shift) * 100) / 100} ${y}`);
+  const ys = tubeSteps(computerTube).map(([, y]) => y);
+  const above = steps.filter((_, i) => ys[i] <= signGap[0]);
+  const below = steps.filter((_, i) => ys[i] >= signGap[1]);
+  return [above, below].map((length) => `M${length.join(" L")}`);
 }
 
 // Computers: down the tube, then around the photo's side. The tube moves with --cut-shift (globals.css).
@@ -97,6 +107,7 @@ export default function Breath({ id, line, locale }: Props) {
           "--clip-phone": phoneClip(right),
           "--clip-computer": computerClip(shift, right),
           "--sign-x": `${signX + shift}%`,
+          "--tube-shift": `${shift}%`,
         } as CSSProperties
       }
       className="breath relative isolate grid overflow-hidden border-b border-line bg-night lg:h-[min(82svh,46rem)] lg:min-h-[36rem] lg:items-center"
@@ -118,7 +129,9 @@ export default function Breath({ id, line, locale }: Props) {
       </picture>
       <svg className="breath-seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <path d={tubePath(phoneTube)} data-device="phone" />
-        <path d={tubePath(computerTube.map(([x, y]) => [x + shift, y]))} data-device="computer" />
+        {computerTubeLengths(shift).map((d) => (
+          <path key={d} d={d} data-device="computer" />
+        ))}
       </svg>
       <FairyLights strands={strands[side]} spacing={58} wire className="breath-lights absolute top-0 hidden h-56 lg:block" />
       <div className="breath-sign">

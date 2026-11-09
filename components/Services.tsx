@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Clip from "@/components/Clip";
 import NeonTitle from "@/components/NeonTitle";
+import OptionCycle from "@/components/OptionCycle";
 import Photo from "@/components/Photo";
 import PickButton from "@/components/PickButton";
 import ServiceDetails from "@/components/ServiceDetails";
@@ -9,10 +10,11 @@ import type { Dictionary, ServiceId } from "@/content/types";
 type PhotoId = Parameters<typeof Photo>[0]["id"];
 type ClipId = Parameters<typeof Clip>[0]["id"];
 
-// Each service shows a photo and, where there is one, a short vertical clip of it in action.
-const serviceMedia: Record<ServiceId, { photo: PhotoId; clip?: ClipId }> = {
+// Each service shows a photo and, where there is one, a short vertical clip of it in action. A service with two versions
+// has a photo of each: the first is `photo`, the second `alternate`, and they take turns in the same frame.
+const serviceMedia: Record<ServiceId, { photo: PhotoId; clip?: ClipId; alternate?: PhotoId }> = {
   mirror: { photo: "service-mirror", clip: "clip-mirror" },
-  "360": { photo: "service-360", clip: "clip-360" },
+  "360": { photo: "service-360", clip: "clip-360", alternate: "service-360-overhead" },
   guestbook: { photo: "service-guestbook", clip: "clip-guestbook" },
   van: { photo: "service-van", clip: "clip-van" },
   bar: { photo: "service-bar", clip: "clip-bar" },
@@ -41,13 +43,15 @@ export default function Services({ dict }: Props) {
 
         <ul>
           {services.items.map((service, i) => {
-            const { photo, clip } = serviceMedia[service.id];
+            const { photo, clip, alternate } = serviceMedia[service.id];
+            const photoSizes = "(min-width: 1440px) 380px, (min-width: 1024px) 32vw, 55vw";
             const flip = i % 2 === 1;
             return (
               <li
                 key={service.id}
                 id={`service-${service.id}`}
                 data-reveal={i % 2 ? "right" : "left"}
+                data-option={alternate ? "0" : undefined}
                 className={`grid gap-4 py-8 lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-18 lg:gap-y-6 lg:py-14 ${
                   flip ? "lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" : "lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]"
                 }`}
@@ -66,12 +70,20 @@ export default function Services({ dict }: Props) {
                     clip ? "grid-cols-[minmax(0,1fr)_minmax(0,0.703fr)]" : "max-w-[24rem]"
                   }`}
                 >
-                  <Photo
-                    id={photo}
-                    locale={dict.locale}
-                    sizes="(min-width: 1440px) 380px, (min-width: 1024px) 32vw, 55vw"
-                    className="aspect-[4/5] w-full rounded-md bg-night-2 object-cover"
-                  />
+                  <div className="relative">
+                    <Photo id={photo} locale={dict.locale} sizes={photoSizes} className="aspect-[4/5] w-full rounded-md bg-night-2 object-cover" />
+                    {alternate && (
+                      <>
+                        <Photo id={alternate} locale={dict.locale} sizes={photoSizes} className="option-over absolute inset-0 h-full w-full rounded-md object-cover" />
+                        <OptionCycle />
+                        {service.options?.map((option, index) => (
+                          <span key={option.title} aria-hidden="true" data-for={index} className="option-tag">
+                            <b>{option.title}</b> · {option.tag}
+                          </span>
+                        ))}
+                      </>
+                    )}
+                  </div>
                   {clip && <Clip id={clip} locale={dict.locale} className="aspect-[9/16] w-full rounded-md bg-night-2 object-cover" />}
                 </div>
 
@@ -81,8 +93,8 @@ export default function Services({ dict }: Props) {
                   <ServiceDetails label={services.more}>
                     {service.options && (
                       <div className="grid gap-3 sm:grid-cols-2">
-                        {service.options.map((option) => (
-                          <div key={option.title} className="rounded-lg border border-line px-4 py-3 text-step--1 text-haze">
+                        {service.options.map((option, index) => (
+                          <div key={option.title} data-option-card={index} className="rounded-lg border border-line px-4 py-3 text-step--1 text-haze">
                             <b className="mb-1 block font-normal text-ink">{option.title}</b>
                             {option.text}
                           </div>

@@ -133,6 +133,18 @@ export const media = {
     },
     "consent": "none"
   },
+  "service-360-overhead": {
+    "kind": "photo",
+    "src": "/media/service-360-overhead-480.webp",
+    "srcSet": "/media/service-360-overhead-480.webp 480w, /media/service-360-overhead-960.webp 960w",
+    "width": 960,
+    "height": 1200,
+    "alt": {
+      "el": "Το Overhead 360: μαύρη αψίδα με το logo του GO! Van και κάμερα που γυρίζει από πάνω",
+      "en": "The Overhead 360: a black arch with the GO! Van logo and a camera that circles from above"
+    },
+    "consent": "none"
+  },
   "service-guestbook": {
     "kind": "photo",
     "src": "/media/service-guestbook-480.webp",

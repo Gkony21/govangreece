@@ -1067,7 +1067,7 @@ html:has(.menu:popover-open) {
   }
 
   .breath[data-side="left"] {
-    --cut-shift: max(min(0px, (100vw - 1440px) * -0.24), -160px);
+    --cut-shift: max(min(0px, (100vw - 1440px) * -0.12), -80px);
   }
 
   .breath-photo {
@@ -1099,11 +1099,11 @@ html:has(.menu:popover-open) {
   }
 
   .breath-sign .neon-sign > svg {
-    height: clamp(8rem, 13.4vw, 12rem);
+    height: clamp(8rem, 14.6vw, 13.25rem);
   }
 
   .breath-sign .neon-sign > img {
-    height: clamp(9rem, 14.5vw, 13rem);
+    height: clamp(9rem, 15.8vw, 14.25rem);
   }
 
   .breath-seam {
@@ -1123,13 +1123,13 @@ html:has(.menu:popover-open) {
   /* The lights' box ends at the cut. */
   .breath-lights {
     left: 0;
-    width: calc(46.9% + var(--cut-shift));
+    width: calc(46.9% + var(--tube-shift) + var(--cut-shift));
   }
 
   .breath[data-side="left"] .breath-lights {
     right: 0;
     left: auto;
-    width: calc(50% - var(--cut-shift));
+    width: calc(50% - var(--tube-shift) - var(--cut-shift));
   }
 
   .breath::after {
@@ -1285,6 +1285,45 @@ html:has(.menu:popover-open) {
 @keyframes breath-drift {
   from { transform: translateY(-8%); }
   to { transform: translateY(8%); }
+}
+
+/* A service with two versions (360): the photo changes by itself between them, and the box that describes the one on
+   show lights up (components/OptionCycle.tsx sets data-option on the scene). */
+.option-over,
+.option-tag {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.option-tag {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  padding: 0.35rem 0.7rem;
+  border: 1.5px solid #fff3fb;
+  border-radius: 999px;
+  background: rgb(12 6 28 / 0.78);
+  box-shadow: 0 0 6px rgb(var(--halo)), 0 0 14px rgb(var(--halo)), inset 0 0 6px rgb(var(--halo));
+  color: #fff;
+  font-size: 0.82rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+[data-option="1"] .option-over,
+[data-option="0"] .option-tag[data-for="0"],
+[data-option="1"] .option-tag[data-for="1"] {
+  opacity: 1;
+}
+
+[data-option-card] {
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+[data-option="0"] [data-option-card="0"],
+[data-option="1"] [data-option-card="1"] {
+  border-color: #fff3fb;
+  box-shadow: 0 0 6px rgb(var(--halo)), 0 0 18px rgb(var(--halo) / 0.75), inset 0 0 8px rgb(var(--halo) / 0.55);
 }
 
 /* Where we go (components/About.tsx): rings around Sparta, brightest near home. The outer one is dashed: further
