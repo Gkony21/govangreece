@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import Clip from "@/components/Clip";
 import CocktailNamer from "@/components/CocktailNamer";
+import NeonTitle from "@/components/NeonTitle";
 import Photo from "@/components/Photo";
 import PickButton from "@/components/PickButton";
 import type { Dictionary } from "@/content/types";
@@ -18,11 +20,11 @@ export default function Cocktails({ dict }: Props) {
   const van = dict.services.items.find((s) => s.id === "van")!;
 
   return (
-    <section id="cocktails" aria-labelledby="cocktails-title" className="border-b border-line bg-night-2 py-20 lg:py-24">
+    <section id="cocktails" aria-labelledby="cocktails-title" style={{ "--halo": "213 140 255" } as CSSProperties} className="border-b border-line bg-night-2 py-20 lg:py-24">
       <div className="wrap">
         <div className="mb-8 grid max-w-[46rem] gap-4">
           <h2 id="cocktails-title" data-reveal className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.cocktails.title}
+            <NeonTitle {...dict.sections.cocktails} />
           </h2>
           <p data-reveal className="text-step-1 text-haze">
             {cocktails.lead}

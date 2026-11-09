@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import NeonSign from "@/components/NeonSign";
+import NeonTitle from "@/components/NeonTitle";
 import type { Dictionary } from "@/content/types";
 import { site } from "@/lib/site";
 
@@ -23,13 +24,13 @@ export default function Reviews({ dict }: Props) {
       id="reviews"
       aria-labelledby="reviews-title"
       style={{ "--halo": "255 195 92" } as CSSProperties}
-      className="overflow-clip border-b border-line py-20 lg:py-28"
+      className="overflow-clip py-20 lg:py-28"
     >
       <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
         <div data-reveal className="section-head grid content-start justify-items-start gap-5 lg:gap-6">
           <NeonSign kind="rating" />
           <h2 id="reviews-title" className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.reviews.title}
+            <NeonTitle {...dict.sections.reviews} />
           </h2>
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-haze">
             <Stars label={stars} className="text-amber [text-shadow:0_0_10px_rgb(255_195_92/0.6)]" />

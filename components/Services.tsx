@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import Clip from "@/components/Clip";
+import NeonTitle from "@/components/NeonTitle";
 import Photo from "@/components/Photo";
 import PickButton from "@/components/PickButton";
 import ServiceDetails from "@/components/ServiceDetails";
@@ -26,11 +28,11 @@ export default function Services({ dict }: Props) {
   const { services } = dict;
 
   return (
-    <section id="services" aria-labelledby="services-title" className="border-b border-line py-20 lg:py-24">
+    <section id="services" aria-labelledby="services-title" style={{ "--halo": "213 140 255" } as CSSProperties} className="py-20 lg:py-24">
       <div className="wrap">
         <div className="mb-12 grid max-w-[46rem] gap-4">
           <h2 id="services-title" data-reveal className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.services.title}
+            <NeonTitle {...dict.sections.services} />
           </h2>
           <p data-reveal className="text-step-1 text-haze">
             {services.lead}

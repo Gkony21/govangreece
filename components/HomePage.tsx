@@ -7,6 +7,7 @@ import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
 import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
+import NeonSeam, { type NeonSeamProps } from "@/components/NeonSeam";
 import PackageBar from "@/components/PackageBar";
 import ParallaxFallback from "@/components/ParallaxFallback";
 import RevealObserver from "@/components/RevealObserver";
@@ -23,6 +24,14 @@ const breathBefore: Partial<Record<SectionId, BreathId>> = {
   why: "bar",
   reviews: "memories",
   contact: "date",
+};
+
+// The neon lines, by the section they come after. Sections that meet a breath are already parted by its cut.
+const seamAfter: Partial<Record<SectionId, NeonSeamProps>> = {
+  services: { from: "night", to: "night-2", climbs: "up" },
+  why: { from: "night-2", to: "night", climbs: "down" },
+  reviews: { from: "night", to: "night-2", climbs: "up" },
+  about: { from: "night-2", to: "night", climbs: "down" },
 };
 
 type Props = {
@@ -50,6 +59,7 @@ export default function HomePage({ dict, homeHref }: Props) {
 
         {sectionIds.map((id) => {
           const breath = breathBefore[id];
+          const seam = seamAfter[id];
           return (
             <Fragment key={id}>
               {breath && <Breath id={breath} line={dict.breaths[breath]} locale={dict.locale} />}
@@ -70,11 +80,13 @@ export default function HomePage({ dict, homeHref }: Props) {
               ) : (
                 <Contact dict={dict} />
               )}
+              {seam && <NeonSeam {...seam} />}
             </Fragment>
           );
         })}
       </main>
 
+      <NeonSeam from="night" to="night" climbs="up" />
       <SiteFooter dict={dict} />
       <PackageBar services={dict.services} quoteCta={dict.quoteCta} />
       <RevealObserver />

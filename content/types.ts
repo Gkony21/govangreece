@@ -57,7 +57,8 @@ export type Dictionary = {
     servicesCta: string;
     servicesCtaShort: string;
   };
-  sections: Record<SectionId, { title: string }>;
+  // neon: the end of the title, lit up on the page.
+  sections: Record<SectionId, { title: string; neon?: string }>;
   services: {
     lead: string;
     pick: string;

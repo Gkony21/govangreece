@@ -15,7 +15,7 @@ export default function About({ dict }: Props) {
       id="about"
       aria-labelledby="about-title"
       style={{ "--halo": "213 140 255" } as CSSProperties}
-      className="border-b border-line bg-night-2 py-20 lg:py-28"
+      className="bg-night-2 py-20 lg:py-28"
     >
       <div className="wrap grid gap-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-16">
         <div className="grid content-start gap-6">
