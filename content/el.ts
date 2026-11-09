@@ -26,7 +26,8 @@ export const el = {
     switchLanguage: { label: "EN", href: "/en", ariaLabel: "English version", hrefLang: "en" },
   },
   hero: {
-    title: "Έχεις event\nστη Λακωνία;",
+    titleLead: "Εσείς καλείτε τον κόσμο.",
+    title: "Το πάρτι το\nφέρνουμε εμείς.",
     leadStrong: "Photo booth, 360 video, τηλέφωνο ευχών και cocktail bar σε VW van.",
     lead: "Όλα από μία ομάδα.",
     servicesCta: "Δείτε τις υπηρεσίες",

@@ -25,7 +25,8 @@ export const en = {
     switchLanguage: { label: "ΕΛ", href: "/", ariaLabel: "Ελληνική έκδοση", hrefLang: "el" },
   },
   hero: {
-    title: "Planning an event\nin Laconia?",
+    titleLead: "You invite the people.",
+    title: "We bring\nthe party.",
     leadStrong: "Photo booth, 360 video, an audio guestbook and a cocktail bar in a VW van.",
     lead: "All from one team.",
     servicesCta: "See the services",

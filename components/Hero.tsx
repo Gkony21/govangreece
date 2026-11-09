@@ -47,7 +47,7 @@ export default function Hero({ dict }: Props) {
 
       <div className="hero-text">
         <h1 id="hero-title" className="hero-title neon font-display font-black">
-          {hero.title}
+          <span className="hero-title-lead">{hero.titleLead}</span> {hero.title}
         </h1>
         <p className="hero-lead">
           {hero.leadStrong} <span className="text-haze">{hero.lead}</span>
