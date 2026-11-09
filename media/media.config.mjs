@@ -86,13 +86,18 @@ export const media = [
   // Gallery: moments with people first (the site sells the night, not the equipment). The largest size is for the lightbox.
   // The "frame-*" sources are single frames from the client's videos, kept in design/assets.
   ...[
-    ["gallery-moment-laugh", "V08", "frame-laugh.jpg", "../design/assets", [0.5, 0.39], "pending", { el: "Καλεσμένοι γελάνε με τα money guns δίπλα στον καθρέφτη", en: "Guests laughing with the money guns beside the mirror booth" }],
     ["gallery-moment-green", "P84", "IMG_3493.HEIC", undefined, [0.5, 0.52], "pending", { el: "Ο barman σερβίρει καλεσμένο στο van με πράσινα φώτα", en: "The barman serving a guest at the van in green light" }],
     ["gallery-moment-cheers", "P14", "IMG_3111.JPG", undefined, [0.62, 0.45], "none", { el: "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van", en: "A smiling guest raising a glass beside the van" }],
     ["gallery-360-night", "P12", "IMG_0211.HEIC", undefined, [0.5, 0.6], "none", { el: "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή", en: "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign" }],
-    ["gallery-moment-van-far", "P70", "IMG_2253.HEIC", undefined, [0.55, 0.5], "pending", { el: "Το van αναμμένο ανάμεσα στα τραπέζια τη νύχτα", en: "The van lit up among the tables at night" }, [[0.79, 0.7, 0.18, 0.07]], [0, 0.3, 1, 0.7]],
     ["gallery-phone-mirror", "P13", "IMG_9631.HEIC", undefined, [0.5, 0.6], "none", { el: "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο", en: "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley" }, [[0.595, 0.265, 0.22, 0.055]]],
   ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
+
+  // Short loops straight from the booth, kept at their full width. "family" shows the client's own family, children
+  // included: the one exception to "no children", decided by the developer on 2026-11-09.
+  { id: "gallery-clip-friends", ref: "booth", src: "gallery-clip-friends.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",
+    alt: { el: "Παρέα ποζάρει στο booth με ροζ καπέλο και ντισκομπάλα", en: "Friends posing at the booth with a pink hat and a disco ball" } },
+  { id: "gallery-clip-family", ref: "booth", src: "gallery-clip-family.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",
+    alt: { el: "Οικογένεια ποζάρει στο booth με γυαλιά και props", en: "A family posing at the booth with party glasses and props" } },
 
   { id: "gallery-moment-wedding", ref: "V32", src: "frame-wedding.jpg", dir: "../design/assets", kind: "photo", aspect: band, focus: [0.5, 0.7], widths: [600, 1080], consent: "none",
     alt: { el: "Γάμος κάτω από τα φωτάκια το σούρουπο", en: "A wedding under string lights at dusk" } },

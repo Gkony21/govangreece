@@ -325,18 +325,6 @@ export const media = {
     },
     "consent": "none"
   },
-  "gallery-moment-laugh": {
-    "kind": "photo",
-    "src": "/media/gallery-moment-laugh-400.webp",
-    "srcSet": "/media/gallery-moment-laugh-400.webp 400w, /media/gallery-moment-laugh-800.webp 800w, /media/gallery-moment-laugh-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
-    "alt": {
-      "el": "Καλεσμένοι γελάνε με τα money guns δίπλα στον καθρέφτη",
-      "en": "Guests laughing with the money guns beside the mirror booth"
-    },
-    "consent": "pending"
-  },
   "gallery-moment-green": {
     "kind": "photo",
     "src": "/media/gallery-moment-green-400.webp",
@@ -373,18 +361,6 @@ export const media = {
     },
     "consent": "none"
   },
-  "gallery-moment-van-far": {
-    "kind": "photo",
-    "src": "/media/gallery-moment-van-far-400.webp",
-    "srcSet": "/media/gallery-moment-van-far-400.webp 400w, /media/gallery-moment-van-far-800.webp 800w, /media/gallery-moment-van-far-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
-    "alt": {
-      "el": "Το van αναμμένο ανάμεσα στα τραπέζια τη νύχτα",
-      "en": "The van lit up among the tables at night"
-    },
-    "consent": "pending"
-  },
   "gallery-phone-mirror": {
     "kind": "photo",
     "src": "/media/gallery-phone-mirror-400.webp",
@@ -394,6 +370,30 @@ export const media = {
     "alt": {
       "el": "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο",
       "en": "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley"
+    },
+    "consent": "none"
+  },
+  "gallery-clip-friends": {
+    "kind": "video",
+    "src": "/video/gallery-clip-friends.mp4",
+    "poster": "/media/gallery-clip-friends-poster.webp",
+    "width": 720,
+    "height": 480,
+    "alt": {
+      "el": "Παρέα ποζάρει στο booth με ροζ καπέλο και ντισκομπάλα",
+      "en": "Friends posing at the booth with a pink hat and a disco ball"
+    },
+    "consent": "none"
+  },
+  "gallery-clip-family": {
+    "kind": "video",
+    "src": "/video/gallery-clip-family.mp4",
+    "poster": "/media/gallery-clip-family-poster.webp",
+    "width": 720,
+    "height": 480,
+    "alt": {
+      "el": "Οικογένεια ποζάρει στο booth με γυαλιά και props",
+      "en": "A family posing at the booth with party glasses and props"
     },
     "consent": "none"
   },
