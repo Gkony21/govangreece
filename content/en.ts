@@ -52,6 +52,7 @@ export const en = {
         alias: "GO! Magic Mirror",
         text: "A mirror with a touch screen. Guests take their photos, get the print right away and download the photo with a QR code.",
         facts: ["4-hour base package", "Unlimited 5x15 prints", "Props", "Your own print design", "Attendant"],
+        gift: "Gift: magnetic prints",
       },
       {
         id: "360",
