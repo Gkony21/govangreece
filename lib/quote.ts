@@ -33,6 +33,7 @@ export type QuoteErrors = Partial<{
   phone: "phone" | "phoneInvalid";
   email: "email";
   date: "date" | "datePast";
+  place: "place";
 }>;
 
 // What the server answers. "invalid" comes with what is wrong, "check" means Turnstile said no, "failed" is our side.
@@ -72,8 +73,8 @@ export function readQuote(data: FormData): Quote {
   };
 }
 
-// Only what is needed to call back: a name, a phone that looks like one (10 to 15 digits, a country code allowed), and
-// a date no earlier than earliest, or "not set yet". An email is optional, but has to look like one when given.
+// Only what is needed to call back: a name, a phone that looks like one (10 to 15 digits, a country code allowed), a
+// date no earlier than earliest or "not set yet", and where the event is. An email is optional, but has to look like one when given.
 export function checkQuote(quote: Quote, earliest: string): QuoteErrors {
   const errors: QuoteErrors = {};
   const digits = quote.phone.replace(/\D/g, "").length;
@@ -86,5 +87,6 @@ export function checkQuote(quote: Quote, earliest: string): QuoteErrors {
     if (!quote.date) errors.date = "date";
     else if (quote.date < earliest) errors.date = "datePast";
   }
+  if (!quote.place) errors.place = "place";
   return errors;
 }

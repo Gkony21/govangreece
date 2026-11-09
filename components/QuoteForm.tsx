@@ -16,7 +16,7 @@ type Props = {
 type Form = Dictionary["contact"]["form"];
 
 // The fields that can be wrong, in the order they appear: the first wrong one gets the focus.
-const fields = ["name", "phone", "date", "email"] as const;
+const fields = ["name", "phone", "date", "place", "email"] as const;
 type Errors = Partial<Record<(typeof fields)[number], string>>;
 
 const input =
@@ -57,7 +57,7 @@ async function send(data: FormData, human: HumanCheck): Promise<QuoteResult> {
   }
 }
 
-// The quote request. Light on purpose: the deal is closed on the phone, so only name, phone and date are needed, and
+// The quote request. Light on purpose: the deal is closed on the phone, so only name, phone, date and place are needed, and
 // everything beyond the basics waits behind "Add details" (open without JavaScript, .quote-details in app/globals.css).
 // Mistakes show after the first try, under each field, and clear as they are fixed; the first one gets the focus.
 // The services are the package built with "I want it", both ways. Names given to the cocktails go into the message.
@@ -227,7 +227,7 @@ export default function QuoteForm({ dict }: Props) {
         maxLength={quoteLimits.phone}
       />
 
-      <div className="col-span-full grid content-start gap-2">
+      <div className="col-span-full grid content-start gap-2 sm:col-span-1">
         <label htmlFor="quote-date" className={label}>
           {form.date}
           <Required />
@@ -254,6 +254,18 @@ export default function QuoteForm({ dict }: Props) {
           {form.noDate}
         </label>
         <FieldError id="quote-date-error" message={errors.date} />
+      </div>
+      <div className="col-span-full sm:col-span-1">
+        <TextField
+          id="quote-place"
+          name="place"
+          label={form.place}
+          placeholder={form.placePlaceholder}
+          error={errors.place}
+          required
+          autoComplete="off"
+          maxLength={quoteLimits.place}
+        />
       </div>
 
       <fieldset className="col-span-full">
@@ -301,25 +313,15 @@ export default function QuoteForm({ dict }: Props) {
       </button>
 
       <div id="quote-details" className="quote-details col-span-full grid gap-x-5 gap-y-4 sm:grid-cols-2" data-open={details || undefined}>
-        <div className="sm:col-span-2">
-          <TextField
-            id="quote-email"
-            name="email"
-            label={form.email}
-            error={errors.email}
-            type="email"
-            autoComplete="email"
-            spellCheck={false}
-            maxLength={quoteLimits.email}
-          />
-        </div>
         <TextField
-          id="quote-place"
-          name="place"
-          label={form.place}
-          placeholder={form.placePlaceholder}
-          autoComplete="off"
-          maxLength={quoteLimits.place}
+          id="quote-email"
+          name="email"
+          label={form.email}
+          error={errors.email}
+          type="email"
+          autoComplete="email"
+          spellCheck={false}
+          maxLength={quoteLimits.email}
         />
         <TextField
           id="quote-guests"

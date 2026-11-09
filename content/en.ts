@@ -27,8 +27,7 @@ export const en = {
   hero: {
     titleLead: "You invite the people.",
     title: "We bring\nthe party.",
-    leadStrong: "Photo booth, 360 video, an audio guestbook and a cocktail bar in a VW van.",
-    lead: "All from one team.",
+    lead: "Photo booth, 360 video, an audio guestbook and a cocktail bar.",
     servicesCta: "See the services",
     servicesCtaShort: "The services",
   },
@@ -53,7 +52,6 @@ export const en = {
         alias: "GO! Magic Mirror",
         text: "A mirror with a touch screen. Guests take their photos, get the print right away and download the photo with a QR code.",
         facts: ["4-hour base package", "Unlimited 5x15 prints", "Props", "Your own print design", "Attendant"],
-        gift: "Gift: magnetic prints or a «Memories» photo box",
       },
       {
         id: "360",
@@ -272,6 +270,7 @@ export const en = {
         phoneInvalid: "This phone number doesn't look right. Include the country code, e.g. +44 7700 900123.",
         email: "This email doesn't look right. Check it or leave it empty.",
         date: "Pick a date, or tick that you haven't set one yet.",
+        place: "Please tell us where it will be.",
         datePast: "This date has already passed.",
         summaryOne: "One field needs fixing.",
         summaryMany: "{count} fields need fixing.",
