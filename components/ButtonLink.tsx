@@ -1,11 +1,12 @@
 import type { ComponentProps } from "react";
 
 // Pill-shaped link styled as a button. "main" is the violet call to action, "ghost" the outlined secondary one, "neon"
-// a lit glass tube (.btn-neon in app/globals.css).
+// a lit glass tube (.btn-neon in app/globals.css) and "tube" a thinner one, for the smaller choices.
 const variants = {
   main: "bg-violet text-on-violet hover:shadow-[0_0_28px_2px_rgb(213_140_255/0.55)]",
   ghost: "border border-line text-ink hover:border-violet",
   neon: "btn-neon",
+  tube: "btn-tube",
 };
 
 const sizes = {

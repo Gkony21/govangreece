@@ -47,7 +47,7 @@ export default function PackageBar({ services, quoteCta }: Props) {
             </span>
             <p className="truncate text-sm text-haze">{short}</p>
           </div>
-          <ButtonLink href="#contact" size="sm" className="shrink-0">
+          <ButtonLink href="#contact" variant="neon" size="sm" className="shrink-0">
             {quoteCta}
           </ButtonLink>
         </div>

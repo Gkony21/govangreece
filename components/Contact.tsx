@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import NeonSign from "@/components/NeonSign";
+import NeonTitle from "@/components/NeonTitle";
 import QuoteForm from "@/components/QuoteForm";
 import type { Dictionary } from "@/content/types";
 import { links, phoneFor, site } from "@/lib/site";
@@ -21,13 +22,13 @@ export default function Contact({ dict }: Props) {
       id="contact"
       aria-labelledby="contact-title"
       style={{ "--halo": "213 140 255" } as CSSProperties}
-      className="overflow-clip border-b border-line py-20 lg:py-28"
+      className="overflow-clip py-20 lg:py-28"
     >
       <div className="wrap grid gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-10">
         <div data-reveal className="section-head grid content-start justify-items-start gap-6 lg:col-start-1 lg:row-start-1">
           <NeonSign kind="phone" />
           <h2 id="contact-title" className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.contact.title}
+            <NeonTitle {...dict.sections.contact} />
           </h2>
           <p className="max-w-[30rem] text-step-1 text-haze">{contact.lead}</p>
         </div>
@@ -48,13 +49,13 @@ export default function Contact({ dict }: Props) {
             </a>
           </p>
           <div className="flex flex-wrap gap-3">
-            <ButtonLink href={links.call} variant="ghost" size="sm">
+            <ButtonLink href={links.call} variant="tube" size="sm">
               {contact.call}
             </ButtonLink>
-            <ButtonLink href={links.viber} variant="ghost" size="sm">
+            <ButtonLink href={links.viber} variant="tube" size="sm">
               Viber
             </ButtonLink>
-            <ButtonLink href={links.whatsapp} variant="ghost" size="sm" rel="noopener">
+            <ButtonLink href={links.whatsapp} variant="tube" size="sm" rel="noopener">
               WhatsApp
             </ButtonLink>
           </div>

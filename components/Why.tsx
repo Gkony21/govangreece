@@ -15,7 +15,7 @@ export default function Why({ dict }: Props) {
       id="why"
       aria-labelledby="why-title"
       style={{ "--halo": "213 140 255" } as CSSProperties}
-      className="border-b border-line bg-night-2 py-20 lg:py-24"
+      className="bg-night-2 py-20 lg:py-24"
     >
       <div className="wrap grid gap-12 lg:gap-14">
         <div className="grid items-center gap-9 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import NeonSign from "@/components/NeonSign";
+import NeonTitle from "@/components/NeonTitle";
 import type { Dictionary } from "@/content/types";
 import { links, phoneFor } from "@/lib/site";
 
@@ -29,7 +30,7 @@ export default function Faq({ dict }: Props) {
         <div data-reveal className="section-head grid content-start justify-items-start gap-6 lg:col-start-1 lg:row-start-1">
           <NeonSign kind="question" />
           <h2 id="faq-title" className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.faq.title}
+            <NeonTitle {...dict.sections.faq} />
           </h2>
         </div>
 
@@ -80,13 +81,13 @@ export default function Faq({ dict }: Props) {
               {after}
             </p>
             <div className="flex flex-wrap gap-3">
-              <ButtonLink href={links.call} variant="ghost" size="sm">
+              <ButtonLink href={links.call} variant="tube" size="sm">
                 {faq.call}
               </ButtonLink>
-              <ButtonLink href={links.viber} variant="ghost" size="sm">
+              <ButtonLink href={links.viber} variant="tube" size="sm">
                 Viber
               </ButtonLink>
-              <ButtonLink href={links.whatsapp} variant="ghost" size="sm" rel="noopener">
+              <ButtonLink href={links.whatsapp} variant="tube" size="sm" rel="noopener">
                 WhatsApp
               </ButtonLink>
             </div>

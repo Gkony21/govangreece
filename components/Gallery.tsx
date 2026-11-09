@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import GalleryGrid from "@/components/GalleryGrid";
+import NeonTitle from "@/components/NeonTitle";
 import Photo from "@/components/Photo";
 import type { Dictionary } from "@/content/types";
 import { media } from "@/lib/media";
@@ -25,11 +27,11 @@ export default function Gallery({ dict }: Props) {
   const { gallery } = dict;
 
   return (
-    <section id="gallery" aria-labelledby="gallery-title" className="border-b border-line py-20 lg:py-24">
+    <section id="gallery" aria-labelledby="gallery-title" style={{ "--halo": "213 140 255" } as CSSProperties} className="border-b border-line py-20 lg:py-24">
       <div className="wrap">
         <div className="mb-10 grid max-w-[46rem] gap-4">
           <h2 id="gallery-title" data-reveal className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
-            {dict.sections.gallery.title}
+            <NeonTitle {...dict.sections.gallery} />
           </h2>
           <p data-reveal className="text-step-1 text-haze">
             {gallery.lead}
