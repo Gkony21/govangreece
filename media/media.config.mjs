@@ -24,7 +24,7 @@ const tall = [2, 3];
 
 export const media = [
   // Hero: the van at night with guests at its bar, whole, so each screen can crop it its own way. Recognizable people.
-  { id: "hero-van", ref: "P10", src: "IMG_2260.HEIC", kind: "photo", aspect: print, focus: [0.5, 0.5], widths: [480, 828, 1200, 1600], consent: "pending",
+  { id: "hero-van", ref: "P10", src: "IMG_2260.HEIC", kind: "photo", aspect: print, focus: [0.5, 0.5], widths: [480, 828, 1200, 1600], consent: "ok",
     alt: { el: "Το GO! Van ανοιχτό τη νύχτα με μωβ φώτα και καλεσμένοι στη μπάρα του", en: "The GO! Van open at night in purple light, with guests at its bar" } },
 
   // Cocktails: the watercolours from the client's 2026 cocktail menu, cut out of the menu's PSD at full resolution.
@@ -59,15 +59,15 @@ export const media = [
 
   { id: "clip-van", ref: "V05", src: "IMG_1635.MOV", kind: "video", trim: [5, 6], consent: "none", // starts after the number plate leaves the frame
     alt: { el: "Το van με τη μπάρα ανοιχτή, από κοντά", en: "A close look at the van with its bar open" } },
-  { id: "clip-mirror", ref: "V06", src: "4f523286234648adb452931bd46dccf5.MOV", kind: "video", trim: [0, 4.3], consent: "pending", // a guest photo on the mirror's screen
+  { id: "clip-mirror", ref: "V06", src: "4f523286234648adb452931bd46dccf5.MOV", kind: "video", trim: [0, 4.3], consent: "ok", // a guest photo on the mirror's screen
     alt: { el: "Το Mirror Photo Booth σε λειτουργία", en: "The Mirror Photo Booth in action" } },
   { id: "clip-360", ref: "V11", src: "IMG_4436.MP4", kind: "video", trim: [0, 6], consent: "none",
     alt: { el: "Η πλατφόρμα 360 στημένη με θέα", en: "The 360 platform set up with a view" } },
   { id: "clip-cocktails", ref: "V13+V20", src: ["IMG_1676.MOV", "d8c1b430392c4c8d81a2fc86a0dd9128.MOV"], kind: "video", consent: "none",
     alt: { el: "Κοκτέιλ σερβίρονται στη μπάρα", en: "Cocktails being poured at the bar" } },
-  { id: "clip-bar", ref: "V25", src: "IMG_2083.mov", kind: "video", trim: [0, 4.8], consent: "pending",
+  { id: "clip-bar", ref: "V25", src: "IMG_2083.mov", kind: "video", trim: [0, 4.8], consent: "ok",
     alt: { el: "Η φορητή μπάρα με την πρόσοψη VW και barman πίσω της", en: "The portable bar with its VW front and a barman behind it" } },
-  { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "pending",
+  { id: "clip-guestbook", ref: "V12", src: "4a00da921a2c408fb6c74d80c6ca502e.MOV", kind: "video", trim: [0, 5.9], consent: "ok",
     alt: { el: "Καλεσμένη αφήνει ευχή στο τηλέφωνο", en: "A guest leaving a message on the guestbook phone" } },
 
   // Full-width "breathers" between sections, with parallax. On computers the photo fills one side of the screen,
@@ -86,7 +86,7 @@ export const media = [
   // Gallery: moments with people first (the site sells the night, not the equipment). The largest size is for the lightbox.
   // The "frame-*" sources are single frames from the client's videos, kept in design/assets.
   ...[
-    ["gallery-moment-green", "P84", "IMG_3493.HEIC", undefined, [0.5, 0.52], "pending", { el: "Ο barman σερβίρει καλεσμένο στο van με πράσινα φώτα", en: "The barman serving a guest at the van in green light" }],
+    ["gallery-moment-green", "P84", "IMG_3493.HEIC", undefined, [0.5, 0.52], "ok", { el: "Ο barman σερβίρει καλεσμένο στο van με πράσινα φώτα", en: "The barman serving a guest at the van in green light" }],
     ["gallery-moment-cheers", "P14", "IMG_3111.JPG", undefined, [0.62, 0.45], "none", { el: "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van", en: "A smiling guest raising a glass beside the van" }],
     ["gallery-360-night", "P12", "IMG_0211.HEIC", undefined, [0.5, 0.6], "none", { el: "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή", en: "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign" }],
     ["gallery-phone-mirror", "P13", "IMG_9631.HEIC", undefined, [0.5, 0.6], "none", { el: "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο", en: "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley" }, [[0.595, 0.265, 0.22, 0.055]]],
