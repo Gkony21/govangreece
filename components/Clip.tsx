@@ -12,8 +12,8 @@ type Props = {
   className?: string;
 };
 
-// A short silent loop. Its poster frame and the video start downloading when it comes near (so the first load of the
-// page carries none of them), and it plays only while on screen. It never plays with "reduce motion" on: then the
+// A short silent loop. Its poster frame and then the video start downloading as it comes near (so the first load of
+// the page carries none of them), and it plays only while on screen. It never plays with "reduce motion" on: then the
 // poster frame stays as a still photo.
 export default function Clip({ id, locale, className }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -26,17 +26,28 @@ export default function Clip({ id, locale, className }: Props) {
     if (!video) return;
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // The poster well ahead; the video itself (a few hundred KB) only just before it shows, so a visitor who never
+    // scrolls that far never downloads it.
     const near = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         video.poster = clip.poster;
-        if (!still) video.preload = "auto";
         near.disconnect();
       },
       { rootMargin: "600px 0px" },
     );
     near.observe(video);
     if (still) return () => near.disconnect();
+
+    const closer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        video.preload = "auto";
+        closer.disconnect();
+      },
+      { rootMargin: "200px 0px" },
+    );
+    closer.observe(video);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -48,6 +59,7 @@ export default function Clip({ id, locale, className }: Props) {
     observer.observe(video);
     return () => {
       near.disconnect();
+      closer.disconnect();
       observer.disconnect();
     };
   }, [clip.poster]);
