@@ -94,6 +94,8 @@ export type Dictionary = {
   // Lines over the full-width photos between sections. The neon words end the line and glow on computers;
   // link: a small link under the line, on computers.
   breaths: Record<BreathId, { lead: string; neon: string; link: string }>;
+  // The 5x15 prints shown over the page (components/PrintViewer.tsx).
+  prints: { open: string; title: string; caption: string; close: string };
   gallery: {
     lead: string;
     instagram: string;

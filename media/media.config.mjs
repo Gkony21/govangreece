@@ -92,6 +92,14 @@ export const media = [
     ["gallery-phone-mirror", "P13", "IMG_9631.HEIC", undefined, [0.5, 0.6], "none", { el: "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο", en: "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley" }, [[0.595, 0.265, 0.22, 0.055]]],
   ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
 
+  // Printed 5x15 strips from the Mirror Photo Booth, shown on request (components/PrintViewer.tsx). The print has two
+  // identical columns: region keeps the left one. The child's name and the date are painted over with made-up ones
+  // (design/assets/print-*-clean.jpg).
+  { id: "print-party", ref: "print", src: "print-party-clean.jpg", dir: "../design/assets", kind: "photo", region: [0.015, 0, 0.49, 1], aspect: [588, 1800], focus: [0.5, 0.5], widths: [400, 700], consent: "ok",
+    alt: { el: "Εκτύπωση 5x15 με τρεις λήψεις μιας παρέας με ροζ καπέλο και ντισκομπάλα, σε ροζ σχέδιο με ουράνιο τόξο", en: "A 5x15 print: three shots of friends with a pink hat and a disco ball, in a pink rainbow design" } },
+  { id: "print-tropical", ref: "print", src: "print-tropical-clean.jpg", dir: "../design/assets", kind: "photo", region: [0.015, 0, 0.49, 1], aspect: [588, 1800], focus: [0.5, 0.5], widths: [400, 700], consent: "ok",
+    alt: { el: "Εκτύπωση 5x15 με τρεις λήψεις ενός ζευγαριού μπροστά σε πέτρινο τοίχο, σε τροπικό σχέδιο με παπαγάλους", en: "A 5x15 print: three shots of a couple by a stone wall, in a tropical design with parrots" } },
+
   // Short loops straight from the booth, kept at their full width. "family" shows the client's own family, children
   // included: the one exception to "no children", decided by the developer on 2026-11-09.
   { id: "gallery-clip-friends", ref: "booth", src: "gallery-clip-friends.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import FairyLights from "@/components/FairyLights";
 import NeonSign from "@/components/NeonSign";
+import PrintViewer from "@/components/PrintViewer";
 import type { BreathId, Dictionary, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
@@ -80,6 +81,8 @@ type Props = {
   id: BreathId;
   line: Dictionary["breaths"][BreathId];
   locale: Locale;
+  // A second link that opens the Mirror Photo Booth's prints over the page (the "memories" breath).
+  prints?: Dictionary["prints"];
 };
 
 // A "breath" between sections: a big photo with one line beside it. The photo ends in a bent neon tube, and is taller than its frame, drifting through it as the page scrolls (parallax): CSS in globals.css,
@@ -87,7 +90,7 @@ type Props = {
 // words glowing like the sign, and a small link under it.
 // Phones: the photo fills the width at the top, the line and the sign below it.
 // Computers: the photo fills one side, the line stands on the other, under a string of fairy lights, the sign on the tube.
-export default function Breath({ id, line, locale }: Props) {
+export default function Breath({ id, line, locale, prints }: Props) {
   const breath = breaths[id];
   const { photo, side, glow, sign, halo, href, shift, photoWidth, focus } = breath;
   const square = media[photo];
@@ -148,12 +151,15 @@ export default function Breath({ id, line, locale }: Props) {
           <p className="max-w-[14ch] font-display text-[clamp(2.6rem,8vw,5.5rem)] leading-[0.95] font-extrabold text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.55)] lg:max-w-[15ch] lg:text-[clamp(3.5rem,min(5.2vw,9svh),5.4rem)] lg:leading-[0.93]">
             {line.lead} <span className="neon-words">{line.neon}</span>
           </p>
-          <a
-            href={href}
-            className="breath-link inline-flex min-h-11 items-center font-display text-[1.2rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon lg:text-[1.3rem]"
-          >
-            {line.link}
-          </a>
+          <div className="flex flex-wrap gap-x-7">
+            <a
+              href={href}
+              className="breath-link inline-flex min-h-11 items-center font-display text-[1.2rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon lg:text-[1.3rem]"
+            >
+              {line.link}
+            </a>
+            {prints && <PrintViewer labels={prints} locale={locale} look="link" />}
+          </div>
         </div>
       </div>
     </div>

@@ -136,6 +136,12 @@ export const en = {
     memories: { lead: "Every guest leaves with a", neon: "memory.", link: "See the Mirror Photo Booth" },
     date: { lead: "Tell us the date. We'll take care of", neon: "the rest.", link: "Ask for a quote" },
   },
+  prints: {
+    open: "See the prints",
+    title: "Prints from the Mirror Photo Booth",
+    caption: "The 5x15 print every guest takes home, in your own design.",
+    close: "Close",
+  },
   gallery: {
     lead: "From weddings, parties and openings. Tap a photo to see it larger.",
     instagram: "More on Instagram",
