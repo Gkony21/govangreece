@@ -8,6 +8,8 @@ type Item = {
   wide: boolean;
   // The big scene across the whole grid.
   feature: boolean;
+  // Moves to the end of the grid from tablets up, so the two clips sit in opposite corners. Phones keep the list order.
+  last?: boolean;
   // The thumbnail, rendered on the server.
   thumb: ReactNode;
   // The large version for the lightbox. A clip has none: it plays where it is.
@@ -75,7 +77,7 @@ export default function GalleryGrid({ items, labels }: Props) {
             style={{ transitionDelay: `${(i % 4) * 0.07}s` }}
             className={`relative overflow-hidden rounded-md bg-night-2 ${
               item.feature ? "col-span-full aspect-[4/3] md:aspect-[21/9]" : item.wide ? "col-span-2 aspect-[8/5] md:aspect-auto" : "aspect-[4/5]"
-            } ${i >= phoneFirst ? "max-md:hidden" : ""}`}
+            } ${i >= phoneFirst ? "max-md:hidden" : ""} ${item.last ? "md:order-last" : ""}`}
           >
             {item.full ? (
               <button

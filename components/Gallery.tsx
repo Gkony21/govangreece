@@ -14,7 +14,7 @@ const photos = [
   { clip: "gallery-clip-friends", wide: true },
   { id: "gallery-moment-green" },
   { id: "gallery-moment-cheers" },
-  { clip: "gallery-clip-family" },
+  { clip: "gallery-clip-family", last: true },
   { id: "gallery-moment-wedding" },
   { id: "gallery-360-night" },
   { id: "gallery-phone-mirror" },
@@ -46,7 +46,7 @@ export default function Gallery({ dict }: Props) {
             const wide = "wide" in photo;
             const feature = "feature" in photo;
             if ("clip" in photo) {
-              return { wide, feature, thumb: <Clip id={photo.clip} locale={dict.locale} className="absolute inset-0 size-full object-cover" /> };
+              return { wide, feature, last: "last" in photo, thumb: <Clip id={photo.clip} locale={dict.locale} className="absolute inset-0 size-full object-cover" /> };
             }
             const { id } = photo;
             const { src, srcSet, width, height, alt } = media[id];
