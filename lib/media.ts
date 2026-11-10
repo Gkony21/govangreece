@@ -11,7 +11,7 @@ export const media = {
       "el": "Το GO! Van ανοιχτό τη νύχτα με μωβ φώτα και καλεσμένοι στη μπάρα του",
       "en": "The GO! Van open at night in purple light, with guests at its bar"
     },
-    "consent": "pending"
+    "consent": "ok"
   },
   "cocktail-signature-1": {
     "kind": "photo",
@@ -203,7 +203,7 @@ export const media = {
       "el": "Το Mirror Photo Booth σε λειτουργία",
       "en": "The Mirror Photo Booth in action"
     },
-    "consent": "pending"
+    "consent": "ok"
   },
   "clip-360": {
     "kind": "video",
@@ -239,7 +239,7 @@ export const media = {
       "el": "Η φορητή μπάρα με την πρόσοψη VW και barman πίσω της",
       "en": "The portable bar with its VW front and a barman behind it"
     },
-    "consent": "pending"
+    "consent": "ok"
   },
   "clip-guestbook": {
     "kind": "video",
@@ -251,7 +251,7 @@ export const media = {
       "el": "Καλεσμένη αφήνει ευχή στο τηλέφωνο",
       "en": "A guest leaving a message on the guestbook phone"
     },
-    "consent": "pending"
+    "consent": "ok"
   },
   "break-drinks-red": {
     "kind": "photo",
@@ -335,7 +335,7 @@ export const media = {
       "el": "Ο barman σερβίρει καλεσμένο στο van με πράσινα φώτα",
       "en": "The barman serving a guest at the van in green light"
     },
-    "consent": "pending"
+    "consent": "ok"
   },
   "gallery-moment-cheers": {
     "kind": "photo",
