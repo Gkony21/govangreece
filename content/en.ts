@@ -70,7 +70,7 @@ export const en = {
         name: "Audio Guestbook",
         alias: "GO! Guestbook",
         text: "A vintage phone. Guests pick it up, hear your greeting and leave their wishes in their own voice.",
-        facts: ["For the whole event", "No power needed", "Unlimited recordings", "Your own greeting"],
+        facts: ["For the whole event", "Unlimited recordings", "Your own greeting"],
         gift: "Gift: a USB stick with all the wishes",
       },
       {
@@ -89,7 +89,7 @@ export const en = {
         name: "Portable Bar",
         alias: "The bar without the van",
         text: "The bar with the VW front, for venues where the van can't go.",
-        facts: ["For the whole event", "With or without a bartender", "We can bring the drinks too"],
+        facts: ["For the whole event", "With or without a bartender"],
       },
     ],
     bag: {
@@ -163,7 +163,7 @@ export const en = {
     text: "Mostly weddings and christenings, but also shop openings, corporate events and parties. We arrive early, set up, and make sure everyone has a great time until we pack up.",
     areaTitle: "Where we go",
     home: "Sparta",
-    areas: ["All of Laconia", "The Peloponnese", "Athens and further"],
+    areas: ["Laconia", "The Peloponnese", "Athens and further"],
     areaNote: "Outside the Peloponnese, by arrangement.",
   },
   faq: {
@@ -195,7 +195,7 @@ export const en = {
         items: [
           {
             q: "What does the venue need?",
-            a: "A power socket near where we set up, for everything except the guestbook phone. If the event is outdoors and it rains, we need an indoor or covered space.",
+            a: "A power socket near where we set up, for every service. If the event is outdoors and it rains, we need an indoor or covered space.",
           },
           {
             q: "How early do you arrive?",
