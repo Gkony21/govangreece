@@ -16,6 +16,9 @@ export default function SiteFooter({ dict }: Props) {
           <a href={site.social.instagram} rel="noopener" className="no-underline hover:text-ink max-lg:inline-block max-lg:py-[11px]">
             Instagram
           </a>
+          <a href={site.social.facebook} rel="noopener" className="no-underline hover:text-ink max-lg:inline-block max-lg:py-[11px]">
+            Facebook
+          </a>
           <a href={site.social.tiktok} rel="noopener" className="no-underline hover:text-ink max-lg:inline-block max-lg:py-[11px]">
             TikTok
           </a>

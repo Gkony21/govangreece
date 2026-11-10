@@ -44,7 +44,7 @@ export default function BusinessJsonLd({ dict, path }: Props) {
           place("AdministrativeArea", el ? "Πελοπόννησος" : "Peloponnese"),
           place("Country", el ? "Ελλάδα" : "Greece"),
         ],
-        sameAs: [site.social.instagram, site.social.tiktok, site.google.url],
+        sameAs: [site.social.instagram, site.social.facebook, site.social.tiktok, site.google.url],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: dict.sections.services.title,

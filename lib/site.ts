@@ -13,6 +13,7 @@ export const site = {
   },
   social: {
     instagram: "https://www.instagram.com/govan.official/",
+    facebook: "https://www.facebook.com/profile.php?id=61571209124874",
     tiktok: "https://www.tiktok.com/@govangreece",
   },
   // The Google Business Profile: rating and number of reviews, updated by hand when they change.
