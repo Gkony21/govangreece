@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Clip from "@/components/Clip";
 import GalleryGrid from "@/components/GalleryGrid";
 import NeonTitle from "@/components/NeonTitle";
 import Photo from "@/components/Photo";
@@ -6,16 +7,17 @@ import type { Dictionary } from "@/content/types";
 import { media } from "@/lib/media";
 import { site } from "@/lib/site";
 
-// In grid order. One big scene across the top, then four columns from tablets up: the wide photo takes two of them.
+// In grid order. One big scene across the top, then four columns from tablets up: the wide one takes two of them.
+// A "clip" is a short silent loop in place of a photo.
 const photos = [
   { id: "gallery-van-crowd", feature: true },
-  { id: "gallery-moment-laugh" },
+  { clip: "gallery-clip-friends", wide: true },
   { id: "gallery-moment-green" },
-  { id: "gallery-moment-pour" },
-  { id: "gallery-moment-portable" },
-  { id: "gallery-moment-wedding", wide: true },
-  { id: "gallery-moment-van-far" },
-  { id: "gallery-moment-call" },
+  { id: "gallery-moment-cheers" },
+  { clip: "gallery-clip-family", last: true },
+  { id: "gallery-moment-wedding" },
+  { id: "gallery-360-night" },
+  { id: "gallery-phone-mirror" },
 ] as const;
 
 type Props = {
@@ -40,9 +42,13 @@ export default function Gallery({ dict }: Props) {
 
         <GalleryGrid
           labels={gallery}
-          items={photos.map(({ id, ...photo }) => {
+          items={photos.map((photo) => {
             const wide = "wide" in photo;
             const feature = "feature" in photo;
+            if ("clip" in photo) {
+              return { wide, feature, last: "last" in photo, thumb: <Clip id={photo.clip} locale={dict.locale} className="absolute inset-0 size-full object-cover" /> };
+            }
+            const { id } = photo;
             const { src, srcSet, width, height, alt } = media[id];
             return {
               wide,

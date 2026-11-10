@@ -8,10 +8,12 @@ type Item = {
   wide: boolean;
   // The big scene across the whole grid.
   feature: boolean;
+  // Moves to the end of the grid from tablets up, so the two clips sit in opposite corners. Phones keep the list order.
+  last?: boolean;
   // The thumbnail, rendered on the server.
   thumb: ReactNode;
-  // The large version for the lightbox.
-  full: { src: string; srcSet: string; width: number; height: number; alt: string };
+  // The large version for the lightbox. A clip has none: it plays where it is.
+  full?: { src: string; srcSet: string; width: number; height: number; alt: string };
 };
 
 type Props = {
@@ -34,7 +36,8 @@ export default function GalleryGrid({ items, labels }: Props) {
   const start = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
 
-  const current = items[index].full;
+  const photos = items.flatMap((item) => item.full ?? []);
+  const current = photos[index];
 
   function open(i: number) {
     setIndex(i);
@@ -42,7 +45,7 @@ export default function GalleryGrid({ items, labels }: Props) {
   }
 
   function step(by: number) {
-    setIndex((i) => (i + by + items.length) % items.length);
+    setIndex((i) => (i + by + photos.length) % photos.length);
   }
 
   function onPointerDown(e: PointerEvent) {
@@ -69,21 +72,25 @@ export default function GalleryGrid({ items, labels }: Props) {
       <ul className="grid grid-flow-dense grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
         {items.map((item, i) => (
           <li
-            key={item.full.src}
+            key={item.full?.src ?? i}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 0.07}s` }}
             className={`relative overflow-hidden rounded-md bg-night-2 ${
               item.feature ? "col-span-full aspect-[4/3] md:aspect-[21/9]" : item.wide ? "col-span-2 aspect-[8/5] md:aspect-auto" : "aspect-[4/5]"
-            } ${i >= phoneFirst ? "max-md:hidden" : ""}`}
+            } ${i >= phoneFirst ? "max-md:hidden" : ""} ${item.last ? "md:order-last" : ""}`}
           >
-            <button
-              type="button"
-              onClick={() => open(i)}
-              aria-label={labels.open.replace("{alt}", item.full.alt)}
-              className="group absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-amber"
-            >
-              {item.thumb}
-            </button>
+            {item.full ? (
+              <button
+                type="button"
+                onClick={() => open(photos.indexOf(item.full!))}
+                aria-label={labels.open.replace("{alt}", item.full.alt)}
+                className="group absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-amber"
+              >
+                {item.thumb}
+              </button>
+            ) : (
+              item.thumb
+            )}
           </li>
         ))}
       </ul>
@@ -121,7 +128,7 @@ export default function GalleryGrid({ items, labels }: Props) {
           <figcaption className="text-center text-step--1 text-haze">
             {current.alt}
             <span className="ml-2 text-ink">
-              {labels.counter.replace("{n}", String(index + 1)).replace("{total}", String(items.length))}
+              {labels.counter.replace("{n}", String(index + 1)).replace("{total}", String(photos.length))}
             </span>
           </figcaption>
         </figure>

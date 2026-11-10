@@ -26,7 +26,7 @@ type Service = {
   alias: string;
   text: string;
   // Two ways to book it, side by side (360 classic or overhead, van full or semi service).
-  options?: { title: string; text: string }[];
+  options?: { title: string; text: string; tag?: string }[];
   facts: string[];
   gift?: string;
 };
@@ -54,7 +54,6 @@ export type Dictionary = {
     titleLead: string;
     title: string;
     // Shown bold, then the rest of the sentence in a lighter colour.
-    leadStrong: string;
     lead: string;
     servicesCta: string;
     servicesCtaShort: string;
@@ -162,7 +161,7 @@ export type Dictionary = {
       services: string;
       // Ticks every service at once.
       all: string;
-      // Opens email, place, guests and message.
+      // Opens email, guests and message.
       more: string;
       message: string;
       // Above the button, once a cocktail has a name; {names} becomes the names.
@@ -183,6 +182,7 @@ export type Dictionary = {
         email: string;
         date: string;
         datePast: string;
+        place: string;
         // Next to the button, after a try with mistakes; {count} becomes how many fields need fixing.
         summaryOne: string;
         summaryMany: string;

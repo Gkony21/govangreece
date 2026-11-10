@@ -133,6 +133,18 @@ export const media = {
     },
     "consent": "none"
   },
+  "service-360-overhead": {
+    "kind": "photo",
+    "src": "/media/service-360-overhead-480.webp",
+    "srcSet": "/media/service-360-overhead-480.webp 480w, /media/service-360-overhead-960.webp 960w",
+    "width": 960,
+    "height": 1200,
+    "alt": {
+      "el": "Το Overhead 360: μαύρη αψίδα με το logo του GO! Van και κάμερα που γυρίζει από πάνω",
+      "en": "The Overhead 360: a black arch with the GO! Van logo and a camera that circles from above"
+    },
+    "consent": "none"
+  },
   "service-guestbook": {
     "kind": "photo",
     "src": "/media/service-guestbook-480.webp",
@@ -224,10 +236,10 @@ export const media = {
     "width": 540,
     "height": 960,
     "alt": {
-      "el": "Η πρόσοψη VW της φορητής μπάρας με αναμμένα φώτα",
-      "en": "The VW front of the portable bar with its lights on"
+      "el": "Η φορητή μπάρα με την πρόσοψη VW και barman πίσω της",
+      "en": "The portable bar with its VW front and a barman behind it"
     },
-    "consent": "none"
+    "consent": "pending"
   },
   "clip-guestbook": {
     "kind": "video",
@@ -241,46 +253,46 @@ export const media = {
     },
     "consent": "pending"
   },
-  "break-van-lit": {
+  "break-drinks-red": {
     "kind": "photo",
-    "src": "/media/break-van-lit-900.webp",
-    "srcSet": "/media/break-van-lit-900.webp 900w, /media/break-van-lit-1400.webp 1400w, /media/break-van-lit-1800.webp 1800w",
+    "src": "/media/break-drinks-red-900.webp",
+    "srcSet": "/media/break-drinks-red-900.webp 900w, /media/break-drinks-red-1400.webp 1400w, /media/break-drinks-red-1800.webp 1800w",
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Το GO! Van αναμμένο με μωβ φώτα τη νύχτα",
-      "en": "The GO! Van lit up in purple at night"
+      "el": "Η μπάρα του van με κόκκινα ποτά και κόκκινα φώτα, στην οθόνη πέφτουν ροδοπέταλα",
+      "en": "The van's bar with red drinks and red lights, rose petals falling on its screen"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "break-van-lit-tall": {
+  "break-drinks-red-tall": {
     "kind": "photo",
-    "src": "/media/break-van-lit-tall-640.webp",
-    "srcSet": "/media/break-van-lit-tall-640.webp 640w, /media/break-van-lit-tall-1080.webp 1080w",
+    "src": "/media/break-drinks-red-tall-640.webp",
+    "srcSet": "/media/break-drinks-red-tall-640.webp 640w, /media/break-drinks-red-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {
       "el": "",
       "en": ""
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "break-mirror-sunset": {
+  "break-mirror-stone": {
     "kind": "photo",
-    "src": "/media/break-mirror-sunset-900.webp",
-    "srcSet": "/media/break-mirror-sunset-900.webp 900w, /media/break-mirror-sunset-1400.webp 1400w, /media/break-mirror-sunset-1800.webp 1800w",
+    "src": "/media/break-mirror-stone-900.webp",
+    "srcSet": "/media/break-mirror-stone-900.webp 900w, /media/break-mirror-stone-1400.webp 1400w, /media/break-mirror-stone-1800.webp 1800w",
     "width": 1800,
     "height": 1800,
     "alt": {
-      "el": "Το Mirror Photo Booth με κόκκινο χαλί στο ηλιοβασίλεμα",
-      "en": "The Mirror Photo Booth on a red carpet at sunset"
+      "el": "Το Mirror Photo Booth με κόκκινο χαλί και χρυσά κολωνάκια μπροστά σε πέτρινο τοίχο, δίπλα το τραπέζι με τα props",
+      "en": "The Mirror Photo Booth with a red carpet and gold posts by a stone wall, the props table beside it"
     },
     "consent": "none"
   },
-  "break-mirror-sunset-tall": {
+  "break-mirror-stone-tall": {
     "kind": "photo",
-    "src": "/media/break-mirror-sunset-tall-640.webp",
-    "srcSet": "/media/break-mirror-sunset-tall-640.webp 640w, /media/break-mirror-sunset-tall-1080.webp 1080w",
+    "src": "/media/break-mirror-stone-tall-640.webp",
+    "srcSet": "/media/break-mirror-stone-tall-640.webp 640w, /media/break-mirror-stone-tall-1080.webp 1080w",
     "width": 1080,
     "height": 1620,
     "alt": {
@@ -313,18 +325,6 @@ export const media = {
     },
     "consent": "none"
   },
-  "gallery-moment-laugh": {
-    "kind": "photo",
-    "src": "/media/gallery-moment-laugh-400.webp",
-    "srcSet": "/media/gallery-moment-laugh-400.webp 400w, /media/gallery-moment-laugh-800.webp 800w, /media/gallery-moment-laugh-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
-    "alt": {
-      "el": "Καλεσμένοι γελάνε με τα money guns δίπλα στον καθρέφτη",
-      "en": "Guests laughing with the money guns beside the mirror booth"
-    },
-    "consent": "pending"
-  },
   "gallery-moment-green": {
     "kind": "photo",
     "src": "/media/gallery-moment-green-400.webp",
@@ -337,53 +337,65 @@ export const media = {
     },
     "consent": "pending"
   },
-  "gallery-moment-pour": {
+  "gallery-moment-cheers": {
     "kind": "photo",
-    "src": "/media/gallery-moment-pour-400.webp",
-    "srcSet": "/media/gallery-moment-pour-400.webp 400w, /media/gallery-moment-pour-800.webp 800w, /media/gallery-moment-pour-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
+    "src": "/media/gallery-moment-cheers-400.webp",
+    "srcSet": "/media/gallery-moment-cheers-400.webp 400w, /media/gallery-moment-cheers-800.webp 800w, /media/gallery-moment-cheers-1024.webp 1024w",
+    "width": 1024,
+    "height": 1280,
     "alt": {
-      "el": "Ο barman φτιάχνει κοκτέιλ κάτω από μωβ φως",
-      "en": "The barman mixing a cocktail under purple light"
+      "el": "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van",
+      "en": "A smiling guest raising a glass beside the van"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "gallery-moment-portable": {
+  "gallery-360-night": {
     "kind": "photo",
-    "src": "/media/gallery-moment-portable-400.webp",
-    "srcSet": "/media/gallery-moment-portable-400.webp 400w, /media/gallery-moment-portable-800.webp 800w, /media/gallery-moment-portable-1080.webp 1080w",
+    "src": "/media/gallery-360-night-400.webp",
+    "srcSet": "/media/gallery-360-night-400.webp 400w, /media/gallery-360-night-800.webp 800w, /media/gallery-360-night-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Το Portable Bar με τον barman και neon επιγραφή",
-      "en": "The Portable Bar with the barman and a neon sign"
+      "el": "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή",
+      "en": "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "gallery-moment-van-far": {
+  "gallery-phone-mirror": {
     "kind": "photo",
-    "src": "/media/gallery-moment-van-far-400.webp",
-    "srcSet": "/media/gallery-moment-van-far-400.webp 400w, /media/gallery-moment-van-far-800.webp 800w, /media/gallery-moment-van-far-1080.webp 1080w",
+    "src": "/media/gallery-phone-mirror-400.webp",
+    "srcSet": "/media/gallery-phone-mirror-400.webp 400w, /media/gallery-phone-mirror-800.webp 800w, /media/gallery-phone-mirror-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Το van αναμμένο ανάμεσα στα τραπέζια τη νύχτα",
-      "en": "The van lit up among the tables at night"
+      "el": "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο",
+      "en": "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley"
     },
-    "consent": "pending"
+    "consent": "none"
   },
-  "gallery-moment-call": {
-    "kind": "photo",
-    "src": "/media/gallery-moment-call-400.webp",
-    "srcSet": "/media/gallery-moment-call-400.webp 400w, /media/gallery-moment-call-800.webp 800w, /media/gallery-moment-call-1080.webp 1080w",
-    "width": 1080,
-    "height": 1350,
+  "gallery-clip-friends": {
+    "kind": "video",
+    "src": "/video/gallery-clip-friends.mp4",
+    "poster": "/media/gallery-clip-friends-poster.webp",
+    "width": 720,
+    "height": 480,
     "alt": {
-      "el": "Καλεσμένη αφήνει ευχή στο τηλέφωνο",
-      "en": "A guest leaving a message on the guestbook phone"
+      "el": "Παρέα ποζάρει στο booth με ροζ καπέλο και ντισκομπάλα",
+      "en": "Friends posing at the booth with a pink hat and a disco ball"
     },
-    "consent": "pending"
+    "consent": "none"
+  },
+  "gallery-clip-family": {
+    "kind": "video",
+    "src": "/video/gallery-clip-family.mp4",
+    "poster": "/media/gallery-clip-family-poster.webp",
+    "width": 720,
+    "height": 480,
+    "alt": {
+      "el": "Οικογένεια ποζάρει στο booth με γυαλιά και props",
+      "en": "A family posing at the booth with party glasses and props"
+    },
+    "consent": "none"
   },
   "gallery-moment-wedding": {
     "kind": "photo",
@@ -407,7 +419,7 @@ export const media = {
       "el": "Καλεσμένοι γύρω από το van σε γλέντι",
       "en": "Guests gathered around the van at a party"
     },
-    "consent": "pending"
+    "consent": "none"
   }
 } as const;
 
