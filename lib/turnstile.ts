@@ -21,7 +21,7 @@ const testKey = "1x00000000000000000000AA";
 const siteKey = "0x4AAAAAAFztYOKddLrEZ5nv";
 
 // How long a send waits for the token before giving up, a box to tick included.
-const patience = 60_000;
+const patience = 20_000;
 
 let loading: Promise<Turnstile> | undefined;
 

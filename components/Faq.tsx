@@ -81,13 +81,13 @@ export default function Faq({ dict }: Props) {
               {after}
             </p>
             <div className="flex flex-wrap gap-3">
-              <ButtonLink href={links.call} variant="tube" size="sm">
+              <ButtonLink href={links.call} variant="tube" size="sm" className="min-h-11">
                 {faq.call}
               </ButtonLink>
-              <ButtonLink href={links.viber} variant="tube" size="sm">
+              <ButtonLink href={links.viber} variant="tube" size="sm" className="min-h-11">
                 Viber
               </ButtonLink>
-              <ButtonLink href={links.whatsapp} variant="tube" size="sm" rel="noopener">
+              <ButtonLink href={links.whatsapp} variant="tube" size="sm" className="min-h-11" rel="noopener">
                 WhatsApp
               </ButtonLink>
             </div>

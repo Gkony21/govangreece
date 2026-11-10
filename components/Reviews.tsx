@@ -77,7 +77,7 @@ function GoogleLink({ label, className }: { label: string; className: string }) 
     <a
       href={site.google.url}
       rel="noopener"
-      className={`items-center gap-2.5 font-display text-[1.3rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon ${className}`}
+      className={`min-h-11 items-center gap-2.5 font-display text-[1.3rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon ${className}`}
     >
       {label}
     </a>

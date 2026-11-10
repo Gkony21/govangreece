@@ -12,8 +12,9 @@ type Props = {
   className?: string;
 };
 
-// A short silent loop. It downloads and plays only while on screen, and never plays with "reduce motion" on:
-// then the poster frame stays as a still photo.
+// A short silent loop. Its poster frame and the video start downloading when it comes near (so the first load of the
+// page carries none of them), and it plays only while on screen. It never plays with "reduce motion" on: then the
+// poster frame stays as a still photo.
 export default function Clip({ id, locale, className }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const clip = media[id];
@@ -22,7 +23,20 @@ export default function Clip({ id, locale, className }: Props) {
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!video) return;
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const near = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        video.poster = clip.poster;
+        if (!still) video.preload = "auto";
+        near.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+    near.observe(video);
+    if (still) return () => near.disconnect();
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -32,14 +46,16 @@ export default function Clip({ id, locale, className }: Props) {
       { threshold: 0.25 },
     );
     observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      near.disconnect();
+      observer.disconnect();
+    };
+  }, [clip.poster]);
 
   return (
     <video
       ref={ref}
       src={src}
-      poster={clip.poster}
       width={clip.width}
       height={clip.height}
       aria-label={clip.alt[locale]}
