@@ -74,6 +74,8 @@ export default function FairyLights({
     let visible = false;
 
     function layout() {
+      // Phones fire resize when the address bar slides away: keep the same bulbs when the canvas has not changed size.
+      if (w && canvas!.clientWidth === w && canvas!.clientHeight === h) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = canvas!.clientWidth;
       h = canvas!.clientHeight;
@@ -129,6 +131,8 @@ export default function FairyLights({
         ctx!.arc(b.x, b.y, b.r, 0, Math.PI * 2);
         ctx!.fill();
       }
+      // The hero's opening (app/globals.css) spreads the bulbs from this moment, not from when the page first showed.
+      if (bulbs.length && !("lit" in canvas!.dataset)) canvas!.dataset.lit = "";
       if (!still && visible) frame = requestAnimationFrame(draw);
     }
 

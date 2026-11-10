@@ -10,7 +10,6 @@ import Hero from "@/components/Hero";
 import NeonSeam, { type NeonSeamProps } from "@/components/NeonSeam";
 import PackageBar from "@/components/PackageBar";
 import ParallaxFallback from "@/components/ParallaxFallback";
-import RevealObserver from "@/components/RevealObserver";
 import Reviews from "@/components/Reviews";
 import ServiceBand from "@/components/ServiceBand";
 import Services from "@/components/Services";
@@ -89,7 +88,6 @@ export default function HomePage({ dict, homeHref }: Props) {
       <NeonSeam from="night" to="night" climbs="up" />
       <SiteFooter dict={dict} />
       <PackageBar services={dict.services} quoteCta={dict.quoteCta} />
-      <RevealObserver />
       <ParallaxFallback />
     </>
   );

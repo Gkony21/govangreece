@@ -59,4 +59,10 @@ export const viewport: Viewport = {
 export const jsFlagScript =
   "var d=document.documentElement;d.classList.add('js');try{var n=performance.getEntriesByType('navigation')[0];" +
   // The hero's lights come on only for someone arriving from elsewhere: not on a reload, "back", or a link within the site.
-  "if(n&&n.type==='navigate'&&document.referrer.indexOf(location.origin)!==0)d.classList.add('hero-intro')}catch(e){}";
+  "if(n&&n.type==='navigate'&&document.referrer.indexOf(location.origin)!==0)d.classList.add('hero-intro')}catch(e){}" +
+  // Reveal on scroll: marks [data-reveal] elements with data-in the first time they come into view (CSS in
+  // globals.css does the motion). It starts as soon as the HTML is read, without waiting for React, so on a slow phone
+  // nothing below the hero stays hidden while the page's JavaScript loads. data-reveal-ready stands the CSS failsafe down.
+  "document.addEventListener('DOMContentLoaded',function(){if(!window.IntersectionObserver)return;" +
+  "var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.setAttribute('data-in','');o.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});" +
+  "document.querySelectorAll('[data-reveal]').forEach(function(el){o.observe(el)});d.setAttribute('data-reveal-ready','')})";

@@ -146,7 +146,7 @@ body {
   to { transform: scaleX(1); }
 }
 
-/* Reveal on scroll: elements with data-reveal fade and slide in once (components/RevealObserver.tsx).
+/* Reveal on scroll: elements with data-reveal fade and slide in once (the inline script in lib/metadata.ts).
    Hidden only when JavaScript runs (html.js). If the observer never starts, a failsafe shows them after 3s. */
 html.js [data-reveal] {
   opacity: 0;
@@ -549,13 +549,13 @@ li:nth-child(3) > .review-note {
     animation: hero-van-on 0.8s 0.5s linear both;
   }
 
-  .hero-intro .hero-media canvas {
+  .hero-intro .hero-media canvas[data-lit] {
     -webkit-mask-image: radial-gradient(circle at 45.5% 15%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
     mask-image: radial-gradient(circle at 45.5% 15%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
     animation: hero-reach-phone 0.75s 0.12s steps(9, end) both;
   }
 
-  .hero-intro .hero > canvas {
+  .hero-intro .hero > canvas[data-lit] {
     -webkit-mask-image: radial-gradient(circle at 53.4% 30%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
     mask-image: radial-gradient(circle at 53.4% 30%, #000 var(--hero-reach), transparent calc(var(--hero-reach) + 34px));
     animation: hero-reach-computer 0.75s 0.12s steps(14, end) both;
@@ -883,7 +883,7 @@ html:has(.menu:popover-open) {
   text-shadow: 0 0 3px rgb(255 255 255 / 0.5), 0 0 14px #c9a8ff, 0 0 34px rgb(213 140 255 / 0.6);
   transform: skewY(-6deg);
   transform-origin: 0 100%;
-  animation: menu-link 0.85s steps(1, end) both;
+  animation: menu-link 0.85s steps(1, end) backwards;
 }
 
 .menu-links a:nth-child(1) { animation-delay: 0.5s; }
@@ -1254,7 +1254,7 @@ html:has(.menu:popover-open) {
   }
 }
 
-/* Sign and words flicker on once, as they come into view (data-in, components/RevealObserver.tsx). */
+/* Sign and words flicker on once, as they come into view (data-in, set by the inline script in lib/metadata.ts). */
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-in] .neon-sign > :not(.neon-sign-glow) {
     animation: sign-on 1.6s steps(1, end) 0.35s both;

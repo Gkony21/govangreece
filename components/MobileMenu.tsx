@@ -26,13 +26,28 @@ const wire = `M-3 8 ${bulbs.map((b) => `L${b.x} ${b.y}`).join(" ")} L103 8`;
 
 // Full-screen phone menu built on the native popover: opens and closes without JavaScript, closes on Esc. A neon line
 // comes down the screen and meets the panel with the phone numbers rising from below; then the lights and the links
-// switch on one by one (CSS in app/globals.css, .menu). The one script here closes it after a link is followed.
+// switch on one by one (CSS in app/globals.css, .menu). The script here closes it after a link is followed, and keeps
+// Tab inside it while it is open, so the keyboard never lands on the page behind.
 export default function MobileMenu({ dict, homeHref, sectionBase = "", switchHref }: Props) {
   const panel = useRef<HTMLDivElement>(null);
   const { header, contact } = dict;
 
   function closeOnLink(event: React.MouseEvent) {
     if ((event.target as HTMLElement).closest("a")) panel.current?.hidePopover();
+  }
+
+  function keepFocusInside(event: React.KeyboardEvent) {
+    if (event.key !== "Tab" || !panel.current) return;
+    const stops = panel.current.querySelectorAll<HTMLElement>("a[href], button");
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
   return (
@@ -48,7 +63,7 @@ export default function MobileMenu({ dict, homeHref, sectionBase = "", switchHre
         </svg>
       </button>
 
-      <div id="mobile-menu" ref={panel} popover="auto" onClick={closeOnLink} className="menu">
+      <div id="mobile-menu" ref={panel} popover="auto" onClick={closeOnLink} onKeyDown={keepFocusInside} className="menu">
         <div className="menu-sheet menu-sheet-top" />
         <div className="menu-sheet menu-sheet-bottom" />
         <svg className="menu-seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">

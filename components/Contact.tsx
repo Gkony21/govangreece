@@ -49,13 +49,13 @@ export default function Contact({ dict }: Props) {
             </a>
           </p>
           <div className="flex flex-wrap gap-3">
-            <ButtonLink href={links.call} variant="tube" size="sm">
+            <ButtonLink href={links.call} variant="tube" size="sm" className="min-h-11">
               {contact.call}
             </ButtonLink>
-            <ButtonLink href={links.viber} variant="tube" size="sm">
+            <ButtonLink href={links.viber} variant="tube" size="sm" className="min-h-11">
               Viber
             </ButtonLink>
-            <ButtonLink href={links.whatsapp} variant="tube" size="sm" rel="noopener">
+            <ButtonLink href={links.whatsapp} variant="tube" size="sm" className="min-h-11" rel="noopener">
               WhatsApp
             </ButtonLink>
           </div>
