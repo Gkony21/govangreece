@@ -14,9 +14,6 @@ type Props = {
 
 const strips = [media["print-party"], media["print-tropical"]];
 
-// Demo only: ?v=a|b|c picks how the prints come in, until the developer chooses one.
-const anims = ["a", "b", "c"] as const;
-
 // "See the prints": opens two real 5x15 prints from the Mirror Photo Booth over the page. They stay out of the page
 // itself (their pastel designs clash with the night colours) and load only on the first click. A native <dialog>:
 // Esc or a tap outside closes it, and focus goes back to the button.
@@ -29,15 +26,13 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
   useEffect(() => {
     if (!armed || !row.current) return;
     const imgs = [...row.current.querySelectorAll("img")];
-    Promise.all(imgs.map((img) => img.decode().catch(() => {}))).then(show);
+    // decode() can stall (a slow network, a tab in the background): never wait more than 2s for it.
+    const ready = Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+    Promise.race([ready, new Promise((r) => setTimeout(r, 2000))]).then(show);
   }, [armed]);
 
   function show() {
-    const box = dialog.current;
-    if (!box) return;
-    const v = new URLSearchParams(location.search).get("v");
-    box.dataset.anim = anims.includes(v as never) ? v! : "a";
-    box.showModal();
+    dialog.current?.showModal();
   }
 
   function open() {
