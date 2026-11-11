@@ -61,7 +61,7 @@ export default function HomePage({ dict, homeHref }: Props) {
           const seam = seamAfter[id];
           return (
             <Fragment key={id}>
-              {breath && <Breath id={breath} line={dict.breaths[breath]} locale={dict.locale} />}
+              {breath && <Breath id={breath} line={dict.breaths[breath]} locale={dict.locale} prints={breath === "memories" ? dict.prints : undefined} />}
               {id === "services" ? (
                 <Services dict={dict} />
               ) : id === "cocktails" ? (

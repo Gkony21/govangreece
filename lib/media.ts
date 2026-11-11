@@ -373,6 +373,30 @@ export const media = {
     },
     "consent": "none"
   },
+  "print-party": {
+    "kind": "photo",
+    "src": "/media/print-party-400.webp",
+    "srcSet": "/media/print-party-400.webp 400w, /media/print-party-588.webp 588w",
+    "width": 588,
+    "height": 1800,
+    "alt": {
+      "el": "Εκτύπωση 5x15 με τρεις λήψεις μιας παρέας με ροζ καπέλο και ντισκομπάλα, σε ροζ σχέδιο με ουράνιο τόξο",
+      "en": "A 5x15 print: three shots of friends with a pink hat and a disco ball, in a pink rainbow design"
+    },
+    "consent": "ok"
+  },
+  "print-tropical": {
+    "kind": "photo",
+    "src": "/media/print-tropical-400.webp",
+    "srcSet": "/media/print-tropical-400.webp 400w, /media/print-tropical-588.webp 588w",
+    "width": 588,
+    "height": 1800,
+    "alt": {
+      "el": "Εκτύπωση 5x15 με τρεις λήψεις ενός ζευγαριού μπροστά σε πέτρινο τοίχο, σε τροπικό σχέδιο με παπαγάλους",
+      "en": "A 5x15 print: three shots of a couple by a stone wall, in a tropical design with parrots"
+    },
+    "consent": "ok"
+  },
   "gallery-clip-friends": {
     "kind": "video",
     "src": "/video/gallery-clip-friends.mp4",

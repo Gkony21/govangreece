@@ -4,6 +4,7 @@ import NeonTitle from "@/components/NeonTitle";
 import OptionCycle from "@/components/OptionCycle";
 import Photo from "@/components/Photo";
 import PickButton from "@/components/PickButton";
+import PrintViewer from "@/components/PrintViewer";
 import ServiceDetails from "@/components/ServiceDetails";
 import type { Dictionary, ServiceId } from "@/content/types";
 
@@ -112,7 +113,14 @@ export default function Services({ dict }: Props) {
                     </ul>
                   </ServiceDetails>
 
-                  <PickButton id={service.id} label={services.pick} name={service.name} />
+                  {service.id === "mirror" ? (
+                    <div className="flex flex-wrap gap-3">
+                      <PickButton id={service.id} label={services.pick} name={service.name} />
+                      <PrintViewer labels={dict.prints} locale={dict.locale} look="tube" />
+                    </div>
+                  ) : (
+                    <PickButton id={service.id} label={services.pick} name={service.name} />
+                  )}
                 </div>
               </li>
             );
