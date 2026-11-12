@@ -15,8 +15,8 @@ const photos = [
   { id: "gallery-moment-green" },
   { id: "gallery-baptism" },
   { clip: "gallery-clip-family", last: true },
+  { clip: "gallery-clip-360" },
   { id: "gallery-moment-wedding" },
-  { id: "gallery-moment-cheers" },
   { id: "gallery-phone-mirror" },
 ] as const;
 

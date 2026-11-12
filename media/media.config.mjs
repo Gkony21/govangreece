@@ -107,6 +107,12 @@ export const media = [
   { id: "gallery-clip-family", ref: "booth", src: "gallery-clip-family.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",
     alt: { el: "Οικογένεια ποζάρει στο booth με γυαλιά και props", en: "A family posing at the booth with party glasses and props" } },
 
+  // The 360 booth's own slow-motion spin: a group of friends, then a father with his son at a school graduation.
+  // Edited from two of the client's videos (design/assets/gallery-clip-360.mp4); the event logos at the bottom are
+  // cut off. The son is a child: a second exception to "no children", decided by the developer on 2026-11-12.
+  { id: "gallery-clip-360", ref: "360", src: "gallery-clip-360.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 540, consent: "ok",
+    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του", en: "The 360 Video Booth spinning around a group of friends, then around a father and his son" } },
+
   // A christening: the sweets table with balloons outside the church, from the client's video V10. No people in it.
   { id: "gallery-baptism", ref: "V10", src: "frame-baptism.jpg", dir: "../design/assets", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [400, 800, 1080], consent: "none",
     alt: { el: "Βάφτιση: τραπέζι με γλυκά, μπαλόνια σε πράσινο και κρεμ, και στεφάνι με το όνομα του παιδιού", en: "A christening: a sweets table with green and cream balloons and a hoop with the child's name" } },

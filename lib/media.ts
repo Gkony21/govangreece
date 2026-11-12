@@ -421,6 +421,18 @@ export const media = {
     },
     "consent": "none"
   },
+  "gallery-clip-360": {
+    "kind": "video",
+    "src": "/video/gallery-clip-360.mp4",
+    "poster": "/media/gallery-clip-360-poster.webp",
+    "width": 540,
+    "height": 676,
+    "alt": {
+      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του",
+      "en": "The 360 Video Booth spinning around a group of friends, then around a father and his son"
+    },
+    "consent": "ok"
+  },
   "gallery-baptism": {
     "kind": "photo",
     "src": "/media/gallery-baptism-400.webp",
