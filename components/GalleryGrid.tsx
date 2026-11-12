@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useRef, useState, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 import type { Dictionary } from "@/content/types";
 
 type Item = {
@@ -12,34 +12,40 @@ type Item = {
   last?: boolean;
   // The thumbnail, rendered on the server.
   thumb: ReactNode;
-  // The large version for the lightbox. A clip has none: it plays where it is.
-  full?: { src: string; srcSet: string; width: number; height: number; alt: string };
+  // The large version for the lightbox: a photo, or a clip that plays there bigger.
+  full?: Full;
 };
+
+type Full =
+  | { kind: "photo"; src: string; srcSet: string; width: number; height: number; alt: string }
+  | { kind: "video"; src: string; poster: string; width: number; height: number; alt: string };
 
 type Props = {
   items: Item[];
   labels: Dictionary["gallery"];
 };
 
-// Phones show this many photos in the grid, to keep the page short. The lightbox still goes through all of them.
+// Phones show this many items in the grid, to keep the page short. The lightbox still goes through all of them.
 const phoneFirst = 12;
 
 // The smallest finger movement, in px, that counts as a swipe.
 const swipe = 50;
 
 // The gallery grid and its lightbox. The lightbox is a native <dialog>: focus stays inside, Esc closes it, and
-// focus returns to the photo that opened it. Arrows or a sideways swipe move through the photos; a swipe down or
-// a tap outside the photo closes it.
+// focus returns to the item that opened it. Arrows or a sideways swipe move through the photos and clips; a swipe
+// down or a tap outside closes it. A clip plays bigger there, on a loop; with "reduce motion" on it waits for play.
 export default function GalleryGrid({ items, labels }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
   const start = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
+  const [still, setStill] = useState(false);
 
   const photos = items.flatMap((item) => item.full ?? []);
   const current = photos[index];
 
   function open(i: number) {
+    setStill(matchMedia("(prefers-reduced-motion: reduce)").matches);
     setIndex(i);
     dialog.current?.showModal();
   }
@@ -112,19 +118,37 @@ export default function GalleryGrid({ items, labels }: Props) {
         }}
       >
         <figure className="grid justify-items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element -- static export: the files are already resized by scripts/media.mjs */}
-          <img
-            key={current.src}
-            src={current.src}
-            srcSet={current.srcSet}
-            sizes="(min-width: 1024px) 80vw, 100vw"
-            width={current.width}
-            height={current.height}
-            alt={current.alt}
-            // Lazy: the lightbox is closed when the page loads, so nothing is fetched until a photo is opened.
-            loading="lazy"
-            className="lightbox-photo"
-          />
+          {current.kind === "video" ? (
+            <video
+              key={current.src}
+              src={current.src}
+              poster={current.poster}
+              width={current.width}
+              height={current.height}
+              aria-label={current.alt}
+              muted
+              loop
+              playsInline
+              autoPlay={!still}
+              controls={still}
+              style={{ "--ratio": current.width / current.height } as CSSProperties}
+              className="lightbox-photo"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element -- static export: the files are already resized by scripts/media.mjs
+            <img
+              key={current.src}
+              src={current.src}
+              srcSet={current.srcSet}
+              sizes="(min-width: 1024px) 80vw, 100vw"
+              width={current.width}
+              height={current.height}
+              alt={current.alt}
+              // Lazy: the lightbox is closed when the page loads, so nothing is fetched until a photo is opened.
+              loading="lazy"
+              className="lightbox-photo"
+            />
+          )}
           <figcaption className="text-center text-step--1 text-haze">
             {current.alt}
             <span className="ml-2 text-ink">
