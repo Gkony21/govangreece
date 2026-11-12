@@ -166,7 +166,7 @@ export const en = {
   about: {
     lead: "We're from Sparta, and we bring your event",
     neon: "drinks & smiles.",
-    text: "Mostly weddings and christenings, but also shop openings, corporate events and parties. We arrive early, set up, and make sure everyone has a great time until we pack up.",
+    text: "Mostly weddings and christenings, but also shop openings, corporate events and parties. We arrive early, set up, and make sure everyone has a great time.",
     areaTitle: "Where we go",
     home: "Sparta",
     areas: ["Laconia", "The Peloponnese", "Athens and further"],

@@ -421,6 +421,18 @@ export const media = {
     },
     "consent": "none"
   },
+  "gallery-baptism": {
+    "kind": "photo",
+    "src": "/media/gallery-baptism-400.webp",
+    "srcSet": "/media/gallery-baptism-400.webp 400w, /media/gallery-baptism-800.webp 800w, /media/gallery-baptism-1080.webp 1080w",
+    "width": 1080,
+    "height": 1350,
+    "alt": {
+      "el": "Βάφτιση: τραπέζι με γλυκά, μπαλόνια σε πράσινο και κρεμ, και στεφάνι με το όνομα του παιδιού",
+      "en": "A christening: a sweets table with green and cream balloons and a hoop with the child's name"
+    },
+    "consent": "none"
+  },
   "gallery-moment-wedding": {
     "kind": "photo",
     "src": "/media/gallery-moment-wedding-600.webp",
