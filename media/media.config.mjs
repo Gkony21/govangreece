@@ -90,6 +90,8 @@ export const media = [
     ["gallery-moment-cheers", "P14", "IMG_3111.JPG", undefined, [0.62, 0.45], "none", { el: "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van", en: "A smiling guest raising a glass beside the van" }],
     ["gallery-360-night", "P12", "IMG_0211.HEIC", undefined, [0.5, 0.6], "none", { el: "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή", en: "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign" }],
     ["gallery-phone-mirror", "P13", "IMG_9631.HEIC", undefined, [0.5, 0.6], "none", { el: "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο", en: "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley" }, [[0.595, 0.265, 0.22, 0.055]]],
+    ["gallery-mirror-night", "P61", "IMG_9877.HEIC", undefined, [0.5, 0.55], "ok", { el: "Το Mirror Photo Booth τη νύχτα σε κήπο, με κόκκινο χαλί και φώτα", en: "The Mirror Photo Booth at night in a garden, with a red carpet and lights" }],
+    ["gallery-bar-barman", "P31", "IMG_2081.HEIC", undefined, [0.5, 0.5], "ok", { el: "Ο barman πίσω από τη φορητή μπάρα με την πρόσοψη VW και μωβ φώτα", en: "The barman behind the portable bar with its VW front in purple light" }],
   ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
 
   // Printed 5x15 strips from the Mirror Photo Booth, shown on request (components/PrintViewer.tsx). The print has two
@@ -106,6 +108,12 @@ export const media = [
     alt: { el: "Παρέα ποζάρει στο booth με ροζ καπέλο και ντισκομπάλα", en: "Friends posing at the booth with a pink hat and a disco ball" } },
   { id: "gallery-clip-family", ref: "booth", src: "gallery-clip-family.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",
     alt: { el: "Οικογένεια ποζάρει στο booth με γυαλιά και props", en: "A family posing at the booth with party glasses and props" } },
+
+  // The 360 booth's own slow-motion spin: a group of friends, then a father with his son at a school graduation.
+  // Edited from two of the client's videos (design/assets/gallery-clip-360.mp4); the event logos at the bottom are
+  // cut off. The son is a child: a second exception to "no children", decided by the developer on 2026-11-12.
+  { id: "gallery-clip-360", ref: "360", src: "gallery-clip-360.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 540, consent: "ok",
+    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του", en: "The 360 Video Booth spinning around a group of friends, then around a father and his son" } },
 
   // A christening: the sweets table with balloons outside the church, from the client's video V10. No people in it.
   { id: "gallery-baptism", ref: "V10", src: "frame-baptism.jpg", dir: "../design/assets", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [400, 800, 1080], consent: "none",

@@ -1538,6 +1538,13 @@ html:has(.menu:popover-open) {
   -webkit-user-drag: none;
 }
 
+/* A clip is small (540-720 px wide): it grows to the size a photo would take, keeping its shape
+   (--ratio = width / height, set by components/GalleryGrid.tsx). */
+video.lightbox-photo {
+  width: min(100vw - 2rem, 72rem, calc((100svh - 9rem) * var(--ratio)));
+  max-height: none;
+}
+
 .lightbox-button {
   position: absolute;
   display: grid;

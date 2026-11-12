@@ -15,9 +15,13 @@ const photos = [
   { id: "gallery-moment-green" },
   { id: "gallery-baptism" },
   { clip: "gallery-clip-family", last: true },
-  { id: "gallery-moment-wedding" },
   { id: "gallery-moment-cheers" },
+  { id: "gallery-moment-wedding" },
+  { clip: "gallery-clip-360" },
   { id: "gallery-phone-mirror" },
+  { id: "gallery-360-night" },
+  { id: "gallery-mirror-night" },
+  { id: "gallery-bar-barman" },
 ] as const;
 
 type Props = {
@@ -46,14 +50,23 @@ export default function Gallery({ dict }: Props) {
             const wide = "wide" in photo;
             const feature = "feature" in photo;
             if ("clip" in photo) {
-              return { wide, feature, last: "last" in photo, thumb: <Clip id={photo.clip} locale={dict.locale} className="absolute inset-0 size-full object-cover" /> };
+              const clip = media[photo.clip];
+              // next dev runs no Functions, so there the clips come straight from public/media (functions/video/[name].ts).
+              const src = process.env.NODE_ENV === "development" ? clip.src.replace("/video/", "/media/") : clip.src;
+              return {
+                wide,
+                feature,
+                last: "last" in photo,
+                full: { kind: "video" as const, src, poster: clip.poster, width: clip.width, height: clip.height, alt: clip.alt[dict.locale] },
+                thumb: <Clip id={photo.clip} locale={dict.locale} className="absolute inset-0 size-full object-cover" />,
+              };
             }
             const { id } = photo;
             const { src, srcSet, width, height, alt } = media[id];
             return {
               wide,
               feature,
-              full: { src, srcSet, width, height, alt: alt[dict.locale] },
+              full: { kind: "photo" as const, src, srcSet, width, height, alt: alt[dict.locale] },
               thumb: (
                 <Photo
                   id={id}
