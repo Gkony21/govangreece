@@ -107,6 +107,9 @@ export const media = [
   { id: "gallery-clip-family", ref: "booth", src: "gallery-clip-family.mp4", dir: "../design/assets", kind: "video", trim: [0, 6.5], videoWidth: 720, consent: "none",
     alt: { el: "Οικογένεια ποζάρει στο booth με γυαλιά και props", en: "A family posing at the booth with party glasses and props" } },
 
+  // A christening: the sweets table with balloons outside the church, from the client's video V10. No people in it.
+  { id: "gallery-baptism", ref: "V10", src: "frame-baptism.jpg", dir: "../design/assets", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [400, 800, 1080], consent: "none",
+    alt: { el: "Βάφτιση: τραπέζι με γλυκά, μπαλόνια σε πράσινο και κρεμ, και στεφάνι με το όνομα του παιδιού", en: "A christening: a sweets table with green and cream balloons and a hoop with the child's name" } },
   { id: "gallery-moment-wedding", ref: "V32", src: "frame-wedding.jpg", dir: "../design/assets", kind: "photo", aspect: band, focus: [0.5, 0.7], widths: [600, 1080], consent: "none",
     alt: { el: "Γάμος κάτω από τα φωτάκια το σούρουπο", en: "A wedding under string lights at dusk" } },
   { id: "gallery-van-crowd", ref: "P86", src: "IMG_3262(1).JPG", kind: "photo", aspect: band, focus: [0.5, 0.45], widths: [600, 1200, 1800], region: [0.115, 0, 0.885, 1], blur: [[0.47, 0.105, 0.095, 0.095], [0.47, 0.33, 0.06, 0.066]], consent: "none",
