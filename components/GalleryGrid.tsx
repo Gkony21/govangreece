@@ -22,7 +22,7 @@ type Props = {
 };
 
 // Phones show this many photos in the grid, to keep the page short. The lightbox still goes through all of them.
-const phoneFirst = 6;
+const phoneFirst = 12;
 
 // The smallest finger movement, in px, that counts as a swipe.
 const swipe = 50;

@@ -373,6 +373,30 @@ export const media = {
     },
     "consent": "none"
   },
+  "gallery-mirror-night": {
+    "kind": "photo",
+    "src": "/media/gallery-mirror-night-400.webp",
+    "srcSet": "/media/gallery-mirror-night-400.webp 400w, /media/gallery-mirror-night-800.webp 800w, /media/gallery-mirror-night-1080.webp 1080w",
+    "width": 1080,
+    "height": 1350,
+    "alt": {
+      "el": "Το Mirror Photo Booth τη νύχτα σε κήπο, με κόκκινο χαλί και φώτα",
+      "en": "The Mirror Photo Booth at night in a garden, with a red carpet and lights"
+    },
+    "consent": "ok"
+  },
+  "gallery-bar-barman": {
+    "kind": "photo",
+    "src": "/media/gallery-bar-barman-400.webp",
+    "srcSet": "/media/gallery-bar-barman-400.webp 400w, /media/gallery-bar-barman-800.webp 800w, /media/gallery-bar-barman-1080.webp 1080w",
+    "width": 1080,
+    "height": 1350,
+    "alt": {
+      "el": "Ο barman πίσω από τη φορητή μπάρα με την πρόσοψη VW και μωβ φώτα",
+      "en": "The barman behind the portable bar with its VW front in purple light"
+    },
+    "consent": "ok"
+  },
   "print-party": {
     "kind": "photo",
     "src": "/media/print-party-400.webp",

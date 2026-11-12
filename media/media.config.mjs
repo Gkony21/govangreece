@@ -90,6 +90,8 @@ export const media = [
     ["gallery-moment-cheers", "P14", "IMG_3111.JPG", undefined, [0.62, 0.45], "none", { el: "Χαμογελαστός καλεσμένος σηκώνει το ποτήρι του δίπλα στο van", en: "A smiling guest raising a glass beside the van" }],
     ["gallery-360-night", "P12", "IMG_0211.HEIC", undefined, [0.5, 0.6], "none", { el: "Το 360 Video Booth τη νύχτα, με μπλε φώτα και τα props σε βαλίτσα με neon επιγραφή", en: "The 360 Video Booth at night in blue light, with the props in a suitcase with a neon sign" }],
     ["gallery-phone-mirror", "P13", "IMG_9631.HEIC", undefined, [0.5, 0.6], "none", { el: "Το vintage τηλέφωνο ευχών με λουλούδια και καθρέφτη υποδοχής, με θέα τον κάμπο", en: "The vintage guestbook phone with flowers and a welcome mirror, overlooking the valley" }, [[0.595, 0.265, 0.22, 0.055]]],
+    ["gallery-mirror-night", "P61", "IMG_9877.HEIC", undefined, [0.5, 0.55], "ok", { el: "Το Mirror Photo Booth τη νύχτα σε κήπο, με κόκκινο χαλί και φώτα", en: "The Mirror Photo Booth at night in a garden, with a red carpet and lights" }],
+    ["gallery-bar-barman", "P31", "IMG_2081.HEIC", undefined, [0.5, 0.5], "ok", { el: "Ο barman πίσω από τη φορητή μπάρα με την πρόσοψη VW και μωβ φώτα", en: "The barman behind the portable bar with its VW front in purple light" }],
   ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
 
   // Printed 5x15 strips from the Mirror Photo Booth, shown on request (components/PrintViewer.tsx). The print has two

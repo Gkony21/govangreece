@@ -17,7 +17,11 @@ const photos = [
   { clip: "gallery-clip-family", last: true },
   { clip: "gallery-clip-360" },
   { id: "gallery-moment-wedding" },
+  { id: "gallery-moment-cheers" },
   { id: "gallery-phone-mirror" },
+  { id: "gallery-360-night" },
+  { id: "gallery-mirror-night" },
+  { id: "gallery-bar-barman" },
 ] as const;
 
 type Props = {
