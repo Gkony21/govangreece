@@ -37,7 +37,7 @@ export const el = {
     cocktails: { title: "Το κοκτέιλ με το όνομά σας", neon: "με το όνομά σας" },
     why: { title: "Γιατί GO! Van" },
     gallery: { title: "Από τα events μας", neon: "events μας" },
-    reviews: { title: "Τι λένε στη Google", neon: "στη Google" },
+    reviews: { title: "Τι γράφετε για εμάς", neon: "για εμάς" },
     about: { title: "Λίγα λόγια για εμάς" },
     faq: { title: "Συχνές ερωτήσεις", neon: "ερωτήσεις" },
     contact: { title: "Πείτε μας για το event σας", neon: "το event σας" },
@@ -154,6 +154,7 @@ export const el = {
     next: "Επόμενη φωτογραφία",
   },
   reviews: {
+    happy: "100% ικανοποιημένοι πελάτες",
     summary: "{rating} στα 5 · {count} κριτικές στη Google",
     stars: "{n} στα 5 αστέρια",
     all: "Δείτε όλες τις κριτικές στη Google",

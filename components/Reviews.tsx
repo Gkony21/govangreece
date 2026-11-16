@@ -32,6 +32,9 @@ export default function Reviews({ dict }: Props) {
           <h2 id="reviews-title" className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
             <NeonTitle {...dict.sections.reviews} />
           </h2>
+          <p className="-mb-2 font-display text-step-1 leading-none font-extrabold text-amber [text-shadow:0_0_14px_rgb(255_195_92/0.45)]">
+            {reviews.happy}
+          </p>
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-haze">
             <Stars label={stars} className="text-amber [text-shadow:0_0_10px_rgb(255_195_92/0.6)]" />
             {summary}

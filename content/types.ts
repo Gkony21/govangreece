@@ -108,6 +108,8 @@ export type Dictionary = {
     next: string;
   };
   reviews: {
+    // A line of its own above the stars.
+    happy: string;
     // {rating} and {count} come from lib/site.ts (google), updated by hand.
     summary: string;
     // Screen-reader label of a row of stars; {n} becomes the number of stars.

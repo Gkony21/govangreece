@@ -331,6 +331,32 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   text-shadow: none;
 }
 
+/* The quieter buttons beside a service: "I want it" and "See the prints". A thin outline at rest; the neon comes on
+   under the pointer or keyboard focus, and a picked service is filled in and stays lit. */
+.btn-pick {
+  border: 1.5px solid rgb(201 168 255 / 0.75);
+  background: transparent;
+  color: var(--color-ink);
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.25s, text-shadow 0.25s, color 0.2s;
+}
+
+.btn-pick:hover,
+.btn-pick:focus-visible {
+  border-color: #f6eaff;
+  background: rgb(70 42 130 / 0.45);
+  color: #fff;
+  box-shadow: 0 0 3px #fff, 0 0 9px #c9a8ff, 0 0 20px rgb(169 139 255 / 0.7), inset 0 0 8px rgb(169 139 255 / 0.45);
+  text-shadow: 0 0 8px #d9c2ff;
+}
+
+.btn-pick[aria-pressed="true"] {
+  border-color: #f6eaff;
+  background: var(--color-violet);
+  color: var(--color-on-violet);
+  box-shadow: 0 0 5px #fff, 0 0 14px #c9a8ff, 0 0 34px #a98bff;
+  text-shadow: none;
+}
+
 /* The hero's slanted line, parting two sections (components/NeonSeam.tsx). */
 .neon-seam {
   position: relative;
