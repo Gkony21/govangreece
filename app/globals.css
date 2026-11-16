@@ -331,6 +331,68 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   text-shadow: none;
 }
 
+/* The quieter buttons beside a service: "I want it" and "See the prints". Unlit at rest, the neon comes on under the
+   pointer or keyboard focus, and stays on while a service is picked. Three looks to choose from, switched by
+   html[data-glow] (components/GlowSwitch.tsx, preview only). A: a thin outline. B: an unlit neon tube. C: a soft
+   filled pill. */
+.btn-pick {
+  border: 1.5px solid rgb(201 168 255 / 0.75);
+  background: transparent;
+  color: var(--color-ink);
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.25s, text-shadow 0.25s, color 0.2s;
+}
+
+.btn-pick:hover,
+.btn-pick:focus-visible {
+  border-color: #f6eaff;
+  background: rgb(70 42 130 / 0.45);
+  color: #fff;
+  box-shadow: 0 0 3px #fff, 0 0 9px #c9a8ff, 0 0 20px rgb(169 139 255 / 0.7), inset 0 0 8px rgb(169 139 255 / 0.45);
+  text-shadow: 0 0 8px #d9c2ff;
+}
+
+.btn-pick[aria-pressed="true"] {
+  border-color: #f6eaff;
+  background: var(--color-violet);
+  color: var(--color-on-violet);
+  box-shadow: 0 0 5px #fff, 0 0 14px #c9a8ff, 0 0 34px #a98bff;
+  text-shadow: none;
+}
+
+html[data-glow="b"] .btn-pick {
+  border: 2px solid #6d5aa0;
+  color: #cfc4ec;
+}
+
+html[data-glow="b"] .btn-pick:hover,
+html[data-glow="b"] .btn-pick:focus-visible,
+html[data-glow="b"] .btn-pick[aria-pressed="true"] {
+  border-color: #f6eaff;
+  background: rgb(14 8 32 / 0.55);
+  color: #fff;
+  box-shadow: 0 0 5px #fff, 0 0 14px #c9a8ff, 0 0 34px #a98bff, inset 0 0 14px rgb(169 139 255 / 0.6);
+  text-shadow: 0 0 10px #d9c2ff;
+}
+
+html[data-glow="c"] .btn-pick {
+  border: 1.5px solid transparent;
+  background: rgb(169 139 255 / 0.16);
+}
+
+html[data-glow="c"] .btn-pick:hover,
+html[data-glow="c"] .btn-pick:focus-visible {
+  border-color: transparent;
+  background: rgb(169 139 255 / 0.3);
+  box-shadow: 0 0 18px rgb(169 139 255 / 0.45);
+  text-shadow: none;
+}
+
+html[data-glow="c"] .btn-pick[aria-pressed="true"] {
+  background: var(--color-violet);
+  color: var(--color-on-violet);
+  box-shadow: 0 0 5px #fff, 0 0 14px #c9a8ff, 0 0 34px #a98bff;
+}
+
 /* The hero's slanted line, parting two sections (components/NeonSeam.tsx). */
 .neon-seam {
   position: relative;

@@ -19,7 +19,7 @@ export default function PickButton({ id, label, name }: Props) {
       type="button"
       aria-pressed={on}
       onClick={() => togglePick(id)}
-      className="btn-neon min-h-11 justify-self-start rounded-full px-5 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide transition-colors"
+      className="btn-pick min-h-11 justify-self-start rounded-full px-5 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide"
     >
       {on && <span aria-hidden="true">✓ </span>}
       {label}

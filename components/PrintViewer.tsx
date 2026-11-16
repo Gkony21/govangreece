@@ -7,7 +7,7 @@ import { media } from "@/lib/media";
 type Props = {
   labels: Dictionary["prints"];
   locale: Locale;
-  // "link": the small violet link of the breaths. "tube": the thin neon button of the services.
+  // "link": the small violet link of the breaths. "tube": the quiet button beside "I want it" (.btn-pick).
   look: "link" | "tube";
   className?: string;
 };
@@ -48,7 +48,7 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
         aria-haspopup="dialog"
         className={
           look === "tube"
-            ? `btn-tube min-h-11 rounded-full px-5 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide ${className}`
+            ? `btn-pick min-h-11 rounded-full px-5 py-2.5 font-display text-lg leading-none font-extrabold tracking-wide ${className}`
             : `breath-link inline-flex min-h-11 items-center font-display text-[1.2rem] leading-none font-extrabold tracking-wide text-violet hover:text-neon lg:text-[1.3rem] ${className}`
         }
       >

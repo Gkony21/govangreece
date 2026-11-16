@@ -36,7 +36,7 @@ export const en = {
     cocktails: { title: "A cocktail with your name on it", neon: "with your name on it" },
     why: { title: "Why GO! Van" },
     gallery: { title: "From our events", neon: "our events" },
-    reviews: { title: "What people say on Google", neon: "on Google" },
+    reviews: { title: "What you say about us", neon: "about us" },
     about: { title: "About us" },
     faq: { title: "Frequently asked questions", neon: "questions" },
     contact: { title: "Tell us about your event", neon: "your event" },
@@ -153,6 +153,7 @@ export const en = {
     next: "Next photo",
   },
   reviews: {
+    happy: "100% happy clients",
     summary: "{rating} out of 5 · {count} reviews on Google",
     stars: "{n} out of 5 stars",
     all: "See all reviews on Google",

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Clip from "@/components/Clip";
+import GlowSwitch from "@/components/GlowSwitch";
 import NeonTitle from "@/components/NeonTitle";
 import OptionCycle from "@/components/OptionCycle";
 import Photo from "@/components/Photo";
@@ -32,6 +33,7 @@ export default function Services({ dict }: Props) {
 
   return (
     <section id="services" aria-labelledby="services-title" style={{ "--halo": "213 140 255" } as CSSProperties} className="py-20 lg:py-24">
+      <GlowSwitch />
       <div className="wrap">
         <div className="mb-12 grid max-w-[46rem] gap-4">
           <h2 id="services-title" data-reveal className="font-display text-step-3 leading-[0.95] font-extrabold text-balance">
