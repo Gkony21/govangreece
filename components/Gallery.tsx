@@ -8,7 +8,7 @@ import { media } from "@/lib/media";
 import { site } from "@/lib/site";
 
 // In grid order. One big scene across the top, then four columns from tablets up: the wide one takes two of them.
-// A "clip" is a short silent loop in place of a photo.
+// A "clip" is a short silent loop in place of a photo. "big": another file for the lightbox, when the grid's is cropped.
 const photos = [
   { id: "gallery-van-crowd", feature: true },
   { clip: "gallery-clip-friends", wide: true },
@@ -17,7 +17,7 @@ const photos = [
   { clip: "gallery-clip-family", last: true },
   { id: "gallery-moment-cheers" },
   { id: "gallery-moment-wedding" },
-  { clip: "gallery-clip-360" },
+  { clip: "gallery-clip-360", big: "gallery-clip-360-full" },
   { id: "gallery-phone-mirror" },
   { id: "gallery-360-night" },
   { id: "gallery-mirror-night" },
@@ -50,7 +50,7 @@ export default function Gallery({ dict }: Props) {
             const wide = "wide" in photo;
             const feature = "feature" in photo;
             if ("clip" in photo) {
-              const clip = media[photo.clip];
+              const clip = media["big" in photo ? photo.big : photo.clip];
               // next dev runs no Functions, so there the clips come straight from public/media (functions/video/[name].ts).
               const src = process.env.NODE_ENV === "development" ? clip.src.replace("/video/", "/media/") : clip.src;
               return {

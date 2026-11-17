@@ -116,6 +116,9 @@ export const media = [
   // bottom are cut off. Adults only: it replaced a father and son, so that exception to "no children" is gone.
   { id: "gallery-clip-360", ref: "360", src: "gallery-clip-360.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 540, crf: 30, consent: "ok",
     alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της", en: "The 360 Video Booth spinning around a group of friends, then around a bride and her friends" } },
+  // The same montage uncropped, for the lightbox: there the whole frame shows, the event's design at the bottom too.
+  { id: "gallery-clip-360-full", ref: "360", src: "gallery-clip-360-full.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 480, crf: 30, consent: "ok",
+    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της", en: "The 360 Video Booth spinning around a group of friends, then around a bride and her friends" } },
 
   // A christening: the sweets table with balloons outside the church, from the client's video V10. No people in it.
   { id: "gallery-baptism", ref: "V10", src: "frame-baptism.jpg", dir: "../design/assets", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [400, 800, 1080], consent: "none",
