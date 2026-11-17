@@ -11,6 +11,7 @@
 //   widths   output widths in px (photos)
 //   blur     areas to blur, as fractions of the photo [x, y, w, h]: number plates, other businesses' signs
 //   trim     [start, length] in seconds (videos)
+//   crf      video quality, 28 by default; higher is smaller (keeps a long clip under the 1 MB limit)
 //   consent  "none"    no recognizable person
 //            "pending" a recognizable adult: fine for previews, blocks the launch until the client has permission
 //            "ok"      permission given
@@ -110,10 +111,14 @@ export const media = [
     alt: { el: "Οικογένεια ποζάρει στο booth με γυαλιά και props", en: "A family posing at the booth with party glasses and props" } },
 
   // The 360 booth's own slow-motion spin: a group of friends, then a father with his son at a school graduation.
-  // Edited from two of the client's videos (design/assets/gallery-clip-360.mp4); the event logos at the bottom are
-  // cut off. The son is a child: a second exception to "no children", decided by the developer on 2026-11-12.
-  { id: "gallery-clip-360", ref: "360", src: "gallery-clip-360.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 540, consent: "ok",
-    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του", en: "The 360 Video Booth spinning around a group of friends, then around a father and his son" } },
+  // Edited from two of the client's videos (design/assets/gallery-clip-360.mp4): a group of friends (104), then a bride
+  // with her friends (a wedding reel the client sent on 2026-11-17). The event logos and the couple's names at the
+  // bottom are cut off. Adults only: it replaced a father and son, so that exception to "no children" is gone.
+  { id: "gallery-clip-360", ref: "360", src: "gallery-clip-360.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 540, crf: 30, consent: "ok",
+    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της", en: "The 360 Video Booth spinning around a group of friends, then around a bride and her friends" } },
+  // The same montage uncropped, for the lightbox: there the whole frame shows, the event's design at the bottom too.
+  { id: "gallery-clip-360-full", ref: "360", src: "gallery-clip-360-full.mp4", dir: "../design/assets", kind: "video", trim: [0, 8.5], videoWidth: 480, crf: 30, consent: "ok",
+    alt: { el: "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της", en: "The 360 Video Booth spinning around a group of friends, then around a bride and her friends" } },
 
   // A christening: the sweets table with balloons outside the church, from the client's video V10. No people in it.
   { id: "gallery-baptism", ref: "V10", src: "frame-baptism.jpg", dir: "../design/assets", kind: "photo", aspect: card, focus: [0.5, 0.5], widths: [400, 800, 1080], consent: "none",
