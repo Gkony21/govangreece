@@ -26,8 +26,9 @@ export const en = {
   },
   hero: {
     titleLead: "Every event is",
-    title: "an experience\nof its own!",
-    lead: "We put together complete entertainment that gives weddings, christenings, parties and corporate events character, energy and a style of their own.",
+    title: "one of\na kind!",
+    leadStrong: "We put together complete entertainment",
+    lead: "that gives weddings, christenings, parties and corporate events character, energy and a style of their own.",
     servicesCta: "See the services",
     servicesCtaShort: "The services",
   },

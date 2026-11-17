@@ -52,8 +52,10 @@ export type Dictionary = {
   hero: {
     // The small sentence over the big title.
     titleLead: string;
+    // The big, lit words; \n starts a new line.
     title: string;
-    // Shown bold, then the rest of the sentence in a lighter colour.
+    // The subtitle: leadStrong in bold, then lead in a lighter colour.
+    leadStrong: string;
     lead: string;
     servicesCta: string;
     servicesCtaShort: string;

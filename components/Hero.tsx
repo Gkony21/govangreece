@@ -3,6 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import FairyLights from "@/components/FairyLights";
 import NeonSign, { type NeonSignKind } from "@/components/NeonSign";
 import Photo from "@/components/Photo";
+import TitleSwitch from "@/components/TitleSwitch";
 import type { Dictionary } from "@/content/types";
 
 type Props = {
@@ -45,12 +46,19 @@ export default function Hero({ dict }: Props) {
 
       <FairyLights strands={computerStrands} spacing={47} wire wireOpacity={0.32} className="absolute inset-x-0 top-0 z-[1] hidden h-32 w-full lg:block" />
 
+      <TitleSwitch />
       <div className="hero-text">
         <h1 id="hero-title" className="hero-title neon font-display font-black">
-          <span className="hero-title-lead">{hero.titleLead}</span> {hero.title}
+          <span className="hero-title-lead">{hero.titleLead}</span>
+          {hero.title.split("\n").map((line, i) => (
+            <span key={line} className="hero-title-line" data-line={i}>
+              {" "}
+              {line}
+            </span>
+          ))}
         </h1>
         <p className="hero-lead">
-          {hero.lead}
+          <strong>{hero.leadStrong}</strong> {hero.lead}
         </p>
 
         <div className="hero-cta">
