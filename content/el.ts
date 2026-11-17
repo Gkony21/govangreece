@@ -26,9 +26,11 @@ export const el = {
     switchLanguage: { label: "EN", href: "/en", ariaLabel: "English version", hrefLang: "en" },
   },
   hero: {
-    titleLead: "Εσείς καλείτε τον κόσμο.",
-    title: "Το πάρτι το\nφέρνουμε εμείς.",
-    lead: "Photo booth, 360 video, τηλέφωνο ευχών και cocktail bar.",
+    // The client's own title and subtitle (2026-11-17).
+    titleLead: "Κάθε εκδήλωση είναι μια",
+    title: "ξεχωριστή\nεμπειρία!",
+    leadStrong: "Δημιουργούμε ολοκληρωμένες προτάσεις ψυχαγωγίας",
+    lead: "που δίνουν χαρακτήρα, ενέργεια και ξεχωριστό στυλ σε γάμους, βαπτίσεις, πάρτι και εταιρικές εκδηλώσεις.",
     servicesCta: "Δείτε τις υπηρεσίες",
     servicesCtaShort: "Οι υπηρεσίες",
   },

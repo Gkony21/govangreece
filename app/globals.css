@@ -263,7 +263,6 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   margin-top: 0.75rem;
   font-size: min(15.1vw, 5.5rem);
   line-height: 0.95;
-  white-space: pre-line;
   transform: skewY(calc(var(--hero-lean) * -1));
   transform-origin: 0 100%;
 }
@@ -282,13 +281,28 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   font-size: min(13vw, 5rem);
 }
 
+/* Each line of the big words on its own line. */
+.hero-title-line {
+  display: block;
+}
+
+/* The two lit words, bigger than the sentence before them. */
+.hero-title {
+  font-size: min(17vw, 5.5rem);
+}
+
 .hero-lead {
   margin: 0.7rem 0 1rem;
-  color: #fff;
+  color: #d6cbef;
   font-size: 1.02rem;
   line-height: 1.4;
   transform: skewY(calc(var(--hero-lean) * -0.5));
   transform-origin: 0 100%;
+}
+
+.hero-lead strong {
+  font-weight: 700;
+  color: #fff;
 }
 
 .hero-cta {
@@ -523,9 +537,10 @@ li:nth-child(3) > .review-note {
 
   .hero-title {
     margin: 0;
-    font-size: min(6.78vw, 5.8rem);
+    font-size: min(7.6vw, 6.4rem);
     transform: none;
   }
+
 
   :lang(en) .hero-title {
     font-size: min(5.4vw, 5.6rem);

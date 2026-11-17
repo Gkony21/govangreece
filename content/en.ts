@@ -25,9 +25,10 @@ export const en = {
     switchLanguage: { label: "ΕΛ", href: "/", ariaLabel: "Ελληνική έκδοση", hrefLang: "el" },
   },
   hero: {
-    titleLead: "You invite the people.",
-    title: "We bring\nthe party.",
-    lead: "Photo booth, 360 video, an audio guestbook and a cocktail bar.",
+    titleLead: "Every event is",
+    title: "one of\na kind!",
+    leadStrong: "We put together complete entertainment",
+    lead: "that gives weddings, christenings, parties and corporate events character, energy and a style of their own.",
     servicesCta: "See the services",
     servicesCtaShort: "The services",
   },

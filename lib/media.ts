@@ -209,13 +209,13 @@ export const media = {
     "kind": "video",
     "src": "/video/clip-360.mp4",
     "poster": "/media/clip-360-poster.webp",
-    "width": 540,
-    "height": 960,
+    "width": 480,
+    "height": 854,
     "alt": {
-      "el": "Η πλατφόρμα 360 στημένη με θέα",
-      "en": "The 360 platform set up with a view"
+      "el": "Η νύφη με τις φίλες της στο 360 Video Booth, με το σχέδιο του γάμου κάτω",
+      "en": "A bride and her friends on the 360 Video Booth, with the wedding's design at the bottom"
     },
-    "consent": "none"
+    "consent": "ok"
   },
   "clip-cocktails": {
     "kind": "video",
@@ -452,20 +452,8 @@ export const media = {
     "width": 540,
     "height": 676,
     "alt": {
-      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της",
-      "en": "The 360 Video Booth spinning around a group of friends, then around a bride and her friends"
-    },
-    "consent": "ok"
-  },
-  "gallery-clip-360-full": {
-    "kind": "video",
-    "src": "/video/gallery-clip-360-full.mp4",
-    "poster": "/media/gallery-clip-360-full-poster.webp",
-    "width": 480,
-    "height": 854,
-    "alt": {
-      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της",
-      "en": "The 360 Video Booth spinning around a group of friends, then around a bride and her friends"
+      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του",
+      "en": "The 360 Video Booth spinning around a group of friends, then around a father and his son"
     },
     "consent": "ok"
   },

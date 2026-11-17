@@ -47,10 +47,16 @@ export default function Hero({ dict }: Props) {
 
       <div className="hero-text">
         <h1 id="hero-title" className="hero-title neon font-display font-black">
-          <span className="hero-title-lead">{hero.titleLead}</span> {hero.title}
+          <span className="hero-title-lead">{hero.titleLead}</span>
+          {hero.title.split("\n").map((line, i) => (
+            <span key={line} className="hero-title-line" data-line={i}>
+              {" "}
+              {line}
+            </span>
+          ))}
         </h1>
         <p className="hero-lead">
-          {hero.lead}
+          <strong>{hero.leadStrong}</strong> {hero.lead}
         </p>
 
         <div className="hero-cta">
