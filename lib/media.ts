@@ -452,8 +452,8 @@ export const media = {
     "width": 540,
     "height": 676,
     "alt": {
-      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από έναν μπαμπά με τον γιο του",
-      "en": "The 360 Video Booth spinning around a group of friends, then around a father and his son"
+      "el": "Το 360 Video Booth γυρνάει γύρω από μια παρέα και μετά γύρω από τη νύφη με τις φίλες της",
+      "en": "The 360 Video Booth spinning around a group of friends, then around a bride and her friends"
     },
     "consent": "ok"
   },

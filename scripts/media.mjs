@@ -138,7 +138,7 @@ function buildVideo(entry) {
   // -map_metadata -1 and bitexact drop creation dates, GPS and the camera model.
   run("ffmpeg", [
     "-y", "-v", "error", ...input, ...filter, "-an",
-    "-c:v", "libx264", "-preset", "slow", "-crf", "28", "-profile:v", "high", "-pix_fmt", "yuv420p",
+    "-c:v", "libx264", "-preset", "slow", "-crf", String(entry.crf ?? 28), "-profile:v", "high", "-pix_fmt", "yuv420p",
     "-movflags", "+faststart", "-map_metadata", "-1", "-map_chapters", "-1",
     "-fflags", "+bitexact", "-flags:v", "+bitexact", out,
   ]);
