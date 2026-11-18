@@ -457,15 +457,15 @@ export const media = {
     },
     "consent": "ok"
   },
-  "gallery-baptism": {
+  "gallery-360-halloween": {
     "kind": "photo",
-    "src": "/media/gallery-baptism-400.webp",
-    "srcSet": "/media/gallery-baptism-400.webp 400w, /media/gallery-baptism-800.webp 800w, /media/gallery-baptism-1080.webp 1080w",
+    "src": "/media/gallery-360-halloween-400.webp",
+    "srcSet": "/media/gallery-360-halloween-400.webp 400w, /media/gallery-360-halloween-800.webp 800w, /media/gallery-360-halloween-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Βάφτιση: τραπέζι με γλυκά, μπαλόνια σε πράσινο και κρεμ, και στεφάνι με το όνομα του παιδιού",
-      "en": "A christening: a sweets table with green and cream balloons and a hoop with the child's name"
+      "el": "Πάρτι Halloween: η πλατφόρμα 360 με το logo GO! Van, ring light και μπαλόνια γύρω",
+      "en": "A Halloween party: the 360 platform with the GO! Van logo, a ring light and balloons all round"
     },
     "consent": "none"
   },
