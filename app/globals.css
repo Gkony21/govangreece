@@ -267,11 +267,11 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   transform-origin: 0 100%;
 }
 
-/* The small first sentence, over the big one. */
+/* The small first sentence, over the big one, a little narrower than the big words under it ("ξεχωριστή"). */
 .hero-title-lead {
   display: block;
   margin-bottom: 0.22em;
-  font-size: 0.5em;
+  font-size: 0.41em;
   line-height: 1.1;
   color: #efe6ff;
   text-shadow: 0 0 10px rgb(213 140 255 / 0.55);
