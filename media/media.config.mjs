@@ -97,13 +97,26 @@ export const media = [
     ["gallery-bar-barman", "P31", "IMG_2081.HEIC", undefined, [0.5, 0.5], "ok", { el: "Ο barman πίσω από τη φορητή μπάρα με την πρόσοψη VW και μωβ φώτα", en: "The barman behind the portable bar with its VW front in purple light" }],
   ].map(([id, ref, src, dir, focus, consent, alt, blur, region]) => ({ id, ref, src, ...(dir && { dir }), ...(blur && { blur }), ...(region && { region }), kind: "photo", aspect: card, focus, widths: [400, 800, 1080], consent, alt })),
 
-  // Printed 5x15 strips from the Mirror Photo Booth, shown on request (components/PrintViewer.tsx). The print has two
-  // identical columns: region keeps the left one. The child's name and the date are painted over with made-up ones
-  // (design/assets/print-*-clean.jpg).
-  { id: "print-party", ref: "print", src: "print-party-clean.jpg", dir: "../design/assets", kind: "photo", region: [0.015, 0, 0.49, 1], aspect: [588, 1800], focus: [0.5, 0.5], widths: [400, 700], consent: "ok",
-    alt: { el: "Εκτύπωση 5x15 με τρεις λήψεις μιας παρέας με ροζ καπέλο και ντισκομπάλα, σε ροζ σχέδιο με ουράνιο τόξο", en: "A 5x15 print: three shots of friends with a pink hat and a disco ball, in a pink rainbow design" } },
-  { id: "print-tropical", ref: "print", src: "print-tropical-clean.jpg", dir: "../design/assets", kind: "photo", region: [0.015, 0, 0.49, 1], aspect: [588, 1800], focus: [0.5, 0.5], widths: [400, 700], consent: "ok",
-    alt: { el: "Εκτύπωση 5x15 με τρεις λήψεις ενός ζευγαριού μπροστά σε πέτρινο τοίχο, σε τροπικό σχέδιο με παπαγάλους", en: "A 5x15 print: three shots of a couple by a stone wall, in a tropical design with parrots" } },
+  // The client's own 5x15 print designs, shown on request (components/PrintViewer.tsx): empty templates as he sends
+  // them to couples and parents, sent on 2026-11-18 (design/assets/prints). Two are left out: one with a basketball
+  // team's logo and a famous player, one with a venue's logo.
+  ...[
+    ["burgundy", { el: "Σχέδιο εκτύπωσης 5x15: μπορντό με χρυσά αρχικά και ονόματα", en: "A 5x15 print design: burgundy with gold initials and names" }],
+    ["fairies", { el: "Σχέδιο εκτύπωσης 5x15: παλιά περγαμηνή με λουλούδια και δύο νεράιδες", en: "A 5x15 print design: old parchment with flowers and two fairies" }],
+    ["terracotta", { el: "Σχέδιο εκτύπωσης 5x15: ακουαρέλα με τριαντάφυλλα σε χρώματα του φθινοπώρου", en: "A 5x15 print design: watercolour roses in autumn colours" }],
+    ["parrot", { el: "Σχέδιο εκτύπωσης 5x15: ζούγκλα με φύλλα και παπαγάλους", en: "A 5x15 print design: a jungle with leaves and parrots" }],
+    ["glitter", { el: "Σχέδιο εκτύπωσης 5x15: ασημένιο glitter με χρυσά αρχικά", en: "A 5x15 print design: silver glitter with gold initials" }],
+    ["christmas", { el: "Σχέδιο εκτύπωσης 5x15: χριστουγεννιάτικο με νεράιδα και γκι", en: "A 5x15 print design: Christmas, with a fairy and holly" }],
+    ["infinity", { el: "Σχέδιο εκτύπωσης 5x15: λευκό με χρυσό σύμβολο του απείρου και αρχικά", en: "A 5x15 print design: white with a gold infinity sign and initials" }],
+    ["shell", { el: "Σχέδιο εκτύπωσης 5x15: κοχύλι με αρχικά και pampas", en: "A 5x15 print design: a seashell with initials and pampas grass" }],
+    ["safari", { el: "Σχέδιο εκτύπωσης 5x15: μπλε σαφάρι με καμηλοπαρδάλεις και ελέφαντα", en: "A 5x15 print design: a blue safari with giraffes and an elephant" }],
+    ["wreath", { el: "Σχέδιο εκτύπωσης 5x15: στεφάνι από λουλούδια με αρχικά", en: "A 5x15 print design: a flower wreath with initials" }],
+    ["rainbow", { el: "Σχέδιο εκτύπωσης 5x15: ροζ με ουράνιο τόξο και ζωάκια με μάσκες", en: "A 5x15 print design: pink, with a rainbow and masked animals" }],
+    ["olive", { el: "Σχέδιο εκτύπωσης 5x15: πράσινο με κλαδιά ελιάς", en: "A 5x15 print design: green with olive branches" }],
+    ["moon", { el: "Σχέδιο εκτύπωσης 5x15: φεγγάρι με δύο μικρές φιγούρες", en: "A 5x15 print design: a moon with two little figures" }],
+    ["heart", { el: "Σχέδιο εκτύπωσης 5x15: κόκκινη καρδιά με αρχικά", en: "A 5x15 print design: a red heart with initials" }],
+    ["leaf", { el: "Σχέδιο εκτύπωσης 5x15: λιτό, με ένα κλαδάκι και μια καρδιά", en: "A 5x15 print design: simple, with a sprig and a heart" }],
+  ].map(([name, alt]) => ({ id: `print-${name}`, ref: "print", src: `print-${name}.jpg`, dir: "../design/assets/prints", kind: "photo", aspect: [1, 3], focus: [0.5, 0.5], widths: [300, 600], consent: "none", alt })),
 
   // Short loops straight from the booth, kept at their full width. "family" shows the client's own family, children
   // included: the one exception to "no children", decided by the developer on 2026-11-09.

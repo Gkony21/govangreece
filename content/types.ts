@@ -97,7 +97,7 @@ export type Dictionary = {
   // link: a small link under the line, on computers.
   breaths: Record<BreathId, { lead: string; neon: string; link: string }>;
   // The 5x15 prints shown over the page (components/PrintViewer.tsx).
-  prints: { open: string; title: string; caption: string; close: string };
+  prints: { open: string; title: string; caption: string; close: string; prev: string; next: string; counter: string };
   gallery: {
     lead: string;
     instagram: string;
