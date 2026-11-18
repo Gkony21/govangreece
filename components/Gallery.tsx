@@ -13,7 +13,7 @@ const photos = [
   { id: "gallery-van-crowd", feature: true },
   { clip: "gallery-clip-friends", wide: true },
   { id: "gallery-moment-green" },
-  { id: "gallery-baptism" },
+  { id: "gallery-360-halloween" },
   { clip: "gallery-clip-family", last: true },
   { id: "gallery-moment-cheers" },
   { id: "gallery-moment-wedding" },

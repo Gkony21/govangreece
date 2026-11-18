@@ -138,10 +138,13 @@ export const en = {
     date: { lead: "Tell us the date. We'll take care of", neon: "the rest.", link: "Ask for a quote" },
   },
   prints: {
-    open: "See the prints",
-    title: "Prints from the Mirror Photo Booth",
-    caption: "The 5x15 print every guest takes home, in your own design.",
+    open: "See the designs",
+    title: "Print designs for the Mirror Photo Booth",
+    caption: "A few of our premium designs for the 5x15 print. A professional graphic designer makes each one to match your event's theme and your invitations.",
     close: "Close",
+    prev: "Previous design",
+    next: "Next design",
+    counter: "{n} of {total}",
   },
   gallery: {
     lead: "From weddings, parties and openings. Tap a photo to see it larger.",

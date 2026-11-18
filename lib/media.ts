@@ -397,29 +397,185 @@ export const media = {
     },
     "consent": "ok"
   },
-  "print-party": {
+  "print-burgundy": {
     "kind": "photo",
-    "src": "/media/print-party-400.webp",
-    "srcSet": "/media/print-party-400.webp 400w, /media/print-party-588.webp 588w",
-    "width": 588,
+    "src": "/media/print-burgundy-300.webp",
+    "srcSet": "/media/print-burgundy-300.webp 300w, /media/print-burgundy-600.webp 600w",
+    "width": 600,
     "height": 1800,
     "alt": {
-      "el": "Εκτύπωση 5x15 με τρεις λήψεις μιας παρέας με ροζ καπέλο και ντισκομπάλα, σε ροζ σχέδιο με ουράνιο τόξο",
-      "en": "A 5x15 print: three shots of friends with a pink hat and a disco ball, in a pink rainbow design"
+      "el": "Σχέδιο εκτύπωσης 5x15: μπορντό με χρυσά αρχικά και ονόματα",
+      "en": "A 5x15 print design: burgundy with gold initials and names"
     },
-    "consent": "ok"
+    "consent": "none"
   },
-  "print-tropical": {
+  "print-fairies": {
     "kind": "photo",
-    "src": "/media/print-tropical-400.webp",
-    "srcSet": "/media/print-tropical-400.webp 400w, /media/print-tropical-588.webp 588w",
-    "width": 588,
+    "src": "/media/print-fairies-300.webp",
+    "srcSet": "/media/print-fairies-300.webp 300w, /media/print-fairies-600.webp 600w",
+    "width": 600,
     "height": 1800,
     "alt": {
-      "el": "Εκτύπωση 5x15 με τρεις λήψεις ενός ζευγαριού μπροστά σε πέτρινο τοίχο, σε τροπικό σχέδιο με παπαγάλους",
-      "en": "A 5x15 print: three shots of a couple by a stone wall, in a tropical design with parrots"
+      "el": "Σχέδιο εκτύπωσης 5x15: παλιά περγαμηνή με λουλούδια και δύο νεράιδες",
+      "en": "A 5x15 print design: old parchment with flowers and two fairies"
     },
-    "consent": "ok"
+    "consent": "none"
+  },
+  "print-terracotta": {
+    "kind": "photo",
+    "src": "/media/print-terracotta-300.webp",
+    "srcSet": "/media/print-terracotta-300.webp 300w, /media/print-terracotta-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: ακουαρέλα με τριαντάφυλλα σε χρώματα του φθινοπώρου",
+      "en": "A 5x15 print design: watercolour roses in autumn colours"
+    },
+    "consent": "none"
+  },
+  "print-parrot": {
+    "kind": "photo",
+    "src": "/media/print-parrot-300.webp",
+    "srcSet": "/media/print-parrot-300.webp 300w, /media/print-parrot-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: ζούγκλα με φύλλα και παπαγάλους",
+      "en": "A 5x15 print design: a jungle with leaves and parrots"
+    },
+    "consent": "none"
+  },
+  "print-glitter": {
+    "kind": "photo",
+    "src": "/media/print-glitter-300.webp",
+    "srcSet": "/media/print-glitter-300.webp 300w, /media/print-glitter-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: ασημένιο glitter με χρυσά αρχικά",
+      "en": "A 5x15 print design: silver glitter with gold initials"
+    },
+    "consent": "none"
+  },
+  "print-christmas": {
+    "kind": "photo",
+    "src": "/media/print-christmas-300.webp",
+    "srcSet": "/media/print-christmas-300.webp 300w, /media/print-christmas-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: χριστουγεννιάτικο με νεράιδα και γκι",
+      "en": "A 5x15 print design: Christmas, with a fairy and holly"
+    },
+    "consent": "none"
+  },
+  "print-infinity": {
+    "kind": "photo",
+    "src": "/media/print-infinity-300.webp",
+    "srcSet": "/media/print-infinity-300.webp 300w, /media/print-infinity-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: λευκό με χρυσό σύμβολο του απείρου και αρχικά",
+      "en": "A 5x15 print design: white with a gold infinity sign and initials"
+    },
+    "consent": "none"
+  },
+  "print-shell": {
+    "kind": "photo",
+    "src": "/media/print-shell-300.webp",
+    "srcSet": "/media/print-shell-300.webp 300w, /media/print-shell-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: κοχύλι με αρχικά και pampas",
+      "en": "A 5x15 print design: a seashell with initials and pampas grass"
+    },
+    "consent": "none"
+  },
+  "print-safari": {
+    "kind": "photo",
+    "src": "/media/print-safari-300.webp",
+    "srcSet": "/media/print-safari-300.webp 300w, /media/print-safari-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: μπλε σαφάρι με καμηλοπαρδάλεις και ελέφαντα",
+      "en": "A 5x15 print design: a blue safari with giraffes and an elephant"
+    },
+    "consent": "none"
+  },
+  "print-wreath": {
+    "kind": "photo",
+    "src": "/media/print-wreath-300.webp",
+    "srcSet": "/media/print-wreath-300.webp 300w, /media/print-wreath-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: στεφάνι από λουλούδια με αρχικά",
+      "en": "A 5x15 print design: a flower wreath with initials"
+    },
+    "consent": "none"
+  },
+  "print-rainbow": {
+    "kind": "photo",
+    "src": "/media/print-rainbow-300.webp",
+    "srcSet": "/media/print-rainbow-300.webp 300w, /media/print-rainbow-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: ροζ με ουράνιο τόξο και ζωάκια με μάσκες",
+      "en": "A 5x15 print design: pink, with a rainbow and masked animals"
+    },
+    "consent": "none"
+  },
+  "print-olive": {
+    "kind": "photo",
+    "src": "/media/print-olive-300.webp",
+    "srcSet": "/media/print-olive-300.webp 300w, /media/print-olive-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: πράσινο με κλαδιά ελιάς",
+      "en": "A 5x15 print design: green with olive branches"
+    },
+    "consent": "none"
+  },
+  "print-moon": {
+    "kind": "photo",
+    "src": "/media/print-moon-300.webp",
+    "srcSet": "/media/print-moon-300.webp 300w, /media/print-moon-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: φεγγάρι με δύο μικρές φιγούρες",
+      "en": "A 5x15 print design: a moon with two little figures"
+    },
+    "consent": "none"
+  },
+  "print-heart": {
+    "kind": "photo",
+    "src": "/media/print-heart-300.webp",
+    "srcSet": "/media/print-heart-300.webp 300w, /media/print-heart-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: κόκκινη καρδιά με αρχικά",
+      "en": "A 5x15 print design: a red heart with initials"
+    },
+    "consent": "none"
+  },
+  "print-leaf": {
+    "kind": "photo",
+    "src": "/media/print-leaf-300.webp",
+    "srcSet": "/media/print-leaf-300.webp 300w, /media/print-leaf-600.webp 600w",
+    "width": 600,
+    "height": 1800,
+    "alt": {
+      "el": "Σχέδιο εκτύπωσης 5x15: λιτό, με ένα κλαδάκι και μια καρδιά",
+      "en": "A 5x15 print design: simple, with a sprig and a heart"
+    },
+    "consent": "none"
   },
   "gallery-clip-friends": {
     "kind": "video",
@@ -457,15 +613,15 @@ export const media = {
     },
     "consent": "ok"
   },
-  "gallery-baptism": {
+  "gallery-360-halloween": {
     "kind": "photo",
-    "src": "/media/gallery-baptism-400.webp",
-    "srcSet": "/media/gallery-baptism-400.webp 400w, /media/gallery-baptism-800.webp 800w, /media/gallery-baptism-1080.webp 1080w",
+    "src": "/media/gallery-360-halloween-400.webp",
+    "srcSet": "/media/gallery-360-halloween-400.webp 400w, /media/gallery-360-halloween-800.webp 800w, /media/gallery-360-halloween-1080.webp 1080w",
     "width": 1080,
     "height": 1350,
     "alt": {
-      "el": "Βάφτιση: τραπέζι με γλυκά, μπαλόνια σε πράσινο και κρεμ, και στεφάνι με το όνομα του παιδιού",
-      "en": "A christening: a sweets table with green and cream balloons and a hoop with the child's name"
+      "el": "Πάρτι Halloween: η πλατφόρμα 360 με το logo GO! Van, ring light και μπαλόνια γύρω",
+      "en": "A Halloween party: the 360 platform with the GO! Van logo, a ring light and balloons all round"
     },
     "consent": "none"
   },
