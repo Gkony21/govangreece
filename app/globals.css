@@ -1707,123 +1707,40 @@ video.lightbox-photo {
   opacity: 0.3;
 }
 
-/* Temporary: the A/B/C switch for the desktop layouts. */
-.prints-switch {
-  display: none;
-}
-
 @media (min-width: 1024px) {
+  /* On a computer: a long ribbon across the whole screen, from the left edge, fading out at both ends. The designs
+     keep their tilt and straighten under the pointer; the arrows are enough without a counter. */
   .prints {
     --w: min(calc((100svh - 17rem) / 3), 15rem);
   }
 
-  .prints-switch {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 10;
-    display: flex;
-    gap: 0.4rem;
-  }
-
-  .prints-switch button {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid var(--color-line);
-    border-radius: 999px;
-    font-weight: 800;
-  }
-
-  .prints-switch button[aria-pressed="true"] {
-    background: var(--color-violet);
-    color: var(--color-on-violet);
-  }
-
-  /* A: a long ribbon across the whole screen, from the left edge, fading out at both ends. */
-  .prints[data-desk="a"] .prints-track {
+  .prints-track {
     padding-inline: 6vw;
     scroll-padding-inline: 6vw;
-  }
-
-  .prints[data-desk="a"] .prints-track li {
-    scroll-snap-align: start;
-  }
-
-  .prints[data-desk="a"] .prints-track li.is-current {
-    --tilt: -2.5deg;
-  }
-
-  .prints[data-desk="a"] .prints-track li.is-current:nth-child(even) {
-    --tilt: 2.5deg;
-  }
-
-  .prints[data-desk="a"] .prints-count {
-    visibility: hidden;
-    min-width: 0;
-    width: 1rem;
-  }
-
-  /* A and C, fading out at both ends. */
-  .prints[data-desk="a"] .prints-track,
-  .prints[data-desk="c"] .prints-track {
     mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
 
-  /* C: one at a time, big, its neighbours small and dim at its sides. */
-  .prints[data-desk="c"] {
-    --w: min(calc((100svh - 14rem) / 3), 19rem);
+  .prints-track li {
+    scroll-snap-align: start;
   }
 
-  .prints[data-desk="c"] .prints-track {
-    gap: 0;
-  }
-
-  .prints[data-desk="c"] .prints-track li:not(.is-current) .prints-strip {
-    opacity: 0.4;
-    transform: rotate(var(--tilt)) scale(0.7);
-  }
-
-  /* B: all of them laid out on a table, five to a row; the page scrolls down through them. */
-  .prints[data-desk="b"] {
-    overflow-y: auto;
-  }
-
-  .prints[data-desk="b"] .prints-body {
-    height: auto;
-    grid-template-rows: auto;
-  }
-
-  .prints[data-desk="b"] .prints-track {
-    display: grid;
-    grid-template-columns: repeat(5, 11.5rem);
-    gap: 2.5rem 2.25rem;
-    justify-content: center;
-    padding: 5rem 2rem 1rem;
-    overflow: visible;
-  }
-
-  .prints[data-desk="b"] .prints-track li {
-    width: auto;
-  }
-
-  .prints[data-desk="a"] .prints-track li:hover .prints-strip,
-  .prints[data-desk="b"] .prints-track li:hover .prints-strip {
-    --tilt: 0deg;
-    transform: scale(1.06);
-    position: relative;
-    z-index: 1;
-  }
-
-  .prints[data-desk="b"] .prints-bar {
-    display: none;
-  }
-
-  .prints[data-desk="b"] .prints-track li.is-current {
+  .prints-track li.is-current {
     --tilt: -2.5deg;
   }
 
-  .prints[data-desk="b"] .prints-track li.is-current:nth-child(even) {
+  .prints-track li.is-current:nth-child(even) {
     --tilt: 2.5deg;
+  }
+
+  .prints-track li:hover .prints-strip {
+    --tilt: 0deg;
+    transform: scale(1.06);
+  }
+
+  .prints-count {
+    visibility: hidden;
+    min-width: 0;
+    width: 1rem;
   }
 }
 

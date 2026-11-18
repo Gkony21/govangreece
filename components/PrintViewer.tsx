@@ -30,20 +30,15 @@ const designs = [
   media["print-leaf"],
 ];
 
-// Temporary: the three desktop layouts to choose from (2026-11-18). A: a ribbon with arrows. B: all of them on a
-// table. C: one at a time, big, the others small at its sides. Phones always get the swipeable ribbon.
-const looks = ["a", "b", "c"] as const;
-
 // "See the designs": the client's 5x15 print designs over the page. They stay out of the page itself (their pastel
 // colours clash with the night) and load only on the first click. They drop from above like prints tossed on a table,
-// then swipe sideways one by one. A native <dialog>: Esc or a tap outside closes it, and focus goes back to the button.
+// then swipe sideways one by one; on a computer the ribbon runs across the whole screen. A native <dialog>: Esc or a tap outside closes it, and focus goes back to the button.
 export default function PrintViewer({ labels, locale, look, className = "" }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const track = useRef<HTMLUListElement>(null);
   const [armed, setArmed] = useState(false);
   const [current, setCurrent] = useState(0);
   const [edge, setEdge] = useState<"start" | "end" | null>("start");
-  const [desk, setDesk] = useState<(typeof looks)[number]>("a");
 
   // After the first click the first few render; wait until they can be drawn, so the animation never runs empty.
   useEffect(() => {
@@ -112,7 +107,6 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
       <dialog
         ref={dialog}
         aria-label={labels.title}
-        data-desk={desk}
         onKeyDown={keys}
         onClick={(e) => e.target === e.currentTarget && dialog.current?.close()}
         className="lightbox prints"
@@ -151,13 +145,6 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
           <p className="prints-caption mx-auto max-w-[34rem] px-4 text-center text-step--1 text-haze">{labels.caption}</p>
         </div>
 
-        <div className="prints-switch" aria-hidden="true">
-          {looks.map((l) => (
-            <button key={l} type="button" tabIndex={-1} onClick={() => setDesk(l)} aria-pressed={desk === l}>
-              {l.toUpperCase()}
-            </button>
-          ))}
-        </div>
         <button type="button" onClick={() => dialog.current?.close()} aria-label={labels.close} className="lightbox-button top-4 right-4 z-10">
           <span aria-hidden="true">✕</span>
         </button>
