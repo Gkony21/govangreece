@@ -1722,6 +1722,19 @@ video.lightbox-photo {
     scroll-snap-align: start;
   }
 
+  .prints-track {
+    cursor: grab;
+  }
+
+  .prints-track.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  .prints-track.is-dragging li:hover .prints-strip {
+    transform: rotate(var(--tilt));
+  }
+
   .prints-track li.is-current {
     --tilt: -2.5deg;
   }

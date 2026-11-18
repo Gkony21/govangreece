@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
 import type { Dictionary, Locale } from "@/content/types";
 import { media } from "@/lib/media";
 
@@ -36,6 +36,7 @@ const designs = [
 export default function PrintViewer({ labels, locale, look, className = "" }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const track = useRef<HTMLUListElement>(null);
+  const drag = useRef<{ x: number; left: number } | null>(null);
   const [armed, setArmed] = useState(false);
   const [current, setCurrent] = useState(0);
   const [edge, setEdge] = useState<"start" | "end" | null>("start");
@@ -76,12 +77,40 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
     setEdge(list.scrollLeft < 2 ? "start" : list.scrollLeft + list.clientWidth > list.scrollWidth - 2 ? "end" : null);
   }
 
-  // One design along, whatever the layout; the snapping settles it in place.
+  // The arrows move by a screenful less one design (one on a phone), so a computer doesn't take 14 clicks; the
+  // snapping settles it in place.
   function go(step: number) {
     const list = track.current;
     if (!list) return;
     const [a, b] = list.children as unknown as HTMLElement[];
-    list.scrollBy({ left: step * (b.offsetLeft - a.offsetLeft), behavior: "smooth" });
+    const stride = b.offsetLeft - a.offsetLeft;
+    const page = Math.max(1, Math.floor(list.clientWidth / stride) - 1);
+    list.scrollBy({ left: step * page * stride, behavior: "smooth" });
+  }
+
+  // With a mouse the ribbon drags sideways too (touch scrolls natively). Snapping is off while dragging, back on at
+  // release, so the ribbon settles on the nearest design.
+  function grab(e: PointerEvent<HTMLUListElement>) {
+    const list = e.currentTarget;
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    drag.current = { x: e.clientX, left: list.scrollLeft };
+    list.setPointerCapture(e.pointerId);
+    list.classList.add("is-dragging");
+  }
+
+  function pull(e: PointerEvent<HTMLUListElement>) {
+    if (!drag.current) return;
+    e.currentTarget.scrollLeft = drag.current.left - (e.clientX - drag.current.x);
+  }
+
+  function drop(e: PointerEvent<HTMLUListElement>) {
+    if (!drag.current) return;
+    drag.current = null;
+    const list = e.currentTarget;
+    // Keep where it was let go, then let the snapping take it from there.
+    const left = list.scrollLeft;
+    list.classList.remove("is-dragging");
+    list.scrollLeft = left;
   }
 
   function keys(e: KeyboardEvent) {
@@ -112,7 +141,7 @@ export default function PrintViewer({ labels, locale, look, className = "" }: Pr
         className="lightbox prints"
       >
         <div className="prints-body">
-          <ul ref={track} onScroll={follow} className="prints-track">
+          <ul ref={track} onScroll={follow} onPointerDown={grab} onPointerMove={pull} onPointerUp={drop} onPointerCancel={drop} className="prints-track">
             {armed &&
               designs.map((design, i) => (
                 <li key={design.src} className={i === current ? "is-current" : undefined} style={{ "--i": Math.min(i, 6) } as CSSProperties}>
