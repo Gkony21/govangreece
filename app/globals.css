@@ -296,8 +296,6 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   color: #d6cbef;
   font-size: 1.02rem;
   line-height: 1.4;
-  transform: skewY(calc(var(--hero-lean) * -0.5));
-  transform-origin: 0 100%;
 }
 
 .hero-lead strong {

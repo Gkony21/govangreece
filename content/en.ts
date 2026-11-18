@@ -140,7 +140,7 @@ export const en = {
   prints: {
     open: "See the designs",
     title: "Print designs for the Mirror Photo Booth",
-    caption: "Every 5x15 print has a design of its own, made by a professional graphic designer for your event, to match its theme and your invitations.",
+    caption: "A few of our premium designs for the 5x15 print. A professional graphic designer makes each one to match your event's theme and your invitations.",
     close: "Close",
     prev: "Previous design",
     next: "Next design",
