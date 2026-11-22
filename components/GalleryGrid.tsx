@@ -1,0 +1,172 @@
+"use client";
+
+import { useRef, useState, type CSSProperties, type PointerEvent, type ReactNode } from "react";
+import type { Dictionary } from "@/content/types";
+
+type Item = {
+  // Landscape photo: two columns wide.
+  wide: boolean;
+  // The big scene across the whole grid.
+  feature: boolean;
+  // Moves to the end of the grid from tablets up, so the two clips sit in opposite corners. Phones keep the list order.
+  last?: boolean;
+  // The thumbnail, rendered on the server.
+  thumb: ReactNode;
+  // The large version for the lightbox: a photo, or a clip that plays there bigger.
+  full?: Full;
+};
+
+type Full =
+  | { kind: "photo"; src: string; srcSet: string; width: number; height: number; alt: string }
+  | { kind: "video"; src: string; poster: string; width: number; height: number; alt: string };
+
+type Props = {
+  items: Item[];
+  labels: Dictionary["gallery"];
+};
+
+// Phones show this many items in the grid, to keep the page short. The lightbox still goes through all of them.
+const phoneFirst = 12;
+
+// The smallest finger movement, in px, that counts as a swipe.
+const swipe = 50;
+
+// The gallery grid and its lightbox. The lightbox is a native <dialog>: focus stays inside, Esc closes it, and
+// focus returns to the item that opened it. Arrows or a sideways swipe move through the photos and clips; a swipe
+// down or a tap outside closes it. A clip plays bigger there, on a loop; with "reduce motion" on it waits for play.
+export default function GalleryGrid({ items, labels }: Props) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const [index, setIndex] = useState(0);
+  const start = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
+  const [still, setStill] = useState(false);
+
+  const photos = items.flatMap((item) => item.full ?? []);
+  const current = photos[index];
+
+  function open(i: number) {
+    setStill(matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setIndex(i);
+    dialog.current?.showModal();
+  }
+
+  function step(by: number) {
+    setIndex((i) => (i + by + photos.length) % photos.length);
+  }
+
+  function onPointerDown(e: PointerEvent) {
+    start.current = { x: e.clientX, y: e.clientY };
+    swiped.current = false;
+  }
+
+  function onPointerUp(e: PointerEvent) {
+    if (!start.current) return;
+    const dx = e.clientX - start.current.x;
+    const dy = e.clientY - start.current.y;
+    start.current = null;
+    if (Math.abs(dx) > swipe && Math.abs(dx) > Math.abs(dy)) {
+      swiped.current = true;
+      step(dx < 0 ? 1 : -1);
+    } else if (dy > swipe && dy > Math.abs(dx)) {
+      swiped.current = true;
+      dialog.current?.close();
+    }
+  }
+
+  return (
+    <>
+      <ul className="grid grid-flow-dense grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
+        {items.map((item, i) => (
+          <li
+            key={item.full?.src ?? i}
+            data-reveal
+            style={{ transitionDelay: `${(i % 4) * 0.07}s` }}
+            className={`relative overflow-hidden rounded-md bg-night-2 ${
+              item.feature ? "col-span-full aspect-[4/3] md:aspect-[21/9]" : item.wide ? "col-span-2 aspect-[8/5] md:aspect-auto" : "aspect-[4/5]"
+            } ${i >= phoneFirst ? "max-md:hidden" : ""} ${item.last ? "md:order-last" : ""}`}
+          >
+            {item.full ? (
+              <button
+                type="button"
+                onClick={() => open(photos.indexOf(item.full!))}
+                aria-label={labels.open.replace("{alt}", item.full.alt)}
+                className="group absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-amber"
+              >
+                {item.thumb}
+              </button>
+            ) : (
+              item.thumb
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <dialog
+        ref={dialog}
+        aria-label={labels.dialogLabel}
+        className="lightbox"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") step(1);
+          if (e.key === "ArrowLeft") step(-1);
+        }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => (start.current = null)}
+        onClick={(e) => {
+          // A tap on the dark area around the photo closes; the end of a swipe doesn't.
+          if (e.target === e.currentTarget && !swiped.current) dialog.current?.close();
+        }}
+      >
+        <figure className="grid justify-items-center gap-3">
+          {current.kind === "video" ? (
+            <video
+              key={current.src}
+              src={current.src}
+              poster={current.poster}
+              width={current.width}
+              height={current.height}
+              aria-label={current.alt}
+              muted
+              loop
+              playsInline
+              autoPlay={!still}
+              controls={still}
+              style={{ "--ratio": current.width / current.height } as CSSProperties}
+              className="lightbox-photo"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element -- static export: the files are already resized by scripts/media.mjs
+            <img
+              key={current.src}
+              src={current.src}
+              srcSet={current.srcSet}
+              sizes="(min-width: 1024px) 80vw, 100vw"
+              width={current.width}
+              height={current.height}
+              alt={current.alt}
+              // Lazy: the lightbox is closed when the page loads, so nothing is fetched until a photo is opened.
+              loading="lazy"
+              className="lightbox-photo"
+            />
+          )}
+          <figcaption className="text-center text-step--1 text-haze">
+            {current.alt}
+            <span className="ml-2 text-ink">
+              {labels.counter.replace("{n}", String(index + 1)).replace("{total}", String(photos.length))}
+            </span>
+          </figcaption>
+        </figure>
+
+        <button type="button" onClick={() => dialog.current?.close()} aria-label={labels.close} className="lightbox-button top-4 right-4">
+          <span aria-hidden="true">✕</span>
+        </button>
+        <button type="button" onClick={() => step(-1)} aria-label={labels.prev} className="lightbox-button top-1/2 left-3 -translate-y-1/2">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button type="button" onClick={() => step(1)} aria-label={labels.next} className="lightbox-button top-1/2 right-3 -translate-y-1/2">
+          <span aria-hidden="true">›</span>
+        </button>
+      </dialog>
+    </>
+  );
+}

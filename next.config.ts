@@ -4,6 +4,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
+  // app/global-not-found.tsx: one 404 page for both root layouts (Greek and English).
+  experimental: { globalNotFound: true },
   turbopack: {
     rules: {
       "*.css": {
