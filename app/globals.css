@@ -277,10 +277,6 @@ html.js:not([data-reveal-ready]) [data-reveal] {
   text-shadow: 0 0 10px rgb(213 140 255 / 0.55);
 }
 
-:lang(en) .hero-title {
-  font-size: min(13vw, 5rem);
-}
-
 /* Each line of the big words on its own line. */
 .hero-title-line {
   display: block;
@@ -539,10 +535,6 @@ li:nth-child(3) > .review-note {
     transform: none;
   }
 
-
-  :lang(en) .hero-title {
-    font-size: min(5.4vw, 5.6rem);
-  }
 
   .hero-lead {
     max-width: 34ch;
