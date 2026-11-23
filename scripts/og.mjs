@@ -8,7 +8,7 @@
 // The photos are the client's originals (macOS, for HEIC), from MEDIA_SOURCE or ../photos/drive-2026-10-31, as in
 // scripts/media.mjs. The output has no metadata (no EXIF, no GPS).
 import { execFileSync } from "node:child_process";
-import { mkdtempSync } from "node:fs";
+import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import sharp from "sharp";
@@ -124,5 +124,10 @@ for (const p of prints) {
   layers.push({ input: img, left: Math.round(p.x - width / 2), top: Math.round(p.y - height / 2) });
 }
 
-await sharp(background).composite(layers).jpeg({ quality: 84, mozjpeg: true }).toFile(out);
+// A plain baseline JPEG with a JFIF header, not progressive: Instagram's phone app showed no preview for the
+// progressive one (browsers, Facebook and Viber were fine). Still no EXIF or GPS.
+// libvips writes no JFIF segment, so it is added by hand right after the start marker (version 1.01, no density).
+const encoded = await sharp(background).composite(layers).jpeg({ quality: 86, progressive: false, mozjpeg: false }).toBuffer();
+const jfif = Buffer.from([0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00]);
+writeFileSync(out, Buffer.concat([encoded.subarray(0, 2), jfif, encoded.subarray(2)]));
 console.log(`Wrote ${path.relative(process.cwd(), out)}`);
