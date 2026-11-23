@@ -4,7 +4,16 @@ import { site } from "@/lib/site";
 
 // The picture shown when a link to the site is shared (Viber, WhatsApp, Facebook...): public/og.jpg, 1200x630,
 // the logo, three booth prints and the party around them, the same for both languages (npm run og, scripts/og.mjs).
-export const shareImage = { url: "/og.jpg", width: 1200, height: 630, alt: "GO! Van, drinks & smiles" };
+// ?v=2: a new address, so the apps that remember the old picture fetch this one (change it whenever og.jpg changes).
+const shareImageUrl = "/og.jpg?v=2";
+export const shareImage = {
+  url: shareImageUrl,
+  secureUrl: `${site.url}${shareImageUrl}`,
+  type: "image/jpeg",
+  width: 1200,
+  height: 630,
+  alt: "GO! Van, drinks & smiles",
+};
 
 // Shared <head> data for both languages. `path` is this language's home page.
 export function pageMetadata(dict: Dictionary, path: string): Metadata {
