@@ -1,0 +1,36 @@
+# main is the live site: it only takes pull requests from dev, and only once every person shown has agreed.
+# Its own workflow, run only for pull requests into main, so no other run ever reports a "skipped" main-guard
+# (GitHub counts a skipped required check as passed).
+name: Main guard
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  main-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+
+      - name: Every photo and video cleared for launch
+        run: node scripts/check-media.mjs --launch
+
+      - name: Only dev may merge into main
+        env:
+          HEAD: ${{ github.head_ref }}
+        run: |
+          if [ "$HEAD" != "dev" ]; then
+            echo "::error::Pull requests into main must come from dev (this one is from '$HEAD')."
+            exit 1
+          fi
